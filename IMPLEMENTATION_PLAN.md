@@ -1,22 +1,30 @@
-# KATANA Optimization Implementation Plan
+# KATANA Optimization Implementation Plan (Updated)
 
-На основе PERFORMANCE_REVIEW.md и DEEP_ANALYSIS_REPORT.md.
+На основе PERFORMANCE_REVIEW.md, DEEP_ANALYSIS_REPORT.md и FINAL_VERDICT.md.
+
+**This is an updated version** incorporating corrections from the final technical adjudicator verdict. All inflated estimates have been corrected, weak items dropped/deferred, and the parser/body-validation fix has been redesigned with a state-machine-friendly approach (no per-call `find_header_terminator()` scan).
+
+**Key corrections applied:**
+- Ir% ≠ wallclock% (systematic 1.5–3x overestimate in original plan)
+- Gains are not additive (Amdahl's Law)
+- I/O bound fraction unknown (sets ceiling on CPU optimization gains)
+- VirtualBox measurement noise floor ~3%
 
 ---
 
-## Phase 0: Verification — Baseline Lock-in
+## Updated Phase 0: Verification — Baseline Lock-in
 
 ### Цель
 Зафиксировать воспроизводимый baseline для всех последующих сравнений.
 
 ### Действия
 
-1. **Запустить canonical benchmarks 3 раза, взять median:**
+1. **Запустить canonical benchmarks 5 раз, взять median:**
    ```bash
-   for i in 1 2 3; do
+   for i in 1 2 3 4 5; do
      wrk -t4 -c512 -d10s http://127.0.0.1:8080/ > hello_run_$i.txt 2>&1
    done
-   for i in 1 2 3; do
+   for i in 1 2 3 4 5; do
      wrk -t4 -c512 -d10s -s compute_payload.lua http://127.0.0.1:8081/compute/sum > compute_run_$i.txt 2>&1
    done
    ```
@@ -24,7 +32,6 @@
 2. **Снять callgrind baseline для обоих сценариев:**
    ```bash
    valgrind --tool=callgrind --callgrind-out-file=hello_baseline.callgrind ./hello_server &
-   # send reduced load
    wrk -t1 -c1 -d3s http://127.0.0.1:8080/
    kill %1
    callgrind_annotate hello_baseline.callgrind > hello_baseline_annotate.txt
@@ -33,20 +40,18 @@
 3. **Зафиксировать commit hash в лог.**
 
 ### Критерий успеха
-- Все 3 прогона hello отличаются не более чем на 10%.
+- Все 5 прогонов отличаются не более чем на 10%.
 - callgrind Ir детерминистичен (±0.1%).
 - Файлы baseline сохранены в `benchmarks/baseline/`.
 
-### Тесты
-- Существующий E2E test suite (если есть).
-- Manual curl smoke test: `curl http://127.0.0.1:8080/` → 200 OK.
-
 ---
 
-## Phase 1: Quick Wins — 30 минут, Low Risk
+## Updated Phase 1: Quick Wins — 20 минут, Zero Risk
 
 ### Цель
-Три точечных правки, zero-risk, суммарный ожидаемый выигрыш: **+5-8% throughput** в обоих сценариях.
+Три точечных правки, zero-risk, суммарный ожидаемый выигрыш: **+2–4% throughput** в обоих сценариях.
+
+**Corrected from original:** original claim was +5–8%. Correction: Ir% ≠ wallclock%. Not all `string_to_field` Ir (7.41%) comes from these 4 call sites (parser also calls it). Real saving is a fraction.
 
 ---
 
@@ -55,12 +60,12 @@
 **Файлы:**
 - `http.cpp` — строка 214
 - `http.cpp` — строка 278
-- `http_server.cpp` — строка 418, 420, 422
+- `http_server.cpp` — строка 418, 422
 
 **Функции:**
 - `response::serialize_into(std::string&)` — строка 214
 - `response::serialize_head_into(std::string&)` — строка 278
-- `handle_connection(...)` — строки 418-422
+- `handle_connection(...)` — строки 418–422
 
 **Что заменить → на что:**
 
@@ -76,7 +81,7 @@
 +    bool has_content_length = headers.contains(field::content_length);
 ```
 
-#### http_server.cpp:418-422 (handle_connection)
+#### http_server.cpp:418–422 (handle_connection)
 ```diff
 -        auto connection_header = req.headers.get("Connection");
 +        auto connection_header = req.headers.get(http::field::connection);
@@ -88,145 +93,124 @@
 ```
 
 **Почему это поможет:**
-- `get(string_view)` → `string_to_field()` → hash → bucket scan → `ci_equal_fast` (с fallback на binary search по 342 rare headers).
-- `get(field)` → прямой linear scan по `known_inline_` (max 16 entries), без hashing и string comparison.
-- `contains(field)` → `find_known_entry(f) != nullptr` — ещё быстрее, нет создания `optional<string_view>`.
-- Evidence: `string_to_field` = 7.41% Ir в hello, 4.51% в compute. Каждый вызов `get("Content-Length")` вызывает полный hash + scan.
+- `get(string_view)` → `string_to_field()` → hash → bucket scan → `ci_equal_fast`.
+- `get(field)` → прямой linear scan по `known_inline_` (max 16 entries), без hashing.
+- `contains(field)` → `find_known_entry(f) != nullptr` — ещё быстрее.
 
-**Ожидаемый выигрыш:**
-- Conservative: +2% throughput
-- Realistic: +3-5% throughput
-- Optimistic: +8% throughput
+**Realistic expected gain: +1.5–2.5% both scenarios.**
+Not all 7.41% Ir from `string_to_field` comes from these 4 calls — parser also calls it. Real saving is the fraction from these specific call sites.
 
-**Риск регрессий:** Нулевой. API `get(field)` и `contains(field)` уже существуют и используются в других местах. `field::content_length` и `field::connection` — стандартные enum values.
+**Риск:** Нулевой. API уже существует и используется.
 
-**Тесты после:**
-```bash
-# callgrind: string_to_field Ir должен уменьшиться
-callgrind_annotate ... | grep string_to_field
-# wrk: сравнить median throughput
-```
-
-**Критерий успеха:** `string_to_field` Ir в hello уменьшается на ≥30% (потеря 2-3 вызовов на каждый request-response cycle).
+**Validation:**
+- `callgrind_annotate | grep string_to_field` — Ir count should decrease by ≥15%
+- `curl http://127.0.0.1:8080/` — response identical byte-for-byte
+- Connection: close/keep-alive behavior unchanged
 
 ---
 
 ### 1.2 Replace `std::tolower` with branchless ASCII lowering in `ci_char_equal`
 
-**Файл:** `http_headers.hpp` — строки 31-34
+**Файл:** `http_headers.hpp` — строки 31–34
 
 **Функция:** `ci_char_equal(char a, char b)`
-
-**Что заменить → на что:**
 
 ```diff
  inline bool ci_char_equal(char a, char b) noexcept {
 -    return std::tolower(static_cast<unsigned char>(a)) ==
 -           std::tolower(static_cast<unsigned char>(b));
-+    // ASCII-only: HTTP headers are guaranteed to be ASCII per RFC 7230.
-+    // Branchless lowering eliminates libc tolower() locale-aware function call overhead.
 +    if (a == b) return true;
-+    // XOR of two chars that differ only in case bit (0x20) for A-Z range
 +    unsigned char ua = static_cast<unsigned char>(a);
 +    unsigned char ub = static_cast<unsigned char>(b);
 +    return (ua ^ ub) == 0x20 && ((ua | 0x20) >= 'a') && ((ua | 0x20) <= 'z');
  }
 ```
 
-**Почему это поможет:**
-- `std::tolower(unsigned char)` — libc function call с locale dispatch (не inlineable).
-- В compute это **4.30% perf** / **2.33% Ir** (2.2M Ir).
-- `ci_char_equal` вызывается из `ci_equal_fast` → `string_to_field` → `get(string_view)`, и из `case_insensitive_less` → binary search по rare headers.
-- Новый код: 2 сравнения + 1 XOR + 2 OR — всё inlineable, zero function calls.
+**Почему XOR+range check, а не простое `|0x20`:**
+- `(a | 0x20) == (b | 0x20)` даёт ложные positives: `'^'` (0x5E) и `'~'` (0x7E) дадут true, `'@'` и `` '`' `` тоже.
+- XOR+range check: `(ua ^ ub) == 0x20` проверяет, что байты отличаются ровно на case bit, а `(ua | 0x20) >= 'a' && <= 'z'` — что оба в диапазоне A–Z/a–z.
+- Note: `ci_equal_short` и SIMD paths уже используют `|0x20` — эта pre-existing inconsistency out of scope, но should be tracked.
 
-**Почему `(a | 0x20) == (b | 0x20)` недостаточно:**
-- `(a | 0x20) == (b | 0x20)` даёт ложные positives для символов, отличающихся на bit 0x20, но не являющихся буквами. Например: `'@'` (0x40) и `` '`' `` (0x60) дадут true. Для HTTP headers это безопасно (header names — это tokens, `@` и `` ` `` не являются token chars), но более точный вариант безопаснее.
+**Realistic expected gain: +1–2% compute, +0.5% hello.**
 
-**Ожидаемый выигрыш:**
-- Conservative: +1% compute throughput
-- Realistic: +2-3% compute throughput
-- Optimistic: +4% compute throughput
-- Hello: +0.5-1% (меньше вызовов `ci_char_equal` на hot path)
+**Риск:** Минимальный. HTTP headers — ASCII per RFC 7230 §3.2.
 
-**Риск регрессий:** Минимальный. HTTP headers — ASCII per RFC 7230 §3.2. Не-ASCII байты уже отклонены parser validation loop (byte >= 0x80 → error). Единственный edge case: если `ci_char_equal` вызывается для произвольных binary data вне HTTP headers — в KATANA это не происходит.
-
-**Тесты после:**
-```bash
-# perf report: tolower должен исчезнуть из compute top-10
-perf report -i perf.data | head -20
-# callgrind: Ir для ci_char_equal / ci_equal_fast должен уменьшиться
-```
-
-**Критерий успеха:** `tolower` исчезает из `perf report`, `ci_char_equal` Ir уменьшается на ≥50%.
+**Validation:**
+- `ci_char_equal('A', 'a')` → true
+- `ci_char_equal('^', '~')` → false (would be true with naive `|0x20`)
+- `ci_char_equal('@', '`')` → false
+- `perf report` — `tolower` should disappear from compute top symbols
 
 ---
 
-### 1.3 Add `[[gnu::always_inline]]` to `skip_ws()` for compact JSON
+### 1.3 Optimize `prepare_for_next_request` memmove
 
-**Файл:** `serde.hpp` — строка 70
+**Файл:** `http.cpp` — строка 1152
 
-**Функция:** `json_cursor::skip_ws()`
-
-**Что заменить → на что:**
+**Функция:** `parser::prepare_for_next_request()`
 
 ```diff
--    void skip_ws() noexcept {
-+    [[gnu::always_inline]] void skip_ws() noexcept {
+ void parser::prepare_for_next_request(monotonic_arena* arena) noexcept {
+     size_t remaining = buffered_bytes();
+-    if (remaining > 0 && parse_pos_ > 0) {
++    if (remaining == 0) {
++        buffer_size_ = 0;
++    } else if (parse_pos_ > 0) {
+         std::memmove(buffer_, buffer_ + parse_pos_, remaining);
++        buffer_size_ = remaining;
+     }
+-    buffer_size_ = remaining;
+     reset_message_state(arena);
+ }
 ```
 
-**Почему это поможет:**
-- `skip_ws()` вызывается ~164,580 раз за callgrind pass.
-- Для compact JSON (без whitespace) функция сразу возвращается: `if (eof() || !is_json_whitespace(...)) return;`.
-- Но overhead call/ret (push/pop RBP, etc.) остаётся. Для hot loop вызовов это 2-4 Ir × 164K = ~0.5-0.7M Ir.
-- `always_inline` позволит компилятору встроить fast-path check прямо в caller.
-- Evidence: 3.68% perf, 1.72% Ir в compute. 44% annotate samples на early-exit check.
+**Realistic expected gain: +0.3–0.5% both.**
+Marginal gain but zero risk. Trivial.
 
-**Ожидаемый выигрыш:**
-- Conservative: +0.5% compute
-- Realistic: +1% compute
-- Optimistic: +2% compute
-
-**Риск регрессий:** Нулевой. Это подсказка компилятору, не меняющая семантику. В worst case (компилятор не inline из-за размера) — no-op.
-
-**Тесты после:**
-```bash
-# callgrind: skip_ws должен исчезнуть как отдельная функция
-callgrind_annotate ... | grep skip_ws
-# Если исчез — Ir ушёл в caller, суммарный Ir не должен увеличиться
-```
-
-**Критерий успеха:** `skip_ws` как отдельный символ исчезает из callgrind output.
+**Validation:**
+- wrk with pipelining — no regression
+- `valgrind --tool=memcheck` — no memory errors
 
 ---
 
-### Phase 1 Summary
+### ~~1.3 (OLD) Add `[[gnu::always_inline]]` to `skip_ws()`~~ — **DROPPED**
 
-| Fix | File | Effort | Expected Gain | Confidence |
+**Verdict: DROP.** Effect is < 0.01% — unmeasurable noise. Call/ret overhead for 164K calls ≈ 0.5–0.8M cycles out of billions. Compiler likely already inlines at -O2/-O3. Original estimate of +1% was ~100x overestimate. Verify with `objdump -d` — if `skip_ws` doesn't appear as a separate symbol, it's already inlined.
+
+---
+
+### Phase 1 Summary (Updated)
+
+| Fix | File | Effort | Realistic Gain | Confidence |
 |---|---|---|---|---|
-| field enum lookups | `http.cpp:214,278`, `http_server.cpp:418,422` | 5 min | +3-5% both | **High** |
-| tolower → branchless | `http_headers.hpp:31-34` | 5 min | +2-3% compute | **High** |
-| always_inline skip_ws | `serde.hpp:70` | 1 min | +1% compute | **High** |
+| field enum lookups | `http.cpp:214,278`, `http_server.cpp:418,422` | 5 min | +1.5–2.5% both | **High** |
+| tolower → branchless | `http_headers.hpp:31-34` | 5 min | +1–2% compute, +0.5% hello | **High** |
+| prepare_for_next memmove | `http.cpp:1152` | 5 min | +0.3–0.5% both | **High** |
 
-**Суммарный ожидаемый выигрыш Phase 1:** +5-8% throughput в обоих сценариях.
-
-**Можно делать параллельно:** Все три правки независимы.
+**Суммарный ожидаемый выигрыш Phase 1: +2–4% throughput** (corrected from +5–8%).
 
 ---
 
-## Phase 2: Parser Work — 1-2 часа, Low-Medium Risk
+## Updated Phase 2: Parser Body Validation Fix — 30 min, Requires Verification
 
 ### Цель
-Устранить #1 bottleneck: parser validation loop (48% Ir в compute, 24% в hello).
+Устранить #1 bottleneck: parser validation loop scanning body bytes needlessly.
+
+**Corrected estimate:** +3–6% compute, +1–2% hello (original claim was +10–15% compute).
+
+**Correction rationale:**
+- Parser Ir% in compute is 48.03%, but perf% (wallclock) is only 31.67% (ratio 0.66x)
+- Body bytes ≈ 29% of total request for canonical compute payload, not 50%+
+- Ir% → wallclock correction: 22% Ir × 29% body fraction × 0.66 ratio ≈ 4.2%
 
 ---
 
-### 2.1 Skip body byte validation (HIGH ROI)
+### Parser Fix Design
 
-**Файл:** `http.cpp` — строки 627-642
+#### Current Problem
 
-**Функция:** `parser::parse_available()`
+In `parser::parse_available()` (http.cpp:627–642), the validation loop runs when `state_ == request_line || state_ == headers`:
 
-**Что сейчас:**
 ```cpp
 if (state_ == state::request_line || state_ == state::headers) [[likely]] {
     size_t validation_start = validated_bytes_;
@@ -235,19 +219,108 @@ if (state_ == state::request_line || state_ == state::headers) [[likely]] {
     }
     for (size_t i = validation_start; i < buffer_size_; ++i) {
         uint8_t byte = static_cast<uint8_t>(buffer_[i]);
-        if (byte == 0 || byte >= 0x80) [[unlikely]] { ... }
-        if (byte == '\n' && (i == 0 || buffer_[i - 1] != '\r')) [[unlikely]] { ... }
+        if (byte == 0 || byte >= 0x80) [[unlikely]] { ... error ... }
+        if (byte == '\n' && (i == 0 || buffer_[i - 1] != '\r')) [[unlikely]] { ... error ... }
     }
     validated_bytes_ = buffer_size_;
 }
 ```
 
-**Проблема:**
-- Условие `state_ == request_line || state_ == headers` правильно ограничивает — validation выполняется только в этих состояниях.
-- **Но** `validated_bytes_` отслеживает позицию в буфере, а буфер содержит ВСЕ принятые байты, включая начало body (если TCP receive вернул и headers, и часть body в одном read).
-- Итог: validation loop сканирует body bytes побайтно, проверяя `byte == 0 || byte >= 0x80` — что бессмысленно для JSON body (может содержать UTF-8 > 0x80).
+**The problem:** When a single `read()` delivers both headers and body bytes into the buffer, the validation loop scans ALL bytes up to `buffer_size_`, including body bytes. Body bytes may legitimately contain:
+- UTF-8 characters (>= 0x80) — **currently incorrectly rejected** (latent bug, violates RFC 7230 §3.3)
+- Null bytes — which should be allowed through to the application layer
 
-**Что заменить → на что:**
+The guard condition `state_ == request_line || state_ == headers` correctly prevents the loop from running on subsequent `parse_available()` calls after headers are fully parsed (state transitions to `body`). But on the **first** call where headers end AND body begins in the same buffer, the loop still over-scans.
+
+Note: `parse_headers_state()` (line 723) also performs its own per-line validation (lines 728–735), providing redundant coverage for header bytes. The top-level validation loop's purpose is to pre-scan the entire buffer before entering the state machine, catching malformed bytes early. But this pre-scan does not need to cover body bytes.
+
+#### Why NOT to use `find_header_terminator()` per call
+
+The original implementation plan proposed calling `find_header_terminator()` inside the validation loop to determine where headers end. **This is wrong** because:
+
+1. `find_header_terminator()` is an O(N) scan (http.cpp:84–94) — it linearly searches for `\r\n\r\n` through the entire buffer
+2. Calling it on every `parse_available()` invocation adds O(N) work to a function that's already a bottleneck
+3. The validation loop itself is O(N), so adding another O(N) scan may negate or reduce savings
+4. `find_header_terminator()` is already called at line 646 for the MAX_HEADER_SIZE check — but only when `buffer_size_ > MAX_HEADER_SIZE`, so it doesn't always run
+
+#### Safest Implementation Approach: State-Machine-Friendly `header_end_pos_`
+
+Instead of scanning, **cache the end-of-headers position** as a parser state variable. The parser already discovers where headers end during normal parsing — specifically in `parse_headers_state()` at line 741 when it finds the empty line (`line.empty()`). At that point, `parse_pos_` points right after the `\r\n\r\n` terminator.
+
+**Step-by-step approach:**
+
+1. Add a member variable `header_end_pos_` to the parser class (initialized to 0, meaning "not yet found")
+2. When `parse_headers_state()` detects the empty line (line 741), set `header_end_pos_ = parse_pos_` — this is the position immediately after `\r\n\r\n`
+3. In the validation loop, use `header_end_pos_` to limit the scan range
+4. Reset `header_end_pos_` in `reset_message_state()` along with other per-request state
+
+**Why this is safe:**
+
+The validation loop runs **before** the state machine loop (line 656). So on the first call where both headers and body arrive:
+1. Validation loop runs with `header_end_pos_ == 0` → scans all bytes (same as current behavior)
+2. State machine runs → `parse_headers_state()` finds empty line → sets `header_end_pos_`
+3. State transitions to `body`
+4. **On subsequent calls**, `state_ != request_line && state_ != headers` → validation loop doesn't run at all
+
+Wait — this means `header_end_pos_` is set **after** the validation loop runs. So for the first call, it's still 0 and the loop scans everything. The fix only helps on subsequent calls, but those are already skipped by the state guard!
+
+**Revised approach:** The validation loop and the state machine run in the same `parse_available()` call. The problem is that on the **first** call, the validation loop runs before the state machine discovers where headers end. We need a different strategy.
+
+**Correct approach: Use `find_header_terminator()` ONCE, cache the result.**
+
+The key insight from the final verdict is: don't call `find_header_terminator()` on **every** `parse_available()` call. Instead:
+
+1. Add `header_end_pos_` member (initialized to 0)
+2. In the validation loop: if `header_end_pos_ == 0`, call `find_header_terminator()` to discover it and cache it. If `header_end_pos_ != 0`, reuse cached value
+3. This means `find_header_terminator()` is called **at most once** per request (on the first `parse_available()` call where the full header terminator is present in the buffer)
+4. For partial headers (terminator not yet in buffer), `find_header_terminator()` returns nullptr → validation scans all bytes (correct: all bytes are headers at this point)
+5. Once cached, subsequent calls (while still in `request_line`/`headers` state) use the cached position
+
+This is safe because:
+- For partial headers across multiple reads: each call scans all buffer bytes (correct — they're all header bytes)
+- For headers + body in one read: first call discovers terminator, scans only header bytes. Subsequent calls in `body` state skip the validation entirely (state guard)
+- For pipelined requests: `reset_message_state()` resets `header_end_pos_` to 0
+
+#### Data/State Changes
+
+**Add to parser class:**
+```cpp
+size_t header_end_pos_ = 0;  // Position after \r\n\r\n, 0 = not yet found
+```
+
+**Reset in `reset_message_state()`** (http.cpp:1124):
+```cpp
+header_end_pos_ = 0;
+```
+
+#### Exact Functions to Edit
+
+1. **Parser class definition** — add `size_t header_end_pos_ = 0;` member
+2. **`parser::parse_available()`** (http.cpp:627–642) — limit validation loop using cached `header_end_pos_`
+3. **`parser::reset_message_state()`** (http.cpp:1124) — reset `header_end_pos_ = 0`
+
+#### Step-by-Step Patch Sequence
+
+##### Patch A: Add member variable
+
+In the parser class definition, add alongside other state variables:
+```diff
+     size_t validated_bytes_ = 0;
++    size_t header_end_pos_ = 0;
+     size_t crlf_scan_pos_ = 0;
+```
+
+##### Patch B: Reset in `reset_message_state()`
+
+```diff
+ void parser::reset_message_state(monotonic_arena* arena) noexcept {
+     ...
+     validated_bytes_ = 0;
++    header_end_pos_ = 0;
+     crlf_scan_pos_ = 0;
+```
+
+##### Patch C: Limit validation loop
 
 ```diff
  if (state_ == state::request_line || state_ == state::headers) [[likely]] {
@@ -256,352 +329,103 @@ if (state_ == state::request_line || state_ == state::headers) [[likely]] {
          --validation_start;
      }
 -    for (size_t i = validation_start; i < buffer_size_; ++i) {
-+    // Only validate header bytes, not body bytes that may be in the buffer.
-+    // Body bytes don't need HTTP header validation (they can contain any byte value).
-+    // find_header_terminator() looks for \r\n\r\n which marks end of headers.
++    // Limit validation to header bytes only. Body bytes may contain
++    // valid UTF-8 (>= 0x80) or null bytes — validating them is incorrect
++    // (latent bug: currently rejects valid RFC 7230 §3.3 body content).
 +    size_t validation_limit = buffer_size_;
-+    if (buffer_size_ >= 4) {
++    if (header_end_pos_ == 0 && buffer_size_ >= 4) {
 +        const char* term = find_header_terminator(buffer_, buffer_size_);
 +        if (term) {
-+            // Header terminator found: only validate up to end of headers (+4 for \r\n\r\n itself)
-+            size_t header_end = static_cast<size_t>(term - buffer_) + 4;
-+            if (header_end < validation_limit) {
-+                validation_limit = header_end;
-+            }
++            header_end_pos_ = static_cast<size_t>(term - buffer_) + 4;
 +        }
++    }
++    if (header_end_pos_ > 0 && header_end_pos_ < validation_limit) {
++        validation_limit = header_end_pos_;
 +    }
 +    for (size_t i = validation_start; i < validation_limit; ++i) {
          uint8_t byte = static_cast<uint8_t>(buffer_[i]);
          if (byte == 0 || byte >= 0x80) [[unlikely]] { ... }
          if (byte == '\n' && (i == 0 || buffer_[i - 1] != '\r')) [[unlikely]] { ... }
      }
-     validated_bytes_ = buffer_size_;
+-    validated_bytes_ = buffer_size_;
++    validated_bytes_ = validation_limit;
  }
 ```
 
-**Почему это поможет:**
-- В compute, request body = JSON array of doubles, e.g. `[1.0,2.0,...,10.0]` — десятки-сотни байт.
-- Эти байты проходят через validation loop побайтно, хотя body не нуждается в HTTP header validation.
-- Parser в compute = **48.03% Ir**. Из annotate: горячие instructions — byte load + compare + branch — доминируют.
-- Исключение body bytes из validation сократит количество итераций цикла на ~40-60% для compute (зависит от размера body vs headers).
+**Important:** `validated_bytes_` is set to `validation_limit` (not `buffer_size_`), so if the buffer grows with more body bytes on a subsequent call, the state guard (`state_ == headers`) will be false (we're already in `body` state) and the loop won't run.
 
-**Дополнительное improvement** (optional, если `find_header_terminator` сама дорогая):
-```cpp
-// Alternative: after we transition from headers to body state, set validated_bytes_ to skip rest
-// This avoids calling find_header_terminator on every parse_available call
-```
+#### Edge Cases
 
-**Ожидаемый выигрыш:**
-- Conservative: +5% compute throughput, +2% hello
-- Realistic: **+10-15% compute**, +3-5% hello
-- Optimistic: +20% compute, +5-8% hello
+| Edge Case | Behavior | Correct? |
+|---|---|---|
+| Headers + body in one read | `find_header_terminator()` finds `\r\n\r\n`, caches position. Validation scans only header bytes. Body bytes pass through. | ✅ Yes |
+| Partial headers across multiple reads | `find_header_terminator()` returns nullptr → `header_end_pos_` stays 0 → scans all bytes (all are header bytes). On next read with more data, if terminator found, caches position. | ✅ Yes |
+| UTF-8 bytes in body | Not scanned by validation loop → accepted. JSON parser handles them downstream. | ✅ Yes (fixes latent bug) |
+| Null bytes in body | Not scanned → accepted. JSON parser will reject them. C-string consumers should be audited. | ✅ Acceptable |
+| Pipelined requests | `reset_message_state()` resets `header_end_pos_ = 0` between requests. Next request starts fresh. | ✅ Yes |
+| GET request (no body) | `find_header_terminator()` finds `\r\n\r\n`, validation scans headers only. No body to skip. No difference in behavior. | ✅ Yes |
+| Very large headers (> MAX_HEADER_SIZE) | `find_header_terminator()` is already called at line 646 for size check. Our call at line ~632 adds one additional scan for the first `parse_available()` call only — acceptable overhead for correctness fix. | ✅ Yes |
 
-**Риск регрессий:**
-- **Low.** Body bytes не нуждаются в HTTP header validation. JSON body может содержать UTF-8 (bytes >= 0x80) и null bytes, что текущий код ошибочно бы отклонил.
-- Edge case: `find_header_terminator` вызывается для каждого `parse_available()` — но эта функция уже вызывается на строке 646 в том же методе. Можно кешировать результат.
-- Security: не ослабляет header validation — headers всё ещё полностью валидируются.
+#### Validation Checklist
 
-**Тесты после:**
-- E2E hello + compute smoke tests
-- Payload с UTF-8 в body (должен проходить, ранее мог ошибочно отклоняться)
-- callgrind: Ir `parse_available` в compute должен уменьшиться на 30-50%
+- [ ] POST with UTF-8 JSON body (`{"name": "Привет"}`) → must succeed (fixes latent bug where >= 0x80 bytes were rejected)
+- [ ] POST with null byte in body → parser should accept, JSON parser should reject
+- [ ] GET / → identical behavior to current (no body, headers fully validated)
+- [ ] Pipelined POST+POST → both requests parsed correctly
+- [ ] Partial header across 2 reads → no regression
+- [ ] `callgrind`: `parse_available` Ir in compute should decrease by 15–25%
+- [ ] `wrk`: median throughput for compute should improve by 3–6%
+- [ ] `valgrind --tool=memcheck` → no memory errors
 
-**Критерий успеха:** `parse_available` Ir в compute уменьшается с 48% до ≤30%.
+#### Realistic Expected Gain
 
----
-
-### 2.2 SIMD validation loop (SSE2) — Deep Refactor, Phase 2 add-on
-
-**Файл:** `http.cpp` — строки 632-640
-
-**Функция:** `parser::parse_available()`, validation inner loop
-
-**Что заменить → на что:**
-
-```cpp
-// SSE2: validate 16 bytes at once instead of 1
-// Check: byte == 0 || byte >= 0x80 → equivalent to signed byte <= 0
-// Also need CRLF consistency check (bare \n without preceding \r)
-#ifdef __SSE2__
-{
-    const uint8_t* buf = reinterpret_cast<const uint8_t*>(buffer_);
-    size_t i = validation_start;
-
-    // SIMD: process 16 bytes at a time
-    for (; i + 16 <= validation_limit; i += 16) {
-        __m128i chunk = _mm_loadu_si128(reinterpret_cast<const __m128i*>(buf + i));
-        __m128i zero = _mm_setzero_si128();
-
-        // byte == 0 || byte >= 0x80 ↔ signed byte <= 0
-        // _mm_cmpgt_epi8(zero, chunk) catches byte > 0x7F (signed negative)
-        // _mm_cmpeq_epi8(chunk, zero) catches byte == 0
-        __m128i cmp_zero = _mm_cmpeq_epi8(chunk, zero);
-        __m128i cmp_high = _mm_cmpgt_epi8(zero, chunk); // signed: 0 > chunk → chunk < 0 → chunk >= 0x80
-        __m128i bad = _mm_or_si128(cmp_zero, cmp_high);
-        if (_mm_movemask_epi8(bad) != 0) [[unlikely]] {
-            return std::unexpected(make_error_code(error_code::invalid_fd));
-        }
-    }
-
-    // Scalar tail for remaining bytes
-    for (; i < validation_limit; ++i) {
-        uint8_t byte = static_cast<uint8_t>(buffer_[i]);
-        if (byte == 0 || byte >= 0x80) [[unlikely]] {
-            return std::unexpected(make_error_code(error_code::invalid_fd));
-        }
-        if (byte == '\n' && (i == 0 || buffer_[i - 1] != '\r')) [[unlikely]] {
-            return std::unexpected(make_error_code(error_code::invalid_fd));
-        }
-    }
-}
-#else
-    // Original scalar loop
-    for (size_t i = validation_start; i < validation_limit; ++i) { ... }
-#endif
-```
-
-**Замечание:** CRLF check (`byte == '\n' && prev != '\r'`) сложнее SIMD-ифицировать из-за cross-boundary dependency (нужен предыдущий байт). Два подхода:
-1. SIMD только для `byte == 0 || byte >= 0x80`, scalar для CRLF — уже даёт основной выигрыш.
-2. Отдельный SIMD pass для `\n` поиска с последующей точечной проверкой `\r` перед каждым найденным `\n`.
-
-**Ожидаемый выигрыш:**
-- Conservative: +3% hello throughput
-- Realistic: +5-10% hello, +3-5% compute (поверх 2.1)
-- Optimistic: +15% hello
-
-**Риск регрессий:** Medium. Boundary handling для SIMD нетривиален. Нужны тесты с payload sizes: 0, 1, 15, 16, 17, 31, 32, 33, MAX.
-
-**Сложность:** Medium-High. Рекомендуется делать **после** 2.1 (skip body validation), т.к. 2.1 уже сокращает объём работы validation loop.
-
-**Строго последовательно после:** Phase 2.1.
-
-**Тесты после:**
-- Unit test: validation с payloads разных размеров (0..100), с invalid bytes, с bare LF.
-- callgrind: parse_available Ir должен уменьшиться дополнительно.
-- wrk: median throughput.
-
-**Критерий успеха:** `parse_available` из 48% → ≤20% Ir в compute (суммарно с 2.1).
+- **Compute: +3–6%** (corrected from +10–15%)
+- **Hello: +1–2%** (corrected from +3–5%)
+- Highest single-fix ROI for compute scenario
 
 ---
 
-### Phase 2 Summary
+### ~~2.2 SIMD validation loop~~ — **DEFERRED**
 
-| Fix | File | Effort | Expected Gain | Confidence | Sequential? |
-|---|---|---|---|---|---|
-| Skip body validation | `http.cpp:627-642` | 30 min | **+10-15% compute** | **High** | Independent |
-| SIMD validation | `http.cpp:632-640` | 2-3 hrs | +5-10% hello | Medium | After 2.1 |
+**Verdict: DEFER.** For typical headers (50–80 bytes), SIMD saves ~200–400 instructions — negligible. CRLF check cannot be SIMD-ified (cross-boundary dependency). Proposed SIMD code in original plan was **incomplete** — it omitted CRLF validation, creating a correctness bug. Only worthwhile for headers > 1KB (not the canonical workload).
 
-**Суммарный ожидаемый выигрыш Phase 2:** +10-20% compute, +5-10% hello.
+**When to revisit:** Only after confirming headers > 1KB in production workloads.
 
 ---
 
-## Phase 3: Serialization Work — 2-3 часа, Medium Risk
+### Phase 2 Summary (Updated)
+
+| Fix | File | Effort | Realistic Gain | Confidence |
+|---|---|---|---|---|
+| Skip body validation | `http.cpp:627-642` | 30 min | +3–6% compute, +1–2% hello | **Medium-High** |
+
+**Corrected from original:** +10–15% compute → +3–6% compute. SIMD validation moved to DEFER.
+
+---
+
+## Updated Phase 3: Routing & Dispatch Optimization — 1 hour, Requires Verification
 
 ### Цель
-Устранить #2 bottleneck: response serialization (29% Ir в hello, 10% в compute).
+Optimize routing and dispatch overhead.
+
+**Corrected from original Phase 3 (serialization) and Phase 4 (routing):** Serialization work moved to DEFER. Routing work elevated.
 
 ---
 
-### 3.1 Single-pass serialize with pre-computed sizes
+### 3.1 Switch hello to `fast_router`
 
-**Файл:** `http.cpp` — строки 203-268
+**Verdict: DO AFTER VERIFICATION.**
 
-**Функция:** `response::serialize_into(std::string&)`
+Compute already uses `fast_router`. Pattern is proven. Dispatch = 11.85% perf in hello. Direct match eliminates path splitting, segment matching, specificity scoring.
 
-**Что сейчас:** Два прохода по headers (size calc + write), 6+ отдельных append calls.
-
-**Что заменить → на что:**
-
+Follow compute_api's `fast_router` pattern:
 ```cpp
-void response::serialize_into(std::string& out) const {
-    if (chunked) {
-        out = serialize_chunked();
-        ::katana::detail::syscall_metrics_registry::instance().note_response_serialize(
-            out.size(), 0, out.capacity());
-        return;
-    }
-
-    // --- Fast path: pre-compute everything in one pass ---
-    char status_buf[16];
-    auto [status_ptr, status_ec] = std::to_chars(status_buf, status_buf + sizeof(status_buf), status);
-    const size_t status_len = static_cast<size_t>(status_ptr - status_buf);
-
-    char content_length_buf[32];
-    size_t cl_len = 0;
-    bool need_cl = !headers.contains(field::content_length);  // uses fix from 1.1
-    if (need_cl) {
-        auto [ptr, ec] = std::to_chars(
-            content_length_buf, content_length_buf + sizeof(content_length_buf), body.size());
-        if (ec == std::errc()) {
-            cl_len = static_cast<size_t>(ptr - content_length_buf);
-        }
-    }
-
-    // Single size calculation
-    size_t total = HTTP_VERSION_PREFIX.size() + status_len + 1 + reason.size() + CRLF.size();
-    for (const auto& [name, value] : headers) {
-        total += name.size() + HEADER_SEPARATOR.size() + value.size() + CRLF.size();
-    }
-    if (cl_len > 0) {
-        total += 14 + HEADER_SEPARATOR.size() + cl_len + CRLF.size(); // "Content-Length: <val>\r\n"
-    }
-    total += CRLF.size() + body.size();
-
-    const size_t old_capacity = out.capacity();
-    out.clear();
-    out.reserve(total);
-
-    // Single write pass — no intermediate checks
-    out.append(HTTP_VERSION_PREFIX);
-    out.append(status_buf, status_len);
-    out.push_back(' ');
-    out.append(reason);
-    out.append(CRLF);
-
-    for (const auto& [name, value] : headers) {
-        out.append(name);
-        out.append(HEADER_SEPARATOR);
-        out.append(value);
-        out.append(CRLF);
-    }
-
-    if (cl_len > 0) {
-        out.append("Content-Length");
-        out.append(HEADER_SEPARATOR);
-        out.append(content_length_buf, cl_len);
-        out.append(CRLF);
-    }
-
-    out.append(CRLF);
-    out.append(body);
-    ::katana::detail::syscall_metrics_registry::instance().note_response_serialize(
-        out.size(), old_capacity, out.capacity());
-}
-```
-
-**Ключевые изменения:**
-1. `headers.get("Content-Length")` → `headers.contains(field::content_length)` — from Phase 1.
-2. `reserve(total)` with **exact** size instead of estimate — eliminates reallocation.
-3. Status buf and content-length buf computed upfront.
-4. All `append` calls guaranteed to be no-realloc (since reserved exact size).
-
-**Ожидаемый выигрыш:**
-- Conservative: +3% hello
-- Realistic: +5-8% hello, +2-3% compute
-- Optimistic: +10% hello
-
-**Риск регрессий:** Low. Semantic behavior unchanged. Only thing that changes: exact reserve size, order of Content-Length computation.
-
-**Тесты после:**
-- Validate identical wire output: `diff <(curl old) <(curl new)`.
-- callgrind: `serialize_into` Ir should decrease by 10-20%.
-
----
-
-### 3.2 Switch hot path to `io_buffer` serialize (Medium Refactor)
-
-**Файлы:**
-- `http.cpp` — строки 328-412: `serialize_into(io_buffer&)` — **уже существует!**
-- `http_server.cpp` — строка 440: `resp.serialize_into(state.response_scratch)`
-
-**Что сейчас:**
-- Hot path в `handle_connection` использует `std::string` overload: `resp.serialize_into(state.response_scratch)`.
-- `io_buffer` overload (lines 328-412) делает single-pass direct-write без `std::string` growth overhead.
-
-**Что заменить → на что:**
-- Заменить `state.response_scratch` (std::string) на `io_buffer` в `connection_state`.
-- Вызывать `resp.serialize_into(state.response_io_buffer)` вместо string variant.
-- Для `active_response.append(state.response_scratch)` — использовать `io_buffer::data()` + `io_buffer::size()`.
-
-**Сложность:** Medium. Требует изменений в `connection_state` struct.
-
-**Ожидаемый выигрыш:**
-- Conservative: +5% both
-- Realistic: +8-12% hello, +5% compute
-- Optimistic: +15% hello
-
-**Риск регрессий:** Medium. Нужно убедиться, что `io_buffer` lifecycle совместим с pipelining.
-
-**Строго последовательно после:** 3.1
-
-**Тесты после:**
-- wrk с pipelining: `wrk -t4 -c512 -d10s --latency`.
-- Проверка на memory leaks: `valgrind --tool=memcheck`.
-
----
-
-### 3.3 Pre-built response template for hello-like endpoints (Deep)
-
-**Файлы:**
-- `http.cpp` — новая функция `response::serialize_static_into()`
-- `router.hpp` / hello server main — fast path для static response
-
-**Идея:**
-```cpp
-// For responses with fixed status + fixed headers + variable body:
-// Pre-compute "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nConnection: keep-alive\r\nContent-Length: "
-// Then append: itoa(body.size()) + "\r\n\r\n" + body
-static constexpr char HELLO_RESPONSE_PREFIX[] =
-    "HTTP/1.1 200 OK\r\n"
-    "Content-Type: text/plain\r\n"
-    "Connection: keep-alive\r\n"
-    "Content-Length: ";
-// Total prefix = 88 bytes, single memcpy
-```
-
-**Сложность:** Medium-High. Нужен механизм для определения "стабильного response shape" и cache invalidation.
-
-**Ожидаемый выигрыш:** +15-25% hello throughput.
-
-**Строго последовательно после:** 3.1, 3.2.
-
----
-
-### Phase 3 Summary
-
-| Fix | File | Effort | Expected Gain | Confidence | Sequential? |
-|---|---|---|---|---|---|
-| Single-pass serialize | `http.cpp:203-268` | 1 hr | +5-8% hello | **High** | Independent |
-| io_buffer hot path | `http_server.cpp:440` | 2 hrs | +8-12% hello | Medium | After 3.1 |
-| Static response template | New | 3-4 hrs | +15-25% hello | Medium | After 3.2 |
-
-**Phase 3 можно делать параллельно с Phase 2.**
-
----
-
-## Phase 4: Routing/Dispatch Work — 2-3 часа, Low-Medium Risk
-
-### Цель
-Уменьшить dispatch overhead: 16% Ir в hello (router), 20.5% Ir в compute (generated dispatch).
-
----
-
-### 4.1 Switch hello to `fast_router` (Quick Win)
-
-**Файлы:**
-- Hello server `main.cpp` (не в этом репозитории, но паттерн из `compute_api/main.cpp`)
-
-**Что заменить → на что:**
-
-Hello server сейчас (предположительно):
-```cpp
-// Before: uses generic router
-katana::http::route_entry routes[] = { ... };
-katana::http::router r(routes);
-return http::server(r).listen(port).run();
-```
-
-Заменить на `fast_router` pattern из compute:
-```cpp
-// After: uses fast_router with hash-based O(1) dispatch
 class hello_fast_router {
 public:
     katana::result<void> dispatch_to(const katana::http::request& req,
                                      katana::http::request_context& ctx,
                                      katana::http::response& out) const {
-        // Direct dispatch — no path splitting, no segment matching
         if (req.http_method == katana::http::method::get && req.uri == "/") {
-            // inline handler
             out.reset();
             out.status = 200;
             out.reason.assign(katana::http::canonical_reason_phrase(200));
@@ -614,269 +438,259 @@ public:
 };
 ```
 
-**Ожидаемый выигрыш:**
-- Conservative: +5% hello
-- Realistic: +8-12% hello
-- Optimistic: +15% hello
+**Realistic expected gain: +3–6% hello** (corrected from +8–12%). Gain limited by Amdahl's Law — dispatch is not the only cost.
 
-**Риск регрессий:** Нулевой для hello. Compute уже использует fast_router.
-
-**Строго последовательно:** Не зависит от других phases.
+**Validation:**
+- wrk: hello throughput should improve
+- curl: identical response
+- callgrind: dispatch Ir should decrease significantly
 
 ---
 
-### 4.2 Optimize generated dispatch — reduce pre-handler tax
+### 3.2 Fix string lookups in generated dispatch code
 
-**Файл:** `compute_api/generated/generated_router_bindings.hpp` — строки 64-104
+**Verdict: DO AFTER VERIFICATION.**
 
-**Функция:** `dispatch_compute_sum()`
+**File:** `compute_api/generated/generated_router_bindings.hpp` — lines 64–104
 
-**Текущий pre-handler cost breakdown** (from callgrind, total 20.51% Ir = 19.6M Ir):
-1. Accept header check: `req.headers.get(field::accept)` + comparisons — ~2M Ir
-2. Content-Type check: `req.headers.get(field::content_type)` + `ascii_iequals` + `media_type_token` — ~4M Ir
-3. JSON body parse: `parse_compute_sum_request(req.body, &ctx.arena)` — ~5M Ir
-4. Validation: `validate_compute_sum_request(*parsed_body)` — ~1M Ir
-5. Handler context scope: `handler_context::scope context_scope(req, ctx)` — ~0.5M Ir
-6. Handler: `handler.compute_sum(*parsed_body, out)` — 5.5M Ir
-7. Content-Type fallback: `out.headers.get(field::content_type)` check — ~0.5M Ir
+**Changes:**
 
-**Optimizations:**
-
-#### 4.2.1 Skip Accept check for single-type endpoints
 ```diff
- inline katana::result<void> dispatch_compute_sum(...) {
-     constexpr std::string_view kJsonContentType = "application/json";
--    auto accept = req.headers.get(katana::http::field::accept);
--    if (accept && !accept->empty() && *accept != "*/*" && *accept != kJsonContentType) {
--        out.assign_error(katana::problem_details::not_acceptable("unsupported Accept header"));
--        return {};
--    }
-+    // Fast path: skip Accept check — most clients send */*, empty, or omit.
-+    // Only check if Accept header is explicitly set to a non-matching type.
-+    if (auto accept = req.headers.get(katana::http::field::accept);
-+        accept && !accept->empty()) [[unlikely]] {
-+        if (*accept != "*/*" && *accept != kJsonContentType) {
-+            out.assign_error(katana::problem_details::not_acceptable("unsupported Accept header"));
-+            return {};
-+        }
-+    }
-```
+ // Line ~101: string-based set_header → enum-based
+-        out.set_header("Content-Type", kJsonContentType);
++        out.set_header(katana::http::field::content_type, kJsonContentType);
 
-#### 4.2.2 Skip post-handler Content-Type fallback when handler already sets it
-```diff
+ // Line ~99: get → contains for Content-Type check
 -    if (out.status != 204 && !out.body.empty() &&
 -        !out.headers.get(katana::http::field::content_type)) {
--        out.set_header("Content-Type", kJsonContentType);
--    }
-+    // Handler already sets Content-Type via out.set_header(field::content_type, "application/json")
-+    // Skip redundant check for endpoints that always set it.
 +    if (out.status != 204 && !out.body.empty() &&
 +        !out.headers.contains(katana::http::field::content_type)) {
-+        out.set_header(katana::http::field::content_type, kJsonContentType);
-+    }
 ```
 
-Note: line 101 uses `out.set_header("Content-Type", kJsonContentType)` — string overload. Change to enum:
-```diff
--        out.set_header("Content-Type", kJsonContentType);
-+        out.set_header(katana::http::field::content_type, kJsonContentType);
-```
+**Realistic expected gain: +1–2% compute** (corrected from +3–5%). Main value: eliminate `string_to_field` calls in generated code.
 
-#### 4.2.3 Use `ascii_iequals` branchless variant for Content-Type
-(This benefits from Phase 1.2 tolower fix propagating to `ascii_iequals`.)
-
-**Ожидаемый выигрыш:**
-- Conservative: +2% compute
-- Realistic: +3-5% compute
-- Optimistic: +8% compute
-
-**Риск регрессий:** Low. Accept check optimization only changes branch prediction hint. Content-Type fallback fix is a pure optimization.
-
-**Тесты после:**
-- E2E test: POST /compute/sum with `Accept: application/xml` → 406.
-- E2E test: POST /compute/sum with `Accept: */*` → 200.
-- callgrind: `dispatch_compute_sum` Ir should decrease by 10-20%.
-
-**Критерий успеха:** `dispatch_compute_sum` Ir decreases from 20.51% to ≤17%.
+**Validation:**
+- E2E test: POST /compute/sum → 200 with correct Content-Type
+- callgrind: `dispatch_compute_sum` Ir should decrease
 
 ---
 
-### 4.3 katana_gen: codegen improvements for dispatch templates
+### Phase 3 Summary (Updated)
 
-**Файлы:** `katana_gen/` — generator that produces `generated_router_bindings.hpp`
-
-**Идея:** Modify the code generator to emit optimized dispatch for single-content-type endpoints:
-- Skip Accept check entirely if only `application/json` is produced.
-- Skip Content-Type validation if endpoint always expects `application/json`.
-- Pre-compute `has_body` flag at compile time from OpenAPI spec.
-
-**Сложность:** Medium. Requires changes to code generator, not just generated code.
-
-**Строго последовательно после:** 4.2 (first validate manual fixes, then automate in codegen).
-
----
-
-### Phase 4 Summary
-
-| Fix | File | Effort | Expected Gain | Confidence | Sequential? |
-|---|---|---|---|---|---|
-| Hello fast_router | hello server main | 30 min | +8-12% hello | **High** | Independent |
-| Dispatch optimization | `generated_router_bindings.hpp:64-104` | 1 hr | +3-5% compute | **High** | Independent |
-| Codegen improvements | `katana_gen/` | 3-4 hrs | +3-5% compute (future) | Medium | After 4.2 |
-
-**Phase 4 можно делать параллельно с Phases 2 и 3.**
-
----
-
-## Phase 5: Deeper Refactors — 1-2 дня, Medium-High Risk
-
-### 5.1 SIMD parser validation (if still needed after Phase 2.1)
-- See Phase 2.2 above.
-
-### 5.2 Zero-copy response path (writev from prebuilt buffers)
-- Skip all `std::string` serialization.
-- Use `writev()` with prebuilt iovec: `[header_prefix, content_length_str, header_suffix, body]`.
-- Eliminates all `append` and `memcpy` from serialize path.
-- **Effort:** 4-8 hrs. **Risk:** High. Needs careful integration with pipelining/batching.
-
-### 5.3 Compile-time route table with constexpr hashing
-- Generate `constexpr` perfect hash at compile time.
-- Route dispatch = single hash + switch, zero-runtime string comparisons.
-- **Effort:** 4-6 hrs. **Risk:** Medium. Compute already has `fast_router` with runtime hash.
-
-### 5.4 Custom JSON parser for compute (skip generic serde)
-- For `compute_sum_request` (array of doubles), write a specialized parser:
-  ```cpp
-  // Skip serde::json_cursor entirely
-  // Direct: scan for '[', then parse doubles inline with std::from_chars
-  const char* p = body.data() + 1; // skip '['
-  while (*p != ']') {
-      double val;
-      auto [next, ec] = std::from_chars(p, body.data() + body.size(), val);
-      result.push_back(val);
-      p = next;
-      if (*p == ',') ++p;
-  }
-  ```
-- **Effort:** 2 hrs. **Risk:** Medium. Must handle edge cases (whitespace, empty arrays, errors).
-- **Expected gain:** -30% generated dispatch Ir (eliminates skip_ws, try_array_start, try_comma overhead).
-
-### 5.5 Avoid memmove in `prepare_for_next_request`
-- **File:** `http.cpp:1152-1159`
-- When `parse_pos_ >= buffer_size_` (all data consumed), skip memmove:
-  ```diff
-   void parser::prepare_for_next_request(monotonic_arena* arena) noexcept {
-       size_t remaining = buffered_bytes();
-  -    if (remaining > 0 && parse_pos_ > 0) {
-  +    if (remaining == 0) {
-  +        buffer_size_ = 0;
-  +    } else if (parse_pos_ > 0) {
-           std::memmove(buffer_, buffer_ + parse_pos_, remaining);
-  +        buffer_size_ = remaining;
-       }
-  -    buffer_size_ = remaining;
-       reset_message_state(arena);
-   }
-  ```
-- **Effort:** 5 min. **Risk:** None.
-- **Expected gain:** +0.5-1% both (2.80% Ir in hello for prepare_for_next_request).
-
----
-
-## Final Rollout Order
-
-```
-┌──────────────────────────────────────────────────────────┐
-│                        Day 1                              │
-├──────────────────────────────────────────────────────────┤
-│  Phase 1.1: field enum lookups         (5 min, +3-5%)    │
-│  Phase 1.2: tolower → branchless       (5 min, +2-3%)    │
-│  Phase 1.3: always_inline skip_ws      (1 min, +1%)      │
-│  Phase 5.5: prepare_for_next memmove   (5 min, +0.5%)    │
-│                                                           │
-│  → Verify: wrk + callgrind baseline comparison            │
-│  → Expected total Day 1: +5-8% both                      │
-├──────────────────────────────────────────────────────────┤
-│                        Day 2                              │
-├──────────────────────────────────────────────────────────┤
-│  Phase 2.1: Skip body validation       (30 min, +10-15%) │
-│  Phase 3.1: Single-pass serialize      (1 hr, +5-8%)     │
-│  Phase 4.2: Generated dispatch opt     (1 hr, +3-5%)     │
-│                                                           │
-│  → Verify: wrk + callgrind                                │
-│  → Expected total Day 1+2: +15-25% both                  │
-├──────────────────────────────────────────────────────────┤
-│                        Day 3                              │
-├──────────────────────────────────────────────────────────┤
-│  Phase 4.1: Hello fast_router          (30 min, +8-12%)  │
-│  Phase 3.2: io_buffer serialize path   (2 hrs, +8-12%)   │
-│                                                           │
-│  → Verify: wrk + callgrind                                │
-│  → Expected total Day 1-3: +20-35% both                  │
-├──────────────────────────────────────────────────────────┤
-│                      Week 2+                              │
-├──────────────────────────────────────────────────────────┤
-│  Phase 2.2: SIMD validation            (if still needed) │
-│  Phase 3.3: Static response template   (hello focused)   │
-│  Phase 5.2: writev zero-copy response                    │
-│  Phase 5.4: Custom JSON parser                           │
-│  Phase 4.3: Codegen improvements                         │
-└──────────────────────────────────────────────────────────┘
-```
-
----
-
-## Параллельность
-
-### Можно делать параллельно:
-- Phase 1 (все три fix) — полностью независимы друг от друга
-- Phase 2 (parser) и Phase 3 (serialization) — разные файлы, разные функции
-- Phase 2 (parser) и Phase 4 (routing) — разные файлы
-- Phase 3 (serialization) и Phase 4 (routing) — разные файлы (кроме 3.2 → http_server.cpp)
-
-### Строго последовательно:
-- Phase 2.2 (SIMD) → после Phase 2.1 (skip body validation) — иначе SIMD-ифицируем лишние байты
-- Phase 3.2 (io_buffer) → после Phase 3.1 (single-pass serialize) — нужен стабильный serialize API
-- Phase 3.3 (static template) → после Phase 3.2 (io_buffer) — строится поверх нового serialize path
-- Phase 4.3 (codegen) → после Phase 4.2 (manual dispatch fix) — сначала валидируем, потом автоматизируем
-
----
-
-## Оценка надёжности рекомендаций
-
-### Самые надёжные (High Confidence)
-
-1. **field enum lookups (1.1)** — Zero-risk, API уже существует, evidence прямой: string_to_field исчезнет из hot path.
-2. **tolower → branchless (1.2)** — Zero-risk для HTTP context, evidence: 4.30% perf на single libc function.
-3. **Skip body validation (2.1)** — Логически обоснованно: body bytes не нуждаются в header validation. Evidence: 48% Ir.
-4. **Hello fast_router (4.1)** — Compute уже использует, zero-risk pattern copy.
-
-### Потенциально спорные (требуют верификации)
-
-1. **SIMD validation (2.2)** — Выигрыш зависит от среднего размера headers. Для очень коротких запросов (GET /) overhead SIMD setup может нивелировать выигрыш. В VirtualBox SIMD timing может отличаться от bare metal.
-2. **io_buffer serialize (3.2)** — `io_buffer` overload уже существует в коде, но не используется на hot path. Возможно есть причина (bug, API mismatch). Нужно проверить.
-3. **Static response template (3.3)** — Предполагает стабильный response shape. Если middleware добавляет dynamic headers, template invalidируется.
-
-### Красивый microbenchmark win, но спорный E2E win
-
-1. **always_inline skip_ws (1.3)** — Microbenchmark покажет -1%, но в E2E wrk может быть в пределах noise (VirtualBox variance ~10%).
-2. **prepare_for_next memmove (5.5)** — 2.80% Ir, но в E2E это <1% throughput impact из-за memmove efficiency для small sizes.
-3. **Custom JSON parser (5.4)** — Microbenchmark для JSON parsing покажет 3x improvement, но в E2E доля JSON parsing = 1.72% → realistically +0.5-1% throughput.
-4. **Accept check skip (4.2.1)** — Branch prediction already handles this well. Change improves Ir but not necessarily wallclock.
-
----
-
-## Итоговая таблица: ROI × Confidence
-
-| Rank | Fix | ROI | Confidence | Effort |
+| Fix | File | Effort | Realistic Gain | Confidence |
 |---|---|---|---|---|
-| 1 | Skip body validation (2.1) | **Highest** | High | 30 min |
-| 2 | field enum lookups (1.1) | High | High | 5 min |
-| 3 | tolower → branchless (1.2) | Medium-High | High | 5 min |
-| 4 | Hello fast_router (4.1) | High (hello) | High | 30 min |
-| 5 | Single-pass serialize (3.1) | Medium | High | 1 hr |
-| 6 | Generated dispatch opt (4.2) | Medium | High | 1 hr |
-| 7 | io_buffer serialize (3.2) | High | Medium | 2 hrs |
-| 8 | SIMD validation (2.2) | Medium | Medium | 3 hrs |
-| 9 | Static response template (3.3) | High (hello) | Medium | 4 hrs |
-| 10 | Custom JSON parser (5.4) | Low | Medium | 2 hrs |
+| Hello fast_router | hello server main | 30 min | +3–6% hello | **High** |
+| Generated dispatch fix | `generated_router_bindings.hpp` | 30 min | +1–2% compute | **Medium** |
+
+---
+
+## Deferred / Dropped Items
+
+### DROPPED (do not implement)
+
+| # | Optimization | Original Estimate | Why Drop |
+|---|---|---|---|
+| 1.3 | `[[gnu::always_inline]]` on `skip_ws()` | +1% | Effect < 0.01%. Call/ret overhead for 164K calls ≈ 0.5–0.8M cycles out of billions. Compiler likely already inlines at -O2/-O3. ~100x overestimate. |
+| 5.4 | Custom JSON parser for compute | +3x micro | JSON parsing = 3–5% Ir total. Custom parser saves ~1% wallclock. Cost: duplicated logic, maintenance burden, correctness risk. ROI negative. |
+| — | Fuse read+parse+dispatch | +0.5% | Destroys modularity for negligible function call overhead savings. |
+
+### DEFERRED (do after measuring Phases 1–3)
+
+| # | Optimization | Original Estimate | Corrected | Why Defer | When to Revisit |
+|---|---|---|---|---|---|
+| 3.1 (old) | Single-pass serialize | +5–8% hello | +1–3% | perf% shows serialize is only 9.36% wallclock (not 29.22% Ir). "Single-pass" proposal is still two-pass with better reserve. ROI doesn't justify. | After Phases 1–3 if serialize still top-3 bottleneck. |
+| 3.2 (old) | io_buffer serialize path | +8–12% hello | +2–5% | Exists in code but unused on hot path — suspicious. May have bugs. Also has `get("Content-Length")` string lookup bug. | After investigating why it's unused. Run memcheck first. |
+| 2.2 | SIMD parser validation | +5–10% hello | <1% typical | Headers 50–80 bytes: SIMD saves ~200–400 instructions. CRLF check can't be SIMD-ified. Proposed code incomplete. | Only after confirming headers > 1KB in production. |
+| 3.3 (old) | Pre-built response template | +15–25% hello | Significant but fragile | Breaks on Connection: close, middleware headers, non-200 status. Not suitable for general-purpose framework. | Only if hello throughput is specific business requirement. |
+| 5.3 | Compile-time route table | +3–5% | Marginal | `fast_router` already O(1) dispatch. Marginal over runtime hash. | Only if profiling shows `fast_router` as top-5 bottleneck. |
+| 5.2 | Zero-copy response (writev) | Unknown | Unknown | Cannot measure in VirtualBox. VM exit/enter overhead may dominate. | Only on bare-metal with PMU-enabled profiling. |
+
+---
+
+## Updated First Patch Set
+
+Only changes with verdict DO NOW — implement immediately, zero risk.
+
+### Patch 1: Field enum lookups in serialize_into
+
+**File:** `http.cpp`, function `response::serialize_into(std::string&)`, line 214
+
+```diff
+-    bool has_content_length = headers.get("Content-Length").has_value();
++    bool has_content_length = headers.contains(field::content_length);
+```
+
+**File:** `http.cpp`, function `response::serialize_head_into(std::string&)`, line 278
+
+```diff
+-    bool has_content_length = headers.get("Content-Length").has_value();
++    bool has_content_length = headers.contains(field::content_length);
+```
+
+**Validation:**
+- `callgrind_annotate | grep string_to_field` — Ir count should decrease by ≥15%
+- `curl http://127.0.0.1:8080/` — response must be identical byte-for-byte
+
+### Patch 2: Field enum lookups in handle_connection
+
+**File:** `http_server.cpp`, function `handle_connection(...)`, lines 418–422
+
+```diff
+-        auto connection_header = req.headers.get("Connection");
++        auto connection_header = req.headers.get(http::field::connection);
+         bool close_connection =
+             connection_header && (*connection_header == "close" || *connection_header == "Close");
+
+-        if (!resp.headers.get("Connection")) {
++        if (!resp.headers.contains(http::field::connection)) {
+```
+
+**Validation:**
+- Send request with `Connection: close` → server must close connection
+- Send request with `Connection: keep-alive` → server must keep connection alive
+- Send request without Connection header → default behavior
+
+### Patch 3: Branchless ci_char_equal
+
+**File:** `http_headers.hpp`, function `ci_char_equal(char, char)`, lines 31–34
+
+```diff
+ inline bool ci_char_equal(char a, char b) noexcept {
+-    return std::tolower(static_cast<unsigned char>(a)) ==
+-           std::tolower(static_cast<unsigned char>(b));
++    if (a == b) return true;
++    unsigned char ua = static_cast<unsigned char>(a);
++    unsigned char ub = static_cast<unsigned char>(b);
++    return (ua ^ ub) == 0x20 && ((ua | 0x20) >= 'a') && ((ua | 0x20) <= 'z');
+ }
+```
+
+**Validation:**
+- `ci_char_equal('A', 'a')` → true
+- `ci_char_equal('Z', 'z')` → true
+- `ci_char_equal('^', '~')` → false (would be true with naive `|0x20`)
+- `ci_char_equal('@', '`')` → false
+- `ci_char_equal('0', '0')` → true
+- `ci_char_equal('-', '-')` → true
+- `perf report` — `tolower` should disappear from compute top symbols
+
+### Patch 4: Optimize prepare_for_next_request
+
+**File:** `http.cpp`, function `parser::prepare_for_next_request()`, line ~1152
+
+```diff
+ void parser::prepare_for_next_request(monotonic_arena* arena) noexcept {
+     size_t remaining = buffered_bytes();
+-    if (remaining > 0 && parse_pos_ > 0) {
++    if (remaining == 0) {
++        buffer_size_ = 0;
++    } else if (parse_pos_ > 0) {
+         std::memmove(buffer_, buffer_ + parse_pos_, remaining);
++        buffer_size_ = remaining;
+     }
+-    buffer_size_ = remaining;
+     reset_message_state(arena);
+ }
+```
+
+**Validation:**
+- wrk with pipelining — no regression
+- `valgrind --tool=memcheck` — no memory errors
+
+### Patch 5: Skip body byte validation (DO AFTER VERIFICATION)
+
+See **Parser Fix Design** section above for complete implementation details, including:
+- Exact code changes (Patches A, B, C)
+- Edge case analysis table
+- Validation checklist
+
+This patch should be implemented after Patches 1–4 are validated.
+
+---
+
+## Final Rollout Order (Updated)
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│                   Step 1: Quick Wins (30 min)                │
+│                   Zero risk, +2–4% both                      │
+├──────────────────────────────────────────────────────────────┤
+│  Patch 1: field enum lookups (serialize)      5 min          │
+│  Patch 2: field enum lookups (handle_conn)    5 min          │
+│  Patch 3: branchless ci_char_equal            5 min          │
+│  Patch 4: prepare_for_next memmove skip       5 min          │
+│                                                              │
+│  → Verify: wrk × 5 median + callgrind comparison            │
+├──────────────────────────────────────────────────────────────┤
+│                Step 2: Parser Fix (30 min)                    │
+│                +3–6% compute, +1–2% hello                    │
+├──────────────────────────────────────────────────────────────┤
+│  Patch 5: Skip body byte validation                          │
+│                                                              │
+│  → Verify: UTF-8 body test, wrk, callgrind                   │
+├──────────────────────────────────────────────────────────────┤
+│              Step 3: Routing/Dispatch (1 hr)                 │
+│              +3–6% hello, +1–2% compute                      │
+├──────────────────────────────────────────────────────────────┤
+│  Switch hello to fast_router                  30 min         │
+│  Fix string lookups in generated dispatch     30 min         │
+│                                                              │
+│  → Verify: wrk + callgrind                                   │
+├──────────────────────────────────────────────────────────────┤
+│              Step 4: Validate and Iterate                     │
+├──────────────────────────────────────────────────────────────┤
+│  Measure combined gains                                      │
+│  Re-profile to identify new top bottlenecks                  │
+│  Decide whether to pursue deferred items                     │
+└──────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Final Expected Outcome (Updated)
+
+### What is likely (>70% confidence)
+
+After Steps 1–3:
+
+- **Compute throughput: +4–8%**
+  - From: field enum (+1.5%), tolower fix (+1.5%), body validation skip (+3–4%), dispatch string fix (+0.5%)
+  - Multiplicative: 1.015 × 1.015 × 1.035 × 1.005 ≈ 1.07 → ~+7%
+
+- **Hello throughput: +4–7%**
+  - From: field enum (+1.5%), fast_router (+4%), prepare_for_next (+0.3%)
+  - Multiplicative: 1.015 × 1.04 × 1.003 ≈ 1.06 → ~+6%
+
+- **Latency (p99): 5–10% improvement** (proportional to throughput gain under load)
+- **One latent bug fixed:** UTF-8 body bytes no longer incorrectly rejected
+
+### What is optimistic but still plausible (30–50% confidence)
+
+- **Compute: +10–15%** — if body validation skip saves more than estimated, or I/O bound fraction is small (<30%)
+- **Hello: +8–12%** — if fast_router eliminates more overhead than estimated
+
+### What is unlikely (<20% confidence)
+
+- **+20–35%** (original plan's claim) — requires all optimizations at optimistic estimates, additive gains, fully CPU-bound, no VirtualBox overhead
+- **SIMD parser providing measurable E2E gain** for canonical workloads (headers too short)
+
+### Summary of Corrections from Original Plan
+
+| Metric | Original Claim | Corrected Estimate | Factor |
+|---|---|---|---|
+| Day 1 quick wins | +5–8% both | +2–4% both | ~2x |
+| Body validation skip (compute) | +10–15% | +3–6% | ~2.5x |
+| Top-5 combined (compute) | +20–30% | +6–12% | ~2.5x |
+| Top-5 combined (hello) | +15–25% | +5–10% | ~2.5x |
+| always_inline skip_ws | +1% | <0.01% | ~100x |
+| Single-pass serialize (hello) | +5–8% | +1–3% | ~3x |
+
+**Root cause of overestimates:**
+1. Using Ir% as direct proxy for throughput% (1.5–3x inflation)
+2. Additive stacking of gains (violates Amdahl's Law)
+3. Not accounting for I/O bound ceiling
+4. Not accounting for VirtualBox noise floor (~3%)
+
+---
+
+*This updated plan reflects the final adjudicator verdict. Implement Steps 1–3, measure, then reassess before pursuing deferred items.*
