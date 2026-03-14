@@ -1,0 +1,211 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 6K of event 'cpu-clock:u'
+# Event count (approx.): 6865865859
+#
+# Overhead  Symbol                                                                                                                                                                                                                                                                                                                                                                                      IPC   [IPC Coverage]
+# ........  ..........................................................................................................................................................................................................................................................................................................................................................................................  ....................
+#
+    25.09%  [.] katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]                                                                                                                                                                                                                                                                -      -            
+            |
+            ---katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]
+
+    12.74%  [.] katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]                                                                                                                                                                                                                                          -      -            
+            |
+            ---katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]
+               |          
+                --12.70%--katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]
+
+     9.87%  [.] katana::http::parser::parse_available()                                                                                                                                                                                                                                                                                                                                                 -      -            
+            |
+            ---katana::http::parser::parse_available()
+               |          
+               |--3.24%--0xa0d312e312f5054
+               |          
+                --0.90%--0
+                          0
+
+     6.49%  [.] katana::http::parser::prepare_for_next_request(katana::monotonic_arena*)                                                                                                                                                                                                                                                                                                                -      -            
+            |
+            ---katana::http::parser::prepare_for_next_request(katana::monotonic_arena*)
+               |          
+                --6.30%--0
+
+     4.23%  [.] __memmove_avx_unaligned_erms                                                                                                                                                                                                                                                                                                                                                            -      -            
+            |
+            ---__memmove_avx_unaligned_erms
+               |          
+               |--0.80%--katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]
+               |          
+                --0.76%--0
+
+     4.13%  [.] (anonymous namespace)::handle_root(katana::http::request const&, katana::http::request_context&, katana::http::response&)                                                                                                                                                                                                                                                               -      -            
+            |
+            ---(anonymous namespace)::handle_root(katana::http::request const&, katana::http::request_context&, katana::http::response&)
+               0
+
+     2.83%  [.] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .isra.0]                                                                                                                                                                                                                                                     -      -            
+            |
+            ---std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .isra.0]
+               |          
+                --0.92%--katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]
+
+     2.46%  [.] katana::http::headers_map::get(katana::http::field) const [clone .part.0]                                                                                                                                                                                                                                                                                                               -      -            
+            |
+            ---katana::http::headers_map::get(katana::http::field) const [clone .part.0]
+               0
+               0
+
+     2.42%  [.] __send                                                                                                                                                                                                                                                                                                                                                                                  -      -            
+            |
+            ---__send
+               |          
+                --2.29%--katana::tcp_socket::write(std::span<unsigned char const, 18446744073709551615ul>)
+                          0x1
+
+     1.97%  [.] __libc_recv                                                                                                                                                                                                                                                                                                                                                                             -      -            
+            |
+            ---__libc_recv
+               |          
+                --1.66%--katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]
+
+     1.94%  [.] __memcmp_avx2_movbe                                                                                                                                                                                                                                                                                                                                                                     -      -            
+            |
+            ---__memcmp_avx2_movbe
+
+     1.87%  [.] katana::reactor_pool::worker_thread(katana::reactor_pool::reactor_context*)                                                                                                                                                                                                                                                                                                             -      -            
+            |
+            ---katana::reactor_pool::worker_thread(katana::reactor_pool::reactor_context*)
+               0x74797e6ecdb4
+               start_thread
+               clone3
+
+     1.66%  [.] katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)                                                                                                                                                                                                                                                               -      -            
+            |
+            ---katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)
+
+     1.65%  [.] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .constprop.0] [clone .isra.0]                                                                                                                                                                                                                                -      -            
+            |
+            ---std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .constprop.0] [clone .isra.0]
+               |          
+                --0.67%--katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]
+
+     1.53%  [.] katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&)::{lambda()#5}::operator()() const [clone .lto_priv.0]                                                                                                                                                                                                                          -      -            
+            |
+            ---katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&)::{lambda()#5}::operator()() const [clone .lto_priv.0]
+
+     1.50%  [.] __memchr_avx2                                                                                                                                                                                                                                                                                                                                                                           -      -            
+            |
+            ---__memchr_avx2
+               |          
+                --1.15%--0xa0d312e312f5054
+
+     1.37%  [.] katana::detail::syscall_metrics_registry::local_slot() [clone .isra.0]                                                                                                                                                                                                                                                                                                                  -      -            
+            |
+            ---katana::detail::syscall_metrics_registry::local_slot() [clone .isra.0]
+
+     1.28%  [.] katana::simd::find_crlf_avx2(char const*, unsigned long)                                                                                                                                                                                                                                                                                                                                -      -            
+            |
+            ---katana::simd::find_crlf_avx2(char const*, unsigned long)
+               |          
+                --0.55%--0xa0d312e312f5054
+
+     1.20%  [.] __memmove_avx_unaligned                                                                                                                                                                                                                                                                                                                                                                 -      -            
+            |
+            ---__memmove_avx_unaligned
+
+     1.20%  [.] std::basic_string_view<char, std::char_traits<char> >::compare(std::basic_string_view<char, std::char_traits<char> >) const                                                                                                                                                                                                                                                             -      -            
+            |
+            ---std::basic_string_view<char, std::char_traits<char> >::compare(std::basic_string_view<char, std::char_traits<char> >) const
+
+     1.11%  [.] __strlen_avx2                                                                                                                                                                                                                                                                                                                                                                           -      -            
+            |
+            ---__strlen_avx2
+               |          
+                --0.55%--0x74006874676e654c
+
+     0.98%  [.] epoll_wait                                                                                                                                                                                                                                                                                                                                                                              -      -            
+            |
+            ---epoll_wait
+               |          
+                --0.83%--katana::reactor_pool::worker_thread(katana::reactor_pool::reactor_context*)
+                          0x74797e6ecdb4
+                          start_thread
+                          clone3
+
+     0.83%  [.] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [clone .isra.0]                                                                                                                                                                                           -      -            
+            |
+            ---std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [clone .isra.0]
+
+     0.79%  [.] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*) [clone .isra.0]                                                                                                                                                                                                                                                                    -      -            
+            |
+            ---std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*) [clone .isra.0]
+               |          
+                --0.57%--0x74006874676e654c
+
+     0.74%  [.] katana::http::headers_map::iterator::advance()                                                                                                                                                                                                                                                                                                                                          -      -            
+            |
+            ---katana::http::headers_map::iterator::advance()
+               katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]
+
+     0.73%  [.] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::push_back(char)                                                                                                                                                                                                                                                                                        -      -            
+            |
+            ---std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::push_back(char)
+
+     0.70%  [.] katana::inplace_function<std::expected<void, std::error_code> (katana::http::request const&, katana::http::request_context&, katana::http::response&), 64ul>::{lambda(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)#3}::_FUN(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)  -      -            
+            |
+            ---katana::inplace_function<std::expected<void, std::error_code> (katana::http::request const&, katana::http::request_context&, katana::http::response&), 64ul>::{lambda(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)#3}::_FUN(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)
+
+     0.66%  [.] katana::http::(anonymous namespace)::set_content_type(katana::http::headers_map&, std::basic_string_view<char, std::char_traits<char> >)                                                                                                                                                                                                                                                -      -            
+            |
+            ---katana::http::(anonymous namespace)::set_content_type(katana::http::headers_map&, std::basic_string_view<char, std::char_traits<char> >)
+               0
+
+     0.60%  [.] std::_Function_handler<void (katana::http::request const&, katana::http::response const&), main::{lambda(katana::http::request const&, katana::http::response const&)#1}>::_M_invoke(std::_Any_data const&, katana::http::request const&, katana::http::response const&)                                                                                                                -      -            
+            |
+            ---std::_Function_handler<void (katana::http::request const&, katana::http::response const&), main::{lambda(katana::http::request const&, katana::http::response const&)#1}>::_M_invoke(std::_Any_data const&, katana::http::request const&, katana::http::response const&)
+
+     0.60%  [.] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace(unsigned long, unsigned long, char const*, unsigned long) [clone .constprop.0]                                                                                                                                                                                                              -      -            
+            |
+            ---std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace(unsigned long, unsigned long, char const*, unsigned long) [clone .constprop.0]
+
+     0.45%  [.] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::reserve(unsigned long)                                                                                                                                                                                                                                                                                 -      -            
+     0.42%  [.] __GI___pthread_disable_asynccancel                                                                                                                                                                                                                                                                                                                                                      -      -            
+     0.39%  [.] memcpy@plt                                                                                                                                                                                                                                                                                                                                                                              -      -            
+     0.35%  [.] katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const                                                                                                                                                                                                                                                          -      -            
+     0.32%  [.] katana::detail::syscall_metrics_registry::instance()                                                                                                                                                                                                                                                                                                                                    -      -            
+     0.31%  [.] clock_gettime@@GLIBC_2.17                                                                                                                                                                                                                                                                                                                                                               -      -            
+     0.29%  [.] __GI___pthread_enable_asynccancel                                                                                                                                                                                                                                                                                                                                                       -      -            
+     0.25%  [.] katana::tcp_socket::write(std::span<unsigned char const, 18446744073709551615ul>)                                                                                                                                                                                                                                                                                                       -      -            
+     0.25%  [.] std::basic_string_view<char, std::char_traits<char> >::substr(unsigned long, unsigned long) const [clone .isra.0]                                                                                                                                                                                                                                                                       -      -            
+     0.22%  [.] katana::inplace_function<void (katana::event_type), 96ul>::{lambda(void const*, katana::event_type)#1}::_FUN(void const*, katana::event_type)                                                                                                                                                                                                                                           -      -            
+     0.20%  [.] katana::http::server::connection_state::set_watch_events(katana::event_type) [clone .isra.0]                                                                                                                                                                                                                                                                                            -      -            
+     0.19%  [.] memchr@plt                                                                                                                                                                                                                                                                                                                                                                              -      -            
+     0.16%  [.] 0x0000000000000b03                                                                                                                                                                                                                                                                                                                                                                      -      -            
+     0.12%  [.] katana::ring_buffer_queue<katana::epoll_reactor::timer_entry>::try_pop_mpmc(katana::epoll_reactor::timer_entry&)                                                                                                                                                                                                                                                                        -      -            
+     0.12%  [.] recv@plt                                                                                                                                                                                                                                                                                                                                                                                -      -            
+     0.10%  [.] std::chrono::_V2::steady_clock::now()                                                                                                                                                                                                                                                                                                                                                   -      -            
+     0.09%  [.] katana::epoll_reactor::flush_deferred_closes()                                                                                                                                                                                                                                                                                                                                          -      -            
+     0.09%  [.] memmove@plt                                                                                                                                                                                                                                                                                                                                                                             -      -            
+     0.07%  [.] memcmp@plt                                                                                                                                                                                                                                                                                                                                                                              -      -            
+     0.07%  [.] strlen@plt                                                                                                                                                                                                                                                                                                                                                                              -      -            
+     0.07%  [.] 0x0000000000000ab0                                                                                                                                                                                                                                                                                                                                                                      -      -            
+     0.06%  [.] clock_gettime@plt                                                                                                                                                                                                                                                                                                                                                                       -      -            
+     0.06%  [.] katana::http::(anonymous namespace)::conn_debug_enabled() [clone .lto_priv.0]                                                                                                                                                                                                                                                                                                           -      -            
+     0.06%  [.] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()                                                                                                                                                                                                                                                                                           -      -            
+     0.03%  [.] 0x0000000000000ac2                                                                                                                                                                                                                                                                                                                                                                      -      -            
+     0.03%  [.] 0x0000000000000b11                                                                                                                                                                                                                                                                                                                                                                      -      -            
+     0.01%  [.] _int_free_merge_chunk                                                                                                                                                                                                                                                                                                                                                                   -      -            
+     0.01%  [.] epoll_wait@plt                                                                                                                                                                                                                                                                                                                                                                          -      -            
+     0.01%  [.] katana::inplace_function<void (katana::event_type), 96ul>::operator=(katana::inplace_function<void (katana::event_type), 96ul>&&) [clone .isra.0]                                                                                                                                                                                                                                       -      -            
+     0.01%  [.] send@plt                                                                                                                                                                                                                                                                                                                                                                                -      -            
+     0.01%  [.] std::_Sp_counted_ptr_inplace<katana::http::server::connection_state, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose()                                                                                                                                                                                                                                                    -      -            
+     0.01%  [.] 0x0000000000000b71                                                                                                                                                                                                                                                                                                                                                                      -      -            
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#

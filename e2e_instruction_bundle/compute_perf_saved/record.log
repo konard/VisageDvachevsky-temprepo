@@ -1,0 +1,2 @@
+[sudo] password for visage: [ perf record: Woken up 1 times to write data ]
+[ perf record: Captured and wrote 0,942 MB /tmp/katana_perf_compute_clean/perf.data (13501 samples) ]

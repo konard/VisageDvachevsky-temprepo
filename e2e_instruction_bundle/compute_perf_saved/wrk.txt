@@ -1,0 +1,15 @@
+Running 10s test @ http://127.0.0.1:18081/
+  4 threads and 512 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     4.43ms    6.56ms 133.09ms   95.25%
+    Req/Sec   215.37k    38.24k  470.18k    77.81%
+  8580460 requests in 10.09s, 785.56MB read
+Requests/sec: 850798.22
+Transfer/sec:     77.89MB
+KATANA_PIPELINE_DEPTH: 10
+KATANA_LATENCY_P50_US: 3124.000
+KATANA_LATENCY_P95_US: 10816.000
+KATANA_LATENCY_P99_US: 20407.000
+KATANA_LATENCY_P999_US: 103247.000
+KATANA_LATENCY_MAX_US: 133093.000
+KATANA_ERRORS: 0

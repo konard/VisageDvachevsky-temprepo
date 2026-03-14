@@ -1,0 +1,68 @@
+--------------------------------------------------------------------------------
+Profile data file '/tmp/harness_hello/callgrind.out' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache: 
+D1 cache: 
+LL cache: 
+Timerange: Basic block 0 - 98898691
+Trigger: Program termination
+Profiled target:  /mnt/bench/katana-bench-20260314/KATANA/build/deep-bench-5runs/e2e_instruction_profile --scenario hello --port 18180 --workers 1 --client-threads 1 --pipeline-depth 10 --requests 50000 (PID 11901, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       99
+Include dirs:     
+User annotated:   
+Auto-annotation:  on
+
+--------------------------------------------------------------------------------
+Ir                   
+--------------------------------------------------------------------------------
+336,744,241 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                    file:function
+--------------------------------------------------------------------------------
+334,745,040 (99.41%)  ./nptl/./nptl/pthread_create.c:start_thread [/usr/lib/x86_64-linux-gnu/libc.so.6]
+334,739,578 (99.40%)  ???:0x00000000000ecda0 [/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33]
+291,767,709 (86.64%)  ???:std::thread::_State_impl<std::thread::_Invoker<std::tuple<void (katana::reactor_pool::*)(katana::reactor_pool::reactor_context*), katana::reactor_pool*, katana::reactor_pool::reactor_context*> > >::_M_run() [/mnt/bench/katana-bench-20260314/KATANA/build/deep-bench-5runs/e2e_instruction_profile]
+291,767,700 (86.64%)  ???:katana::reactor_pool::worker_thread(katana::reactor_pool::reactor_context*) [/mnt/bench/katana-bench-20260314/KATANA/build/deep-bench-5runs/e2e_instruction_profile]
+289,349,761 (85.93%)  ???:katana::inplace_function<void (katana::event_type), 96ul>::{lambda(void const*, katana::event_type)#1}::_FUN(void const*, katana::event_type) [/mnt/bench/katana-bench-20260314/KATANA/build/deep-bench-5runs/e2e_instruction_profile]
+289,329,757 (85.92%)  ???:katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0] [/mnt/bench/katana-bench-20260314/KATANA/build/deep-bench-5runs/e2e_instruction_profile]
+136,926,892 (40.66%)  ???:katana::http::parser::parse_available() [/mnt/bench/katana-bench-20260314/KATANA/build/deep-bench-5runs/e2e_instruction_profile]
+ 69,950,000 (20.77%)  ???:katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [/mnt/bench/katana-bench-20260314/KATANA/build/deep-bench-5runs/e2e_instruction_profile]
+ 69,100,000 (20.52%)  ???:katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0] [/mnt/bench/katana-bench-20260314/KATANA/build/deep-bench-5runs/e2e_instruction_profile]
+ 40,741,756 (12.10%)  ???:std::thread::_State_impl<std::thread::_Invoker<std::tuple<(anonymous namespace)::run_clients((anonymous namespace)::options const&)::{lambda()#1}> > >::_M_run() [/mnt/bench/katana-bench-20260314/KATANA/build/deep-bench-5runs/e2e_instruction_profile]
+ 26,450,000 ( 7.85%)  ???:katana::inplace_function<std::expected<void, std::error_code> (katana::http::request const&, katana::http::request_context&, katana::http::response&), 64ul>::{lambda(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)#4}::_FUN(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&) [/mnt/bench/katana-bench-20260314/KATANA/build/deep-bench-5runs/e2e_instruction_profile]
+ 20,500,000 ( 6.09%)  ???:(anonymous namespace)::handle_root(katana::http::request const&, katana::http::request_context&, katana::http::response&) [/mnt/bench/katana-bench-20260314/KATANA/build/deep-bench-5runs/e2e_instruction_profile]
+ 18,555,333 ( 5.51%)  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_avx_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 15,300,000 ( 4.54%)  ???:std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [/mnt/bench/katana-bench-20260314/KATANA/build/deep-bench-5runs/e2e_instruction_profile]
+ 14,335,293 ( 4.26%)  ???:0x000000000010fa80 [???]
+ 13,500,000 ( 4.01%)  ???:katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >) [/mnt/bench/katana-bench-20260314/KATANA/build/deep-bench-5runs/e2e_instruction_profile]
+ 12,600,000 ( 3.74%)  ???:0x000000000010fba0 [???]
+ 11,400,000 ( 3.39%)  ./string/../sysdeps/x86_64/multiarch/memchr-avx2.S:__memchr_avx2 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  8,950,138 ( 2.66%)  ???:std::basic_string_view<char, std::char_traits<char> >::compare(std::basic_string_view<char, std::char_traits<char> >) const [/mnt/bench/katana-bench-20260314/KATANA/build/deep-bench-5runs/e2e_instruction_profile]
+  8,785,000 ( 2.61%)  ???:katana::http::parser::prepare_for_next_request(katana::monotonic_arena*) [/mnt/bench/katana-bench-20260314/KATANA/build/deep-bench-5runs/e2e_instruction_profile]
+  7,350,000 ( 2.18%)  ???:katana::http::(anonymous namespace)::set_content_type(katana::http::headers_map&, std::basic_string_view<char, std::char_traits<char> >) [/mnt/bench/katana-bench-20260314/KATANA/build/deep-bench-5runs/e2e_instruction_profile]
+  6,700,750 ( 1.99%)  ???:0x000000000010fcd0 [???]
+  6,601,806 ( 1.96%)  ???:katana::http::string_to_field(std::basic_string_view<char, std::char_traits<char> >) [/mnt/bench/katana-bench-20260314/KATANA/build/deep-bench-5runs/e2e_instruction_profile]
+  6,600,740 ( 1.96%)  ./stdlib/../stdlib/strtol.c:__isoc23_strtoul [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  6,300,710 ( 1.87%)  ./stdlib/../stdlib/strtol_l.c:____strtoul_l_internal [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  6,010,000 ( 1.78%)  ???:0x000000000010fdd0 [???]
+  5,800,006 ( 1.72%)  ???:katana::simd::find_crlf_avx2(char const*, unsigned long) [/mnt/bench/katana-bench-20260314/KATANA/build/deep-bench-5runs/e2e_instruction_profile]
+  4,500,000 ( 1.34%)  ???:std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .constprop.0] [clone .isra.0] [/mnt/bench/katana-bench-20260314/KATANA/build/deep-bench-5runs/e2e_instruction_profile]
+  3,750,129 ( 1.11%)  ???:0x000000000010f920 [???]
+  3,700,388 ( 1.10%)  ???:std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace(unsigned long, unsigned long, char const*, unsigned long) [clone .constprop.0] [/mnt/bench/katana-bench-20260314/KATANA/build/deep-bench-5runs/e2e_instruction_profile]
+  3,450,000 ( 1.02%)  ???:std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*) [/mnt/bench/katana-bench-20260314/KATANA/build/deep-bench-5runs/e2e_instruction_profile]
+  3,351,165 ( 1.00%)  ./string/../sysdeps/x86_64/multiarch/memcmp-avx2-movbe.S:__memcmp_avx2_movbe [/usr/lib/x86_64-linux-gnu/libc.so.6]
+
+--------------------------------------------------------------------------------
+The following files chosen for auto-annotation could not be found:
+--------------------------------------------------------------------------------
+  ./nptl/./nptl/pthread_create.c
+  ./stdlib/../stdlib/strtol.c
+  ./stdlib/../stdlib/strtol_l.c
+  ./string/../sysdeps/x86_64/multiarch/memchr-avx2.S
+  ./string/../sysdeps/x86_64/multiarch/memcmp-avx2-movbe.S
+  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S
+

@@ -1,0 +1,2 @@
+[sudo] password for visage: [ perf record: Woken up 1 times to write data ]
+[ perf record: Captured and wrote 0,490 MB /tmp/e2e_instruction_bundle_remote/hello_perf/perf.data (6859 samples) ]

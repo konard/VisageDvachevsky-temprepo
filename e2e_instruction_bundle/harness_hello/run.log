@@ -1,0 +1,11 @@
+==11901== Callgrind, a call-graph generating cache profiler
+==11901== Copyright (C) 2002-2017, and GNU GPL'd, by Josef Weidendorfer et al.
+==11901== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==11901== Command: /mnt/bench/katana-bench-20260314/KATANA/build/deep-bench-5runs/e2e_instruction_profile --scenario hello --port 18180 --workers 1 --client-threads 1 --pipeline-depth 10 --requests 50000
+==11901== 
+==11901== For interactive control, run 'callgrind_control -h'.
+==11901== 
+==11901== Events    : Ir
+==11901== Collected : 336744241
+==11901== 
+==11901== I   refs:      336,744,241

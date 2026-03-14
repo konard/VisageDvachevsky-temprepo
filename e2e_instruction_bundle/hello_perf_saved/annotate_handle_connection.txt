@@ -1,0 +1,1668 @@
+ Percent |	Source code & Disassembly of hello_world_server for cpu-clock:u (2467 samples, percent: local period)
+---------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     0000000000023a20 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]>:
+    0.00 :   23a20:  endbr64
+    0.24 :   23a24:  push   %r15
+    0.04 :   23a26:  push   %r14
+    0.00 :   23a28:  push   %r13
+    0.00 :   23a2a:  push   %r12
+    0.00 :   23a2c:  mov    %rdi,%r13
+    0.00 :   23a2f:  push   %rbp
+    0.00 :   23a30:  push   %rbx
+    0.04 :   23a31:  mov    %rsi,%rbp
+    0.00 :   23a34:  sub    $0xa88,%rsp
+    0.00 :   23a3b:  mov    %fs:0x28,%rax
+    0.04 :   23a44:  mov    %rax,0xa78(%rsp)
+    0.00 :   23a4c:  xor    %eax,%eax
+    0.00 :   23a4e:  lea    0xa0(%rsp),%rax
+    0.00 :   23a56:  incl   %fs:0xffffffffffffffc8
+    0.00 :   23a5e:  mov    %rax,0xb8(%rsp)
+    0.00 :   23a66:  lea    0x98(%rsp),%rax
+    0.00 :   23a6e:  mov    %rax,(%rsp)
+    0.08 :   23a72:  lea    0x97(%rsp),%rax
+    0.00 :   23a7a:  mov    %rsi,0x98(%rsp)
+    0.00 :   23a82:  mov    %rsi,0xa0(%rsp)
+    0.00 :   23a8a:  mov    %rsi,0xb0(%rsp)
+    0.00 :   23a92:  mov    %rsi,0xa8(%rsp)
+    0.00 :   23a9a:  mov    %rsi,0x120(%rsp)
+    0.00 :   23aa2:  mov    %rdi,0x128(%rsp)
+    0.00 :   23aaa:  vmovq  (%rsp),%xmm1
+    0.08 :   23aaf:  mov    %rsi,0x100(%rsp)
+    0.00 :   23ab7:  vpinsrq $0x1,%rax,%xmm1,%xmm0
+    0.00 :   23abd:  lea    0xb0(%rsp),%rax
+    0.00 :   23ac5:  mov    %rax,0x140(%rsp)
+    0.00 :   23acd:  lea    0xa8(%rsp),%rax
+    0.00 :   23ad5:  mov    %rax,0x108(%rsp)
+    0.00 :   23add:  lea    0x120(%rsp),%rax
+    0.00 :   23ae5:  vmovdqa %xmm0,0x130(%rsp)
+    0.00 :   23aee:  mov    %rax,0x18(%rsp)
+    0.00 :   23af3:  mov    %rax,0x110(%rsp)
+    0.00 :   23afb:  mov    0x30(%rsi),%rax
+    5.72 :   23aff:  add    0x10(%rsi),%rax
+    0.08 :   23b03:  mov    %rdi,0x118(%rsp)
+    0.00 :   23b0b:  cmp    %rax,0xa8(%rsi)
+    0.41 :   23b12:  jb     24648 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xc28>
+    0.00 :   23b18:  lea    0x3d8(%rbp),%rax
+    0.00 :   23b1f:  mov    %rax,(%rsp)
+    0.00 :   23b23:  lea    0xc0(%rsp),%rax
+    0.00 :   23b2b:  mov    %rax,0x10(%rsp)
+    0.00 :   23b30:  lea    0xe0(%rsp),%rax
+    0.00 :   23b38:  mov    %rax,0x28(%rsp)
+    0.04 :   23b3d:  mov    (%rsp),%rsi
+    1.70 :   23b41:  mov    0x10(%rsp),%rdi
+    0.00 :   23b46:  call   15750 <katana::http::parser::parse_available()>
+    0.20 :   23b4b:  movzbl 0xd0(%rsp),%r14d
+    0.16 :   23b54:  test   %r14b,%r14b
+    0.08 :   23b57:  je     23c53 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x233>
+    0.00 :   23b5d:  cmpb   $0x6,0x3e0(%rbp)
+    0.12 :   23b64:  je     23cf0 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2d0>
+    0.00 :   23b6a:  mov    0x9f0(%rbp),%rbx
+    0.08 :   23b71:  test   %rbx,%rbx
+    0.00 :   23b74:  je     24680 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xc60>
+    0.00 :   23b7a:  mov    0x9f8(%rbp),%r14
+    0.00 :   23b81:  mov    0xa00(%rbp),%r12
+    0.00 :   23b88:  cmp    %r14,%r12
+    0.00 :   23b8b:  jb     24680 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xc60>
+    0.00 :   23b91:  mov    %r12,%rax
+    0.00 :   23b94:  sub    %r14,%rax
+    0.00 :   23b97:  cmp    $0xfff,%rax
+    0.00 :   23b9d:  jbe    24a83 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1063>
+    0.00 :   23ba3:  mov    0x0(%rbp),%eax
+    0.00 :   23ba6:  test   %eax,%eax
+    0.00 :   23ba8:  js     24530 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb10>
+    0.00 :   23bae:  call   1bf60 <katana::detail::syscall_metrics_registry::instance()>
+    0.00 :   23bb3:  add    %r14,%rbx
+    0.00 :   23bb6:  mov    %rax,%r14
+    0.00 :   23bb9:  nopl   0x0(%rax)
+    0.00 :   23bc0:  mov    0x0(%rbp),%edi
+    0.04 :   23bc3:  mov    $0x40,%ecx
+    0.00 :   23bc8:  mov    $0x1000,%edx
+    0.00 :   23bcd:  mov    %rbx,%rsi
+    0.00 :   23bd0:  call   66f0 <recv@plt>
+    0.00 :   23bd5:  mov    %rax,%r12
+    0.16 :   23bd8:  test   %rax,%rax
+    0.00 :   23bdb:  js     23c90 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x270>
+    0.00 :   23be1:  movzbl (%r14),%edi
+    0.08 :   23be5:  call   1eae0 <katana::detail::syscall_metrics_registry::local_slot() [clone .isra.0]>
+    0.00 :   23bea:  test   %rax,%rax
+    0.00 :   23bed:  je     23bf3 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1d3>
+    0.00 :   23bef:  lock incq (%rax)
+    0.00 :   23bf3:  test   %r12,%r12
+    0.08 :   23bf6:  je     249b7 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xf97>
+    0.00 :   23bfc:  cmpq   $0x0,0x9f0(%rbp)
+    0.12 :   23c04:  je     24690 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xc70>
+    0.04 :   23c0a:  mov    0x9f8(%rbp),%rax
+    0.00 :   23c11:  mov    0xa00(%rbp),%rdx
+    0.00 :   23c18:  cmp    %rax,%rdx
+    0.00 :   23c1b:  jb     24690 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xc70>
+    0.00 :   23c21:  sub    %rax,%rdx
+    0.00 :   23c24:  cmp    %r12,%rdx
+    0.00 :   23c27:  jb     24690 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xc70>
+    0.00 :   23c2d:  add    %r12,%rax
+    0.00 :   23c30:  mov    (%rsp),%rsi
+    0.00 :   23c34:  mov    0x28(%rsp),%rdi
+    0.00 :   23c39:  mov    %rax,0x9f8(%rbp)
+    0.04 :   23c40:  call   15750 <katana::http::parser::parse_available()>
+    0.00 :   23c45:  cmpb   $0x0,0xf0(%rsp)
+    0.00 :   23c4d:  jne    23b3d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x11d>
+    0.00 :   23c53:  lea    0x100(%rsp),%rdi
+    0.00 :   23c5b:  call   17a90 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&)::{lambda()#6}::operator()() const [clone .lto_priv.0]>
+    0.00 :   23c60:  mov    0xa78(%rsp),%rax
+    0.12 :   23c68:  sub    %fs:0x28,%rax
+    0.04 :   23c71:  jne    25aa0 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2080>
+    0.00 :   23c77:  add    $0xa88,%rsp
+    0.00 :   23c7e:  pop    %rbx
+    0.20 :   23c7f:  pop    %rbp
+    0.00 :   23c80:  pop    %r12
+    0.00 :   23c82:  pop    %r13
+    0.00 :   23c84:  pop    %r14
+    0.00 :   23c86:  pop    %r15
+    0.00 :   23c88:  ret
+    0.00 :   23c89:  nopl   0x0(%rax)
+    0.00 :   23c90:  call   6650 <__errno_location@plt>
+    0.00 :   23c95:  movzbl (%r14),%edi
+    0.00 :   23c99:  cmpl   $0xb,(%rax)
+    0.00 :   23c9c:  mov    %rax,%r12
+    0.00 :   23c9f:  je     23cd8 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2b8>
+    0.00 :   23ca1:  call   1eae0 <katana::detail::syscall_metrics_registry::local_slot() [clone .isra.0]>
+    0.00 :   23ca6:  test   %rax,%rax
+    0.00 :   23ca9:  je     23caf <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x28f>
+    0.00 :   23cab:  lock incq (%rax)
+    0.00 :   23caf:  cmpl   $0x4,(%r12)
+    0.00 :   23cb4:  je     23bc0 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1a0>
+    0.00 :   23cba:  call   6650 <__errno_location@plt>
+    0.00 :   23cbf:  mov    (%rax),%eax
+    0.00 :   23cc1:  cmp    $0xb,%eax
+    0.00 :   23cc4:  je     2466e <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xc4e>
+    0.00 :   23cca:  test   %eax,%eax
+    0.00 :   23ccc:  je     249bc <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xf9c>
+    0.00 :   23cd2:  jmp    24535 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb15>
+    0.00 :   23cd7:  nop
+    0.00 :   23cd8:  call   1eae0 <katana::detail::syscall_metrics_registry::local_slot() [clone .isra.0]>
+    0.00 :   23cdd:  test   %rax,%rax
+    0.00 :   23ce0:  je     23caf <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x28f>
+    0.00 :   23ce2:  lock incq (%rax)
+    0.00 :   23ce6:  lock incq 0x8(%rax)
+    0.00 :   23ceb:  jmp    23caf <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x28f>
+    0.00 :   23ced:  nopl   (%rax)
+    0.04 :   23cf0:  lea    0xb0(%rbp),%rsi
+    0.04 :   23cf7:  lea    0x3e8(%rbp),%rax
+    0.00 :   23cfe:  mov    $0x40,%ecx
+    0.04 :   23d03:  mov    %rsi,0x30(%rsp)
+    0.00 :   23d08:  mov    %rsi,0x240(%rsp)
+    0.20 :   23d10:  movq   $0x0,0x448(%rsp)
+    0.08 :   23d1c:  movl   $0xc8,0x450(%rsp)
+    0.04 :   23d27:  movq   $0x0,0x460(%rsp)
+    0.16 :   23d33:  movb   $0x0,0x468(%rsp)
+    0.00 :   23d3b:  mov    %rsi,0x478(%rsp)
+    0.12 :   23d43:  movq   $0x0,0x480(%rsp)
+    0.16 :   23d4f:  mov    %rax,0x20(%rsp)
+    0.04 :   23d54:  lea    0x248(%rsp),%rdi
+    0.00 :   23d5c:  xor    %eax,%eax
+   18.81 :   23d5e:  rep stos %rax,%es:(%rdi)
+    0.16 :   23d61:  lea    0x450(%rsp),%rax
+    0.00 :   23d69:  lea    0x488(%rsp),%r12
+    0.00 :   23d71:  lea    0x788(%rsp),%rbx
+    0.00 :   23d79:  mov    %rax,0x8(%rsp)
+    0.28 :   23d7e:  lea    0x468(%rsp),%rax
+    0.00 :   23d86:  mov    %rax,0x40(%rsp)
+    0.12 :   23d8b:  mov    %rax,0x458(%rsp)
+    0.24 :   23d93:  mov    %r12,%rax
+    0.00 :   23d96:  cs nopw 0x0(%rax,%rax,1)
+    0.08 :   23da0:  movq   $0x0,(%rax)
+    4.22 :   23da7:  movq   $0x0,0x8(%rax)
+    3.65 :   23daf:  add    $0x18,%rax
+    0.12 :   23db3:  movq   $0x0,-0x8(%rax)
+    4.86 :   23dbb:  cmp    %rbx,%rax
+    0.08 :   23dbe:  jne    23da0 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x380>
+    0.00 :   23dc0:  mov    0x0(%r13),%rsi
+    0.81 :   23dc4:  xor    %eax,%eax
+    0.00 :   23dc6:  lea    0x7b0(%rsp),%rdi
+    0.00 :   23dce:  mov    $0x30,%ecx
+    0.00 :   23dd3:  lea    0x940(%rsp),%r15
+    0.04 :   23ddb:  mov    %rdi,0x50(%rsp)
+   12.16 :   23de0:  rep stos %rax,%es:(%rdi)
+    0.12 :   23de3:  movq   $0x0,0x788(%rsp)
+    0.12 :   23def:  movq   $0x0,0x790(%rsp)
+    0.00 :   23dfb:  mov    $0x20,%ecx
+    0.00 :   23e00:  mov    %r15,%rdi
+    8.47 :   23e03:  rep stos %rax,%es:(%rdi)
+    0.32 :   23e06:  lea    0xa60(%rsp),%rax
+    0.00 :   23e0e:  movq   $0x1000,0x798(%rsp)
+    0.04 :   23e1a:  mov    %rax,0x38(%rsp)
+    0.00 :   23e1f:  mov    %rax,0xa50(%rsp)
+    0.12 :   23e27:  movq   $0x0,0x7a0(%rsp)
+    0.08 :   23e33:  movq   $0x0,0x7a8(%rsp)
+    0.08 :   23e3f:  movq   $0x0,0x930(%rsp)
+    0.12 :   23e4b:  movq   $0x0,0x938(%rsp)
+    0.12 :   23e57:  movq   $0x0,0xa40(%rsp)
+    0.00 :   23e63:  movq   $0x0,0xa48(%rsp)
+    0.16 :   23e6f:  movq   $0x0,0xa58(%rsp)
+    0.12 :   23e7b:  movb   $0x0,0xa60(%rsp)
+    0.04 :   23e83:  movb   $0x0,0xa70(%rsp)
+    0.08 :   23e8b:  lea    0xe0(%rsp),%rax
+    0.04 :   23e93:  test   %rsi,%rsi
+    0.00 :   23e96:  jne    244d8 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xab8>
+    0.00 :   23e9c:  mov    %rax,0x48(%rsp)
+    0.04 :   23ea1:  mov    0x8(%rsp),%r8
+    0.04 :   23ea6:  lea    0x240(%rsp),%rcx
+    0.00 :   23eae:  mov    %rax,%rdi
+    0.00 :   23eb1:  mov    0x50(%r13),%rax
+    0.28 :   23eb5:  mov    0x20(%rsp),%rdx
+    0.00 :   23eba:  lea    0x10(%r13),%rsi
+    0.00 :   23ebe:  call   *0x18(%rax)
+    0.12 :   23ec1:  cmpb   $0x0,0xf0(%rsp)
+    0.16 :   23ec9:  je     24a63 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1043>
+    0.00 :   23ecf:  cmpq   $0x0,0xf0(%r13)
+    0.36 :   23ed7:  je     23ef1 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x4d1>
+    0.00 :   23ed9:  mov    0x8(%rsp),%rdx
+    0.00 :   23ede:  mov    0x20(%rsp),%rsi
+    0.00 :   23ee3:  lea    0xe0(%r13),%rdi
+    0.00 :   23eea:  call   *0xf8(%r13)
+    0.12 :   23ef1:  cmpw   $0x3b,0x738(%rbp)
+    0.20 :   23ef9:  je     2457d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb5d>
+    0.00 :   23eff:  cmpw   $0x3b,0x750(%rbp)
+    0.00 :   23f07:  lea    0x750(%rbp),%rax
+    0.00 :   23f0e:  je     24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.04 :   23f14:  cmpw   $0x3b,0x768(%rbp)
+    0.04 :   23f1c:  lea    0x768(%rbp),%rax
+    0.04 :   23f23:  je     24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.00 :   23f29:  cmpw   $0x3b,0x780(%rbp)
+    0.04 :   23f31:  lea    0x780(%rbp),%rax
+    0.00 :   23f38:  je     24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.04 :   23f3e:  cmpw   $0x3b,0x798(%rbp)
+    0.12 :   23f46:  lea    0x798(%rbp),%rax
+    0.00 :   23f4d:  je     24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.04 :   23f53:  cmpw   $0x3b,0x7b0(%rbp)
+    0.00 :   23f5b:  lea    0x7b0(%rbp),%rax
+    0.00 :   23f62:  je     24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.16 :   23f68:  cmpw   $0x3b,0x7c8(%rbp)
+    0.04 :   23f70:  lea    0x7c8(%rbp),%rax
+    0.00 :   23f77:  je     24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.12 :   23f7d:  cmpw   $0x3b,0x7e0(%rbp)
+    0.08 :   23f85:  lea    0x7e0(%rbp),%rax
+    0.04 :   23f8c:  je     24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.16 :   23f92:  cmpw   $0x3b,0x7f8(%rbp)
+    0.00 :   23f9a:  lea    0x7f8(%rbp),%rax
+    0.00 :   23fa1:  je     24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.08 :   23fa7:  cmpw   $0x3b,0x810(%rbp)
+    0.04 :   23faf:  lea    0x810(%rbp),%rax
+    0.00 :   23fb6:  je     24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.12 :   23fbc:  cmpw   $0x3b,0x828(%rbp)
+    0.04 :   23fc4:  lea    0x828(%rbp),%rax
+    0.00 :   23fcb:  je     24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.08 :   23fd1:  cmpw   $0x3b,0x840(%rbp)
+    0.08 :   23fd9:  lea    0x840(%rbp),%rax
+    0.08 :   23fe0:  je     24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.00 :   23fe6:  cmpw   $0x3b,0x858(%rbp)
+    0.12 :   23fee:  lea    0x858(%rbp),%rax
+    0.04 :   23ff5:  je     24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.04 :   23ffb:  cmpw   $0x3b,0x870(%rbp)
+    0.12 :   24003:  lea    0x870(%rbp),%rax
+    0.00 :   2400a:  je     24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.08 :   24010:  cmpw   $0x3b,0x888(%rbp)
+    0.00 :   24018:  lea    0x888(%rbp),%rax
+    0.00 :   2401f:  je     24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.04 :   24025:  cmpw   $0x3b,0x8a0(%rbp)
+    0.00 :   2402d:  lea    0x8a0(%rbp),%rax
+    0.00 :   24034:  je     24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.08 :   2403a:  mov    0x8b8(%rbp),%rax
+    0.08 :   24041:  test   %rax,%rax
+    0.04 :   24044:  je     24130 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x710>
+    0.00 :   2404a:  cmpw   $0x3b,(%rax)
+    0.00 :   2404e:  je     24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.00 :   24054:  cmpw   $0x3b,0x18(%rax)
+    0.00 :   24059:  je     24ed3 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x14b3>
+    0.00 :   2405f:  cmpw   $0x3b,0x30(%rax)
+    0.00 :   24064:  je     24edc <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x14bc>
+    0.00 :   2406a:  cmpw   $0x3b,0x48(%rax)
+    0.00 :   2406f:  je     24ee5 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x14c5>
+    0.00 :   24075:  cmpw   $0x3b,0x60(%rax)
+    0.00 :   2407a:  je     24f7a <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x155a>
+    0.00 :   24080:  cmpw   $0x3b,0x78(%rax)
+    0.00 :   24085:  je     24f71 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1551>
+    0.00 :   2408b:  cmpw   $0x3b,0x90(%rax)
+    0.00 :   24093:  je     24f83 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1563>
+    0.00 :   24099:  cmpw   $0x3b,0xa8(%rax)
+    0.00 :   240a1:  je     24f99 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1579>
+    0.00 :   240a7:  cmpw   $0x3b,0xc0(%rax)
+    0.00 :   240af:  je     24f8e <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x156e>
+    0.00 :   240b5:  cmpw   $0x3b,0xd8(%rax)
+    0.00 :   240bd:  je     24faf <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x158f>
+    0.00 :   240c3:  cmpw   $0x3b,0xf0(%rax)
+    0.00 :   240cb:  je     24fa4 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1584>
+    0.00 :   240d1:  cmpw   $0x3b,0x108(%rax)
+    0.00 :   240d9:  je     24fc5 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x15a5>
+    0.00 :   240df:  cmpw   $0x3b,0x120(%rax)
+    0.00 :   240e7:  je     24fba <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x159a>
+    0.00 :   240ed:  cmpw   $0x3b,0x138(%rax)
+    0.00 :   240f5:  je     24fdb <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x15bb>
+    0.00 :   240fb:  cmpw   $0x3b,0x150(%rax)
+    0.00 :   24103:  je     24fd0 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x15b0>
+    0.00 :   24109:  cmpw   $0x3b,0x168(%rax)
+    0.00 :   24111:  je     24fe6 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x15c6>
+    0.00 :   24117:  mov    0x180(%rax),%rax
+    0.00 :   2411e:  test   %rax,%rax
+    0.00 :   24121:  jne    2404a <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x62a>
+    0.00 :   24127:  nopw   0x0(%rax,%rax,1)
+    0.00 :   24130:  cmpw   $0x3b,0x7b0(%rsp)
+    0.32 :   24139:  je     246a0 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xc80>
+    0.08 :   2413f:  cmpw   $0x3b,0x7c8(%rsp)
+    0.04 :   24148:  je     246a0 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xc80>
+    0.08 :   2414e:  cmpw   $0x3b,0x7e0(%rsp)
+    0.04 :   24157:  je     246a0 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xc80>
+    0.08 :   2415d:  cmpw   $0x3b,0x7f8(%rsp)
+    0.04 :   24166:  je     246a0 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xc80>
+    0.04 :   2416c:  cmpw   $0x3b,0x810(%rsp)
+    0.04 :   24175:  je     246a0 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xc80>
+    0.16 :   2417b:  cmpw   $0x3b,0x828(%rsp)
+    0.08 :   24184:  je     246a0 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xc80>
+    0.00 :   2418a:  xor    %r15d,%r15d
+    0.00 :   2418d:  cmpw   $0x3b,0x840(%rsp)
+    0.00 :   24196:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.24 :   2419c:  cmpw   $0x3b,0x858(%rsp)
+    0.08 :   241a5:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.00 :   241ab:  cmpw   $0x3b,0x870(%rsp)
+    0.00 :   241b4:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.04 :   241ba:  cmpw   $0x3b,0x888(%rsp)
+    0.08 :   241c3:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.04 :   241c9:  cmpw   $0x3b,0x8a0(%rsp)
+    0.00 :   241d2:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.08 :   241d8:  cmpw   $0x3b,0x8b8(%rsp)
+    0.08 :   241e1:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.08 :   241e7:  cmpw   $0x3b,0x8d0(%rsp)
+    0.04 :   241f0:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.00 :   241f6:  cmpw   $0x3b,0x8e8(%rsp)
+    0.12 :   241ff:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.16 :   24205:  cmpw   $0x3b,0x900(%rsp)
+    0.08 :   2420e:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.12 :   24214:  cmpw   $0x3b,0x918(%rsp)
+    0.04 :   2421d:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.04 :   24223:  mov    0x930(%rsp),%rax
+    0.00 :   2422b:  test   %rax,%rax
+    0.00 :   2422e:  je     242f9 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x8d9>
+    0.00 :   24234:  cmpw   $0x3b,(%rax)
+    0.00 :   24238:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.00 :   2423e:  cmpw   $0x3b,0x18(%rax)
+    0.00 :   24243:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.00 :   24249:  cmpw   $0x3b,0x30(%rax)
+    0.00 :   2424e:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.00 :   24254:  cmpw   $0x3b,0x48(%rax)
+    0.00 :   24259:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.00 :   2425f:  cmpw   $0x3b,0x60(%rax)
+    0.00 :   24264:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.00 :   2426a:  cmpw   $0x3b,0x78(%rax)
+    0.00 :   2426f:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.00 :   24275:  cmpw   $0x3b,0x90(%rax)
+    0.00 :   2427d:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.00 :   24283:  cmpw   $0x3b,0xa8(%rax)
+    0.00 :   2428b:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.00 :   24291:  cmpw   $0x3b,0xc0(%rax)
+    0.00 :   24299:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.00 :   2429f:  cmpw   $0x3b,0xd8(%rax)
+    0.00 :   242a7:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.00 :   242ad:  cmpw   $0x3b,0xf0(%rax)
+    0.00 :   242b5:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.00 :   242b7:  cmpw   $0x3b,0x108(%rax)
+    0.00 :   242bf:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.00 :   242c1:  cmpw   $0x3b,0x120(%rax)
+    0.00 :   242c9:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.00 :   242cb:  cmpw   $0x3b,0x138(%rax)
+    0.00 :   242d3:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.00 :   242d5:  cmpw   $0x3b,0x150(%rax)
+    0.00 :   242dd:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.00 :   242df:  cmpw   $0x3b,0x168(%rax)
+    0.00 :   242e7:  je     24335 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x915>
+    0.00 :   242e9:  mov    0x180(%rax),%rax
+    0.00 :   242f0:  test   %rax,%rax
+    0.00 :   242f3:  jne    24234 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x814>
+    0.04 :   242f9:  lea    0x357f(%rip),%rax        # 2787f <_IO_stdin_used+0x187f>
+    0.12 :   24300:  lea    0x361a(%rip),%rcx        # 27921 <_IO_stdin_used+0x1921>
+    0.08 :   24307:  test   %r15b,%r15b
+    0.00 :   2430a:  cmovne %rax,%rcx
+    0.04 :   2430e:  mov    %rcx,%rdi
+    0.00 :   24311:  mov    %rcx,0x20(%rsp)
+    0.08 :   24316:  call   6740 <strlen@plt>
+    0.00 :   2431b:  mov    0x20(%rsp),%rcx
+    0.00 :   24320:  lea    0x478(%rsp),%rdi
+    0.00 :   24328:  mov    $0x3b,%esi
+    0.04 :   2432d:  mov    %rax,%rdx
+    0.04 :   24330:  call   ca48 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)>
+    0.04 :   24335:  test   %r15b,%r15b
+    0.00 :   24338:  je     246a0 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xc80>
+    0.00 :   2433e:  call   16aa0 <katana::http::(anonymous namespace)::conn_debug_enabled() [clone .lto_priv.0]>
+    0.00 :   24343:  test   %al,%al
+    0.00 :   24345:  jne    248c2 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xea2>
+    0.00 :   2434b:  mov    0x30(%rbp),%rax
+    0.00 :   2434f:  add    0x10(%rbp),%rax
+    0.00 :   24353:  cmp    %rax,0xa8(%rbp)
+    0.00 :   2435a:  jae    247b8 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xd98>
+    0.00 :   24360:  mov    0xa8(%rsp),%r15
+    0.00 :   24368:  mov    0x8(%rsp),%rdi
+    0.00 :   2436d:  mov    0x48(%r15),%rax
+    0.00 :   24371:  movq   $0x0,0x50(%r15)
+    0.00 :   24379:  lea    0x48(%r15),%rsi
+    0.00 :   2437d:  movb   $0x0,(%rax)
+    0.00 :   24380:  movq   $0x0,0x70(%r15)
+    0.00 :   24388:  mov    0x68(%r15),%rax
+    0.00 :   2438c:  movb   $0x0,(%rax)
+    0.00 :   2438f:  cmpb   $0x0,0xa70(%rsp)
+    0.00 :   24397:  jne    24a79 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1059>
+    0.00 :   2439d:  cmpq   $0x100,0xa58(%rsp)
+    0.00 :   243a9:  jbe    24a79 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1059>
+    0.00 :   243af:  call   118b0 <katana::http::response::serialize_head_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const>
+    0.00 :   243b4:  lea    0xa50(%rsp),%rsi
+    0.00 :   243bc:  lea    0x68(%r15),%rdi
+    0.00 :   243c0:  call   23530 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [clone .isra.0]>
+    0.00 :   243c5:  call   16aa0 <katana::http::(anonymous namespace)::conn_debug_enabled() [clone .lto_priv.0]>
+    0.00 :   243ca:  test   %al,%al
+    0.00 :   243cc:  jne    24be0 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x11c0>
+    0.00 :   243d2:  mov    0xa8(%rsp),%rax
+    0.00 :   243da:  lea    0xc0(%rbp),%rdx
+    0.00 :   243e1:  movq   $0x1,0xa98(%rax)
+    0.00 :   243ec:  mov    %r14b,0xa90(%rax)
+    0.00 :   243f3:  xor    %eax,%eax
+    0.00 :   243f5:  mov    0x3b0(%rbp),%rcx
+    0.00 :   243fc:  test   %rcx,%rcx
+    0.00 :   243ff:  je     2441b <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x9fb>
+    0.00 :   24401:  nopl   0x0(%rax)
+    0.00 :   24408:  inc    %rax
+    0.00 :   2440b:  movq   $0x0,(%rdx)
+    0.00 :   24412:  add    $0x18,%rdx
+    0.00 :   24416:  cmp    %rcx,%rax
+    0.00 :   24419:  jne    24408 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x9e8>
+    0.00 :   2441b:  movq   $0x0,0x3b8(%rbp)
+    0.00 :   24426:  movq   $0x0,0x3c8(%rbp)
+    0.00 :   24431:  mov    (%rsp),%rdi
+    0.00 :   24435:  mov    0x30(%rsp),%rsi
+    0.00 :   2443a:  call   14b30 <katana::http::parser::prepare_for_next_request(katana::monotonic_arena*)>
+    0.00 :   2443f:  mov    0x18(%rsp),%rdi
+    0.00 :   24444:  call   17280 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&)::{lambda()#5}::operator()() const [clone .lto_priv.0]>
+    0.00 :   24449:  test   %al,%al
+    0.00 :   2444b:  je     249fd <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xfdd>
+    0.00 :   24451:  mov    0x9f8(%rbp),%rax
+    0.00 :   24458:  cmp    %rax,0xa30(%rbp)
+    0.00 :   2445f:  jae    249f0 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xfd0>
+    0.00 :   24465:  mov    0xa50(%rsp),%rdi
+    0.16 :   2446d:  mov    0x38(%rsp),%rax
+    0.00 :   24472:  cmp    %rax,%rdi
+    0.00 :   24475:  je     24490 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xa70>
+    0.00 :   24477:  mov    0xa60(%rsp),%rax
+    0.00 :   2447f:  lea    0x1(%rax),%rsi
+    0.00 :   24483:  call   6900 <operator delete(void*, unsigned long)@plt>
+    0.00 :   24488:  nopl   0x0(%rax,%rax,1)
+    0.00 :   24490:  mov    -0x18(%rbx),%rdi
+   11.43 :   24494:  sub    $0x18,%rbx
+    0.04 :   24498:  test   %rdi,%rdi
+    2.19 :   2449b:  je     249e0 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xfc0>
+    0.00 :   244a1:  call   69a0 <free@plt>
+    0.00 :   244a6:  cmp    %r12,%rbx
+    0.00 :   244a9:  jne    24490 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xa70>
+    0.16 :   244ab:  mov    0x458(%rsp),%rdi
+    0.41 :   244b3:  mov    0x40(%rsp),%rax
+    0.32 :   244b8:  cmp    %rax,%rdi
+    0.04 :   244bb:  je     23b3d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x11d>
+    0.00 :   244c1:  mov    0x468(%rsp),%rax
+    0.00 :   244c9:  lea    0x1(%rax),%rsi
+    0.00 :   244cd:  call   6900 <operator delete(void*, unsigned long)@plt>
+    0.00 :   244d2:  jmp    23b3d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x11d>
+    0.00 :   244d7:  nop
+    0.00 :   244d8:  mov    0x8(%rsp),%r8
+    0.00 :   244dd:  mov    0x20(%rsp),%rdx
+    0.00 :   244e2:  lea    0x240(%rsp),%rcx
+    0.00 :   244ea:  mov    %rax,%rdi
+    0.00 :   244ed:  mov    %rax,0x48(%rsp)
+    0.00 :   244f2:  call   bb90 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const>
+    0.00 :   244f7:  movzbl 0xf0(%rsp),%eax
+    0.00 :   244ff:  mov    %al,0x58(%rsp)
+    0.00 :   24503:  test   %al,%al
+    0.00 :   24505:  je     23ecf <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x4af>
+    0.00 :   2450b:  mov    0xe0(%rsp),%edi
+    0.00 :   24512:  cmp    $0x8,%edi
+    0.00 :   24515:  je     24d62 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1342>
+    0.00 :   2451b:  mov    0x8(%rsp),%rsi
+    0.00 :   24520:  call   236e8 <katana::http::map_route_error(std::error_code, katana::http::response&) [clone .isra.0]>
+    0.00 :   24525:  jmp    23ecf <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x4af>
+    0.00 :   2452a:  nopw   0x0(%rax,%rax,1)
+    0.00 :   24530:  call   b520 <katana::get_error_category()>
+    0.00 :   24535:  mov    $0x1,%esi
+    0.00 :   2453a:  lock xadd %rsi,0xab9d(%rip)        # 2f0e0 <_ZZN6katana4http12_GLOBAL__N_114close_countersEvE8counters.lto_priv.0>
+    0.00 :   24543:  lea    0x33eb(%rip),%rdi        # 27935 <_IO_stdin_used+0x1935>
+    0.00 :   2454a:  inc    %rsi
+    0.00 :   2454d:  call   16b00 <katana::http::(anonymous namespace)::maybe_log_close(char const*, unsigned long) [clone .lto_priv.0]>
+    0.00 :   24552:  nopw   0x0(%rax,%rax,1)
+    0.00 :   24558:  mov    0xa78(%rbp),%rdi
+    0.00 :   2455f:  movq   $0x0,0xa78(%rbp)
+    0.00 :   2456a:  test   %rdi,%rdi
+    0.00 :   2456d:  je     23c60 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x240>
+    0.00 :   24573:  call   23280 <std::default_delete<katana::fd_watch>::operator()(katana::fd_watch*) const [clone .isra.0]>
+    0.00 :   24578:  jmp    23c60 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x240>
+    0.00 :   2457d:  lea    0x738(%rbp),%rax
+    0.00 :   24584:  nopl   0x0(%rax)
+    0.00 :   24588:  movzwl 0x10(%rax),%edx
+    0.00 :   2458c:  mov    0x8(%rax),%rax
+    0.00 :   24590:  mov    %rax,0xe8(%rsp)
+    0.00 :   24598:  mov    %rdx,0xe0(%rsp)
+    0.00 :   245a0:  cmp    $0x5,%rdx
+    0.00 :   245a4:  jne    24130 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x710>
+    0.00 :   245aa:  mov    0x48(%rsp),%r15
+    0.00 :   245af:  mov    $0x5,%esi
+    0.00 :   245b4:  lea    0x32c4(%rip),%rdx        # 2787f <_IO_stdin_used+0x187f>
+    0.00 :   245bb:  mov    %r15,%rdi
+    0.00 :   245be:  call   bb28 <std::basic_string_view<char, std::char_traits<char> >::compare(std::basic_string_view<char, std::char_traits<char> >) const>
+    0.00 :   245c3:  test   %eax,%eax
+    0.00 :   245c5:  je     245e3 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xbc3>
+    0.00 :   245c7:  mov    $0x5,%esi
+    0.00 :   245cc:  lea    0x20e1(%rip),%rdx        # 266b4 <_IO_stdin_used+0x6b4>
+    0.00 :   245d3:  mov    %r15,%rdi
+    0.00 :   245d6:  call   bb28 <std::basic_string_view<char, std::char_traits<char> >::compare(std::basic_string_view<char, std::char_traits<char> >) const>
+    0.00 :   245db:  test   %eax,%eax
+    0.00 :   245dd:  jne    24130 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x710>
+    0.00 :   245e3:  cmpw   $0x3b,0x7b0(%rsp)
+    0.00 :   245ec:  je     2433e <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x91e>
+    0.00 :   245f2:  cmpw   $0x3b,0x7c8(%rsp)
+    0.00 :   245fb:  je     2433e <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x91e>
+    0.00 :   24601:  cmpw   $0x3b,0x7e0(%rsp)
+    0.00 :   2460a:  je     2433e <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x91e>
+    0.00 :   24610:  cmpw   $0x3b,0x7f8(%rsp)
+    0.00 :   24619:  je     2433e <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x91e>
+    0.00 :   2461f:  cmpw   $0x3b,0x810(%rsp)
+    0.00 :   24628:  je     2433e <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x91e>
+    0.00 :   2462e:  cmpw   $0x3b,0x828(%rsp)
+    0.00 :   24637:  je     2433e <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x91e>
+    0.00 :   2463d:  mov    %r14d,%r15d
+    0.00 :   24640:  jmp    2418d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x76d>
+    0.00 :   24645:  nopl   (%rax)
+    0.00 :   24648:  mov    0x18(%rsp),%rdi
+    0.00 :   2464d:  call   17280 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&)::{lambda()#5}::operator()() const [clone .lto_priv.0]>
+    0.00 :   24652:  test   %al,%al
+    0.00 :   24654:  je     23c60 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x240>
+    0.00 :   2465a:  mov    0x9f8(%rbp),%rax
+    0.00 :   24661:  cmp    %rax,0xa30(%rbp)
+    0.00 :   24668:  jb     23b18 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xf8>
+    0.00 :   2466e:  mov    $0x1,%esi
+    0.00 :   24673:  mov    %rbp,%rdi
+    0.00 :   24676:  call   232b8 <katana::http::server::connection_state::set_watch_events(katana::event_type) [clone .isra.0]>
+    0.00 :   2467b:  jmp    23c60 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x240>
+    0.00 :   24680:  call   b520 <katana::get_error_category()>
+    0.00 :   24685:  jmp    24558 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb38>
+    0.00 :   2468a:  nopw   0x0(%rax,%rax,1)
+    0.00 :   24690:  call   b520 <katana::get_error_category()>
+    0.00 :   24695:  jmp    23c53 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x233>
+    0.00 :   2469a:  nopw   0x0(%rax,%rax,1)
+    0.00 :   246a0:  movzbl 0xa70(%rsp),%r14d
+    0.36 :   246a9:  test   %r14b,%r14b
+    0.00 :   246ac:  jne    248b2 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xe92>
+    0.04 :   246b2:  cmpq   $0x100,0xa58(%rsp)
+    0.12 :   246be:  ja     2433e <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x91e>
+    0.16 :   246c4:  call   16aa0 <katana::http::(anonymous namespace)::conn_debug_enabled() [clone .lto_priv.0]>
+    0.32 :   246c9:  mov    %al,0x20(%rsp)
+    0.04 :   246cd:  test   %al,%al
+    0.00 :   246cf:  jne    24ec6 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x14a6>
+    0.00 :   246d5:  mov    0x88(%rbp),%rax
+    0.24 :   246dc:  movq   $0x0,0x90(%rbp)
+    0.08 :   246e7:  lea    0x88(%rbp),%r14
+    0.00 :   246ee:  mov    0x8(%rsp),%rdi
+    0.04 :   246f3:  mov    %r14,%rsi
+    0.16 :   246f6:  movb   $0x0,(%rax)
+    2.31 :   246f9:  call   117b0 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const>
+    0.12 :   246fe:  mov    0x30(%rbp),%rax
+    0.57 :   24702:  add    0x10(%rbp),%rax
+    0.28 :   24706:  mov    0x90(%rbp),%rdx
+    0.04 :   2470d:  lea    (%rax,%rdx,1),%rcx
+    0.04 :   24711:  cmp    $0x10000,%rcx
+    0.12 :   24718:  ja     24728 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xd08>
+    0.00 :   2471a:  mov    0x70(%rbp),%rcx
+    1.58 :   2471e:  add    0x50(%rbp),%rcx
+    0.12 :   24722:  je     24c9a <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x127a>
+    0.00 :   24728:  cmp    %rax,0xa8(%rbp)
+    0.00 :   2472f:  jae    24b70 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1150>
+    0.00 :   24735:  call   16aa0 <katana::http::(anonymous namespace)::conn_debug_enabled() [clone .lto_priv.0]>
+    0.00 :   2473a:  test   %al,%al
+    0.00 :   2473c:  jne    24eee <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x14ce>
+    0.00 :   24742:  lea    0x48(%rbp),%rdi
+    0.00 :   24746:  mov    %r14,%rsi
+    0.00 :   24749:  call   23530 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [clone .isra.0]>
+    0.00 :   2474e:  mov    0x68(%rbp),%rax
+    0.00 :   24752:  movq   $0x0,0x70(%rbp)
+    0.00 :   2475a:  lea    0xc0(%rbp),%rdx
+    0.00 :   24761:  movb   $0x0,(%rax)
+    0.00 :   24764:  movb   $0x0,0xa90(%rbp)
+    0.00 :   2476b:  movq   $0x1,0xa98(%rbp)
+    0.00 :   24776:  movq   $0x0,0x90(%rbp)
+    0.00 :   24781:  mov    0x88(%rbp),%rax
+    0.00 :   24788:  movb   $0x0,(%rax)
+    0.00 :   2478b:  xor    %eax,%eax
+    0.00 :   2478d:  mov    0x3b0(%rbp),%rcx
+    0.00 :   24794:  test   %rcx,%rcx
+    0.00 :   24797:  je     2441b <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x9fb>
+    0.00 :   2479d:  nopl   (%rax)
+    0.00 :   247a0:  inc    %rax
+    0.00 :   247a3:  movq   $0x0,(%rdx)
+    0.00 :   247aa:  add    $0x18,%rdx
+    0.00 :   247ae:  cmp    %rax,%rcx
+    0.00 :   247b1:  jne    247a0 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xd80>
+    0.00 :   247b3:  jmp    2441b <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x9fb>
+    0.00 :   247b8:  mov    %r14b,0xa80(%rbp)
+    0.00 :   247bf:  mov    0x8(%rsp),%rdx
+    0.00 :   247c4:  lea    0x28(%rbp),%rsi
+    0.00 :   247c8:  lea    0x8(%rbp),%rdi
+    0.00 :   247cc:  call   17100 <katana::http::(anonymous namespace)::prepare_response_storage(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, katana::http::response&) [clone .lto_priv.0]>
+    0.00 :   247d1:  mov    0x3b0(%rbp),%rcx
+    0.00 :   247d8:  movq   $0x0,0xa8(%rbp)
+    0.00 :   247e3:  lea    0xc0(%rbp),%rdx
+    0.00 :   247ea:  movq   $0x1,0xa88(%rbp)
+    0.00 :   247f5:  xor    %eax,%eax
+    0.00 :   247f7:  test   %rcx,%rcx
+    0.00 :   247fa:  je     24813 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xdf3>
+    0.00 :   247fc:  nopl   0x0(%rax)
+    0.00 :   24800:  inc    %rax
+    0.00 :   24803:  movq   $0x0,(%rdx)
+    0.00 :   2480a:  add    $0x18,%rdx
+    0.00 :   2480e:  cmp    %rcx,%rax
+    0.00 :   24811:  jne    24800 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xde0>
+    0.00 :   24813:  movq   $0x0,0x3b8(%rbp)
+    0.00 :   2481e:  movq   $0x0,0x3c8(%rbp)
+    0.00 :   24829:  mov    0x30(%rsp),%rsi
+    0.00 :   2482e:  mov    (%rsp),%rdi
+    0.00 :   24832:  call   14b30 <katana::http::parser::prepare_for_next_request(katana::monotonic_arena*)>
+    0.00 :   24837:  mov    0x18(%rsp),%rdi
+    0.00 :   2483c:  call   17280 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&)::{lambda()#5}::operator()() const [clone .lto_priv.0]>
+    0.00 :   24841:  test   %al,%al
+    0.32 :   24843:  je     249fd <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xfdd>
+    0.00 :   24849:  mov    0x9f8(%rbp),%rax
+    0.00 :   24850:  cmp    %rax,0xa30(%rbp)
+    0.04 :   24857:  jae    249f0 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xfd0>
+    0.00 :   2485d:  mov    0xa50(%rsp),%rdi
+    0.00 :   24865:  mov    0x38(%rsp),%rax
+    0.00 :   2486a:  cmp    %rax,%rdi
+    0.00 :   2486d:  je     24880 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xe60>
+    0.00 :   2486f:  mov    0xa60(%rsp),%rax
+    0.00 :   24877:  lea    0x1(%rax),%rsi
+    0.00 :   2487b:  call   6900 <operator delete(void*, unsigned long)@plt>
+    0.00 :   24880:  mov    -0x18(%rbx),%rdi
+    0.00 :   24884:  sub    $0x18,%rbx
+    0.00 :   24888:  test   %rdi,%rdi
+    0.00 :   2488b:  je     248a8 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xe88>
+    0.00 :   2488d:  call   69a0 <free@plt>
+    0.00 :   24892:  cmp    %r12,%rbx
+    0.00 :   24895:  je     244ab <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xa8b>
+    0.00 :   2489b:  mov    -0x18(%rbx),%rdi
+    0.00 :   2489f:  sub    $0x18,%rbx
+    0.00 :   248a3:  test   %rdi,%rdi
+    0.00 :   248a6:  jne    2488d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xe6d>
+    0.00 :   248a8:  cmp    %r12,%rbx
+    0.00 :   248ab:  jne    24880 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xe60>
+    0.00 :   248ad:  jmp    244ab <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xa8b>
+    0.00 :   248b2:  xor    %r14d,%r14d
+    0.00 :   248b5:  call   16aa0 <katana::http::(anonymous namespace)::conn_debug_enabled() [clone .lto_priv.0]>
+    0.00 :   248ba:  test   %al,%al
+    0.00 :   248bc:  je     2434b <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x92b>
+    0.00 :   248c2:  movl   $0x0,0x48(%rsp)
+    0.00 :   248ca:  movb   $0x0,0x20(%rsp)
+    0.00 :   248cf:  mov    0xa702(%rip),%r15        # 2efd8 <std::cerr@GLIBCXX_3.4>
+    0.00 :   248d6:  mov    $0x1a,%edx
+    0.00 :   248db:  lea    0x3061(%rip),%rsi        # 27943 <_IO_stdin_used+0x1943>
+    0.00 :   248e2:  mov    %r15,%rdi
+    0.00 :   248e5:  call   6970 <std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)@plt>
+    0.00 :   248ea:  mov    0x3f0(%rbp),%rdx
+    0.00 :   248f1:  mov    %r15,%rdi
+    0.00 :   248f4:  mov    0x3f8(%rbp),%rsi
+    0.00 :   248fb:  call   6970 <std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)@plt>
+    0.00 :   24900:  mov    $0x6,%edx
+    0.00 :   24905:  lea    0x193b(%rip),%rsi        # 26247 <_IO_stdin_used+0x247>
+    0.00 :   2490c:  mov    %rax,%rdi
+    0.00 :   2490f:  mov    %rax,%r15
+    0.00 :   24912:  call   6970 <std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)@plt>
+    0.00 :   24917:  mov    0xa58(%rsp),%rsi
+    0.00 :   2491f:  mov    %r15,%rdi
+    0.00 :   24922:  call   6810 <std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long)@plt>
+    0.00 :   24927:  mov    $0x11,%edx
+    0.00 :   2492c:  lea    0x302b(%rip),%rsi        # 2795e <_IO_stdin_used+0x195e>
+    0.00 :   24933:  mov    %rax,%rdi
+    0.00 :   24936:  mov    %rax,%r15
+    0.00 :   24939:  call   6970 <std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)@plt>
+    0.00 :   2493e:  mov    0x48(%rsp),%esi
+    0.00 :   24942:  mov    %r15,%rdi
+    0.00 :   24945:  call   6b40 <std::ostream& std::ostream::_M_insert<bool>(bool)@plt>
+    0.00 :   2494a:  mov    $0x10,%edx
+    0.00 :   2494f:  lea    0x301a(%rip),%rsi        # 27970 <_IO_stdin_used+0x1970>
+    0.00 :   24956:  mov    %rax,%rdi
+    0.00 :   24959:  mov    %rax,%r15
+    0.00 :   2495c:  call   6970 <std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)@plt>
+    0.00 :   24961:  mov    0x30(%rbp),%rsi
+    0.00 :   24965:  mov    %r15,%rdi
+    0.00 :   24968:  add    0x10(%rbp),%rsi
+    0.00 :   2496c:  call   6810 <std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long)@plt>
+    0.00 :   24971:  mov    $0x8,%edx
+    0.00 :   24976:  lea    0x18ac(%rip),%rsi        # 26229 <_IO_stdin_used+0x229>
+    0.00 :   2497d:  mov    %rax,%rdi
+    0.00 :   24980:  mov    %rax,%r15
+    0.00 :   24983:  call   6970 <std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)@plt>
+    0.00 :   24988:  mov    0x70(%rbp),%rsi
+    0.00 :   2498c:  mov    %r15,%rdi
+    0.00 :   2498f:  add    0x50(%rbp),%rsi
+    0.00 :   24993:  call   6810 <std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long)@plt>
+    0.00 :   24998:  mov    %rax,%rdi
+    0.00 :   2499b:  lea    0x1a3b(%rip),%rsi        # 263dd <_IO_stdin_used+0x3dd>
+    0.00 :   249a2:  call   68e0 <std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)@plt>
+    0.00 :   249a7:  cmpb   $0x0,0x20(%rsp)
+    0.00 :   249ac:  jne    246d5 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xcb5>
+    0.00 :   249b2:  jmp    2434b <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x92b>
+    0.00 :   249b7:  call   b520 <katana::get_error_category()>
+    0.00 :   249bc:  mov    $0x1,%esi
+    0.00 :   249c1:  lock xadd %rsi,0xa71e(%rip)        # 2f0e8 <_ZZN6katana4http12_GLOBAL__N_114close_countersEvE8counters.lto_priv.0+0x8>
+    0.00 :   249ca:  lea    0x2f5b(%rip),%rdi        # 2792c <_IO_stdin_used+0x192c>
+    0.00 :   249d1:  inc    %rsi
+    0.00 :   249d4:  call   16b00 <katana::http::(anonymous namespace)::maybe_log_close(char const*, unsigned long) [clone .lto_priv.0]>
+    0.00 :   249d9:  jmp    24558 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb38>
+    0.00 :   249de:  xchg   %ax,%ax
+    0.00 :   249e0:  cmp    %r12,%rbx
+    0.97 :   249e3:  jne    24490 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xa70>
+    0.00 :   249e9:  jmp    244ab <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xa8b>
+    0.00 :   249ee:  xchg   %ax,%ax
+    0.00 :   249f0:  mov    $0x1,%esi
+    0.00 :   249f5:  mov    %rbp,%rdi
+    0.00 :   249f8:  call   232b8 <katana::http::server::connection_state::set_watch_events(katana::event_type) [clone .isra.0]>
+    0.00 :   249fd:  lea    0xa50(%rsp),%rdi
+    0.00 :   24a05:  lea    0x770(%rsp),%rbx
+    0.00 :   24a0d:  call   b7d0 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()>
+    0.12 :   24a12:  mov    0x8(%rsp),%rbp
+    0.00 :   24a17:  add    $0x20,%rbp
+    0.00 :   24a1b:  nopl   0x0(%rax,%rax,1)
+    0.00 :   24a20:  mov    (%rbx),%rdi
+    0.81 :   24a23:  test   %rdi,%rdi
+    0.16 :   24a26:  je     24a48 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1028>
+    0.00 :   24a28:  sub    $0x18,%rbx
+    0.00 :   24a2c:  call   69a0 <free@plt>
+    0.00 :   24a31:  cmp    %rbp,%rbx
+    0.00 :   24a34:  jne    24a20 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1000>
+    0.00 :   24a36:  lea    0x458(%rsp),%rdi
+    0.00 :   24a3e:  call   b7d0 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()>
+    0.00 :   24a43:  jmp    23c60 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x240>
+    0.00 :   24a48:  sub    $0x18,%rbx
+    0.16 :   24a4c:  cmp    %rbx,%rbp
+    0.00 :   24a4f:  jne    24a20 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1000>
+    0.00 :   24a51:  lea    0x458(%rsp),%rdi
+    0.00 :   24a59:  call   b7d0 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()>
+    0.00 :   24a5e:  jmp    23c60 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x240>
+    0.00 :   24a63:  mov    0x8(%rsp),%rsi
+    0.00 :   24a68:  mov    0xe0(%rsp),%edi
+    0.00 :   24a6f:  call   236e8 <katana::http::map_route_error(std::error_code, katana::http::response&) [clone .isra.0]>
+    0.00 :   24a74:  jmp    23ecf <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x4af>
+    0.00 :   24a79:  call   117b0 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const>
+    0.00 :   24a7e:  jmp    243c5 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x9a5>
+    0.00 :   24a83:  cmpq   $0x0,0xa30(%rbp)
+    0.00 :   24a8b:  jne    24d24 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1304>
+    0.00 :   24a91:  mov    $0xa02000,%eax
+    0.00 :   24a96:  sub    %r14,%rax
+    0.00 :   24a99:  cmp    $0xfff,%rax
+    0.00 :   24a9f:  jbe    24680 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xc60>
+    0.00 :   24aa5:  lea    0x1000(%r14),%rax
+    0.00 :   24aac:  cmp    $0xa02000,%rax
+    0.00 :   24ab2:  ja     24680 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xc60>
+    0.00 :   24ab8:  mov    0x9f0(%rbp),%rbx
+    0.00 :   24abf:  cmp    %rax,%r12
+    0.00 :   24ac2:  jae    23ba3 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x183>
+    0.00 :   24ac8:  test   %r12,%r12
+    0.00 :   24acb:  jne    250ec <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x16cc>
+    0.00 :   24ad1:  mov    $0x4000,%edx
+    0.00 :   24ad6:  mov    $0x4000,%r15d
+    0.00 :   24adc:  cmp    $0x4000,%rax
+    0.00 :   24ae2:  ja     24afd <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x10dd>
+    0.00 :   24ae4:  jmp    24ff7 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x15d7>
+    0.00 :   24ae9:  nopl   0x0(%rax)
+    0.00 :   24af0:  cmp    $0x500fff,%rdx
+    0.00 :   24af7:  ja     24ff1 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x15d1>
+    0.00 :   24afd:  add    %rdx,%rdx
+    0.00 :   24b00:  cmp    %rax,%rdx
+    0.00 :   24b03:  jb     24af0 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x10d0>
+    0.00 :   24b05:  cmp    %rdx,%rax
+    0.00 :   24b08:  cmovae %rax,%rdx
+    0.00 :   24b0c:  mov    %rdx,%r15
+    0.00 :   24b0f:  cmp    %rdx,%r12
+    0.00 :   24b12:  jb     24ff7 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x15d7>
+    0.00 :   24b18:  xor    %r14d,%r14d
+    0.00 :   24b1b:  test   %rbx,%rbx
+    0.00 :   24b1e:  je     25000 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x15e0>
+    0.00 :   24b24:  nopl   0x0(%rax)
+    0.00 :   24b28:  add    %r12,%r12
+    0.00 :   24b2b:  cmp    %rax,%r12
+    0.00 :   24b2e:  jae    24b3f <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x111f>
+    0.00 :   24b30:  cmp    $0x500fff,%r12
+    0.00 :   24b37:  jbe    24b28 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1108>
+    0.00 :   24b39:  mov    $0xa02000,%r12d
+    0.00 :   24b3f:  mov    (%rsp),%rdi
+    0.00 :   24b43:  cmp    %rax,%r12
+    0.00 :   24b46:  cmovae %r12,%rax
+    0.00 :   24b4a:  mov    %rax,%rsi
+    0.00 :   24b4d:  call   14590 <katana::http::parser::reserve_buffer(unsigned long)>
+    0.00 :   24b52:  test   %al,%al
+    0.00 :   24b54:  je     24680 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xc60>
+    0.00 :   24b5a:  mov    0x9f0(%rbp),%rbx
+    0.00 :   24b61:  mov    0x9f8(%rbp),%r14
+    0.00 :   24b68:  jmp    23ba3 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x183>
+    0.00 :   24b6d:  nopl   (%rax)
+    0.00 :   24b70:  lea    0x8(%rbp),%rdi
+    0.00 :   24b74:  mov    %r14,%rsi
+    0.00 :   24b77:  call   23530 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [clone .isra.0]>
+    0.00 :   24b7c:  mov    0x28(%rbp),%rax
+    0.00 :   24b80:  movq   $0x0,0x30(%rbp)
+    0.00 :   24b88:  lea    0xc0(%rbp),%rdx
+    0.00 :   24b8f:  movb   $0x0,(%rax)
+    0.00 :   24b92:  movq   $0x0,0xa8(%rbp)
+    0.00 :   24b9d:  xor    %eax,%eax
+    0.00 :   24b9f:  movb   $0x0,0xa80(%rbp)
+    0.00 :   24ba6:  movq   $0x1,0xa88(%rbp)
+    0.00 :   24bb1:  mov    0x3b0(%rbp),%rcx
+    0.00 :   24bb8:  test   %rcx,%rcx
+    0.00 :   24bbb:  je     24813 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xdf3>
+    0.00 :   24bc1:  nopl   0x0(%rax)
+    0.00 :   24bc8:  inc    %rax
+    0.00 :   24bcb:  movq   $0x0,(%rdx)
+    0.00 :   24bd2:  add    $0x18,%rdx
+    0.00 :   24bd6:  cmp    %rcx,%rax
+    0.00 :   24bd9:  jne    24bc8 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x11a8>
+    0.00 :   24bdb:  jmp    24813 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xdf3>
+    0.00 :   24be0:  mov    0xa3f1(%rip),%r15        # 2efd8 <std::cerr@GLIBCXX_3.4>
+    0.00 :   24be7:  mov    $0x21,%edx
+    0.00 :   24bec:  lea    0x2fad(%rip),%rsi        # 27ba0 <_IO_stdin_used+0x1ba0>
+    0.00 :   24bf3:  mov    %r15,%rdi
+    0.00 :   24bf6:  call   6970 <std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)@plt>
+    0.00 :   24bfb:  mov    0xa8(%rsp),%rax
+    0.00 :   24c03:  mov    %r15,%rdi
+    0.00 :   24c06:  mov    0x50(%rax),%rsi
+    0.00 :   24c0a:  call   6810 <std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long)@plt>
+    0.00 :   24c0f:  mov    $0x6,%edx
+    0.00 :   24c14:  lea    0x162c(%rip),%rsi        # 26247 <_IO_stdin_used+0x247>
+    0.00 :   24c1b:  mov    %rax,%rdi
+    0.00 :   24c1e:  mov    %rax,%r15
+    0.00 :   24c21:  call   6970 <std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)@plt>
+    0.00 :   24c26:  mov    0xa8(%rsp),%rax
+    0.00 :   24c2e:  mov    %r15,%rdi
+    0.00 :   24c31:  mov    0x70(%rax),%rsi
+    0.00 :   24c35:  call   6810 <std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long)@plt>
+    0.00 :   24c3a:  mov    $0x7,%edx
+    0.00 :   24c3f:  lea    0x15ec(%rip),%rsi        # 26232 <_IO_stdin_used+0x232>
+    0.00 :   24c46:  mov    %rax,%rdi
+    0.00 :   24c49:  mov    %rax,%r15
+    0.00 :   24c4c:  call   6970 <std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)@plt>
+    0.00 :   24c51:  movzbl %r14b,%esi
+    0.00 :   24c55:  mov    %r15,%rdi
+    0.00 :   24c58:  call   6b40 <std::ostream& std::ostream::_M_insert<bool>(bool)@plt>
+    0.00 :   24c5d:  mov    $0xb,%edx
+    0.00 :   24c62:  lea    0x15e5(%rip),%rsi        # 2624e <_IO_stdin_used+0x24e>
+    0.00 :   24c69:  mov    %rax,%rdi
+    0.00 :   24c6c:  mov    %rax,%r15
+    0.00 :   24c6f:  call   6970 <std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)@plt>
+    0.00 :   24c74:  mov    $0x1,%esi
+    0.00 :   24c79:  mov    %r15,%rdi
+    0.00 :   24c7c:  call   6810 <std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long)@plt>
+    0.00 :   24c81:  mov    %rax,%rdi
+    0.00 :   24c84:  lea    0x1752(%rip),%rsi        # 263dd <_IO_stdin_used+0x3dd>
+    0.00 :   24c8b:  mov    $0x1,%edx
+    0.00 :   24c90:  call   6970 <std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)@plt>
+    0.00 :   24c95:  jmp    243d2 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x9b2>
+    0.00 :   24c9a:  mov    0xa98(%rbp),%r15
+    0.32 :   24ca1:  test   %r15,%r15
+    0.04 :   24ca4:  jne    24728 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xd08>
+    0.00 :   24caa:  mov    0x88(%rbp),%rsi
+    0.16 :   24cb1:  lea    0x8(%rbp),%rdi
+    0.00 :   24cb5:  call   1c178 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .isra.0]>
+    0.00 :   24cba:  mov    0x3b0(%rbp),%rdx
+    1.05 :   24cc1:  lea    0xc0(%rbp),%rax
+    0.04 :   24cc8:  incq   0xa88(%rbp)
+    0.12 :   24ccf:  test   %rdx,%rdx
+    0.04 :   24cd2:  je     24ce7 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x12c7>
+    0.00 :   24cd4:  inc    %r15
+    0.00 :   24cd7:  movq   $0x0,(%rax)
+    0.00 :   24cde:  add    $0x18,%rax
+    0.00 :   24ce2:  cmp    %r15,%rdx
+    0.00 :   24ce5:  jne    24cd4 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x12b4>
+    0.00 :   24ce7:  movq   $0x0,0x3b8(%rbp)
+    0.20 :   24cf2:  movq   $0x0,0x3c8(%rbp)
+    0.00 :   24cfd:  mov    0x30(%rsp),%rsi
+    0.00 :   24d02:  mov    (%rsp),%rdi
+    0.00 :   24d06:  call   14b30 <katana::http::parser::prepare_for_next_request(katana::monotonic_arena*)>
+    0.28 :   24d0b:  mov    0x9f8(%rbp),%rax
+    0.36 :   24d12:  cmp    %rax,0xa30(%rbp)
+    0.24 :   24d19:  jb     24465 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xa45>
+    0.00 :   24d1f:  jmp    24837 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xe17>
+    0.00 :   24d24:  mov    (%rsp),%rdi
+    0.00 :   24d28:  call   14400 <katana::http::parser::compact_buffer()>
+    0.00 :   24d2d:  mov    0x9f8(%rbp),%r14
+    0.00 :   24d34:  mov    0xa00(%rbp),%r12
+    0.00 :   24d3b:  cmp    %r14,%r12
+    0.00 :   24d3e:  jb     24680 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xc60>
+    0.00 :   24d44:  mov    %r12,%rax
+    0.00 :   24d47:  sub    %r14,%rax
+    0.00 :   24d4a:  cmp    $0xfff,%rax
+    0.00 :   24d50:  jbe    24a91 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1071>
+    0.00 :   24d56:  mov    0x9f0(%rbp),%rbx
+    0.00 :   24d5d:  jmp    23ba3 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x183>
+    0.00 :   24d62:  lea    0x180(%rsp),%rax
+    0.00 :   24d6a:  lea    0x190(%rsp),%rdi
+    0.00 :   24d72:  mov    $0x12,%ecx
+    0.00 :   24d77:  xor    %esi,%esi
+    0.00 :   24d79:  mov    %rax,0x70(%rsp)
+    0.00 :   24d7e:  mov    %rax,0x170(%rsp)
+    0.00 :   24d86:  movabs $0x6c623a74756f6261,%rax
+    0.00 :   24d90:  mov    %rax,0x180(%rsp)
+    0.00 :   24d98:  lea    0x1a0(%rsp),%rax
+    0.00 :   24da0:  mov    %rax,0x190(%rsp)
+    0.00 :   24da8:  lea    0x2b41(%rip),%rdx        # 278f0 <_IO_stdin_used+0x18f0>
+    0.00 :   24daf:  lea    0x238(%rsp),%rax
+    0.00 :   24db7:  movl   $0x6b6e616c,0x187(%rsp)
+    0.00 :   24dc2:  movq   $0xb,0x178(%rsp)
+    0.00 :   24dce:  movb   $0x0,0x18b(%rsp)
+    0.00 :   24dd6:  movq   $0x0,0x198(%rsp)
+    0.00 :   24de2:  movb   $0x0,0x1a0(%rsp)
+    0.00 :   24dea:  movb   $0x0,0x1d8(%rsp)
+    0.00 :   24df2:  movb   $0x0,0x200(%rsp)
+    0.00 :   24dfa:  mov    %rax,0x208(%rsp)
+    0.00 :   24e02:  movq   $0x1,0x210(%rsp)
+    0.00 :   24e0e:  movq   $0x0,0x218(%rsp)
+    0.00 :   24e1a:  movq   $0x0,0x220(%rsp)
+    0.00 :   24e26:  movl   $0x3f800000,0x228(%rsp)
+    0.00 :   24e31:  movq   $0x0,0x230(%rsp)
+    0.00 :   24e3d:  movq   $0x0,0x238(%rsp)
+    0.00 :   24e49:  movl   $0x195,0x1b0(%rsp)
+    0.00 :   24e54:  call   1e720 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace(unsigned long, unsigned long, char const*, unsigned long) [clone .constprop.0]>
+    0.00 :   24e59:  mov    0x8(%rsp),%rdi
+    0.00 :   24e5e:  lea    0x170(%rsp),%rax
+    0.00 :   24e66:  mov    %rax,%rsi
+    0.00 :   24e69:  mov    %rax,0x60(%rsp)
+    0.00 :   24e6e:  call   138a0 <katana::http::response::assign_error(katana::problem_details const&)>
+    0.00 :   24e73:  mov    0x60(%rsp),%rdi
+    0.00 :   24e78:  call   16950 <katana::problem_details::~problem_details() [clone .lto_priv.0]>
+    0.00 :   24e7d:  mov    0xf4(%rsp),%eax
+    0.00 :   24e84:  mov    %eax,0x78(%rsp)
+    0.00 :   24e88:  test   %eax,%eax
+    0.00 :   24e8a:  jne    25101 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x16e1>
+    0.00 :   24e90:  lea    0x160(%rsp),%rax
+    0.00 :   24e98:  movq   $0x0,0x158(%rsp)
+    0.00 :   24ea4:  mov    %rax,0x150(%rsp)
+    0.00 :   24eac:  movb   $0x0,0x160(%rsp)
+    0.00 :   24eb4:  lea    0x150(%rsp),%rdi
+    0.00 :   24ebc:  call   b7d0 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()>
+    0.00 :   24ec1:  jmp    23ecf <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x4af>
+    0.00 :   24ec6:  movl   $0x1,0x48(%rsp)
+    0.00 :   24ece:  jmp    248cf <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xeaf>
+    0.00 :   24ed3:  add    $0x18,%rax
+    0.00 :   24ed7:  jmp    24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.00 :   24edc:  add    $0x30,%rax
+    0.00 :   24ee0:  jmp    24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.00 :   24ee5:  add    $0x48,%rax
+    0.00 :   24ee9:  jmp    24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.00 :   24eee:  mov    0xa0e3(%rip),%r15        # 2efd8 <std::cerr@GLIBCXX_3.4>
+    0.00 :   24ef5:  mov    $0x24,%edx
+    0.00 :   24efa:  lea    0x3097(%rip),%rsi        # 27f98 <_IO_stdin_used+0x1f98>
+    0.00 :   24f01:  mov    %r15,%rdi
+    0.00 :   24f04:  call   6970 <std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)@plt>
+    0.00 :   24f09:  mov    0x90(%rbp),%rsi
+    0.00 :   24f10:  mov    %r15,%rdi
+    0.00 :   24f13:  call   6810 <std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long)@plt>
+    0.00 :   24f18:  mov    $0x7,%edx
+    0.00 :   24f1d:  lea    0x130e(%rip),%rsi        # 26232 <_IO_stdin_used+0x232>
+    0.00 :   24f24:  mov    %rax,%rdi
+    0.00 :   24f27:  mov    %rax,%r15
+    0.00 :   24f2a:  call   6970 <std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)@plt>
+    0.00 :   24f2f:  xor    %esi,%esi
+    0.00 :   24f31:  mov    %r15,%rdi
+    0.00 :   24f34:  call   6b40 <std::ostream& std::ostream::_M_insert<bool>(bool)@plt>
+    0.00 :   24f39:  mov    $0xb,%edx
+    0.00 :   24f3e:  lea    0x1309(%rip),%rsi        # 2624e <_IO_stdin_used+0x24e>
+    0.00 :   24f45:  mov    %rax,%rdi
+    0.00 :   24f48:  mov    %rax,%r15
+    0.00 :   24f4b:  call   6970 <std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)@plt>
+    0.00 :   24f50:  mov    $0x1,%esi
+    0.00 :   24f55:  mov    %r15,%rdi
+    0.00 :   24f58:  call   6810 <std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long)@plt>
+    0.00 :   24f5d:  mov    %rax,%rdi
+    0.00 :   24f60:  lea    0x1476(%rip),%rsi        # 263dd <_IO_stdin_used+0x3dd>
+    0.00 :   24f67:  call   68e0 <std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)@plt>
+    0.00 :   24f6c:  jmp    24742 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xd22>
+    0.00 :   24f71:  add    $0x78,%rax
+    0.00 :   24f75:  jmp    24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.00 :   24f7a:  add    $0x60,%rax
+    0.00 :   24f7e:  jmp    24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.00 :   24f83:  add    $0x90,%rax
+    0.00 :   24f89:  jmp    24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.00 :   24f8e:  add    $0xc0,%rax
+    0.00 :   24f94:  jmp    24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.00 :   24f99:  add    $0xa8,%rax
+    0.00 :   24f9f:  jmp    24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.00 :   24fa4:  add    $0xf0,%rax
+    0.00 :   24faa:  jmp    24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.00 :   24faf:  add    $0xd8,%rax
+    0.00 :   24fb5:  jmp    24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.00 :   24fba:  add    $0x120,%rax
+    0.00 :   24fc0:  jmp    24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.00 :   24fc5:  add    $0x108,%rax
+    0.00 :   24fcb:  jmp    24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.00 :   24fd0:  add    $0x150,%rax
+    0.00 :   24fd6:  jmp    24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.00 :   24fdb:  add    $0x138,%rax
+    0.00 :   24fe1:  jmp    24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.00 :   24fe6:  add    $0x168,%rax
+    0.00 :   24fec:  jmp    24588 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xb68>
+    0.00 :   24ff1:  mov    $0xa02000,%r15d
+    0.00 :   24ff7:  xor    %eax,%eax
+    0.00 :   24ff9:  test   %rbx,%rbx
+    0.00 :   24ffc:  cmove  %rax,%r14
+    0.00 :   25000:  mov    0x9f51(%rip),%rsi        # 2ef58 <std::nothrow@GLIBCXX_3.4>
+    0.00 :   25007:  mov    %r15,%rdi
+    0.00 :   2500a:  call   6b30 <operator new[](unsigned long, std::nothrow_t const&)@plt>
+    0.00 :   2500f:  mov    %rax,%rdi
+    0.00 :   25012:  test   %rax,%rax
+    0.00 :   25015:  je     24680 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xc60>
+    0.00 :   2501b:  mov    0x9f0(%rbp),%rsi
+    0.00 :   25022:  test   %rsi,%rsi
+    0.00 :   25025:  je     25037 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1617>
+    0.00 :   25027:  mov    0x9f8(%rbp),%rdx
+    0.00 :   2502e:  test   %rdx,%rdx
+    0.00 :   25031:  jne    25820 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e00>
+    0.00 :   25037:  mov    0x9e8(%rbp),%rax
+    0.00 :   2503e:  mov    %rdi,0x9e8(%rbp)
+    0.00 :   25045:  test   %rax,%rax
+    0.00 :   25048:  je     25059 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1639>
+    0.00 :   2504a:  mov    %rax,%rdi
+    0.00 :   2504d:  call   6a00 <operator delete[](void*)@plt>
+    0.00 :   25052:  mov    0x9e8(%rbp),%rdi
+    0.00 :   25059:  mov    %rdi,0x9f0(%rbp)
+    0.00 :   25060:  mov    %r15,0xa00(%rbp)
+    0.00 :   25067:  call   1bf60 <katana::detail::syscall_metrics_registry::instance()>
+    0.00 :   2506c:  movzbl (%rax),%edi
+    0.00 :   2506f:  call   1eae0 <katana::detail::syscall_metrics_registry::local_slot() [clone .isra.0]>
+    0.00 :   25074:  test   %rax,%rax
+    0.00 :   25077:  je     25090 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1670>
+    0.00 :   25079:  lock incq 0x78(%rax)
+    0.00 :   2507e:  cmp    %r15,%r12
+    0.00 :   25081:  jb     2583d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e1d>
+    0.00 :   25087:  test   %r14,%r14
+    0.00 :   2508a:  jne    25830 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e10>
+    0.00 :   25090:  mov    0xa00(%rbp),%r12
+    0.00 :   25097:  mov    0x9f8(%rbp),%r14
+    0.00 :   2509e:  mov    %r12,%rax
+    0.00 :   250a1:  sub    %r14,%rax
+    0.00 :   250a4:  cmp    $0xfff,%rax
+    0.00 :   250aa:  ja     24d56 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1336>
+    0.00 :   250b0:  lea    0x1000(%r14),%rax
+    0.00 :   250b7:  cmp    $0xa02000,%rax
+    0.00 :   250bd:  ja     24680 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0xc60>
+    0.00 :   250c3:  cmp    %rax,%r12
+    0.00 :   250c6:  jae    24d56 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1336>
+    0.00 :   250cc:  test   %r12,%r12
+    0.00 :   250cf:  jne    24b30 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1110>
+    0.00 :   250d5:  mov    $0x4000,%r12d
+    0.00 :   250db:  cmp    $0x4000,%rax
+    0.00 :   250e1:  ja     24b28 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1108>
+    0.00 :   250e7:  jmp    24b3f <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x111f>
+    0.00 :   250ec:  cmp    $0x500fff,%r12
+    0.00 :   250f3:  ja     24ff1 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x15d1>
+    0.00 :   250f9:  mov    %r12,%rdx
+    0.00 :   250fc:  jmp    24afd <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x10dd>
+    0.00 :   25101:  mov    0x70(%rsp),%rax
+    0.00 :   25106:  mov    0x60(%rsp),%rdi
+    0.00 :   2510b:  mov    $0x20,%esi
+    0.00 :   25110:  movl   $0x2010500,0x148(%rsp)
+    0.00 :   2511b:  movw   $0x403,0x14c(%rsp)
+    0.00 :   25125:  movb   $0x6,0x14e(%rsp)
+    0.00 :   2512d:  movq   $0x0,0x178(%rsp)
+    0.00 :   25139:  movb   $0x0,0x180(%rsp)
+    0.00 :   25141:  mov    %rax,0x170(%rsp)
+    0.00 :   25149:  call   c670 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::reserve(unsigned long)>
+    0.00 :   2514e:  lea    0x148(%rsp),%rax
+    0.00 :   25156:  mov    %rax,0x68(%rsp)
+    0.00 :   2515b:  lea    0x14f(%rsp),%rax
+    0.00 :   25163:  mov    %rax,0x80(%rsp)
+    0.00 :   2516b:  mov    0x68(%rsp),%rax
+    0.00 :   25170:  movzbl (%rax),%ecx
+    0.00 :   25173:  cmp    $0x1e,%cl
+    0.00 :   25176:  mov    %cl,0x7e(%rsp)
+    0.00 :   2517a:  seta   %al
+    0.00 :   2517d:  cmp    $0x7,%cl
+    0.00 :   25180:  sete   %dl
+    0.00 :   25183:  or     %dl,%al
+    0.00 :   25185:  jne    251e8 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x17c8>
+    0.00 :   25187:  mov    $0x1,%eax
+    0.00 :   2518c:  shlx   %ecx,%eax,%eax
+    0.00 :   25191:  test   %eax,0x78(%rsp)
+    0.00 :   25195:  je     251e8 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x17c8>
+    0.00 :   25197:  cmpb   $0x0,0x58(%rsp)
+    0.00 :   2519c:  jne    251af <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x178f>
+    0.00 :   2519e:  mov    0x60(%rsp),%rdi
+    0.00 :   251a3:  lea    0x2796(%rip),%rsi        # 27940 <_IO_stdin_used+0x1940>
+    0.00 :   251aa:  call   1c0b0 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*) [clone .isra.0]>
+    0.00 :   251af:  movzbl 0x7e(%rsp),%eax
+    0.00 :   251b4:  cmp    $0x6,%al
+    0.00 :   251b6:  ja     253b3 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1993>
+    0.00 :   251bc:  lea    0x3569(%rip),%rcx        # 2872c <template parameter object for katana::http::fixed_string<14ul>{char [14]{(char)47, (char)104, (char)101, (char)108, (char)108, (char)111, (char)47, (char)123, (char)110, (char)97, (char)109, (char)101, (char)125}}+0xec>
+    0.00 :   251c3:  movslq (%rcx,%rax,4),%rax
+    0.00 :   251c7:  add    %rcx,%rax
+    0.00 :   251ca:  notrack jmp *%rax
+    0.00 :   251cd:  lea    0xf94(%rip),%rsi        # 26168 <_IO_stdin_used+0x168>
+    0.00 :   251d4:  mov    $0x4,%edx
+    0.00 :   251d9:  mov    0x60(%rsp),%rdi
+    0.00 :   251de:  call   1c178 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .isra.0]>
+    0.00 :   251e3:  movb   $0x0,0x58(%rsp)
+    0.00 :   251e8:  incq   0x68(%rsp)
+    0.00 :   251ed:  mov    0x80(%rsp),%rcx
+    0.00 :   251f5:  mov    0x68(%rsp),%rax
+    0.00 :   251fa:  cmp    %rcx,%rax
+    0.00 :   251fd:  jne    2516b <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x174b>
+    0.00 :   25203:  mov    0x170(%rsp),%rcx
+    0.00 :   2520b:  mov    0x70(%rsp),%rsi
+    0.00 :   25210:  lea    0x160(%rsp),%rax
+    0.00 :   25218:  mov    %rax,0x150(%rsp)
+    0.00 :   25220:  mov    0x178(%rsp),%rdx
+    0.00 :   25228:  cmp    %rsi,%rcx
+    0.00 :   2522b:  je     25a5a <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x203a>
+    0.00 :   25231:  mov    0x180(%rsp),%rax
+    0.00 :   25239:  mov    %rcx,0x150(%rsp)
+    0.00 :   25241:  mov    %rax,0x160(%rsp)
+    0.00 :   25249:  mov    %rsi,%rax
+    0.00 :   2524c:  mov    0x60(%rsp),%rdi
+    0.00 :   25251:  mov    %rax,0x170(%rsp)
+    0.00 :   25259:  mov    %rdx,0x158(%rsp)
+    0.00 :   25261:  movq   $0x0,0x178(%rsp)
+    0.00 :   2526d:  movb   $0x0,0x180(%rsp)
+    0.00 :   25275:  call   b7d0 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()>
+    0.00 :   2527a:  mov    0x158(%rsp),%rax
+    0.00 :   25282:  mov    %rax,0x58(%rsp)
+    0.00 :   25287:  test   %rax,%rax
+    0.00 :   2528a:  je     24eb4 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1494>
+    0.00 :   25290:  mov    0x150(%rsp),%rax
+    0.00 :   25298:  mov    $0x5,%edi
+    0.00 :   2529d:  lea    0x12d4(%rip),%rsi        # 26578 <_IO_stdin_used+0x578>
+    0.00 :   252a4:  mov    %rax,0x60(%rsp)
+    0.00 :   252a9:  call   14f78 <katana::http::string_to_field(std::basic_string_view<char, std::char_traits<char> >)>
+    0.00 :   252ae:  mov    %eax,%r8d
+    0.00 :   252b1:  test   %ax,%ax
+    0.00 :   252b4:  jne    253c4 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x19a4>
+    0.00 :   252ba:  mov    0x478(%rsp),%rdi
+    0.00 :   252c2:  test   %rdi,%rdi
+    0.00 :   252c5:  je     25955 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1f35>
+    0.00 :   252cb:  lea    0x12a6(%rip),%rdx        # 26578 <_IO_stdin_used+0x578>
+    0.00 :   252d2:  mov    %rdi,0x68(%rsp)
+    0.00 :   252d7:  mov    $0x5,%esi
+    0.00 :   252dc:  call   ca00 <katana::monotonic_arena::allocate_string(std::basic_string_view<char, std::char_traits<char> >)>
+    0.00 :   252e1:  mov    0x58(%rsp),%rsi
+    0.00 :   252e6:  mov    0x60(%rsp),%rdx
+    0.00 :   252eb:  mov    0x68(%rsp),%rdi
+    0.00 :   252f0:  mov    %rax,0x50(%rsp)
+    0.00 :   252f5:  call   ca00 <katana::monotonic_arena::allocate_string(std::basic_string_view<char, std::char_traits<char> >)>
+    0.00 :   252fa:  cmpq   $0x0,0x50(%rsp)
+    0.00 :   25300:  je     24eb4 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1494>
+    0.00 :   25306:  test   %rax,%rax
+    0.00 :   25309:  mov    %rax,0x60(%rsp)
+    0.00 :   2530e:  je     24eb4 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1494>
+    0.00 :   25314:  lea    0x478(%rsp),%rdi
+    0.00 :   2531c:  lea    0x1255(%rip),%rdx        # 26578 <_IO_stdin_used+0x578>
+    0.00 :   25323:  mov    $0x5,%esi
+    0.00 :   25328:  call   110d8 <katana::http::headers_map::find_unknown_entry(std::basic_string_view<char, std::char_traits<char> >)>
+    0.00 :   2532d:  mov    0x60(%rsp),%r8
+    0.00 :   25332:  test   %rax,%rax
+    0.00 :   25335:  je     25870 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e50>
+    0.00 :   2533b:  movzwl 0x58(%rsp),%ecx
+    0.00 :   25340:  mov    %r8,0x10(%rax)
+    0.00 :   25344:  mov    %cx,0x18(%rax)
+    0.00 :   25348:  jmp    24eb4 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1494>
+    0.00 :   2534d:  lea    0xe0e(%rip),%rsi        # 26162 <_IO_stdin_used+0x162>
+    0.00 :   25354:  mov    $0x5,%edx
+    0.00 :   25359:  jmp    251d9 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x17b9>
+    0.00 :   2535e:  lea    0xe25(%rip),%rsi        # 2618a <_IO_stdin_used+0x18a>
+    0.00 :   25365:  mov    $0x6,%edx
+    0.00 :   2536a:  jmp    251d9 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x17b9>
+    0.00 :   2536f:  lea    0xde8(%rip),%rsi        # 2615e <_IO_stdin_used+0x15e>
+    0.00 :   25376:  mov    $0x3,%edx
+    0.00 :   2537b:  jmp    251d9 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x17b9>
+    0.00 :   25380:  lea    0xde6(%rip),%rsi        # 2616d <_IO_stdin_used+0x16d>
+    0.00 :   25387:  mov    $0x7,%edx
+    0.00 :   2538c:  jmp    251d9 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x17b9>
+    0.00 :   25391:  lea    0xdee(%rip),%rsi        # 26186 <_IO_stdin_used+0x186>
+    0.00 :   25398:  mov    $0x3,%edx
+    0.00 :   2539d:  jmp    251d9 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x17b9>
+    0.00 :   253a2:  lea    0xde8(%rip),%rsi        # 26191 <_IO_stdin_used+0x191>
+    0.00 :   253a9:  mov    $0x4,%edx
+    0.00 :   253ae:  jmp    251d9 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x17b9>
+    0.00 :   253b3:  lea    0x255f(%rip),%rsi        # 27919 <_IO_stdin_used+0x1919>
+    0.00 :   253ba:  mov    $0x7,%edx
+    0.00 :   253bf:  jmp    251d9 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x17b9>
+    0.00 :   253c4:  lea    -0x1(%r8),%eax
+    0.00 :   253c8:  cmp    $0x163,%ax
+    0.00 :   253cc:  ja     24eb4 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1494>
+    0.00 :   253d2:  mov    0x478(%rsp),%rdi
+    0.00 :   253da:  test   %rdi,%rdi
+    0.00 :   253dd:  je     25ddb <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x23bb>
+    0.00 :   253e3:  mov    0x58(%rsp),%rax
+    0.00 :   253e8:  mov    $0x1,%edx
+    0.00 :   253ed:  mov    %r8d,0x68(%rsp)
+    0.00 :   253f2:  lea    0x1(%rax),%rsi
+    0.00 :   253f6:  call   22df0 <katana::monotonic_arena::allocate(unsigned long, unsigned long)>
+    0.00 :   253fb:  mov    %rax,%r15
+    0.00 :   253fe:  test   %rax,%rax
+    0.00 :   25401:  je     24eb4 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1494>
+    0.00 :   25407:  mov    0x58(%rsp),%rdx
+    0.00 :   2540c:  mov    0x60(%rsp),%rsi
+    0.00 :   25411:  mov    %rax,%rdi
+    0.00 :   25414:  call   6870 <memcpy@plt>
+    0.00 :   25419:  mov    0x58(%rsp),%rax
+    0.00 :   2541e:  mov    0x68(%rsp),%r8d
+    0.00 :   25423:  movb   $0x0,(%r15,%rax,1)
+    0.00 :   25428:  movzwl 0x7b0(%rsp),%r10d
+    0.00 :   25431:  cmp    %r10w,%r8w
+    0.00 :   25435:  je     25dd1 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x23b1>
+    0.00 :   2543b:  movzwl 0x7c8(%rsp),%r9d
+    0.00 :   25444:  cmp    %r9w,%r8w
+    0.00 :   25448:  je     25dc4 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x23a4>
+    0.00 :   2544e:  movzwl 0x7e0(%rsp),%edi
+    0.00 :   25456:  cmp    %di,%r8w
+    0.00 :   2545a:  je     25db7 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2397>
+    0.00 :   25460:  movzwl 0x7f8(%rsp),%esi
+    0.00 :   25468:  cmp    %si,%r8w
+    0.00 :   2546c:  je     25daa <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x238a>
+    0.00 :   25472:  movzwl 0x810(%rsp),%ecx
+    0.00 :   2547a:  cmp    %cx,%r8w
+    0.00 :   2547e:  je     25d9d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x237d>
+    0.00 :   25484:  movzwl 0x828(%rsp),%r11d
+    0.00 :   2548d:  cmp    %r11w,%r8w
+    0.00 :   25491:  je     25d90 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2370>
+    0.00 :   25497:  movzwl 0x840(%rsp),%eax
+    0.00 :   2549f:  mov    %ax,0x60(%rsp)
+    0.00 :   254a4:  cmp    %ax,%r8w
+    0.00 :   254a8:  je     25d83 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2363>
+    0.00 :   254ae:  movzwl 0x858(%rsp),%eax
+    0.00 :   254b6:  mov    %ax,0x68(%rsp)
+    0.00 :   254bb:  cmp    %ax,%r8w
+    0.00 :   254bf:  je     25d76 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2356>
+    0.00 :   254c5:  movzwl 0x870(%rsp),%eax
+    0.00 :   254cd:  mov    %ax,0x70(%rsp)
+    0.00 :   254d2:  cmp    %ax,%r8w
+    0.00 :   254d6:  je     25d69 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2349>
+    0.00 :   254dc:  movzwl 0x888(%rsp),%eax
+    0.00 :   254e4:  mov    %ax,0x78(%rsp)
+    0.00 :   254e9:  cmp    %ax,%r8w
+    0.00 :   254ed:  je     25d5c <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x233c>
+    0.00 :   254f3:  movzwl 0x8a0(%rsp),%eax
+    0.00 :   254fb:  mov    %ax,0x7e(%rsp)
+    0.00 :   25500:  cmp    %ax,%r8w
+    0.00 :   25504:  je     25d4f <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x232f>
+    0.00 :   2550a:  movzwl 0x8b8(%rsp),%eax
+    0.00 :   25512:  mov    %ax,0x80(%rsp)
+    0.00 :   2551a:  cmp    %ax,%r8w
+    0.00 :   2551e:  je     25d42 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2322>
+    0.00 :   25524:  movzwl 0x8d0(%rsp),%eax
+    0.00 :   2552c:  mov    %ax,0x88(%rsp)
+    0.00 :   25534:  cmp    %ax,%r8w
+    0.00 :   25538:  je     25d35 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2315>
+    0.00 :   2553e:  movzwl 0x8e8(%rsp),%eax
+    0.00 :   25546:  mov    %ax,0x8a(%rsp)
+    0.00 :   2554e:  cmp    %ax,%r8w
+    0.00 :   25552:  je     25d28 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2308>
+    0.00 :   25558:  movzwl 0x900(%rsp),%eax
+    0.00 :   25560:  mov    %ax,0x8c(%rsp)
+    0.00 :   25568:  cmp    %ax,%r8w
+    0.00 :   2556c:  je     25d1b <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x22fb>
+    0.00 :   25572:  movzwl 0x918(%rsp),%eax
+    0.00 :   2557a:  mov    %ax,0x8e(%rsp)
+    0.00 :   25582:  cmp    %ax,%r8w
+    0.00 :   25586:  je     25b3a <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x211a>
+    0.00 :   2558c:  mov    0x930(%rsp),%rax
+    0.00 :   25594:  test   %rax,%rax
+    0.00 :   25597:  je     2567d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1c5d>
+    0.00 :   2559d:  mov    %rax,%rdx
+    0.00 :   255a0:  cmp    (%rdx),%r8w
+    0.00 :   255a4:  je     25b32 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2112>
+    0.00 :   255aa:  cmp    0x18(%rdx),%r8w
+    0.00 :   255af:  je     25b29 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2109>
+    0.00 :   255b5:  cmp    0x30(%rdx),%r8w
+    0.00 :   255ba:  je     25b20 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2100>
+    0.00 :   255c0:  cmp    0x48(%rdx),%r8w
+    0.00 :   255c5:  je     25b17 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x20f7>
+    0.00 :   255cb:  cmp    0x60(%rdx),%r8w
+    0.00 :   255d0:  je     25b0e <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x20ee>
+    0.00 :   255d6:  cmp    0x78(%rdx),%r8w
+    0.00 :   255db:  je     25b05 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x20e5>
+    0.00 :   255e1:  cmp    0x90(%rdx),%r8w
+    0.00 :   255e9:  je     25af9 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x20d9>
+    0.00 :   255ef:  cmp    0xa8(%rdx),%r8w
+    0.00 :   255f7:  je     25aed <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x20cd>
+    0.00 :   255fd:  cmp    0xc0(%rdx),%r8w
+    0.00 :   25605:  je     25ae1 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x20c1>
+    0.00 :   2560b:  cmp    0xd8(%rdx),%r8w
+    0.00 :   25613:  je     25ad5 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x20b5>
+    0.00 :   25619:  cmp    0xf0(%rdx),%r8w
+    0.00 :   25621:  je     25ac9 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x20a9>
+    0.00 :   25627:  cmp    0x108(%rdx),%r8w
+    0.00 :   2562f:  je     25abd <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x209d>
+    0.00 :   25635:  cmp    0x120(%rdx),%r8w
+    0.00 :   2563d:  je     25ab1 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2091>
+    0.00 :   25643:  cmp    0x138(%rdx),%r8w
+    0.00 :   2564b:  je     25aa5 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2085>
+    0.00 :   25651:  cmp    0x150(%rdx),%r8w
+    0.00 :   25659:  je     25867 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e47>
+    0.00 :   2565f:  cmp    0x168(%rdx),%r8w
+    0.00 :   25667:  je     2584a <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e2a>
+    0.00 :   2566d:  mov    0x180(%rdx),%rdx
+    0.00 :   25674:  test   %rdx,%rdx
+    0.00 :   25677:  jne    255a0 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1b80>
+    0.00 :   2567d:  test   %r10w,%r10w
+    0.00 :   25681:  je     25d11 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x22f1>
+    0.00 :   25687:  test   %r9w,%r9w
+    0.00 :   2568b:  je     25d04 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x22e4>
+    0.00 :   25691:  test   %di,%di
+    0.00 :   25694:  je     25cf7 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x22d7>
+    0.00 :   2569a:  test   %si,%si
+    0.00 :   2569d:  je     25cea <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x22ca>
+    0.00 :   256a3:  test   %cx,%cx
+    0.00 :   256a6:  je     25cdd <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x22bd>
+    0.00 :   256ac:  test   %r11w,%r11w
+    0.00 :   256b0:  je     25cd0 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x22b0>
+    0.00 :   256b6:  cmpw   $0x0,0x60(%rsp)
+    0.00 :   256bc:  je     25cc3 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x22a3>
+    0.00 :   256c2:  cmpw   $0x0,0x68(%rsp)
+    0.00 :   256c8:  je     25cb6 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2296>
+    0.00 :   256ce:  cmpw   $0x0,0x70(%rsp)
+    0.00 :   256d4:  je     25ca9 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2289>
+    0.00 :   256da:  cmpw   $0x0,0x78(%rsp)
+    0.00 :   256e0:  je     25c9c <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x227c>
+    0.00 :   256e6:  cmpw   $0x0,0x7e(%rsp)
+    0.00 :   256ec:  je     25c8f <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x226f>
+    0.00 :   256f2:  cmpw   $0x0,0x80(%rsp)
+    0.00 :   256fb:  je     25c82 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2262>
+    0.00 :   25701:  cmpw   $0x0,0x88(%rsp)
+    0.00 :   2570a:  je     25c75 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2255>
+    0.00 :   25710:  cmpw   $0x0,0x8a(%rsp)
+    0.00 :   25719:  je     25c68 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2248>
+    0.00 :   2571f:  cmpw   $0x0,0x8c(%rsp)
+    0.00 :   25728:  je     25c5b <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x223b>
+    0.00 :   2572e:  cmpw   $0x0,0x8e(%rsp)
+    0.00 :   25737:  je     25c4e <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x222e>
+    0.00 :   2573d:  test   %rax,%rax
+    0.00 :   25740:  je     25b5a <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x213a>
+    0.00 :   25746:  cmpw   $0x0,(%rax)
+    0.00 :   2574a:  je     25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25750:  cmpw   $0x0,0x18(%rax)
+    0.00 :   25755:  je     25c1f <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x21ff>
+    0.00 :   2575b:  cmpw   $0x0,0x30(%rax)
+    0.00 :   25760:  je     25c16 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x21f6>
+    0.00 :   25766:  cmpw   $0x0,0x48(%rax)
+    0.00 :   2576b:  je     25c45 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2225>
+    0.00 :   25771:  cmpw   $0x0,0x60(%rax)
+    0.00 :   25776:  je     25c3c <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x221c>
+    0.00 :   2577c:  cmpw   $0x0,0x78(%rax)
+    0.00 :   25781:  je     25c33 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2213>
+    0.00 :   25787:  cmpw   $0x0,0x90(%rax)
+    0.00 :   2578f:  je     25c28 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2208>
+    0.00 :   25795:  cmpw   $0x0,0xa8(%rax)
+    0.00 :   2579d:  je     25c0b <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x21eb>
+    0.00 :   257a3:  cmpw   $0x0,0xc0(%rax)
+    0.00 :   257ab:  je     25c00 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x21e0>
+    0.00 :   257b1:  cmpw   $0x0,0xd8(%rax)
+    0.00 :   257b9:  je     25bf5 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x21d5>
+    0.00 :   257bf:  cmpw   $0x0,0xf0(%rax)
+    0.00 :   257c7:  je     25bea <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x21ca>
+    0.00 :   257cd:  cmpw   $0x0,0x108(%rax)
+    0.00 :   257d5:  je     25bc5 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x21a5>
+    0.00 :   257db:  cmpw   $0x0,0x120(%rax)
+    0.00 :   257e3:  je     25bbd <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x219d>
+    0.00 :   257e9:  cmpw   $0x0,0x138(%rax)
+    0.00 :   257f1:  je     25bcd <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x21ad>
+    0.00 :   257f7:  cmpw   $0x0,0x150(%rax)
+    0.00 :   257ff:  je     25bb5 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2195>
+    0.00 :   25805:  cmpw   $0x0,0x168(%rax)
+    0.00 :   2580d:  je     25b47 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2127>
+    0.00 :   25813:  mov    0x180(%rax),%rax
+    0.00 :   2581a:  jmp    2573d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1d1d>
+    0.00 :   2581f:  nop
+    0.00 :   25820:  mov    %r15,%rcx
+    0.00 :   25823:  call   6b50 <__memcpy_chk@plt>
+    0.00 :   25828:  mov    %rax,%rdi
+    0.00 :   2582b:  jmp    25037 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1617>
+    0.00 :   25830:  lock add %r14,0x88(%rax)
+    0.00 :   25838:  jmp    25090 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1670>
+    0.00 :   2583d:  lock incq 0x80(%rax)
+    0.00 :   25845:  jmp    25087 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1667>
+    0.00 :   2584a:  lea    0x168(%rdx),%rax
+    0.00 :   25851:  movzwl 0x58(%rsp),%ecx
+    0.00 :   25856:  mov    %r8w,(%rax)
+    0.00 :   2585a:  mov    %r15,0x8(%rax)
+    0.00 :   2585e:  mov    %cx,0x10(%rax)
+    0.00 :   25862:  jmp    24eb4 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1494>
+    0.00 :   25867:  lea    0x150(%rdx),%rax
+    0.00 :   2586e:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25870:  cmpq   $0x0,0x940(%rsp)
+    0.00 :   25879:  je     25972 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1f52>
+    0.00 :   2587f:  cmpq   $0x0,0x960(%rsp)
+    0.00 :   25888:  je     25a4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x202d>
+    0.00 :   2588e:  cmpq   $0x0,0x980(%rsp)
+    0.00 :   25897:  je     25a93 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2073>
+    0.00 :   2589d:  cmpq   $0x0,0x9a0(%rsp)
+    0.00 :   258a6:  je     25a86 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2066>
+    0.00 :   258ac:  cmpq   $0x0,0x9c0(%rsp)
+    0.00 :   258b5:  je     25a79 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2059>
+    0.00 :   258bb:  cmpq   $0x0,0x9e0(%rsp)
+    0.00 :   258c4:  je     25a6c <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x204c>
+    0.00 :   258ca:  cmpq   $0x0,0xa00(%rsp)
+    0.00 :   258d3:  je     25a2e <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x200e>
+    0.00 :   258d9:  cmpq   $0x0,0xa20(%rsp)
+    0.00 :   258e2:  je     25a21 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2001>
+    0.00 :   258e8:  mov    0xa40(%rsp),%r15
+    0.00 :   258f0:  test   %r15,%r15
+    0.00 :   258f3:  je     259c6 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1fa6>
+    0.00 :   258f9:  cmpq   $0x0,(%r15)
+    0.00 :   258fd:  je     25972 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1f52>
+    0.00 :   258ff:  cmpq   $0x0,0x20(%r15)
+    0.00 :   25904:  je     259c0 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1fa0>
+    0.00 :   2590a:  cmpq   $0x0,0x40(%r15)
+    0.00 :   2590f:  je     259ba <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1f9a>
+    0.00 :   25915:  cmpq   $0x0,0x60(%r15)
+    0.00 :   2591a:  je     259b4 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1f94>
+    0.00 :   25920:  cmpq   $0x0,0x80(%r15)
+    0.00 :   25928:  je     259ae <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1f8e>
+    0.00 :   2592e:  cmpq   $0x0,0xa0(%r15)
+    0.00 :   25936:  je     259a5 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1f85>
+    0.00 :   25938:  cmpq   $0x0,0xc0(%r15)
+    0.00 :   25940:  je     2599c <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1f7c>
+    0.00 :   25942:  cmpq   $0x0,0xe0(%r15)
+    0.00 :   2594a:  je     2596b <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1f4b>
+    0.00 :   2594c:  mov    0x100(%r15),%r15
+    0.00 :   25953:  jmp    258f0 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1ed0>
+    0.00 :   25955:  mov    0x480(%rsp),%rdi
+    0.00 :   2595d:  test   %rdi,%rdi
+    0.00 :   25960:  jne    252cb <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x18ab>
+    0.00 :   25966:  jmp    24eb4 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1494>
+    0.00 :   2596b:  add    $0xe0,%r15
+    0.00 :   25972:  mov    0x50(%rsp),%rax
+    0.00 :   25977:  movw   $0x5,0x8(%r15)
+    0.00 :   2597e:  mov    %r8,0x10(%r15)
+    0.00 :   25982:  mov    %rax,(%r15)
+    0.00 :   25985:  movzwl 0x58(%rsp),%eax
+    0.00 :   2598a:  mov    %ax,0x18(%r15)
+    0.00 :   2598f:  incq   0xa48(%rsp)
+    0.00 :   25997:  jmp    24eb4 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1494>
+    0.00 :   2599c:  add    $0xc0,%r15
+    0.00 :   259a3:  jmp    25972 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1f52>
+    0.00 :   259a5:  add    $0xa0,%r15
+    0.00 :   259ac:  jmp    25972 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1f52>
+    0.00 :   259ae:  sub    $0xffffffffffffff80,%r15
+    0.00 :   259b2:  jmp    25972 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1f52>
+    0.00 :   259b4:  add    $0x60,%r15
+    0.00 :   259b8:  jmp    25972 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1f52>
+    0.00 :   259ba:  add    $0x40,%r15
+    0.00 :   259be:  jmp    25972 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1f52>
+    0.00 :   259c0:  add    $0x20,%r15
+    0.00 :   259c4:  jmp    25972 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1f52>
+    0.00 :   259c6:  mov    0x478(%rsp),%rdi
+    0.00 :   259ce:  test   %rdi,%rdi
+    0.00 :   259d1:  je     25a3b <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x201b>
+    0.00 :   259d3:  mov    $0x8,%edx
+    0.00 :   259d8:  mov    %r8,0x60(%rsp)
+    0.00 :   259dd:  mov    $0x108,%esi
+    0.00 :   259e2:  call   22df0 <katana::monotonic_arena::allocate(unsigned long, unsigned long)>
+    0.00 :   259e7:  mov    %rax,%r15
+    0.00 :   259ea:  test   %rax,%rax
+    0.00 :   259ed:  je     24eb4 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1494>
+    0.00 :   259f3:  xor    %eax,%eax
+    0.00 :   259f5:  mov    $0x21,%ecx
+    0.00 :   259fa:  mov    %r15,%rdi
+    0.00 :   259fd:  mov    0x60(%rsp),%r8
+    0.00 :   25a02:  rep stos %rax,%es:(%rdi)
+    0.00 :   25a05:  mov    0xa40(%rsp),%rax
+    0.00 :   25a0d:  mov    %rax,0x100(%r15)
+    0.00 :   25a14:  mov    %r15,0xa40(%rsp)
+    0.00 :   25a1c:  jmp    25972 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1f52>
+    0.00 :   25a21:  lea    0xa20(%rsp),%r15
+    0.00 :   25a29:  jmp    25972 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1f52>
+    0.00 :   25a2e:  lea    0xa00(%rsp),%r15
+    0.00 :   25a36:  jmp    25972 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1f52>
+    0.00 :   25a3b:  mov    0x480(%rsp),%rdi
+    0.00 :   25a43:  test   %rdi,%rdi
+    0.00 :   25a46:  jne    259d3 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1fb3>
+    0.00 :   25a48:  jmp    24eb4 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1494>
+    0.00 :   25a4d:  lea    0x960(%rsp),%r15
+    0.00 :   25a55:  jmp    25972 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1f52>
+    0.00 :   25a5a:  mov    %rax,%rdi
+    0.00 :   25a5d:  lea    0x1(%rdx),%ecx
+    0.00 :   25a60:  mov    0x70(%rsp),%rax
+    0.00 :   25a65:  rep movsb %ds:(%rsi),%es:(%rdi)
+    0.00 :   25a67:  jmp    2524c <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x182c>
+    0.00 :   25a6c:  lea    0x9e0(%rsp),%r15
+    0.00 :   25a74:  jmp    25972 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1f52>
+    0.00 :   25a79:  lea    0x9c0(%rsp),%r15
+    0.00 :   25a81:  jmp    25972 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1f52>
+    0.00 :   25a86:  lea    0x9a0(%rsp),%r15
+    0.00 :   25a8e:  jmp    25972 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1f52>
+    0.00 :   25a93:  lea    0x980(%rsp),%r15
+    0.00 :   25a9b:  jmp    25972 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1f52>
+    0.00 :   25aa0:  call   6950 <__stack_chk_fail@plt>
+    0.00 :   25aa5:  lea    0x138(%rdx),%rax
+    0.00 :   25aac:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25ab1:  lea    0x120(%rdx),%rax
+    0.00 :   25ab8:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25abd:  lea    0x108(%rdx),%rax
+    0.00 :   25ac4:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25ac9:  lea    0xf0(%rdx),%rax
+    0.00 :   25ad0:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25ad5:  lea    0xd8(%rdx),%rax
+    0.00 :   25adc:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25ae1:  lea    0xc0(%rdx),%rax
+    0.00 :   25ae8:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25aed:  lea    0xa8(%rdx),%rax
+    0.00 :   25af4:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25af9:  lea    0x90(%rdx),%rax
+    0.00 :   25b00:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25b05:  lea    0x78(%rdx),%rax
+    0.00 :   25b09:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25b0e:  lea    0x60(%rdx),%rax
+    0.00 :   25b12:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25b17:  lea    0x48(%rdx),%rax
+    0.00 :   25b1b:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25b20:  lea    0x30(%rdx),%rax
+    0.00 :   25b24:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25b29:  lea    0x18(%rdx),%rax
+    0.00 :   25b2d:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25b32:  mov    %rdx,%rax
+    0.00 :   25b35:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25b3a:  lea    0x918(%rsp),%rax
+    0.00 :   25b42:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25b47:  add    $0x168,%rax
+    0.00 :   25b4d:  incq   0x938(%rsp)
+    0.00 :   25b55:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25b5a:  mov    0x478(%rsp),%rdi
+    0.00 :   25b62:  test   %rdi,%rdi
+    0.00 :   25b65:  je     25bd8 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x21b8>
+    0.00 :   25b67:  mov    $0x8,%edx
+    0.00 :   25b6c:  mov    %r8d,0x50(%rsp)
+    0.00 :   25b71:  mov    $0x188,%esi
+    0.00 :   25b76:  call   22df0 <katana::monotonic_arena::allocate(unsigned long, unsigned long)>
+    0.00 :   25b7b:  mov    %rax,%rdx
+    0.00 :   25b7e:  test   %rax,%rax
+    0.00 :   25b81:  je     24eb4 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1494>
+    0.00 :   25b87:  xor    %eax,%eax
+    0.00 :   25b89:  mov    $0x31,%ecx
+    0.00 :   25b8e:  mov    %rdx,%rdi
+    0.00 :   25b91:  mov    0x50(%rsp),%r8d
+    0.00 :   25b96:  rep stos %rax,%es:(%rdi)
+    0.00 :   25b99:  mov    0x930(%rsp),%rax
+    0.00 :   25ba1:  mov    %rax,0x180(%rdx)
+    0.00 :   25ba8:  mov    %rdx,0x930(%rsp)
+    0.00 :   25bb0:  mov    %rdx,%rax
+    0.00 :   25bb3:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25bb5:  add    $0x150,%rax
+    0.00 :   25bbb:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25bbd:  add    $0x120,%rax
+    0.00 :   25bc3:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25bc5:  add    $0x108,%rax
+    0.00 :   25bcb:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25bcd:  add    $0x138,%rax
+    0.00 :   25bd3:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25bd8:  mov    0x480(%rsp),%rdi
+    0.00 :   25be0:  test   %rdi,%rdi
+    0.00 :   25be3:  jne    25b67 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x2147>
+    0.00 :   25be5:  jmp    24eb4 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1494>
+    0.00 :   25bea:  add    $0xf0,%rax
+    0.00 :   25bf0:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25bf5:  add    $0xd8,%rax
+    0.00 :   25bfb:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25c00:  add    $0xc0,%rax
+    0.00 :   25c06:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25c0b:  add    $0xa8,%rax
+    0.00 :   25c11:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25c16:  add    $0x30,%rax
+    0.00 :   25c1a:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25c1f:  add    $0x18,%rax
+    0.00 :   25c23:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25c28:  add    $0x90,%rax
+    0.00 :   25c2e:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25c33:  add    $0x78,%rax
+    0.00 :   25c37:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25c3c:  add    $0x60,%rax
+    0.00 :   25c40:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25c45:  add    $0x48,%rax
+    0.00 :   25c49:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25c4e:  lea    0x918(%rsp),%rax
+    0.00 :   25c56:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25c5b:  lea    0x900(%rsp),%rax
+    0.00 :   25c63:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25c68:  lea    0x8e8(%rsp),%rax
+    0.00 :   25c70:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25c75:  lea    0x8d0(%rsp),%rax
+    0.00 :   25c7d:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25c82:  lea    0x8b8(%rsp),%rax
+    0.00 :   25c8a:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25c8f:  lea    0x8a0(%rsp),%rax
+    0.00 :   25c97:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25c9c:  lea    0x888(%rsp),%rax
+    0.00 :   25ca4:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25ca9:  lea    0x870(%rsp),%rax
+    0.00 :   25cb1:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25cb6:  lea    0x858(%rsp),%rax
+    0.00 :   25cbe:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25cc3:  lea    0x840(%rsp),%rax
+    0.00 :   25ccb:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25cd0:  lea    0x828(%rsp),%rax
+    0.00 :   25cd8:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25cdd:  lea    0x810(%rsp),%rax
+    0.00 :   25ce5:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25cea:  lea    0x7f8(%rsp),%rax
+    0.00 :   25cf2:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25cf7:  lea    0x7e0(%rsp),%rax
+    0.00 :   25cff:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25d04:  lea    0x7c8(%rsp),%rax
+    0.00 :   25d0c:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25d11:  mov    0x50(%rsp),%rax
+    0.00 :   25d16:  jmp    25b4d <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x212d>
+    0.00 :   25d1b:  lea    0x900(%rsp),%rax
+    0.00 :   25d23:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25d28:  lea    0x8e8(%rsp),%rax
+    0.00 :   25d30:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25d35:  lea    0x8d0(%rsp),%rax
+    0.00 :   25d3d:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25d42:  lea    0x8b8(%rsp),%rax
+    0.00 :   25d4a:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25d4f:  lea    0x8a0(%rsp),%rax
+    0.00 :   25d57:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25d5c:  lea    0x888(%rsp),%rax
+    0.00 :   25d64:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25d69:  lea    0x870(%rsp),%rax
+    0.00 :   25d71:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25d76:  lea    0x858(%rsp),%rax
+    0.00 :   25d7e:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25d83:  lea    0x840(%rsp),%rax
+    0.00 :   25d8b:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25d90:  lea    0x828(%rsp),%rax
+    0.00 :   25d98:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25d9d:  lea    0x810(%rsp),%rax
+    0.00 :   25da5:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25daa:  lea    0x7f8(%rsp),%rax
+    0.00 :   25db2:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25db7:  lea    0x7e0(%rsp),%rax
+    0.00 :   25dbf:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25dc4:  lea    0x7c8(%rsp),%rax
+    0.00 :   25dcc:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25dd1:  mov    0x50(%rsp),%rax
+    0.00 :   25dd6:  jmp    25851 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1e31>
+    0.00 :   25ddb:  mov    0x480(%rsp),%rdi
+    0.00 :   25de3:  test   %rdi,%rdi
+    0.00 :   25de6:  jne    253e3 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x19c3>
+    0.00 :   25dec:  jmp    24eb4 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]+0x1494>
+    0.00 :   25df1:  endbr64
+    0.00 :   25df5:  mov    %rax,%rbx
+    0.00 :   25df8:  jmp    7792 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0] [clone .cold]>
+    0.00 :   25dfd:  endbr64
+    0.00 :   25e01:  mov    %rax,%rbx
+    0.00 :   25e04:  vzeroupper
+    0.00 :   25e07:  jmp    779f <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0] [clone .cold]+0xd>
+    0.00 :   25e0c:  endbr64
+    0.00 :   25e10:  mov    %rax,%rbx
+    0.00 :   25e13:  jmp    77c4 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0] [clone .cold]+0x32>
+    0.00 :   25e18:  endbr64
+    0.00 :   25e1c:  mov    %rax,%rbx
+    0.00 :   25e1f:  jmp    77d3 <katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0] [clone .cold]+0x41>

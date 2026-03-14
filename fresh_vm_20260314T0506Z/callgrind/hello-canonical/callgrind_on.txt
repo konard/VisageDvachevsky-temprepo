@@ -1,2 +1,0 @@
-Error: Callgrind task with PID/name '2365' not detected.
-See '/usr/bin/callgrind_control -h' for help.

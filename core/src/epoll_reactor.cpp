@@ -1,0 +1,779 @@
+#include "katana/core/epoll_reactor.hpp"
+#include "katana/core/detail/syscall_metrics.hpp"
+#include "katana/core/scoped_fd.hpp"
+
+#include <algorithm>
+#include <cerrno>
+#include <chrono>
+#include <cstring>
+#include <iostream>
+#include <sys/epoll.h>
+#include <sys/eventfd.h>
+#include <system_error>
+#include <unistd.h>
+
+namespace katana {
+
+namespace {
+
+constexpr uint32_t to_epoll_events(event_type events) noexcept {
+    uint32_t result = 0;
+
+    if (has_flag(events, event_type::readable)) {
+        result |= EPOLLIN;
+    }
+    if (has_flag(events, event_type::writable)) {
+        result |= EPOLLOUT;
+    }
+    if (has_flag(events, event_type::edge_triggered)) {
+        result |= EPOLLET;
+    }
+    if (has_flag(events, event_type::oneshot)) {
+        result |= EPOLLONESHOT;
+    }
+
+    return result;
+}
+
+constexpr event_type from_epoll_events(uint32_t events) noexcept {
+    event_type result = event_type::none;
+
+    if (events & EPOLLIN) {
+        result = result | event_type::readable;
+    }
+    if (events & EPOLLOUT) {
+        result = result | event_type::writable;
+    }
+    if (events & EPOLLERR) {
+        result = result | event_type::error;
+    }
+    if (events & EPOLLHUP) {
+        result = result | event_type::hup;
+    }
+
+    return result;
+}
+
+} // namespace
+
+epoll_reactor::epoll_reactor(int32_t max_events, size_t max_pending_tasks)
+    : epoll_fd_(-1), wakeup_fd_(-1), max_events_(max_events), running_(false),
+      graceful_shutdown_(false), pending_tasks_(max_pending_tasks),
+      pending_timers_(max_pending_tasks), metrics_enabled_(true),
+      exception_handler_([](const exception_context& ctx) {
+          std::cerr << "[reactor] Exception in " << ctx.location;
+          if (ctx.fd >= 0) {
+              std::cerr << " (fd=" << ctx.fd << ")";
+          }
+          std::cerr << ": ";
+          try {
+              if (ctx.exception) {
+                  std::rethrow_exception(ctx.exception);
+              }
+          } catch (const std::exception& e) {
+              std::cerr << e.what();
+          } catch (...) {
+              std::cerr << "unknown exception";
+          }
+          std::cerr << "\n";
+      }) {
+    // Use RAII wrappers for exception safety during construction
+    scoped_fd epoll_fd(epoll_create1(EPOLL_CLOEXEC));
+    if (!epoll_fd.is_valid()) {
+        throw std::system_error(errno, std::system_category(), "epoll_create1 failed");
+    }
+
+    scoped_fd wakeup_fd(eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC));
+    if (!wakeup_fd.is_valid()) {
+        throw std::system_error(errno, std::system_category(), "eventfd failed");
+    }
+
+    epoll_event ev{};
+    ev.events = EPOLLIN | EPOLLET;
+    ev.data.fd = wakeup_fd.get();
+    detail::syscall_metrics_registry::instance().note_epoll_ctl_add();
+    if (epoll_ctl(epoll_fd.get(), EPOLL_CTL_ADD, wakeup_fd.get(), &ev) < 0) {
+        throw std::system_error(errno, std::system_category(), "failed to add wakeup fd to epoll");
+    }
+
+    fd_states_.reserve(65536);
+    events_buffer_.resize(static_cast<size_t>(max_events_));
+
+    // Everything succeeded, release ownership from RAII wrappers
+    epoll_fd_ = epoll_fd.release();
+    wakeup_fd_ = wakeup_fd.release();
+}
+
+epoll_reactor::~epoll_reactor() noexcept {
+    if (wakeup_fd_ >= 0) {
+        close(wakeup_fd_);
+    }
+    if (epoll_fd_ >= 0) {
+        close(epoll_fd_);
+    }
+}
+
+result<void> epoll_reactor::run() {
+    if (running_.exchange(true)) {
+        return std::unexpected(make_error_code(error_code::reactor_stopped));
+    }
+
+    while (running_.load(std::memory_order_relaxed)) {
+        const auto loop_now = std::chrono::steady_clock::now();
+        process_wheel_timer();
+        process_timers(loop_now);
+        process_tasks();
+
+        if (graceful_shutdown_.load(std::memory_order_relaxed)) {
+            auto now = loop_now;
+            bool has_active_fds = false;
+            for (const auto& state : fd_states_) {
+                if (state.callback) {
+                    has_active_fds = true;
+                    break;
+                }
+            }
+            if (!has_active_fds) {
+                running_ = false;
+                break;
+            }
+            if (now >= graceful_shutdown_deadline_) {
+                for (size_t fd = 0; fd < fd_states_.size(); ++fd) {
+                    if (!fd_states_[fd].callback)
+                        continue;
+                    try {
+                        fd_states_[fd].callback(event_type::error);
+                    } catch (...) {
+                        handle_exception("forced_shutdown_callback",
+                                         std::current_exception(),
+                                         static_cast<int32_t>(fd));
+                    }
+                    if (fd_states_[fd].callback) {
+                        detail::syscall_metrics_registry::instance().note_epoll_ctl_del();
+                        epoll_ctl(epoll_fd_, EPOLL_CTL_DEL, static_cast<int32_t>(fd), nullptr);
+                        close(static_cast<int32_t>(fd));
+                        fd_states_[fd] = fd_state{};
+                    }
+                }
+                running_ = false;
+                break;
+            }
+        }
+
+        int timeout_ms = calculate_timeout(loop_now);
+        auto res = process_events(timeout_ms);
+        if (!res) {
+            running_ = false;
+            return res;
+        }
+
+        flush_deferred_closes();
+    }
+
+    flush_deferred_closes();
+    return {};
+}
+
+void epoll_reactor::stop() {
+    running_.store(false, std::memory_order_relaxed);
+    uint64_t val = 1;
+    ssize_t ret;
+    do {
+        ret = write(wakeup_fd_, &val, sizeof(val));
+    } while (ret < 0 && errno == EINTR);
+}
+
+void epoll_reactor::graceful_stop(std::chrono::milliseconds timeout) {
+    graceful_shutdown_.store(true, std::memory_order_relaxed);
+    graceful_shutdown_deadline_ = std::chrono::steady_clock::now() + timeout;
+    uint64_t val = 1;
+    ssize_t ret;
+    do {
+        ret = write(wakeup_fd_, &val, sizeof(val));
+    } while (ret < 0 && errno == EINTR);
+}
+
+result<void> epoll_reactor::register_fd(int32_t fd, event_type events, event_callback callback) {
+    if (fd < 0) {
+        return std::unexpected(make_error_code(error_code::invalid_fd));
+    }
+
+    auto ensure = ensure_fd_capacity(fd);
+    if (!ensure) {
+        return ensure;
+    }
+
+    epoll_event ev{};
+    ev.events = to_epoll_events(events);
+    ev.data.fd = fd;
+
+    detail::syscall_metrics_registry::instance().note_epoll_ctl_add();
+    if (epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, fd, &ev) < 0) {
+        return std::unexpected(std::error_code(errno, std::system_category()));
+    }
+
+    auto& state = fd_states_[static_cast<size_t>(fd)];
+    state.callback = std::move(callback);
+    state.events = events;
+    state.timeouts = {};
+    state.timeout_id = 0;
+    state.has_timeout = false;
+    state.last_activity = std::chrono::steady_clock::now();
+    state.timeout_interval = std::chrono::milliseconds{0};
+
+    active_fds_.fetch_add(1, std::memory_order_relaxed);
+    return {};
+}
+
+result<void> epoll_reactor::register_fd_with_timeout(int32_t fd,
+                                                     event_type events,
+                                                     event_callback callback,
+                                                     const timeout_config& config) {
+    if (fd < 0) {
+        return std::unexpected(make_error_code(error_code::invalid_fd));
+    }
+
+    auto ensure = ensure_fd_capacity(fd);
+    if (!ensure) {
+        return ensure;
+    }
+
+    fd_state state{};
+    state.callback = std::move(callback);
+    state.events = events;
+    state.timeouts = config;
+    state.timeout_id = 0;
+    state.has_timeout = true;
+    state.timeout_interval = fd_timeout_for(state);
+    state.last_activity = std::chrono::steady_clock::now();
+    schedule_fd_timeout(fd, state);
+
+    epoll_event ev{};
+    ev.events = to_epoll_events(events);
+    ev.data.fd = fd;
+
+    detail::syscall_metrics_registry::instance().note_epoll_ctl_add();
+    if (epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, fd, &ev) < 0) {
+        cancel_fd_timeout(state);
+        return std::unexpected(std::error_code(errno, std::system_category()));
+    }
+
+    fd_states_[static_cast<size_t>(fd)] = std::move(state);
+    active_fds_.fetch_add(1, std::memory_order_relaxed);
+    return {};
+}
+
+result<void> epoll_reactor::modify_fd(int32_t fd, event_type events) {
+    if (fd < 0 || static_cast<size_t>(fd) >= fd_states_.size() ||
+        !fd_states_[static_cast<size_t>(fd)].callback) {
+        return std::unexpected(make_error_code(error_code::invalid_fd));
+    }
+
+    epoll_event ev{};
+    ev.events = to_epoll_events(events);
+    ev.data.fd = fd;
+
+    detail::syscall_metrics_registry::instance().note_epoll_ctl_mod();
+    if (epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, fd, &ev) < 0) {
+        return std::unexpected(std::error_code(errno, std::system_category()));
+    }
+
+    auto& state = fd_states_[static_cast<size_t>(fd)];
+    state.events = events;
+    if (state.has_timeout) {
+        cancel_fd_timeout(state);
+        schedule_fd_timeout(fd, state);
+    }
+    return {};
+}
+
+result<void> epoll_reactor::unregister_fd(int32_t fd) {
+    if (fd < 0 || static_cast<size_t>(fd) >= fd_states_.size() ||
+        !fd_states_[static_cast<size_t>(fd)].callback) {
+        return std::unexpected(make_error_code(error_code::invalid_fd));
+    }
+
+    cancel_fd_timeout(fd_states_[static_cast<size_t>(fd)]);
+
+    detail::syscall_metrics_registry::instance().note_epoll_ctl_del();
+    if (epoll_ctl(epoll_fd_, EPOLL_CTL_DEL, fd, nullptr) < 0) {
+        return std::unexpected(std::error_code(errno, std::system_category()));
+    }
+
+    fd_states_[static_cast<size_t>(fd)] = fd_state{};
+    active_fds_.fetch_sub(1, std::memory_order_relaxed);
+    return {};
+}
+
+void epoll_reactor::refresh_fd_timeout(int32_t fd) {
+    if (fd >= 0 && static_cast<size_t>(fd) < fd_states_.size() &&
+        fd_states_[static_cast<size_t>(fd)].has_timeout) {
+        auto& state = fd_states_[static_cast<size_t>(fd)];
+        state.last_activity = std::chrono::steady_clock::now();
+    }
+}
+
+bool epoll_reactor::schedule(task_fn task) {
+    if (!pending_tasks_.try_push(std::move(task))) {
+        if (metrics_enabled_) {
+            metrics_.tasks_rejected.fetch_add(1, std::memory_order_relaxed);
+        }
+        return false;
+    }
+    if (metrics_enabled_) {
+        metrics_.tasks_scheduled.fetch_add(1, std::memory_order_relaxed);
+    }
+    uint32_t prev = pending_count_.fetch_add(1, std::memory_order_relaxed);
+
+    if (prev == 0) {
+        bool expected = false;
+        if (needs_wakeup_.compare_exchange_strong(expected, true, std::memory_order_acq_rel)) {
+            uint64_t val = 1;
+            ssize_t ret;
+            do {
+                ret = write(wakeup_fd_, &val, sizeof(val));
+            } while (ret < 0 && errno == EINTR);
+
+            if (ret < 0 && errno != EAGAIN) {
+                handle_exception("schedule_wakeup",
+                                 std::make_exception_ptr(std::system_error(
+                                     errno, std::system_category(), "eventfd write failed")));
+            }
+        }
+    }
+
+    return true;
+}
+
+bool epoll_reactor::schedule_after(std::chrono::milliseconds delay, task_fn task) {
+    auto deadline = std::chrono::steady_clock::now() + delay;
+    if (!pending_timers_.try_push(timer_entry{deadline, std::move(task)})) {
+        if (metrics_enabled_) {
+            metrics_.tasks_rejected.fetch_add(1, std::memory_order_relaxed);
+        }
+        return false;
+    }
+    if (metrics_enabled_) {
+        metrics_.tasks_scheduled.fetch_add(1, std::memory_order_relaxed);
+    }
+    timeout_dirty_.store(true, std::memory_order_relaxed);
+
+    uint64_t val = 1;
+    ssize_t ret;
+    do {
+        ret = write(wakeup_fd_, &val, sizeof(val));
+    } while (ret < 0 && errno == EINTR);
+
+    if (ret < 0 && errno != EAGAIN) {
+        handle_exception("schedule_timer_wakeup",
+                         std::make_exception_ptr(std::system_error(
+                             errno, std::system_category(), "eventfd write failed")));
+    }
+
+    return true;
+}
+
+result<void> epoll_reactor::process_events(int32_t timeout_ms) {
+    int32_t nfds = epoll_wait(epoll_fd_, events_buffer_.data(), max_events_, timeout_ms);
+    detail::syscall_metrics_registry::instance().note_epoll_wait(nfds);
+
+    if (nfds < 0) {
+        if (errno == EINTR) {
+            return {};
+        }
+        return std::unexpected(std::error_code(errno, std::system_category()));
+    }
+
+    constexpr int32_t kChunk = 128;
+    uint64_t processed_events = 0;
+    for (int32_t base = 0; base < nfds; base += kChunk) {
+        const int32_t end = std::min<int32_t>(base + kChunk, nfds);
+
+        // Prefetch phase: warm up fd_state AND callback for this chunk.
+        // This reduces cache misses when we invoke callbacks later.
+        for (int32_t i = base; i < end; ++i) {
+            int32_t fd = events_buffer_[static_cast<size_t>(i)].data.fd;
+            if (fd >= 0 && static_cast<size_t>(fd) < fd_states_.size()) {
+                auto& state = fd_states_[static_cast<size_t>(fd)];
+                __builtin_prefetch(&state, 0, 1);          // Prefetch fd_state struct
+                __builtin_prefetch(&state.callback, 0, 1); // Prefetch callback (inplace_function)
+            }
+        }
+
+        for (int32_t i = base; i < end; ++i) {
+            int32_t fd = events_buffer_[static_cast<size_t>(i)].data.fd;
+
+            if (fd == wakeup_fd_) [[unlikely]] {
+                // Wakeup fd is rare compared to regular I/O events
+                uint64_t val;
+                ssize_t ret = read(wakeup_fd_, &val, sizeof(val));
+                (void)ret;
+                needs_wakeup_.store(true, std::memory_order_relaxed);
+                continue;
+            }
+
+            if (fd >= 0 && static_cast<size_t>(fd) < fd_states_.size() &&
+                fd_states_[static_cast<size_t>(fd)].callback) [[likely]] {
+                // Most events are for valid registered fds (happy path)
+                event_type ev = from_epoll_events(events_buffer_[static_cast<size_t>(i)].events);
+                auto& state = fd_states_[static_cast<size_t>(fd)];
+
+                if (i + 1 < end) {
+                    int32_t next_fd = events_buffer_[static_cast<size_t>(i + 1)].data.fd;
+                    if (next_fd >= 0 && static_cast<size_t>(next_fd) < fd_states_.size()) {
+                        __builtin_prefetch(&fd_states_[static_cast<size_t>(next_fd)], 0, 1);
+                    }
+                }
+                if (i + 2 < end && (end - base) >= 16) {
+                    int32_t next_fd2 = events_buffer_[static_cast<size_t>(i + 2)].data.fd;
+                    if (next_fd2 >= 0 && static_cast<size_t>(next_fd2) < fd_states_.size()) {
+                        __builtin_prefetch(&fd_states_[static_cast<size_t>(next_fd2)], 0, 1);
+                    }
+                }
+
+                try {
+                    state.callback(ev); // Hot spot: 3.15% of total CPU time
+                    ++processed_events;
+                } catch (...) {
+                    // Exceptions in callbacks are rare - compiler should optimize this path
+                    handle_exception("fd_callback", std::current_exception(), fd);
+                }
+            }
+        }
+    }
+
+    if (metrics_enabled_ && processed_events != 0) {
+        metrics_.fd_events_processed.fetch_add(processed_events, std::memory_order_relaxed);
+    }
+
+    return {};
+}
+
+void epoll_reactor::process_tasks() {
+    uint32_t to_process = pending_count_.exchange(0, std::memory_order_relaxed);
+    needs_wakeup_.store(false, std::memory_order_release);
+    uint32_t executed = 0;
+
+    for (uint32_t i = 0; i < to_process; ++i) {
+        auto task = pending_tasks_.pop();
+        if (!task)
+            break;
+        try {
+            (*task)();
+            ++executed;
+        } catch (...) {
+            handle_exception("scheduled_task", std::current_exception());
+        }
+    }
+
+    if (metrics_enabled_ && executed != 0) {
+        metrics_.tasks_executed.fetch_add(executed, std::memory_order_relaxed);
+    }
+}
+
+void epoll_reactor::process_timers(std::chrono::steady_clock::time_point now) {
+    while (auto timer = pending_timers_.pop()) {
+        timers_.push(std::move(*timer));
+    }
+
+    uint32_t fired = 0;
+    while (!timers_.empty() && timers_.top().deadline <= now) {
+        auto task = std::move(timers_.top().task);
+        timers_.pop();
+
+        try {
+            task();
+            ++fired;
+        } catch (...) {
+            handle_exception("delayed_task", std::current_exception());
+        }
+    }
+
+    if (metrics_enabled_ && fired != 0) {
+        metrics_.tasks_executed.fetch_add(fired, std::memory_order_relaxed);
+        metrics_.timers_fired.fetch_add(fired, std::memory_order_relaxed);
+    }
+}
+
+int32_t epoll_reactor::calculate_timeout(std::chrono::steady_clock::time_point now) const {
+    if (!pending_tasks_.empty()) {
+        timeout_dirty_.store(true, std::memory_order_relaxed);
+        return 0;
+    }
+
+    if (!timeout_dirty_.load(std::memory_order_relaxed)) {
+        auto elapsed =
+            std::chrono::duration_cast<std::chrono::milliseconds>(now - timeout_cached_at_);
+        if (elapsed.count() < 5 && cached_timeout_ > 0) {
+            return std::max(0, cached_timeout_ - static_cast<int32_t>(elapsed.count()));
+        }
+    }
+
+    auto min_timeout = std::chrono::milliseconds::max();
+
+    if (!timers_.empty()) {
+        auto deadline = timers_.top().deadline;
+        if (deadline <= now) {
+            timeout_dirty_.store(true, std::memory_order_relaxed);
+            return 0;
+        }
+        auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(deadline - now);
+        min_timeout = std::min(min_timeout, delta);
+    }
+
+    auto wheel_timeout = wheel_timer_.time_until_next_expiration(now);
+    if (wheel_timeout == std::chrono::milliseconds::zero()) {
+        timeout_dirty_.store(true, std::memory_order_relaxed);
+        return 0;
+    }
+    if (wheel_timeout != std::chrono::milliseconds::max()) {
+        min_timeout = std::min(min_timeout, wheel_timeout);
+    }
+
+    if (graceful_shutdown_.load(std::memory_order_relaxed)) {
+        auto graceful_timeout = time_until_graceful_deadline(now);
+        if (graceful_timeout.count() <= 0) {
+            timeout_dirty_.store(true, std::memory_order_relaxed);
+            return 0;
+        }
+        min_timeout = std::min(min_timeout, graceful_timeout);
+    }
+
+    int32_t result;
+    if (min_timeout == std::chrono::milliseconds::max()) {
+        result = -1;
+    } else {
+        auto clamped = std::min<int64_t>(min_timeout.count(),
+                                         static_cast<int64_t>(std::numeric_limits<int32_t>::max()));
+        result = static_cast<int32_t>(clamped);
+    }
+
+    cached_timeout_ = result;
+    timeout_cached_at_ = now;
+    timeout_dirty_.store(false, std::memory_order_relaxed);
+
+    return result;
+}
+
+void epoll_reactor::set_exception_handler(exception_handler handler) {
+    exception_handler_ = std::move(handler);
+}
+
+uint64_t epoll_reactor::get_load_score() const noexcept {
+    size_t active_fds = active_fds_.load(std::memory_order_relaxed);
+    size_t pending_tasks = pending_tasks_.size();
+    size_t pending_timers_count = pending_timers_.size();
+
+    return active_fds * 100 + pending_tasks * 50 + pending_timers_count * 10;
+}
+
+void epoll_reactor::process_wheel_timer() {
+    wheel_timer_.tick();
+}
+
+void epoll_reactor::schedule_fd_timeout(int32_t fd, fd_state& state) {
+    state.timeout_interval = fd_timeout_for(state);
+    state.last_activity = std::chrono::steady_clock::now();
+    state.timeout_id =
+        wheel_timer_.add(state.timeout_interval, [this, fd]() { handle_fd_timeout(fd); });
+}
+
+void epoll_reactor::handle_fd_timeout(int32_t fd) {
+    if (fd < 0 || static_cast<size_t>(fd) >= fd_states_.size()) {
+        return;
+    }
+
+    auto index = static_cast<size_t>(fd);
+    auto& entry_state = fd_states_[index];
+    if (!entry_state.callback || !entry_state.has_timeout) {
+        return;
+    }
+
+    const auto now = std::chrono::steady_clock::now();
+    const auto elapsed_ns =
+        std::chrono::duration_cast<std::chrono::nanoseconds>(now - entry_state.last_activity)
+            .count();
+
+    if (elapsed_ns >= entry_state.timeout_interval.count()) {
+        if (metrics_enabled_) {
+            metrics_.fd_timeouts.fetch_add(1, std::memory_order_relaxed);
+        }
+
+        auto cb = std::move(entry_state.callback);
+        entry_state.has_timeout = false;
+        entry_state.timeout_id = 0;
+
+        if (cb) {
+            try {
+                cb(event_type::timeout);
+            } catch (...) {
+                handle_exception("timeout_handler", std::current_exception(), fd);
+            }
+        }
+
+        queue_fd_close(fd);
+        return;
+    }
+
+    const auto remaining_ns = entry_state.timeout_interval.count() - elapsed_ns;
+    entry_state.timeout_id = wheel_timer_.add(std::chrono::milliseconds(remaining_ns / 1'000'000),
+                                              [this, fd]() { handle_fd_timeout(fd); });
+}
+
+void epoll_reactor::cancel_fd_timeout(fd_state& state) {
+    if (state.timeout_id != 0) {
+        (void)wheel_timer_.cancel(state.timeout_id);
+        state.timeout_id = 0;
+    }
+}
+
+void epoll_reactor::queue_fd_close(int32_t fd) {
+    if (fd < 0) {
+        return;
+    }
+
+    // For tiny close counts, close inline; otherwise push to the deferred queue.
+    // Minimal inline budget to keep the tick short.
+    constexpr size_t kInlineThreshold = 2;
+    static thread_local size_t inline_budget = kInlineThreshold;
+
+    if (inline_budget > 0 && deferred_closes_.empty()) {
+        --inline_budget;
+        close_fd_immediate(fd);
+        return;
+    }
+    inline_budget = kInlineThreshold;
+
+    if (!deferred_closes_.try_push(fd)) {
+        // Fallback: queue is saturated — close immediately to avoid leaks.
+        close_fd_immediate(fd);
+    }
+}
+
+void epoll_reactor::close_fd_immediate(int32_t fd) {
+    if (fd < 0) {
+        return;
+    }
+
+    detail::syscall_metrics_registry::instance().note_epoll_ctl_del();
+    (void)epoll_ctl(epoll_fd_, EPOLL_CTL_DEL, fd, nullptr);
+    (void)close(fd);
+
+    size_t idx = static_cast<size_t>(fd);
+    if (idx < fd_states_.size()) {
+        fd_states_[idx] = fd_state{};
+    }
+    active_fds_.fetch_sub(1, std::memory_order_relaxed);
+}
+
+void epoll_reactor::flush_deferred_closes() {
+    // Small batch to avoid blocking the tick with a long syscall series.
+    constexpr size_t kMaxBatch = 2;
+    size_t processed = 0;
+    int32_t fd;
+    while (processed < kMaxBatch && deferred_closes_.try_pop(fd)) {
+        ++processed;
+        if (fd < 0) {
+            continue;
+        }
+
+        detail::syscall_metrics_registry::instance().note_epoll_ctl_del();
+        if (epoll_ctl(epoll_fd_, EPOLL_CTL_DEL, fd, nullptr) < 0 && errno != ENOENT &&
+            errno != EBADF) {
+            handle_exception("deferred_epoll_ctl_del",
+                             std::make_exception_ptr(std::system_error(
+                                 errno, std::system_category(), "epoll_ctl del failed")),
+                             fd);
+        }
+
+        if (close(fd) < 0 && errno != EBADF) {
+            handle_exception("deferred_close",
+                             std::make_exception_ptr(
+                                 std::system_error(errno, std::system_category(), "close failed")),
+                             fd);
+        }
+
+        size_t idx = static_cast<size_t>(fd);
+        if (idx < fd_states_.size()) {
+            fd_states_[idx] = fd_state{};
+        }
+        active_fds_.fetch_sub(1, std::memory_order_relaxed);
+    }
+}
+
+std::chrono::milliseconds epoll_reactor::fd_timeout_for(const fd_state& state) const {
+    auto timeout = state.timeouts.idle_timeout;
+
+    if (has_flag(state.events, event_type::readable)) {
+        timeout = std::min(timeout, state.timeouts.read_timeout);
+    }
+
+    if (has_flag(state.events, event_type::writable)) {
+        timeout = std::min(timeout, state.timeouts.write_timeout);
+    }
+
+    if (timeout.count() <= 0) {
+        return std::chrono::milliseconds{1};
+    }
+
+    return timeout;
+}
+
+result<void> epoll_reactor::ensure_fd_capacity(int32_t fd) {
+    if (fd < 0) {
+        return std::unexpected(make_error_code(error_code::invalid_fd));
+    }
+
+    size_t index = static_cast<size_t>(fd);
+    if (index < fd_states_.size()) {
+        return {};
+    }
+
+    size_t new_size = fd_states_.empty() ? 64 : fd_states_.size();
+    while (new_size <= index) {
+        if (new_size > fd_states_.max_size() / 2) {
+            new_size = index + 1;
+            break;
+        }
+        new_size = std::max(new_size * 2, index + 1);
+    }
+
+    try {
+        fd_states_.resize(new_size);
+    } catch (const std::bad_alloc&) {
+        return std::unexpected(std::make_error_code(std::errc::not_enough_memory));
+    }
+
+    return {};
+}
+
+std::chrono::milliseconds
+epoll_reactor::time_until_graceful_deadline(std::chrono::steady_clock::time_point now) const {
+    if (!graceful_shutdown_.load(std::memory_order_relaxed)) {
+        return std::chrono::milliseconds::max();
+    }
+
+    if (now >= graceful_shutdown_deadline_) {
+        return std::chrono::milliseconds{0};
+    }
+
+    return std::chrono::duration_cast<std::chrono::milliseconds>(graceful_shutdown_deadline_ - now);
+}
+
+void epoll_reactor::handle_exception(std::string_view location,
+                                     std::exception_ptr ex,
+                                     int32_t fd) noexcept {
+    if (metrics_enabled_) {
+        metrics_.exceptions_caught.fetch_add(1, std::memory_order_relaxed);
+    }
+
+    if (exception_handler_) {
+        try {
+            exception_handler_(exception_context{location, ex, fd});
+        } catch (...) {
+            std::cerr << "[reactor] Exception handler threw an exception!\n";
+        }
+    }
+}
+
+} // namespace katana
