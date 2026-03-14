@@ -1,0 +1,247 @@
+ Percent |	Source code & Disassembly of hello_world_server for cpu-clock:u (85 samples, percent: local period)
+-------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3    Disassembly of section .text:
+         :
+         : 5    000000000000a3f0 <katana::http::headers_map::get(katana::http::field) const [clone .part.0]>:
+         : 6    } else {
+         : 7    set_known(f, value);
+         : 8    }
+         : 9    }
+         :
+         : 11   [[nodiscard]] std::optional<std::string_view> get(field f) const noexcept {
+    1.18 :   a3f0:   mov    %rdi,%rax
+         : 13   { return const_iterator(data()); }
+         :
+         : 15   [[__gnu__::__const__, __nodiscard__]]
+         : 16   _GLIBCXX17_CONSTEXPR iterator
+         : 17   end() noexcept
+         : 18   { return iterator(data() + _Nm); }
+    7.06 :   a3f3:   lea    0x338(%rsi),%rcx
+    1.18 :   a3fa:   mov    %edx,%r8d
+         : 21   return arena_ ? arena_ : fallback_arena_;
+         : 22   }
+         :
+         : 24   [[nodiscard]] known_entry* find_known_entry(field f) noexcept {
+         : 25   for (auto& entry : known_inline_) {
+         : 26   if (entry.key == f) {
+    1.18 :   a3fd:   cmp    0x338(%rsi),%dx
+   18.82 :   a404:   je     a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 29   for (auto& entry : known_inline_) {
+    0.00 :   a40a:   lea    0x350(%rsi),%rcx
+         : 31   if (entry.key == f) {
+    0.00 :   a411:   cmp    0x350(%rsi),%dx
+    9.41 :   a418:   je     a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 34   for (auto& entry : known_inline_) {
+    0.00 :   a41e:   lea    0x368(%rsi),%rcx
+         : 36   if (entry.key == f) {
+    0.00 :   a425:   cmp    0x368(%rsi),%dx
+    3.53 :   a42c:   je     a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 39   for (auto& entry : known_inline_) {
+    1.18 :   a432:   lea    0x380(%rsi),%rcx
+         : 41   if (entry.key == f) {
+    0.00 :   a439:   cmp    0x380(%rsi),%dx
+    3.53 :   a440:   je     a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 44   for (auto& entry : known_inline_) {
+    0.00 :   a446:   lea    0x398(%rsi),%rcx
+         : 46   if (entry.key == f) {
+    1.18 :   a44d:   cmp    0x398(%rsi),%dx
+    1.18 :   a454:   je     a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 49   for (auto& entry : known_inline_) {
+    0.00 :   a45a:   lea    0x3b0(%rsi),%rcx
+         : 51   if (entry.key == f) {
+    0.00 :   a461:   cmp    0x3b0(%rsi),%dx
+    3.53 :   a468:   je     a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 54   for (auto& entry : known_inline_) {
+    0.00 :   a46e:   lea    0x3c8(%rsi),%rcx
+         : 56   if (entry.key == f) {
+    0.00 :   a475:   cmp    0x3c8(%rsi),%dx
+    3.53 :   a47c:   je     a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 59   for (auto& entry : known_inline_) {
+    2.35 :   a482:   lea    0x3e0(%rsi),%rcx
+         : 61   if (entry.key == f) {
+    0.00 :   a489:   cmp    0x3e0(%rsi),%dx
+    4.71 :   a490:   je     a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 64   for (auto& entry : known_inline_) {
+    1.18 :   a496:   lea    0x3f8(%rsi),%rcx
+         : 66   if (entry.key == f) {
+    0.00 :   a49d:   cmp    0x3f8(%rsi),%dx
+    2.35 :   a4a4:   je     a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 69   for (auto& entry : known_inline_) {
+    0.00 :   a4aa:   lea    0x410(%rsi),%rcx
+         : 71   if (entry.key == f) {
+    0.00 :   a4b1:   cmp    0x410(%rsi),%dx
+    1.18 :   a4b8:   je     a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 74   for (auto& entry : known_inline_) {
+    0.00 :   a4be:   lea    0x428(%rsi),%rcx
+         : 76   if (entry.key == f) {
+    1.18 :   a4c5:   cmp    0x428(%rsi),%dx
+    2.35 :   a4cc:   je     a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 79   for (auto& entry : known_inline_) {
+    1.18 :   a4d2:   lea    0x440(%rsi),%rcx
+         : 81   if (entry.key == f) {
+    0.00 :   a4d9:   cmp    0x440(%rsi),%dx
+    3.53 :   a4e0:   je     a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 84   for (auto& entry : known_inline_) {
+    1.18 :   a4e6:   lea    0x458(%rsi),%rcx
+         : 86   if (entry.key == f) {
+    0.00 :   a4ed:   cmp    0x458(%rsi),%dx
+    3.53 :   a4f4:   je     a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 89   for (auto& entry : known_inline_) {
+    0.00 :   a4fa:   lea    0x470(%rsi),%rcx
+         : 91   if (entry.key == f) {
+    0.00 :   a501:   cmp    0x470(%rsi),%dx
+    2.35 :   a508:   je     a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 94   for (auto& entry : known_inline_) {
+    0.00 :   a50e:   lea    0x488(%rsi),%rcx
+         : 96   if (entry.key == f) {
+    0.00 :   a515:   cmp    0x488(%rsi),%dx
+    3.53 :   a51c:   je     a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 99   for (auto& entry : known_inline_) {
+    2.35 :   a522:   lea    0x4a0(%rsi),%rcx
+         : 101  if (entry.key == f) {
+    0.00 :   a529:   cmp    %dx,0x4a0(%rsi)
+    2.35 :   a530:   je     a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+    1.18 :   a536:   mov    0x4b8(%rsi),%rdx
+         : 105  return &entry;
+         : 106  }
+         : 107  }
+         : 108  for (auto* chunk = known_chunks_; chunk; chunk = chunk->next) {
+    0.00 :   a53d:   test   %rdx,%rdx
+    1.18 :   a540:   je     a623 <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x233>
+         : 111  for (auto& entry : chunk->entries) {
+         : 112  if (entry.key == f) {
+    0.00 :   a546:   cmp    (%rdx),%r8w
+    0.00 :   a54a:   je     a628 <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x238>
+    0.00 :   a550:   cmp    0x18(%rdx),%r8w
+    0.00 :   a555:   je     a63f <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x24f>
+    0.00 :   a55b:   cmp    0x30(%rdx),%r8w
+    0.00 :   a560:   je     a645 <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x255>
+    0.00 :   a566:   cmp    0x48(%rdx),%r8w
+    0.00 :   a56b:   je     a64b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x25b>
+    0.00 :   a571:   cmp    0x60(%rdx),%r8w
+    0.00 :   a576:   je     a651 <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x261>
+    0.00 :   a57c:   cmp    0x78(%rdx),%r8w
+    0.00 :   a581:   je     a657 <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x267>
+    0.00 :   a587:   cmp    0x90(%rdx),%r8w
+    0.00 :   a58f:   je     a65d <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x26d>
+    0.00 :   a595:   cmp    0xa8(%rdx),%r8w
+    0.00 :   a59d:   je     a666 <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x276>
+    0.00 :   a5a3:   cmp    0xc0(%rdx),%r8w
+    0.00 :   a5ab:   je     a66f <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x27f>
+    0.00 :   a5b1:   cmp    0xd8(%rdx),%r8w
+    0.00 :   a5b9:   je     a678 <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x288>
+    0.00 :   a5bf:   cmp    0xf0(%rdx),%r8w
+    0.00 :   a5c7:   je     a681 <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x291>
+    0.00 :   a5cd:   cmp    0x108(%rdx),%r8w
+    0.00 :   a5d5:   je     a68a <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x29a>
+    0.00 :   a5db:   cmp    0x120(%rdx),%r8w
+    0.00 :   a5e3:   je     a693 <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x2a3>
+    0.00 :   a5e9:   cmp    0x138(%rdx),%r8w
+    0.00 :   a5f1:   je     a69c <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x2ac>
+    0.00 :   a5f7:   cmp    0x150(%rdx),%r8w
+    0.00 :   a5ff:   je     a6a5 <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x2b5>
+    0.00 :   a605:   cmp    0x168(%rdx),%r8w
+    0.00 :   a60d:   je     a6b1 <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x2c1>
+         : 145  for (auto* chunk = known_chunks_; chunk; chunk = chunk->next) {
+    0.00 :   a613:   mov    0x180(%rdx),%rdx
+    0.00 :   a61a:   test   %rdx,%rdx
+    0.00 :   a61d:   jne    a546 <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x156>
+         : 149  template <typename _Tp>
+         : 150  struct _Optional_payload_base
+         : 151  {
+         : 152  using _Stored_type = remove_const_t<_Tp>;
+         :
+         : 154  _Optional_payload_base() = default;
+    1.18 :   a623:   movb   $0x0,0x10(%rax)
+         : 156  return std::nullopt;
+    4.71 :   a627:   ret
+         : 158  }
+         :
+         : 160  [[__nodiscard__, __gnu__::__const__, __gnu__::__always_inline__]]
+         : 161  _GLIBCXX17_CONSTEXPR pointer
+         : 162  data() noexcept
+         : 163  { return static_cast<pointer>(_M_elems); }
+    0.00 :   a628:   mov    %rdx,%rcx
+         : 165  return std::string_view(entry->value, entry->length);
+    0.00 :   a62b:   movzwl 0x10(%rcx),%esi
+    0.00 :   a62f:   mov    0x8(%rcx),%rdx
+         :
+         : 169  template<typename... _Args>
+         : 170  constexpr
+         : 171  _Optional_payload_base(in_place_t __tag, _Args&&... __args)
+         : 172  : _M_payload(__tag, std::forward<_Args>(__args)...),
+         : 173  _M_engaged(true)
+    0.00 :   a633:   movb   $0x1,0x10(%rax)
+         : 175  constexpr _Storage() noexcept : _M_empty() { }
+         :
+         : 177  template<typename... _Args>
+         : 178  constexpr
+         : 179  _Storage(in_place_t, _Args&&... __args)
+         : 180  : _M_value(std::forward<_Args>(__args)...)
+    0.00 :   a637:   mov    %rdx,0x8(%rax)
+    0.00 :   a63b:   mov    %rsi,(%rax)
+         : 183  }
+    0.00 :   a63e:   ret
+         : 185  for (auto& entry : chunk->entries) {
+    0.00 :   a63f:   lea    0x18(%rdx),%rcx
+         : 187  if (!entry) {
+    0.00 :   a643:   jmp    a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 189  for (auto& entry : chunk->entries) {
+    0.00 :   a645:   lea    0x30(%rdx),%rcx
+         : 191  if (!entry) {
+    0.00 :   a649:   jmp    a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 193  for (auto& entry : chunk->entries) {
+    0.00 :   a64b:   lea    0x48(%rdx),%rcx
+         : 195  if (!entry) {
+    0.00 :   a64f:   jmp    a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 197  for (auto& entry : chunk->entries) {
+    0.00 :   a651:   lea    0x60(%rdx),%rcx
+         : 199  if (!entry) {
+    0.00 :   a655:   jmp    a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 201  for (auto& entry : chunk->entries) {
+    0.00 :   a657:   lea    0x78(%rdx),%rcx
+         : 203  if (!entry) {
+    0.00 :   a65b:   jmp    a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 205  for (auto& entry : chunk->entries) {
+    0.00 :   a65d:   lea    0x90(%rdx),%rcx
+         : 207  if (!entry) {
+    0.00 :   a664:   jmp    a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 209  for (auto& entry : chunk->entries) {
+    0.00 :   a666:   lea    0xa8(%rdx),%rcx
+         : 211  if (!entry) {
+    0.00 :   a66d:   jmp    a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 213  for (auto& entry : chunk->entries) {
+    0.00 :   a66f:   lea    0xc0(%rdx),%rcx
+         : 215  if (!entry) {
+    0.00 :   a676:   jmp    a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 217  for (auto& entry : chunk->entries) {
+    0.00 :   a678:   lea    0xd8(%rdx),%rcx
+         : 219  if (!entry) {
+    0.00 :   a67f:   jmp    a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 221  for (auto& entry : chunk->entries) {
+    0.00 :   a681:   lea    0xf0(%rdx),%rcx
+         : 223  if (!entry) {
+    0.00 :   a688:   jmp    a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 225  for (auto& entry : chunk->entries) {
+    0.00 :   a68a:   lea    0x108(%rdx),%rcx
+         : 227  if (!entry) {
+    0.00 :   a691:   jmp    a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 229  for (auto& entry : chunk->entries) {
+    0.00 :   a693:   lea    0x120(%rdx),%rcx
+         : 231  if (!entry) {
+    0.00 :   a69a:   jmp    a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 233  for (auto& entry : chunk->entries) {
+    0.00 :   a69c:   lea    0x138(%rdx),%rcx
+         : 235  if (!entry) {
+    0.00 :   a6a3:   jmp    a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 237  for (auto& entry : chunk->entries) {
+    0.00 :   a6a5:   lea    0x150(%rdx),%rcx
+         : 239  if (!entry) {
+    0.00 :   a6ac:   jmp    a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>
+         : 241  for (auto& entry : chunk->entries) {
+    0.00 :   a6b1:   lea    0x168(%rdx),%rcx
+         : 243  if (!entry) {
+    0.00 :   a6b8:   jmp    a62b <katana::http::headers_map::get(katana::http::field) const [clone .part.0]+0x23b>

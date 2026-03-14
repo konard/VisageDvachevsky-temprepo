@@ -1,0 +1,205 @@
+ Percent |	Source code & Disassembly of hello_world_server for cpu-clock:u (193 samples, percent: local period)
+--------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     0000000000010ba0 <katana::http::parser::prepare_for_next_request(katana::monotonic_arena*)>:
+         : 6     buffer_size_ = 0;
+         : 7     maybe_shrink_buffer();
+         : 8     reset_message_state(arena);
+         : 9     }
+         :
+         : 11    void parser::prepare_for_next_request(monotonic_arena* arena) noexcept {
+    0.00 :   10ba0:  endbr64
+    0.52 :   10ba4:  push   %rbp
+    0.52 :   10ba5:  mov    %rsp,%rbp
+    0.00 :   10ba8:  push   %r13
+         :
+         : 17    [[nodiscard]] bool is_complete() const noexcept { return state_ == state::complete; }
+         : 18    [[nodiscard]] const request& get_request() const noexcept { return request_; }
+         : 19    [[nodiscard]] size_t bytes_parsed() const noexcept { return parse_pos_; }
+         : 20    [[nodiscard]] size_t buffered_bytes() const noexcept {
+         : 21    return buffer_size_ > parse_pos_ ? buffer_size_ - parse_pos_ : 0;
+    0.00 :   10baa:  xor    %r13d,%r13d
+    0.00 :   10bad:  push   %r12
+    1.55 :   10baf:  push   %rbx
+    0.52 :   10bb0:  mov    %rsi,%r12
+    0.00 :   10bb3:  mov    %rdi,%rbx
+    0.00 :   10bb6:  sub    $0x8,%rsp
+    0.00 :   10bba:  mov    0x620(%rdi),%rax
+    2.59 :   10bc1:  mov    0x658(%rdi),%rsi
+    0.00 :   10bc8:  cmp    %rax,%rsi
+    0.00 :   10bcb:  jae    10bdc <katana::http::parser::prepare_for_next_request(katana::monotonic_arena*)+0x3c>
+    0.00 :   10bcd:  sub    %rsi,%rax
+    0.00 :   10bd0:  mov    %rax,%r13
+         : 34    size_t remaining = buffered_bytes();
+         : 35    if (remaining > 0 && parse_pos_ > 0) {
+    0.00 :   10bd3:  test   %rsi,%rsi
+    0.00 :   10bd6:  jne    10fc0 <katana::http::parser::prepare_for_next_request(katana::monotonic_arena*)+0x420>
+         : 38    last_header_name_len_ = 0;
+    0.00 :   10bdc:  vpxor  %xmm0,%xmm0,%xmm0
+         : 40    std::memmove(buffer_, buffer_ + parse_pos_, remaining);
+         : 41    }
+         : 42    buffer_size_ = remaining;
+    1.04 :   10be0:  mov    %r13,0x620(%rbx)
+         : 44    arena_ = arena;
+    3.63 :   10be7:  mov    %r12,(%rbx)
+         :
+         : 47    [[nodiscard]] size_t size() const noexcept { return known_size_ + unknown_size_; }
+         : 48    [[nodiscard]] bool empty() const noexcept { return known_size_ == 0 && unknown_size_ == 0; }
+         :
+         : 50    void reset(monotonic_arena* arena) noexcept {
+         : 51    arena_ = arena;
+    0.52 :   10bea:  mov    %r12,0x28(%rbx)
+         : 53    state_ = state::request_line;
+    2.59 :   10bee:  movb   $0x0,0x8(%rbx)
+         : 55    request_.http_method = method::unknown;
+    2.59 :   10bf2:  movb   $0x7,0x10(%rbx)
+         : 57    request_.uri = {};
+    1.55 :   10bf6:  movq   $0x0,0x18(%rbx)
+    0.00 :   10bfe:  movq   $0x0,0x20(%rbx)
+         : 60    request_.body = {};
+    2.07 :   10c06:  movq   $0x0,0x600(%rbx)
+    2.59 :   10c11:  movq   $0x0,0x608(%rbx)
+         : 63    fallback_arena_ = arena_ ? nullptr : &owned_arena_;
+    0.00 :   10c1c:  movq   $0x0,0x30(%rbx)
+         : 65    __gnu_cxx::__enable_if<!__is_scalar<_Tp>::__value, void>::__type
+         : 66    __fill_a1(_ForwardIterator __first, _ForwardIterator __last,
+         : 67    const _Tp& __value)
+         : 68    {
+         : 69    for (; __first != __last; ++__first)
+         : 70    *__first = __value;
+    1.04 :   10c24:  movw   $0x0,0x360(%rbx)
+    0.00 :   10c2d:  movq   $0x0,0x368(%rbx)
+    0.00 :   10c38:  movw   $0x0,0x370(%rbx)
+    1.55 :   10c41:  movw   $0x0,0x378(%rbx)
+    2.07 :   10c4a:  movq   $0x0,0x380(%rbx)
+    1.55 :   10c55:  movw   $0x0,0x388(%rbx)
+    0.52 :   10c5e:  movw   $0x0,0x390(%rbx)
+    2.07 :   10c67:  movq   $0x0,0x398(%rbx)
+    1.04 :   10c72:  movw   $0x0,0x3a0(%rbx)
+    2.07 :   10c7b:  movw   $0x0,0x3a8(%rbx)
+    1.55 :   10c84:  movq   $0x0,0x3b0(%rbx)
+    1.55 :   10c8f:  movw   $0x0,0x3b8(%rbx)
+    1.55 :   10c98:  movw   $0x0,0x3c0(%rbx)
+    1.04 :   10ca1:  movq   $0x0,0x3c8(%rbx)
+    0.00 :   10cac:  movw   $0x0,0x3d0(%rbx)
+    1.04 :   10cb5:  movw   $0x0,0x3d8(%rbx)
+    1.04 :   10cbe:  movq   $0x0,0x3e0(%rbx)
+    1.04 :   10cc9:  movw   $0x0,0x3e8(%rbx)
+    1.04 :   10cd2:  movw   $0x0,0x3f0(%rbx)
+    0.52 :   10cdb:  movq   $0x0,0x3f8(%rbx)
+    0.52 :   10ce6:  movw   $0x0,0x400(%rbx)
+    0.52 :   10cef:  movw   $0x0,0x408(%rbx)
+    1.04 :   10cf8:  movq   $0x0,0x410(%rbx)
+    0.00 :   10d03:  movw   $0x0,0x418(%rbx)
+    0.00 :   10d0c:  movw   $0x0,0x420(%rbx)
+    1.04 :   10d15:  movq   $0x0,0x428(%rbx)
+    0.00 :   10d20:  movw   $0x0,0x430(%rbx)
+    0.52 :   10d29:  movw   $0x0,0x438(%rbx)
+    0.00 :   10d32:  movq   $0x0,0x440(%rbx)
+    1.04 :   10d3d:  movw   $0x0,0x448(%rbx)
+    1.04 :   10d46:  movw   $0x0,0x450(%rbx)
+    0.52 :   10d4f:  movq   $0x0,0x458(%rbx)
+    1.04 :   10d5a:  movw   $0x0,0x460(%rbx)
+    0.52 :   10d63:  movw   $0x0,0x468(%rbx)
+    0.52 :   10d6c:  movq   $0x0,0x470(%rbx)
+    1.04 :   10d77:  movw   $0x0,0x478(%rbx)
+    0.00 :   10d80:  movw   $0x0,0x480(%rbx)
+    0.52 :   10d89:  movq   $0x0,0x488(%rbx)
+    1.04 :   10d94:  movw   $0x0,0x490(%rbx)
+    0.00 :   10d9d:  movw   $0x0,0x498(%rbx)
+    0.52 :   10da6:  movq   $0x0,0x4a0(%rbx)
+    1.04 :   10db1:  movw   $0x0,0x4a8(%rbx)
+    0.52 :   10dba:  movw   $0x0,0x4b0(%rbx)
+    1.04 :   10dc3:  movq   $0x0,0x4b8(%rbx)
+    0.00 :   10dce:  movw   $0x0,0x4c0(%rbx)
+    0.52 :   10dd7:  movw   $0x0,0x4c8(%rbx)
+    0.52 :   10de0:  movq   $0x0,0x4d0(%rbx)
+    0.52 :   10deb:  movw   $0x0,0x4d8(%rbx)
+         : 119   return &chunk->entries[0];
+         : 120   }
+         :
+         : 122   void reset_storage() noexcept {
+         : 123   known_inline_.fill({});
+         : 124   known_chunks_ = nullptr;
+    0.52 :   10df4:  movq   $0x0,0x4e0(%rbx)
+         : 126   known_size_ = 0;
+    1.04 :   10dff:  movq   $0x0,0x4e8(%rbx)
+    1.04 :   10e0a:  movq   $0x0,0x4f0(%rbx)
+    2.59 :   10e15:  movw   $0x0,0x4f8(%rbx)
+    1.04 :   10e1e:  movq   $0x0,0x500(%rbx)
+    0.00 :   10e29:  movw   $0x0,0x508(%rbx)
+    0.00 :   10e32:  movq   $0x0,0x510(%rbx)
+    0.52 :   10e3d:  movw   $0x0,0x518(%rbx)
+    1.04 :   10e46:  movq   $0x0,0x520(%rbx)
+    0.00 :   10e51:  movw   $0x0,0x528(%rbx)
+    1.04 :   10e5a:  movq   $0x0,0x530(%rbx)
+    0.52 :   10e65:  movw   $0x0,0x538(%rbx)
+    0.00 :   10e6e:  movq   $0x0,0x540(%rbx)
+    2.07 :   10e79:  movw   $0x0,0x548(%rbx)
+    1.55 :   10e82:  movq   $0x0,0x550(%rbx)
+    1.04 :   10e8d:  movw   $0x0,0x558(%rbx)
+    1.04 :   10e96:  movq   $0x0,0x560(%rbx)
+    0.52 :   10ea1:  movw   $0x0,0x568(%rbx)
+    1.04 :   10eaa:  movq   $0x0,0x570(%rbx)
+    1.04 :   10eb5:  movw   $0x0,0x578(%rbx)
+    1.04 :   10ebe:  movq   $0x0,0x580(%rbx)
+    0.52 :   10ec9:  movw   $0x0,0x588(%rbx)
+    0.52 :   10ed2:  movq   $0x0,0x590(%rbx)
+    0.52 :   10edd:  movw   $0x0,0x598(%rbx)
+    1.04 :   10ee6:  movq   $0x0,0x5a0(%rbx)
+    0.00 :   10ef1:  movw   $0x0,0x5a8(%rbx)
+    0.00 :   10efa:  movq   $0x0,0x5b0(%rbx)
+    1.04 :   10f05:  movw   $0x0,0x5b8(%rbx)
+    1.55 :   10f0e:  movq   $0x0,0x5c0(%rbx)
+    0.52 :   10f19:  movw   $0x0,0x5c8(%rbx)
+    1.55 :   10f22:  movq   $0x0,0x5d0(%rbx)
+    1.04 :   10f2d:  movw   $0x0,0x5d8(%rbx)
+    0.52 :   10f36:  movq   $0x0,0x5e0(%rbx)
+    0.00 :   10f41:  movw   $0x0,0x5e8(%rbx)
+         : 160   unknown_inline_.fill({});
+         : 161   unknown_chunks_ = nullptr;
+    0.52 :   10f4a:  movq   $0x0,0x5f0(%rbx)
+         : 163   unknown_size_ = 0;
+    0.52 :   10f55:  movq   $0x0,0x5f8(%rbx)
+         : 165   chunked_body_ = nullptr;
+    0.00 :   10f60:  movq   $0x0,0x630(%rbx)
+         : 167   chunked_body_size_ = 0;
+    0.52 :   10f6b:  movq   $0x0,0x638(%rbx)
+         : 169   last_header_field_ = field::unknown;
+    0.00 :   10f76:  movw   $0x0,0x640(%rbx)
+         : 171   last_header_name_ = nullptr;
+    0.00 :   10f7f:  movq   $0x0,0x648(%rbx)
+         : 173   last_header_name_len_ = 0;
+    0.52 :   10f8a:  vmovdqu %xmm0,0x650(%rbx)
+         : 175   is_chunked_ = false;
+    0.52 :   10f92:  movb   $0x0,0x690(%rbx)
+         : 177   last_header_name_len_ = 0;
+    0.00 :   10f99:  vmovdqu %xmm0,0x660(%rbx)
+    0.52 :   10fa1:  vmovdqu %xmm0,0x670(%rbx)
+    0.52 :   10fa9:  vmovdqu %xmm0,0x680(%rbx)
+         : 181   reset_message_state(arena);
+         : 182   }
+    1.04 :   10fb1:  add    $0x8,%rsp
+    0.00 :   10fb5:  pop    %rbx
+    3.63 :   10fb6:  pop    %r12
+    0.00 :   10fb8:  pop    %r13
+    0.00 :   10fba:  pop    %rbp
+    1.04 :   10fbb:  ret
+    0.00 :   10fbc:  nopl   0x0(%rax)
+         : 190   std::memmove(buffer_, buffer_ + parse_pos_, remaining);
+    0.00 :   10fc0:  mov    0x618(%rdi),%rdi
+         : 192   }
+         :
+         : 194   __fortify_function void *
+         : 195   __NTH (memmove (void *__dest, const void *__src, size_t __len))
+         : 196   {
+         : 197   return __builtin___memmove_chk (__dest, __src, __len,
+    2.59 :   10fc7:  mov    %rax,%rdx
+    0.00 :   10fca:  add    %rdi,%rsi
+    0.00 :   10fcd:  call   6b30 <memmove@plt>
+         : 201   __glibc_objsize0 (__dest));
+    0.52 :   10fd2:  jmp    10bdc <katana::http::parser::prepare_for_next_request(katana::monotonic_arena*)+0x3c>

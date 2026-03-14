@@ -1,0 +1,344 @@
+ Percent |	Source code & Disassembly of hello_world_server for cpu-clock:u (169 samples, percent: local period)
+--------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3    Disassembly of section .text:
+         :
+         : 5    000000000000e3a0 <katana::inplace_function<std::expected<void, std::error_code> (katana::http::request const&, katana::http::request_context&, katana::http::response&), 160ul>::{lambda(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)#2}::_FUN(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)>:
+         : 6    [](void* dst, const void* src) { new (dst) F(*static_cast<const F*>(src)); },
+         : 7    [](void* dst, void* src) noexcept {
+         : 8    new (dst) F(std::move(*static_cast<F*>(src)));
+         : 9    static_cast<F*>(src)->~F();
+         : 10   },
+         : 11   [](const void* storage, Args... args) -> R {
+    4.14 :   e3a0:   endbr64
+    0.59 :   e3a4:   push   %rbp
+    0.00 :   e3a5:   mov    %rsp,%rbp
+    0.00 :   e3a8:   push   %r13
+    0.59 :   e3aa:   push   %r12
+    0.00 :   e3ac:   push   %rbx
+    1.18 :   e3ad:   mov    %rdi,%r12
+    0.00 :   e3b0:   mov    %r8,%rbx
+    0.00 :   e3b3:   sub    $0x38,%rsp
+         : 21   _Alloc_hider(pointer __dat, const _Alloc& __a = _Alloc())
+         : 22   : allocator_type(__a), _M_p(__dat) { }
+         : 23   #else
+         : 24   _GLIBCXX20_CONSTEXPR
+         : 25   _Alloc_hider(pointer __dat, const _Alloc& __a)
+         : 26   : allocator_type(__a), _M_p(__dat) { }
+    0.59 :   e3b7:   lea    -0x40(%rbp),%r13
+    0.00 :   e3bb:   mov    %fs:0x28,%rax
+    0.59 :   e3c4:   mov    %rax,-0x28(%rbp)
+    0.00 :   e3c8:   xor    %eax,%eax
+    0.00 :   e3ca:   mov    %r13,-0x50(%rbp)
+         : 32   return __s1;
+         : 33   #if __cplusplus >= 202002L
+         : 34   if (std::__is_constant_evaluated())
+         : 35   return __gnu_cxx::char_traits<char_type>::copy(__s1, __s2, __n);
+         : 36   #endif
+         : 37   return static_cast<char_type*>(__builtin_memcpy(__s1, __s2, __n));
+    0.00 :   e3ce:   movabs $0x57202c6f6c6c6548,%rax
+    0.00 :   e3d8:   mov    %rax,-0x40(%rbp)
+         : 40   { _M_dataplus._M_p = __p; }
+         :
+         : 42   _GLIBCXX20_CONSTEXPR
+         : 43   void
+         : 44   _M_length(size_type __length)
+         : 45   { _M_string_length = __length; }
+    1.18 :   e3dc:   movq   $0xd,-0x48(%rbp)
+    2.37 :   e3e4:   movabs $0x21646c726f57202c,%rax
+    0.00 :   e3ee:   mov    %rax,-0x3b(%rbp)
+         :
+         : 50   _GLIBCXX20_CONSTEXPR
+         : 51   pointer
+         : 52   _M_data() const
+         : 53   { return _M_dataplus._M_p; }
+    1.78 :   e3f2:   mov    0x8(%r8),%rax
+         : 55   __c1 = __c2;
+    0.00 :   e3f6:   movb   $0x0,-0x33(%rbp)
+         : 57   res.assign_error(problem);
+         : 58   return res;
+         : 59   }
+         :
+         : 61   void response::reset() noexcept {
+         : 62   status = 200;
+    1.18 :   e3fa:   movl   $0xc8,(%r8)
+         : 64   { _M_string_length = __length; }
+    0.59 :   e401:   movq   $0x0,0x10(%r8)
+    1.18 :   e409:   movb   $0x0,(%rax)
+    1.18 :   e40c:   movq   $0x0,0x608(%r8)
+         : 68   { return _M_dataplus._M_p; }
+    0.59 :   e417:   mov    0x600(%r8),%rax
+    0.00 :   e41e:   movb   $0x0,(%rax)
+         : 71   reason.clear();
+         : 72   body.clear();
+         : 73   chunked = false;
+    0.59 :   e421:   movb   $0x0,0x620(%r8)
+         : 75   __gnu_cxx::__enable_if<!__is_scalar<_Tp>::__value, void>::__type
+         : 76   __fill_a1(_ForwardIterator __first, _ForwardIterator __last,
+         : 77   const _Tp& __value)
+         : 78   {
+         : 79   for (; __first != __last; ++__first)
+         : 80   *__first = __value;
+    0.00 :   e429:   movw   $0x0,0x360(%r8)
+    0.00 :   e433:   movq   $0x0,0x368(%r8)
+    0.59 :   e43e:   movw   $0x0,0x370(%r8)
+    0.00 :   e448:   movw   $0x0,0x378(%r8)
+    1.18 :   e452:   movq   $0x0,0x380(%r8)
+    1.18 :   e45d:   movw   $0x0,0x388(%r8)
+    0.59 :   e467:   movw   $0x0,0x390(%r8)
+    1.18 :   e471:   movq   $0x0,0x398(%r8)
+    0.59 :   e47c:   movw   $0x0,0x3a0(%r8)
+    1.18 :   e486:   movw   $0x0,0x3a8(%r8)
+    0.00 :   e490:   movq   $0x0,0x3b0(%r8)
+    0.59 :   e49b:   movw   $0x0,0x3b8(%r8)
+    0.00 :   e4a5:   movw   $0x0,0x3c0(%r8)
+    0.59 :   e4af:   movq   $0x0,0x3c8(%r8)
+    2.37 :   e4ba:   movw   $0x0,0x3d0(%r8)
+    0.59 :   e4c4:   movw   $0x0,0x3d8(%r8)
+    0.59 :   e4ce:   movq   $0x0,0x3e0(%r8)
+    1.78 :   e4d9:   movw   $0x0,0x3e8(%r8)
+    2.37 :   e4e3:   movw   $0x0,0x3f0(%r8)
+    1.78 :   e4ed:   movq   $0x0,0x3f8(%r8)
+    1.18 :   e4f8:   movw   $0x0,0x400(%r8)
+    1.78 :   e502:   movw   $0x0,0x408(%r8)
+    0.59 :   e50c:   movq   $0x0,0x410(%r8)
+    1.18 :   e517:   movw   $0x0,0x418(%r8)
+    1.18 :   e521:   movw   $0x0,0x420(%r8)
+    0.59 :   e52b:   movq   $0x0,0x428(%r8)
+    0.59 :   e536:   movw   $0x0,0x430(%r8)
+    0.59 :   e540:   movw   $0x0,0x438(%r8)
+    1.18 :   e54a:   movq   $0x0,0x440(%r8)
+    0.00 :   e555:   movw   $0x0,0x448(%r8)
+    0.59 :   e55f:   movw   $0x0,0x450(%r8)
+    1.18 :   e569:   movq   $0x0,0x458(%r8)
+    0.59 :   e574:   movw   $0x0,0x460(%r8)
+    0.59 :   e57e:   movw   $0x0,0x468(%r8)
+    0.59 :   e588:   movq   $0x0,0x470(%r8)
+    1.18 :   e593:   movw   $0x0,0x478(%r8)
+    0.00 :   e59d:   movw   $0x0,0x480(%r8)
+    0.59 :   e5a7:   movq   $0x0,0x488(%r8)
+    0.00 :   e5b2:   movw   $0x0,0x490(%r8)
+    2.37 :   e5bc:   movw   $0x0,0x498(%r8)
+    0.00 :   e5c6:   movq   $0x0,0x4a0(%r8)
+         : 122  remove(f);
+         : 123  }
+         :
+         : 125  void clear() noexcept {
+         : 126  known_inline_.fill({});
+         : 127  for (auto* chunk = known_chunks_; chunk; chunk = chunk->next) {
+    0.59 :   e5d1:   mov    0x4e0(%r8),%rax
+    1.18 :   e5d8:   movw   $0x0,0x4a8(%r8)
+    0.59 :   e5e2:   movw   $0x0,0x4b0(%r8)
+    0.59 :   e5ec:   movq   $0x0,0x4b8(%r8)
+    0.59 :   e5f7:   movw   $0x0,0x4c0(%r8)
+    1.18 :   e601:   movw   $0x0,0x4c8(%r8)
+    0.00 :   e60b:   movq   $0x0,0x4d0(%r8)
+    0.00 :   e616:   movw   $0x0,0x4d8(%r8)
+    1.18 :   e620:   test   %rax,%rax
+    0.00 :   e623:   je     e7df <katana::inplace_function<std::expected<void, std::error_code> (katana::http::request const&, katana::http::request_context&, katana::http::response&), 160ul>::{lambda(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)#2}::_FUN(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)+0x43f>
+    0.00 :   e629:   nopl   0x0(%rax)
+    0.00 :   e630:   movw   $0x0,(%rax)
+    0.00 :   e635:   movq   $0x0,0x8(%rax)
+    0.00 :   e63d:   movw   $0x0,0x10(%rax)
+    0.00 :   e643:   movw   $0x0,0x18(%rax)
+    0.00 :   e649:   movq   $0x0,0x20(%rax)
+    0.00 :   e651:   movw   $0x0,0x28(%rax)
+    0.00 :   e657:   movw   $0x0,0x30(%rax)
+    0.00 :   e65d:   movq   $0x0,0x38(%rax)
+    0.00 :   e665:   movw   $0x0,0x40(%rax)
+    0.00 :   e66b:   movw   $0x0,0x48(%rax)
+    0.00 :   e671:   movq   $0x0,0x50(%rax)
+    0.00 :   e679:   movw   $0x0,0x58(%rax)
+    0.00 :   e67f:   movw   $0x0,0x60(%rax)
+    0.00 :   e685:   movq   $0x0,0x68(%rax)
+    0.00 :   e68d:   movw   $0x0,0x70(%rax)
+    0.00 :   e693:   movw   $0x0,0x78(%rax)
+    0.00 :   e699:   movq   $0x0,0x80(%rax)
+    0.00 :   e6a4:   movw   $0x0,0x88(%rax)
+    0.00 :   e6ad:   movw   $0x0,0x90(%rax)
+    0.00 :   e6b6:   movq   $0x0,0x98(%rax)
+    0.00 :   e6c1:   movw   $0x0,0xa0(%rax)
+    0.00 :   e6ca:   movw   $0x0,0xa8(%rax)
+    0.00 :   e6d3:   movq   $0x0,0xb0(%rax)
+    0.00 :   e6de:   movw   $0x0,0xb8(%rax)
+    0.00 :   e6e7:   movw   $0x0,0xc0(%rax)
+    0.00 :   e6f0:   movq   $0x0,0xc8(%rax)
+    0.00 :   e6fb:   movw   $0x0,0xd0(%rax)
+    0.00 :   e704:   movw   $0x0,0xd8(%rax)
+    0.00 :   e70d:   movq   $0x0,0xe0(%rax)
+    0.00 :   e718:   movw   $0x0,0xe8(%rax)
+    0.00 :   e721:   movw   $0x0,0xf0(%rax)
+    0.00 :   e72a:   movq   $0x0,0xf8(%rax)
+    0.00 :   e735:   movw   $0x0,0x100(%rax)
+    0.00 :   e73e:   movw   $0x0,0x108(%rax)
+    0.00 :   e747:   movq   $0x0,0x110(%rax)
+    0.00 :   e752:   movw   $0x0,0x118(%rax)
+    0.00 :   e75b:   movw   $0x0,0x120(%rax)
+    0.00 :   e764:   movq   $0x0,0x128(%rax)
+    0.00 :   e76f:   movw   $0x0,0x130(%rax)
+    0.00 :   e778:   movw   $0x0,0x138(%rax)
+    0.00 :   e781:   movq   $0x0,0x140(%rax)
+    0.00 :   e78c:   movw   $0x0,0x148(%rax)
+    0.00 :   e795:   movw   $0x0,0x150(%rax)
+    0.00 :   e79e:   movq   $0x0,0x158(%rax)
+    0.00 :   e7a9:   movw   $0x0,0x160(%rax)
+    0.00 :   e7b2:   movw   $0x0,0x168(%rax)
+    0.00 :   e7bb:   movq   $0x0,0x170(%rax)
+    0.00 :   e7c6:   movw   $0x0,0x178(%rax)
+    0.00 :   e7cf:   mov    0x180(%rax),%rax
+    0.00 :   e7d6:   test   %rax,%rax
+    0.00 :   e7d9:   jne    e630 <katana::inplace_function<std::expected<void, std::error_code> (katana::http::request const&, katana::http::request_context&, katana::http::response&), 160ul>::{lambda(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)#2}::_FUN(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)+0x290>
+         : 190  chunk->entries.fill({});
+         : 191  }
+         : 192  known_size_ = 0;
+    0.00 :   e7df:   movq   $0x0,0x4e8(%rbx)
+    1.78 :   e7ea:   movq   $0x0,0x4f0(%rbx)
+    0.59 :   e7f5:   movw   $0x0,0x4f8(%rbx)
+    1.18 :   e7fe:   movq   $0x0,0x500(%rbx)
+    1.78 :   e809:   movw   $0x0,0x508(%rbx)
+    2.37 :   e812:   movq   $0x0,0x510(%rbx)
+    0.00 :   e81d:   movw   $0x0,0x518(%rbx)
+    0.00 :   e826:   movq   $0x0,0x520(%rbx)
+    1.18 :   e831:   movw   $0x0,0x528(%rbx)
+    0.59 :   e83a:   movq   $0x0,0x530(%rbx)
+    1.78 :   e845:   movw   $0x0,0x538(%rbx)
+    0.59 :   e84e:   movq   $0x0,0x540(%rbx)
+    2.37 :   e859:   movw   $0x0,0x548(%rbx)
+    0.00 :   e862:   movq   $0x0,0x550(%rbx)
+    0.00 :   e86d:   movw   $0x0,0x558(%rbx)
+    0.00 :   e876:   movq   $0x0,0x560(%rbx)
+    0.00 :   e881:   movw   $0x0,0x568(%rbx)
+    1.18 :   e88a:   movq   $0x0,0x570(%rbx)
+    1.18 :   e895:   movw   $0x0,0x578(%rbx)
+    0.59 :   e89e:   movq   $0x0,0x580(%rbx)
+    2.37 :   e8a9:   movw   $0x0,0x588(%rbx)
+    1.18 :   e8b2:   movq   $0x0,0x590(%rbx)
+    0.00 :   e8bd:   movw   $0x0,0x598(%rbx)
+    1.78 :   e8c6:   movq   $0x0,0x5a0(%rbx)
+    0.59 :   e8d1:   movw   $0x0,0x5a8(%rbx)
+    0.00 :   e8da:   movq   $0x0,0x5b0(%rbx)
+    0.59 :   e8e5:   movw   $0x0,0x5b8(%rbx)
+    0.00 :   e8ee:   movq   $0x0,0x5c0(%rbx)
+    0.59 :   e8f9:   movw   $0x0,0x5c8(%rbx)
+    1.78 :   e902:   movq   $0x0,0x5d0(%rbx)
+    1.18 :   e90d:   movw   $0x0,0x5d8(%rbx)
+    1.18 :   e916:   movq   $0x0,0x5e0(%rbx)
+    2.37 :   e921:   movw   $0x0,0x5e8(%rbx)
+         :
+         : 227  unknown_inline_.fill({});
+         : 228  for (auto* chunk = unknown_chunks_; chunk; chunk = chunk->next) {
+    0.59 :   e92a:   mov    0x5f0(%rbx),%rax
+    1.78 :   e931:   test   %rax,%rax
+    0.00 :   e934:   je     ea5f <katana::inplace_function<std::expected<void, std::error_code> (katana::http::request const&, katana::http::request_context&, katana::http::response&), 160ul>::{lambda(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)#2}::_FUN(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)+0x6bf>
+    0.00 :   e93a:   nopw   0x0(%rax,%rax,1)
+    0.00 :   e940:   movq   $0x0,(%rax)
+    0.00 :   e947:   movw   $0x0,0x8(%rax)
+    0.00 :   e94d:   movq   $0x0,0x10(%rax)
+    0.00 :   e955:   movw   $0x0,0x18(%rax)
+    0.00 :   e95b:   movq   $0x0,0x20(%rax)
+    0.00 :   e963:   movw   $0x0,0x28(%rax)
+    0.00 :   e969:   movq   $0x0,0x30(%rax)
+    0.00 :   e971:   movw   $0x0,0x38(%rax)
+    0.00 :   e977:   movq   $0x0,0x40(%rax)
+    0.00 :   e97f:   movw   $0x0,0x48(%rax)
+    0.00 :   e985:   movq   $0x0,0x50(%rax)
+    0.00 :   e98d:   movw   $0x0,0x58(%rax)
+    0.00 :   e993:   movq   $0x0,0x60(%rax)
+    0.00 :   e99b:   movw   $0x0,0x68(%rax)
+    0.00 :   e9a1:   movq   $0x0,0x70(%rax)
+    0.00 :   e9a9:   movw   $0x0,0x78(%rax)
+    0.00 :   e9af:   movq   $0x0,0x80(%rax)
+    0.00 :   e9ba:   movw   $0x0,0x88(%rax)
+    0.00 :   e9c3:   movq   $0x0,0x90(%rax)
+    0.00 :   e9ce:   movw   $0x0,0x98(%rax)
+    0.00 :   e9d7:   movq   $0x0,0xa0(%rax)
+    0.00 :   e9e2:   movw   $0x0,0xa8(%rax)
+    0.00 :   e9eb:   movq   $0x0,0xb0(%rax)
+    0.00 :   e9f6:   movw   $0x0,0xb8(%rax)
+    0.00 :   e9ff:   movq   $0x0,0xc0(%rax)
+    0.00 :   ea0a:   movw   $0x0,0xc8(%rax)
+    0.00 :   ea13:   movq   $0x0,0xd0(%rax)
+    0.00 :   ea1e:   movw   $0x0,0xd8(%rax)
+    0.00 :   ea27:   movq   $0x0,0xe0(%rax)
+    0.00 :   ea32:   movw   $0x0,0xe8(%rax)
+    0.00 :   ea3b:   movq   $0x0,0xf0(%rax)
+    0.00 :   ea46:   movw   $0x0,0xf8(%rax)
+    0.00 :   ea4f:   mov    0x100(%rax),%rax
+    0.00 :   ea56:   test   %rax,%rax
+    0.00 :   ea59:   jne    e940 <katana::inplace_function<std::expected<void, std::error_code> (katana::http::request const&, katana::http::request_context&, katana::http::response&), 160ul>::{lambda(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)#2}::_FUN(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)+0x5a0>
+         : 268  chunk->entries.fill({});
+         : 269  }
+         : 270  unknown_size_ = 0;
+    0.00 :   ea5f:   movq   $0x0,0x5f8(%rbx)
+         : 272  void response::assign_text(std::string body_value,
+         : 273  std::string_view content_type,
+         : 274  int32_t status_code,
+         : 275  std::string_view reason_phrase) {
+         : 276  reset();
+         : 277  status = status_code;
+    1.18 :   ea6a:   movl   $0xc8,(%rbx)
+         : 279  _GLIBCXX20_CONSTEXPR
+         : 280  basic_string&
+         : 281  assign(const _CharT* __s, size_type __n)
+         : 282  {
+         : 283  __glibcxx_requires_string_len(__s, __n);
+         : 284  return _M_replace(size_type(0), this->size(), __s, __n);
+    0.00 :   ea70:   mov    $0x2,%ecx
+    0.00 :   ea75:   mov    0x10(%rbx),%rsi
+         : 287  if (reason_phrase.empty()) {
+         : 288  reason.assign(canonical_reason_phrase(status_code));
+         : 289  } else {
+         : 290  reason.assign(reason_phrase.data(), reason_phrase.size());
+    0.00 :   ea79:   lea    0x8(%rbx),%rdi
+    0.00 :   ea7d:   lea    0x18778(%rip),%rdx        # 271fc <_IO_stdin_used+0x11fc>
+    1.18 :   ea84:   call   1e9d0 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace(unsigned long, unsigned long, char const*, unsigned long) [clone .constprop.0]>
+         : 294  }
+         : 295  body = std::move(body_value);
+    0.00 :   ea89:   lea    -0x50(%rbp),%rsi
+    0.00 :   ea8d:   lea    0x600(%rbx),%rdi
+    0.00 :   ea94:   call   237f0 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [clone .isra.0]>
+         : 299  headers.clear();
+    1.18 :   ea99:   lea    0x28(%rbx),%rdi
+         : 301  set_content_type(headers, content_type);
+    0.00 :   ea9d:   lea    0x17652(%rip),%rdx        # 260f6 <_IO_stdin_used+0xf6>
+    0.00 :   eaa4:   mov    $0xa,%esi
+    0.00 :   eaa9:   call   d268 <katana::http::(anonymous namespace)::set_content_type(katana::http::headers_map&, std::basic_string_view<char, std::char_traits<char> >)>
+         : 305  { return _M_dataplus._M_p; }
+    1.18 :   eaae:   mov    -0x50(%rbp),%rdi
+         : 307  if (_M_data() == _M_local_data())
+    1.18 :   eab2:   cmp    %r13,%rdi
+    0.00 :   eab5:   je     eac4 <katana::inplace_function<std::expected<void, std::error_code> (katana::http::request const&, katana::http::request_context&, katana::http::response&), 160ul>::{lambda(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)#2}::_FUN(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)+0x724>
+         : 310  { _Alloc_traits::deallocate(_M_get_allocator(), _M_data(), __size + 1); }
+    0.00 :   eab7:   mov    -0x40(%rbp),%rax
+    0.00 :   eabb:   lea    0x1(%rax),%rsi
+         : 313  _GLIBCXX_OPERATOR_DELETE(_GLIBCXX_SIZED_DEALLOC(__p, __n),
+         : 314  std::align_val_t(alignof(_Tp)));
+         : 315  return;
+         : 316  }
+         : 317  #endif
+         : 318  _GLIBCXX_OPERATOR_DELETE(_GLIBCXX_SIZED_DEALLOC(__p, __n));
+    0.00 :   eabf:   call   6910 <operator delete(void*, unsigned long)@plt>
+         : 320  template<typename _Up>
+         : 321  using rebind = expected<_Up, error_type>;
+         :
+         : 323  constexpr
+         : 324  expected() noexcept
+         : 325  : _M_void(), _M_has_value(true)
+    0.00 :   eac4:   movb   $0x1,0x10(%r12)
+    1.18 :   eaca:   mov    -0x28(%rbp),%rax
+    0.00 :   eace:   sub    %fs:0x28,%rax
+    1.18 :   ead7:   jne    eae7 <katana::inplace_function<std::expected<void, std::error_code> (katana::http::request const&, katana::http::request_context&, katana::http::response&), 160ul>::{lambda(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)#2}::_FUN(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)+0x747>
+    0.00 :   ead9:   add    $0x38,%rsp
+    0.00 :   eadd:   mov    %r12,%rax
+    0.00 :   eae0:   pop    %rbx
+    0.00 :   eae1:   pop    %r12
+    0.59 :   eae3:   pop    %r13
+    0.00 :   eae5:   pop    %rbp
+    0.00 :   eae6:   ret
+    0.00 :   eae7:   call   6960 <__stack_chk_fail@plt>
+    0.00 :   eaec:   endbr64
+         : 339  { _M_dispose(); }
+    0.00 :   eaf0:   mov    %rax,%rbx
+    0.00 :   eaf3:   jmp    6c80 <katana::inplace_function<std::expected<void, std::error_code> (katana::http::request const&, katana::http::request_context&, katana::http::response&), 160ul>::{lambda(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)#2}::_FUN(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&) [clone .cold]>

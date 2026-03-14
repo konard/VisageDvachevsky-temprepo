@@ -1,0 +1,120 @@
+ Percent |	Source code & Disassembly of hello_world_server for cpu-clock:u (93 samples, percent: local period)
+-------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     000000000001c420 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .isra.0]>:
+    7.53 :   1c420:  endbr64
+         : 7     *  @param __n  The number of characters to append.
+         : 8     *  @return  Reference to this string.
+         : 9     */
+         : 10    _GLIBCXX20_CONSTEXPR
+         : 11    basic_string&
+         : 12    append(const _CharT* __s, size_type __n)
+    0.00 :   1c424:  push   %rbp
+         : 14    if (this->max_size() - (this->size() - __n1) < __n2)
+    6.45 :   1c425:  movabs $0x7fffffffffffffff,%rax
+         : 16    append(const _CharT* __s, size_type __n)
+    0.00 :   1c42f:  mov    %rsp,%rbp
+    1.08 :   1c432:  push   %r12
+    4.30 :   1c434:  push   %rbx
+         : 20    { return _M_string_length; }
+    5.38 :   1c435:  mov    0x8(%rdi),%r9
+         : 22    if (this->max_size() - (this->size() - __n1) < __n2)
+    5.38 :   1c439:  sub    %r9,%rax
+    3.23 :   1c43c:  cmp    %rdx,%rax
+    4.30 :   1c43f:  jb     1c4ce <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .isra.0]+0xae>
+    3.23 :   1c445:  mov    %rdi,%rbx
+         : 27    { return _M_dataplus._M_p; }
+    0.00 :   1c448:  mov    (%rdi),%rdi
+         : 29    _GLIBCXX20_CONSTEXPR
+         : 30    basic_string<_CharT, _Traits, _Alloc>&
+         : 31    basic_string<_CharT, _Traits, _Alloc>::
+         : 32    _M_append(const _CharT* __s, size_type __n)
+         : 33    {
+         : 34    const size_type __len = __n + this->size();
+    2.15 :   1c44b:  lea    (%r9,%rdx,1),%r12
+         : 36    return std::pointer_traits<const_pointer>::pointer_to(*_M_local_buf);
+    0.00 :   1c44f:  lea    0x10(%rbx),%rax
+         : 38    if (_M_data() == _M_local_data())
+    0.00 :   1c453:  cmp    %rax,%rdi
+    2.15 :   1c456:  je     1c4b0 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .isra.0]+0x90>
+         : 41    return _M_is_local() ? size_type(_S_local_capacity)
+    0.00 :   1c458:  mov    0x10(%rbx),%rax
+         :
+         : 44    if (__len <= this->capacity())
+    1.08 :   1c45c:  cmp    %r12,%rax
+    5.38 :   1c45f:  jb     1c488 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .isra.0]+0x68>
+         : 47    {
+         : 48    if (__n)
+    2.15 :   1c461:  test   %rdx,%rdx
+    0.00 :   1c464:  je     1c477 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .isra.0]+0x57>
+         : 51    this->_S_copy(this->_M_data() + this->size(), __s, __n);
+    0.00 :   1c466:  add    %r9,%rdi
+         : 53    if (__n == 1)
+    0.00 :   1c469:  cmp    $0x1,%rdx
+    0.00 :   1c46d:  je     1c4b8 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .isra.0]+0x98>
+         : 56    return __s1;
+         : 57    #if __cplusplus >= 202002L
+         : 58    if (std::__is_constant_evaluated())
+         : 59    return __gnu_cxx::char_traits<char_type>::copy(__s1, __s2, __n);
+         : 60    #endif
+         : 61    return static_cast<char_type*>(__builtin_memcpy(__s1, __s2, __n));
+    0.00 :   1c46f:  call   6880 <memcpy@plt>
+         : 63    { return _M_dataplus._M_p; }
+    5.38 :   1c474:  mov    (%rbx),%rdi
+         : 65    { _M_string_length = __length; }
+    2.15 :   1c477:  mov    %r12,0x8(%rbx)
+         : 67    __c1 = __c2;
+    5.38 :   1c47b:  movb   $0x0,(%rdi,%r12,1)
+         : 69    {
+         : 70    __glibcxx_requires_string_len(__s, __n);
+         : 71    _M_check_length(size_type(0), __n, "basic_string::append");
+         : 72    return _M_append(__s, __n);
+         : 73    }
+   18.28 :   1c480:  pop    %rbx
+   11.83 :   1c481:  pop    %r12
+    1.08 :   1c483:  pop    %rbp
+    2.15 :   1c484:  ret
+    0.00 :   1c485:  nopl   (%rax)
+         : 79    }
+         : 80    else
+         : 81    this->_M_mutate(this->size(), size_type(0), __s, __n);
+    0.00 :   1c488:  mov    %rbx,%rdi
+    0.00 :   1c48b:  mov    %rdx,%r8
+    0.00 :   1c48e:  mov    %rsi,%rcx
+    0.00 :   1c491:  xor    %edx,%edx
+    0.00 :   1c493:  mov    %r9,%rsi
+    0.00 :   1c496:  call   ba38 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_mutate(unsigned long, unsigned long, char const*, unsigned long)>
+         : 88    { return _M_dataplus._M_p; }
+    0.00 :   1c49b:  mov    (%rbx),%rdi
+         : 90    { _M_string_length = __length; }
+    0.00 :   1c49e:  mov    %r12,0x8(%rbx)
+    0.00 :   1c4a2:  movb   $0x0,(%rdi,%r12,1)
+         : 93    }
+    0.00 :   1c4a7:  pop    %rbx
+    0.00 :   1c4a8:  pop    %r12
+    0.00 :   1c4aa:  pop    %rbp
+    0.00 :   1c4ab:  ret
+    0.00 :   1c4ac:  nopl   0x0(%rax)
+         : 99    return _M_is_local() ? size_type(_S_local_capacity)
+    0.00 :   1c4b0:  mov    $0xf,%eax
+    0.00 :   1c4b5:  jmp    1c45c <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .isra.0]+0x3c>
+    0.00 :   1c4b7:  nop
+    0.00 :   1c4b8:  movzbl (%rsi),%eax
+    0.00 :   1c4bb:  mov    %al,(%rdi)
+         : 105   { _M_string_length = __length; }
+    0.00 :   1c4bd:  mov    %r12,0x8(%rbx)
+         : 107   { return _M_dataplus._M_p; }
+    0.00 :   1c4c1:  mov    (%rbx),%rdi
+    0.00 :   1c4c4:  movb   $0x0,(%rdi,%r12,1)
+         : 110   }
+    0.00 :   1c4c9:  pop    %rbx
+    0.00 :   1c4ca:  pop    %r12
+    0.00 :   1c4cc:  pop    %rbp
+    0.00 :   1c4cd:  ret
+         : 115   __throw_length_error(__N(__s));
+    0.00 :   1c4ce:  lea    0x9c72(%rip),%rdi        # 26147 <_IO_stdin_used+0x147>
+    0.00 :   1c4d5:  call   67d0 <std::__throw_length_error(char const*)@plt>

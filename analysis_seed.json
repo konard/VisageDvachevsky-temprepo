@@ -1,0 +1,122 @@
+{
+  "hello-canonical": {
+    "requests_per_sec": "1310914.98",
+    "transfer_per_sec": "127.52MB",
+    "p50_us": "2297.000",
+    "p95_us": "7456.000",
+    "p99_us": "10954.000",
+    "perf_stat": {
+      "cpu-clock": "31062",
+      "task-clock": "31078",
+      "31078545090": "0"
+    },
+    "perf_top_symbols": [
+      {
+        "symbol": "katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]",
+        "overhead_pct": 16.67
+      },
+      {
+        "symbol": "katana::http::parser::parse_available()",
+        "overhead_pct": 16.4
+      },
+      {
+        "symbol": "katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const",
+        "overhead_pct": 11.85
+      },
+      {
+        "symbol": "katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]",
+        "overhead_pct": 9.36
+      },
+      {
+        "symbol": "katana::http::string_to_field(std::basic_string_view<char, std::char_traits<char> >)",
+        "overhead_pct": 6.0
+      },
+      {
+        "symbol": "katana::http::parser::prepare_for_next_request(katana::monotonic_arena*)",
+        "overhead_pct": 4.03
+      },
+      {
+        "symbol": "katana::inplace_function<std::expected<void, std::error_code> (katana::http::request const&, katana::http::request_context&, katana::http::response&), 160ul>::{lambda(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)#2}::_FUN(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)",
+        "overhead_pct": 3.53
+      },
+      {
+        "symbol": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .isra.0]",
+        "overhead_pct": 1.94
+      }
+    ],
+    "callgrind_top": [
+      "218,284,415 (99.83%)  *  katana/core/include/katana/core/inplace_function.hpp:katana::reactor_pool::worker_thread(katana::reactor_pool::reactor_context*)",
+      "218,090,253 (99.74%)  *  katana/core/include/katana/core/inplace_function.hpp:katana::inplace_function<void (katana::event_type), 96ul>::{lambda(void const*, katana::event_type)#1}::_FUN(void const*, katana::event_type) [/mnt/bench/KATANA/build/perf-e2e/hello_world_server]",
+      "218,070,105 (99.73%)  *  katana/core/src/http_server.cpp:katana::inplace_function<void (katana::event_type), 96ul>::{lambda(void const*, katana::event_type)#1}::_FUN(void const*, katana::event_type)",
+      "218,058,015 (99.72%)  *  katana/core/src/http_server.cpp:katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0] [/mnt/bench/KATANA/build/perf-e2e/hello_world_server]",
+      "63,899,940 (29.22%)  *  /mnt/bench/KATANA/katana/core/src/http.cpp:katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const",
+      "63,094,140 (28.85%)  *  katana/core/src/syscall_metrics.cpp:katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const",
+      "63,053,850 (28.84%)  *  /mnt/bench/KATANA/katana/core/src/http.cpp:katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]",
+      "51,614,682 (23.60%)  *  /mnt/bench/KATANA/katana/core/src/http.cpp:katana::http::parser::parse_available()",
+      "35,374,620 (16.18%)  *  katana/core/include/katana/core/router.hpp:katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]",
+      "34,931,430 (15.97%)  *  katana/core/include/katana/core/router.hpp:katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const [/mnt/bench/KATANA/build/perf-e2e/hello_world_server]",
+      "25,626,246 (11.72%)  *  /mnt/bench/KATANA/katana/core/include/katana/core/http_headers.hpp:katana::http::headers_map::get(std::basic_string_view<char, std::char_traits<char> >) const",
+      "25,384,506 (11.61%)  *  katana/core/include/katana/core/http_headers.hpp:katana::http::headers_map::get(std::basic_string_view<char, std::char_traits<char> >) const [/mnt/bench/KATANA/build/perf-e2e/hello_world_server]"
+    ]
+  },
+  "compute-canonical": {
+    "requests_per_sec": "1017712.55",
+    "transfer_per_sec": "93.17MB",
+    "p50_us": "3006.000",
+    "p95_us": "13262.000",
+    "p99_us": "28490.000",
+    "perf_stat": {
+      "cpu-clock": "38319",
+      "task-clock": "38324",
+      "38324517492": "0"
+    },
+    "perf_top_symbols": [
+      {
+        "symbol": "katana::http::parser::parse_available()",
+        "overhead_pct": 31.67
+      },
+      {
+        "symbol": "katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]",
+        "overhead_pct": 8.82
+      },
+      {
+        "symbol": "generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)",
+        "overhead_pct": 8.2
+      },
+      {
+        "symbol": "katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]",
+        "overhead_pct": 5.9
+      },
+      {
+        "symbol": "tolower",
+        "overhead_pct": 4.3
+      },
+      {
+        "symbol": "katana::http::string_to_field(std::basic_string_view<char, std::char_traits<char> >)",
+        "overhead_pct": 4.26
+      },
+      {
+        "symbol": "katana::serde::json_cursor::skip_ws()",
+        "overhead_pct": 3.68
+      },
+      {
+        "symbol": "compute_handler::compute_sum(katana::arena_vector<double, 8ul> const&, katana::http::response&)",
+        "overhead_pct": 3.48
+      }
+    ],
+    "callgrind_top": [
+      "95,468,090 (99.92%)  *  katana/core/include/katana/core/inplace_function.hpp:katana::reactor_pool::worker_thread(katana::reactor_pool::reactor_context*)",
+      "95,415,201 (99.86%)  *  katana/core/include/katana/core/inplace_function.hpp:katana::inplace_function<void (katana::event_type), 96ul>::{lambda(void const*, katana::event_type)#1}::_FUN(void const*, katana::event_type) [/mnt/bench/KATANA/build/perf-e2e/examples/codegen/compute_api/compute_api]",
+      "95,411,991 (99.86%)  *  katana/core/src/http_server.cpp:katana::inplace_function<void (katana::event_type), 96ul>::{lambda(void const*, katana::event_type)#1}::_FUN(void const*, katana::event_type)",
+      "95,410,065 (99.85%)  *  katana/core/src/http_server.cpp:katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0] [/mnt/bench/KATANA/build/perf-e2e/examples/codegen/compute_api/compute_api]",
+      "45,888,336 (48.03%)  *  /mnt/bench/KATANA/katana/core/src/http.cpp:katana::http::parser::parse_available()",
+      "21,092,765 (22.08%)  *  katana/core/include/katana/core/inplace_function.hpp:katana::http::server::handle_connection(katana::http::server::connection_state&, katana::epoll_reactor&) [clone .isra.0]",
+      "21,042,125 (22.02%)  *  katana/core/include/katana/core/inplace_function.hpp:katana::inplace_function<std::expected<void, std::error_code> (katana::http::request const&, katana::http::request_context&, katana::http::response&), 64ul>::{lambda(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)#3}::_FUN(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&) [/mnt/bench/KATANA/build/perf-e2e/examples/codegen/compute_api/compute_api]",
+      "19,687,505 (20.60%)  *  examples/codegen/compute_api/generated/generated_router_bindings.hpp:katana::inplace_function<std::expected<void, std::error_code> (katana::http::request const&, katana::http::request_context&, katana::http::response&), 64ul>::{lambda(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)#3}::_FUN(void const*, katana::http::request const&, katana::http::request_context&, katana::http::response&)",
+      "19,598,885 (20.51%)  *  examples/codegen/compute_api/generated/generated_router_bindings.hpp:generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&) [/mnt/bench/KATANA/build/perf-e2e/examples/codegen/compute_api/compute_api]",
+      "9,817,830 (10.28%)  *  /mnt/bench/KATANA/katana/core/src/http.cpp:katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const",
+      "9,691,230 (10.14%)  *  katana/core/src/syscall_metrics.cpp:katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const",
+      "9,684,900 (10.14%)  *  /mnt/bench/KATANA/katana/core/src/http.cpp:katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]"
+    ]
+  }
+}

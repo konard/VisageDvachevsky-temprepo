@@ -1,0 +1,198 @@
+ Percent |	Source code & Disassembly of compute_api for cpu-clock:u (68 samples, percent: local period)
+------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3    Disassembly of section .text:
+         :
+         : 5    000000000000b268 <katana::simd::find_crlf_avx2(char const*, unsigned long)>:
+         : 6    }
+         : 7    return nullptr;
+         : 8    }
+         :
+         : 10   #ifdef KATANA_HAS_AVX2
+         : 11   inline const char* find_crlf_avx2(const char* data, size_t len) noexcept {
+    1.47 :   b268:   mov    %rdi,%rax
+         : 13   if (len < 2)
+    5.88 :   b26b:   cmp    $0x1,%rsi
+    2.94 :   b26f:   jbe    b39f <katana::simd::find_crlf_avx2(char const*, unsigned long)+0x137>
+         :
+         : 17   size_t i = 0;
+         :
+         : 19   // For large buffers (>4KB), use aggressive prefetching and 2x unrolling
+         : 20   // to maximize memory throughput and hide latency
+         : 21   if (len >= 4096) {
+    0.00 :   b275:   cmp    $0xfff,%rsi
+    2.94 :   b27c:   ja     b2f8 <katana::simd::find_crlf_avx2(char const*, unsigned long)+0x90>
+         : 24   }
+         : 25   }
+         : 26   }
+         :
+         : 28   // Standard path for smaller buffers or remainder
+         : 29   for (; i + 33 <= len; i += 32) {
+    0.00 :   b27e:   cmp    $0x20,%rsi
+    2.94 :   b282:   jbe    b3b7 <katana::simd::find_crlf_avx2(char const*, unsigned long)+0x14f>
+    0.00 :   b288:   vmovdqa 0x20830(%rip),%ymm1        # 2bac0 <katana::serde::is_json_whitespace_table+0x120>
+    4.41 :   b290:   vmovdqa 0x20848(%rip),%ymm2        # 2bae0 <katana::serde::is_json_whitespace_table+0x140>
+         : 34   size_t i = 0;
+    2.94 :   b298:   xor    %ecx,%ecx
+    4.41 :   b29a:   lea    0x161(%rax,%rcx,1),%rdx
+    1.47 :   b2a2:   jmp    b2c0 <katana::simd::find_crlf_avx2(char const*, unsigned long)+0x58>
+    0.00 :   b2a4:   nopl   0x0(%rax)
+         : 39   for (; i + 33 <= len; i += 32) {
+    0.00 :   b2a8:   lea    0x20(%rcx),%rdi
+    0.00 :   b2ac:   add    $0x41,%rcx
+    0.00 :   b2b0:   add    $0x20,%rdx
+    0.00 :   b2b4:   cmp    %rcx,%rsi
+    0.00 :   b2b7:   jb     b3a8 <katana::simd::find_crlf_avx2(char const*, unsigned long)+0x140>
+    0.00 :   b2bd:   mov    %rdi,%rcx
+         :
+         : 47   extern __inline __m256i
+         : 48   __attribute__ ((__gnu_inline__, __always_inline__, __artificial__))
+         : 49   _mm256_cmpeq_epi8 (__m256i __A, __m256i __B)
+         : 50   {
+         : 51   return (__m256i) ((__v32qi)__A == (__v32qi)__B);
+    0.00 :   b2c0:   vpcmpeqb -0x161(%rdx),%ymm1,%ymm0
+   13.24 :   b2c8:   vpcmpeqb -0x160(%rdx),%ymm2,%ymm3
+    4.41 :   b2d0:   prefetcht0 -0x1(%rdx)
+         : 55   }
+         :
+         : 57   extern __inline __m256i __attribute__((__gnu_inline__, __always_inline__, __artificial__))
+         : 58   _mm256_loadu_si256 (__m256i_u const *__P)
+         : 59   {
+         : 60   return *__P;
+    0.00 :   b2d4:   prefetcht0 (%rdx)
+         : 62   return (__m256i) ((__v4du)__A & (__v4du)__B);
+    0.00 :   b2d7:   vpand  %ymm3,%ymm0,%ymm0
+         :
+         : 65   extern __inline int
+         : 66   __attribute__ ((__gnu_inline__, __always_inline__, __artificial__))
+         : 67   _mm256_movemask_epi8 (__m256i __A)
+         : 68   {
+         : 69   return __builtin_ia32_pmovmskb256 ((__v32qi)__A);
+    0.00 :   b2db:   vpmovmskb %ymm0,%edi
+         :
+         : 72   __m256i crlf_match = _mm256_and_si256(cr_match, lf_match);
+         : 73   int mask = _mm256_movemask_epi8(crlf_match);
+         : 74   const auto mask_bits = static_cast<unsigned int>(mask);
+         :
+         : 76   if (mask_bits != 0U) {
+    0.00 :   b2df:   test   %edi,%edi
+   27.94 :   b2e1:   je     b2a8 <katana::simd::find_crlf_avx2(char const*, unsigned long)+0x40>
+         : 79   const auto offset = static_cast<size_t>(__builtin_ctz(mask_bits));
+    0.00 :   b2e3:   tzcnt  %edi,%edi
+         : 81   return data + i + offset;
+    2.94 :   b2e7:   add    %rcx,%rdi
+    5.88 :   b2ea:   add    %rax,%rdi
+    8.82 :   b2ed:   vzeroupper
+         : 85   }
+         : 86   }
+         :
+         : 88   return find_crlf_scalar(data + i, len - i);
+         : 89   }
+    0.00 :   b2f0:   mov    %rdi,%rax
+    2.94 :   b2f3:   ret
+    0.00 :   b2f4:   nopl   0x0(%rax)
+         : 93   processor.  The selector I specifies the type of prefetch operation.  */
+         : 94   #ifdef __OPTIMIZE__
+         : 95   extern __inline void __attribute__((__gnu_inline__, __always_inline__, __artificial__))
+         : 96   _mm_prefetch (const void *__P, enum _mm_hint __I)
+         : 97   {
+         : 98   __builtin_ia32_prefetch (__P, (__I & 0x4) >> 2,
+    0.00 :   b2f8:   lea    0x161(%rdi),%rdx
+    0.00 :   b2ff:   prefetcht0 (%rdi)
+    0.00 :   b302:   prefetcht0 0x40(%rdi)
+    0.00 :   b306:   prefetcht0 0x80(%rdi)
+         : 103  for (; i + 65 <= len; i += 64) {
+    0.00 :   b30d:   vmovdqa 0x207ab(%rip),%ymm1        # 2bac0 <katana::serde::is_json_whitespace_table+0x120>
+    0.00 :   b315:   vmovdqa 0x207c3(%rip),%ymm2        # 2bae0 <katana::serde::is_json_whitespace_table+0x140>
+         : 106  size_t i = 0;
+    0.00 :   b31d:   xor    %edi,%edi
+    0.00 :   b31f:   jmp    b366 <katana::simd::find_crlf_avx2(char const*, unsigned long)+0xfe>
+    0.00 :   b321:   nopl   0x0(%rax)
+         : 110  return (__m256i) ((__v32qi)__A == (__v32qi)__B);
+    0.00 :   b328:   vpcmpeqb -0x141(%rdx),%ymm1,%ymm0
+    0.00 :   b330:   vpcmpeqb -0x140(%rdx),%ymm2,%ymm3
+    0.00 :   b338:   prefetcht0 (%rdx)
+         : 114  return (__m256i) ((__v4du)__A & (__v4du)__B);
+    0.00 :   b33b:   vpand  %ymm3,%ymm0,%ymm0
+         : 116  return __builtin_ia32_pmovmskb256 ((__v32qi)__A);
+    0.00 :   b33f:   vpmovmskb %ymm0,%ecx
+         : 118  if (mask1 != 0) {
+    0.00 :   b343:   test   %ecx,%ecx
+    0.00 :   b345:   jne    b3f8 <katana::simd::find_crlf_avx2(char const*, unsigned long)+0x190>
+         : 121  for (; i + 65 <= len; i += 64) {
+    0.00 :   b34b:   lea    0x81(%rdi),%r8
+    0.00 :   b352:   lea    0x40(%rdi),%rcx
+    0.00 :   b356:   add    $0x40,%rdx
+    0.00 :   b35a:   cmp    %r8,%rsi
+    0.00 :   b35d:   jb     b3e0 <katana::simd::find_crlf_avx2(char const*, unsigned long)+0x178>
+    0.00 :   b363:   mov    %rcx,%rdi
+         : 128  return (__m256i) ((__v32qi)__A == (__v32qi)__B);
+    0.00 :   b366:   vpcmpeqb -0x161(%rdx),%ymm1,%ymm0
+    0.00 :   b36e:   vpcmpeqb -0x160(%rdx),%ymm2,%ymm3
+    0.00 :   b376:   prefetcht0 -0x61(%rdx)
+    0.00 :   b37a:   prefetcht0 -0x21(%rdx)
+         : 133  return (__m256i) ((__v4du)__A & (__v4du)__B);
+    0.00 :   b37e:   vpand  %ymm3,%ymm0,%ymm0
+         : 135  return __builtin_ia32_pmovmskb256 ((__v32qi)__A);
+    0.00 :   b382:   vpmovmskb %ymm0,%ecx
+         : 137  if (mask0 != 0) {
+    0.00 :   b386:   test   %ecx,%ecx
+    0.00 :   b388:   je     b328 <katana::simd::find_crlf_avx2(char const*, unsigned long)+0xc0>
+         : 140  return data + i + static_cast<size_t>(__builtin_ctz(static_cast<unsigned>(mask0)));
+    0.00 :   b38a:   tzcnt  %ecx,%ecx
+    0.00 :   b38e:   add    %rdi,%rcx
+    0.00 :   b391:   lea    (%rax,%rcx,1),%rdi
+    0.00 :   b395:   vzeroupper
+         : 145  }
+    0.00 :   b398:   mov    %rdi,%rax
+    0.00 :   b39b:   ret
+    0.00 :   b39c:   vzeroupper
+         : 149  return nullptr;
+    0.00 :   b39f:   xor    %edi,%edi
+         : 151  }
+    0.00 :   b3a1:   mov    %rdi,%rax
+    0.00 :   b3a4:   ret
+    0.00 :   b3a5:   nopl   (%rax)
+         : 155  return find_crlf_scalar(data + i, len - i);
+    0.00 :   b3a8:   add    %rdi,%rax
+    0.00 :   b3ab:   sub    %rdi,%rsi
+         : 158  if (len < 2)
+    0.00 :   b3ae:   cmp    $0x1,%rsi
+    0.00 :   b3b2:   jbe    b39c <katana::simd::find_crlf_avx2(char const*, unsigned long)+0x134>
+    0.00 :   b3b4:   vzeroupper
+         : 162  for (size_t i = 0; i <= len - 2; ++i) {
+    0.00 :   b3b7:   lea    -0x1(%rax,%rsi,1),%rcx
+    1.47 :   b3bc:   jmp    b3c8 <katana::simd::find_crlf_avx2(char const*, unsigned long)+0x160>
+    0.00 :   b3be:   xchg   %ax,%ax
+    0.00 :   b3c0:   inc    %rax
+    0.00 :   b3c3:   cmp    %rax,%rcx
+    0.00 :   b3c6:   je     b39f <katana::simd::find_crlf_avx2(char const*, unsigned long)+0x137>
+         : 169  if (data[i] == '\r' && data[i + 1] == '\n') {
+    0.00 :   b3c8:   cmpb   $0xd,(%rax)
+    2.94 :   b3cb:   mov    %rax,%rdi
+    0.00 :   b3ce:   jne    b3c0 <katana::simd::find_crlf_avx2(char const*, unsigned long)+0x158>
+    0.00 :   b3d0:   cmpb   $0xa,0x1(%rax)
+    0.00 :   b3d4:   jne    b3c0 <katana::simd::find_crlf_avx2(char const*, unsigned long)+0x158>
+    0.00 :   b3d6:   jmp    b2f0 <katana::simd::find_crlf_avx2(char const*, unsigned long)+0x88>
+    0.00 :   b3db:   nopl   0x0(%rax,%rax,1)
+         : 177  for (; i + 33 <= len; i += 32) {
+    0.00 :   b3e0:   add    $0x61,%rdi
+    0.00 :   b3e4:   cmp    %rdi,%rsi
+    0.00 :   b3e7:   jae    b29a <katana::simd::find_crlf_avx2(char const*, unsigned long)+0x32>
+         : 181  return find_crlf_scalar(data + i, len - i);
+    0.00 :   b3ed:   add    %rcx,%rax
+    0.00 :   b3f0:   mov    %rcx,%rdi
+    0.00 :   b3f3:   jmp    b3ab <katana::simd::find_crlf_avx2(char const*, unsigned long)+0x143>
+    0.00 :   b3f5:   nopl   (%rax)
+         : 186  static_cast<size_t>(__builtin_ctz(static_cast<unsigned>(mask1)));
+    0.00 :   b3f8:   tzcnt  %ecx,%ecx
+         : 188  return data + i + 32 +
+    0.00 :   b3fc:   lea    0x20(%rdi,%rcx,1),%rdx
+    0.00 :   b401:   vzeroupper
+         : 191  static_cast<size_t>(__builtin_ctz(static_cast<unsigned>(mask1)));
+    0.00 :   b404:   lea    (%rax,%rdx,1),%rdi
+         : 193  }
+    0.00 :   b408:   mov    %rdi,%rax
+    0.00 :   b40b:   ret

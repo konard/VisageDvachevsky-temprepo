@@ -1,0 +1,2478 @@
+ Percent |	Source code & Disassembly of hello_world_server for cpu-clock:u (448 samples, percent: local period)
+--------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     0000000000011b50 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]>:
+         : 6     std::string out;
+         : 7     serialize_into(out);
+         : 8     return out;
+         : 9     }
+         :
+         : 11    void response::serialize_into(std::string& out) const {
+    0.45 :   11b50:  push   %rbp
+         : 13    }
+         :
+         : 15    // Calculate Content-Length if not already set
+         : 16    char content_length_buf[32];
+         : 17    std::string_view content_length_value;
+         : 18    bool has_content_length = headers.get("Content-Length").has_value();
+    0.45 :   11b51:  lea    0x145d6(%rip),%rcx        # 2612e <_IO_stdin_used+0x12e>
+    0.00 :   11b58:  mov    $0xe,%edx
+         : 21    void response::serialize_into(std::string& out) const {
+    0.00 :   11b5d:  mov    %rsp,%rbp
+    0.00 :   11b60:  push   %r15
+    0.00 :   11b62:  push   %r14
+    0.00 :   11b64:  push   %r13
+    0.22 :   11b66:  push   %r12
+    0.00 :   11b68:  push   %rbx
+    0.67 :   11b69:  mov    %rsi,%r12
+    0.00 :   11b6c:  mov    %rdi,%rbx
+    0.00 :   11b6f:  sub    $0x1a8,%rsp
+    0.00 :   11b76:  mov    %fs:0x28,%rax
+    0.22 :   11b7f:  mov    %rax,0x198(%rsp)
+    0.22 :   11b87:  xor    %eax,%eax
+         : 34    bool has_content_length = headers.get("Content-Length").has_value();
+    0.00 :   11b89:  lea    0x28(%rdi),%rax
+    0.00 :   11b8d:  lea    0x60(%rsp),%rdi
+    0.22 :   11b92:  mov    %rax,0x50(%rsp)
+    0.45 :   11b97:  mov    %rax,%rsi
+    0.00 :   11b9a:  mov    %rdi,0x48(%rsp)
+    0.45 :   11b9f:  call   117f0 <katana::http::headers_map::get(std::basic_string_view<char, std::char_traits<char> >) const>
+         :
+         : 42    if (!has_content_length) {
+    0.22 :   11ba4:  cmpb   $0x0,0x70(%rsp)
+    0.22 :   11ba9:  je     13458 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1908>
+         : 45    std::string_view content_length_value;
+    0.00 :   11baf:  movq   $0x0,0x40(%rsp)
+    0.00 :   11bb8:  xor    %r15d,%r15d
+         : 48    }
+         : 49    };
+         :
+         : 51    iterator begin() const noexcept {
+         : 52    iterator it;
+         : 53    it.map = this;
+    0.00 :   11bbb:  mov    0x50(%rsp),%rax
+         : 55    it.advance();
+    0.22 :   11bc0:  mov    0x48(%rsp),%rdi
+         :
+         : 58    std::string_view field_to_string(field f) noexcept {
+         : 59    auto idx = static_cast<size_t>(f);
+         : 60    const auto& table = detail::get_field_name_table();
+         : 61    if (idx < table.size()) {
+         : 62    return table[idx];
+    0.00 :   11bc5:  lea    0x1a534(%rip),%r10        # 2c100 <_ZZN6katana4http6detail20get_field_name_tableEvE5table.lto_priv.0>
+         : 64    iterator it;
+    0.00 :   11bcc:  movq   $0x0,0x68(%rsp)
+    0.00 :   11bd5:  movb   $0x0,0x70(%rsp)
+    0.00 :   11bda:  movq   $0x0,0x78(%rsp)
+    0.22 :   11be3:  movq   $0x0,0x80(%rsp)
+         : 69    it.map = this;
+    0.00 :   11bef:  mov    %rax,0x60(%rsp)
+         : 71    it.advance();
+    0.22 :   11bf4:  call   eb00 <katana::http::headers_map::iterator::advance()>
+         :
+         : 74    iterator end() const noexcept {
+         : 75    iterator it;
+         : 76    it.map = this;
+         : 77    it.phase = 4;
+         : 78    return it;
+    1.56 :   11bf9:  movzbl 0x70(%rsp),%esi
+         : 80    content_length_value =
+         : 81    std::string_view(content_length_buf, static_cast<size_t>(ptr - content_length_buf));
+         : 82    }
+         : 83    }
+         :
+         : 85    size_t headers_size = 0;
+    0.00 :   11bfe:  xor    %edx,%edx
+    0.00 :   11c00:  mov    0x80(%rsp),%rdi
+    0.00 :   11c08:  mov    0x68(%rsp),%rax
+    0.00 :   11c0d:  mov    0x78(%rsp),%rcx
+         : 90    known_chunk != other.known_chunk || unknown_chunk != other.unknown_chunk;
+    0.00 :   11c12:  cmp    $0x4,%sil
+    0.22 :   11c16:  je     11e20 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x2d0>
+         : 93    if (phase == 0) {
+    0.00 :   11c1c:  test   %sil,%sil
+    0.00 :   11c1f:  je     11e73 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x323>
+         : 96    if (phase == 1) {
+    0.00 :   11c25:  cmp    $0x1,%sil
+    0.00 :   11c29:  je     12203 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x6b3>
+         : 99    (phase == 2) ? map->unknown_inline_[index] : unknown_chunk->entries[index];
+    0.00 :   11c2f:  cmp    $0x2,%sil
+    0.00 :   11c33:  jne    11e29 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x2d9>
+         : 102   operator[](size_type __n) const noexcept
+         : 103   {
+         : 104   #if __cplusplus >= 201402L
+         : 105   __glibcxx_requires_subscript(__n);
+         : 106   #endif
+         : 107   return _M_elems[__n];
+    0.00 :   11c39:  mov    %rax,%rsi
+         : 109   ++index;
+    0.00 :   11c3c:  inc    %rax
+    0.00 :   11c3f:  shl    $0x5,%rsi
+         : 112   std::string_view(entry.value, entry.value_length)};
+    0.00 :   11c43:  movzwl 0x508(%rbx,%rsi,1),%edi
+    0.00 :   11c4b:  lea    0x4(%rdx,%rdi,1),%rdi
+         : 115   return {std::string_view(entry.name, entry.name_length),
+    0.00 :   11c50:  movzwl 0x4f8(%rbx,%rsi,1),%edx
+         : 117   for (const auto& [name, value] : headers) {
+         : 118   headers_size += name.size() + HEADER_SEPARATOR.size() + value.size() + CRLF.size();
+    0.00 :   11c58:  add    %rdi,%rdx
+         : 120   void advance() noexcept {
+    0.00 :   11c5b:  nopl   0x0(%rax,%rax,1)
+         : 122   while (index < UNKNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   11c60:  cmp    $0x7,%rax
+    0.00 :   11c64:  ja     11d30 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e0>
+    0.00 :   11c6a:  mov    %rax,%rsi
+    0.22 :   11c6d:  shl    $0x5,%rsi
+         : 127   if (map->unknown_inline_[index].name) {
+    0.22 :   11c71:  cmpq   $0x0,0x4f0(%rbx,%rsi,1)
+    2.01 :   11c7a:  lea    (%rbx,%rsi,1),%rdi
+    0.00 :   11c7e:  jne    11c39 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe9>
+         : 131   ++index;
+    0.00 :   11c80:  lea    0x1(%rax),%rsi
+         : 133   while (index < UNKNOWN_HEADERS_INLINE_SIZE) {
+    0.22 :   11c84:  cmp    $0x7,%rax
+    0.00 :   11c88:  je     11d30 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e0>
+         : 136   if (map->unknown_inline_[index].name) {
+    0.00 :   11c8e:  cmpq   $0x0,0x510(%rdi)
+    0.00 :   11c96:  jne    12936 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xde6>
+         : 139   ++index;
+    0.22 :   11c9c:  lea    0x2(%rax),%rsi
+         : 141   while (index < UNKNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   11ca0:  cmp    $0x6,%rax
+    0.00 :   11ca4:  je     11d30 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e0>
+         : 144   if (map->unknown_inline_[index].name) {
+    0.00 :   11caa:  cmpq   $0x0,0x530(%rdi)
+    0.22 :   11cb2:  jne    12936 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xde6>
+         : 147   ++index;
+    0.22 :   11cb8:  lea    0x3(%rax),%rsi
+         : 149   while (index < UNKNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   11cbc:  cmp    $0x5,%rax
+    0.00 :   11cc0:  je     11d30 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e0>
+         : 152   if (map->unknown_inline_[index].name) {
+    0.00 :   11cc2:  cmpq   $0x0,0x550(%rdi)
+    0.00 :   11cca:  jne    12936 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xde6>
+         : 155   ++index;
+    0.00 :   11cd0:  lea    0x4(%rax),%rsi
+         : 157   while (index < UNKNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   11cd4:  cmp    $0x4,%rax
+    0.00 :   11cd8:  je     11d30 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e0>
+         : 160   if (map->unknown_inline_[index].name) {
+    0.00 :   11cda:  cmpq   $0x0,0x570(%rdi)
+    0.22 :   11ce2:  jne    12936 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xde6>
+         : 163   ++index;
+    0.00 :   11ce8:  lea    0x5(%rax),%rsi
+         : 165   while (index < UNKNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   11cec:  cmp    $0x3,%rax
+    0.00 :   11cf0:  je     11d30 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e0>
+         : 168   if (map->unknown_inline_[index].name) {
+    0.00 :   11cf2:  cmpq   $0x0,0x590(%rdi)
+    0.00 :   11cfa:  jne    12936 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xde6>
+         : 171   ++index;
+    0.00 :   11d00:  lea    0x6(%rax),%rsi
+         : 173   while (index < UNKNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   11d04:  cmp    $0x2,%rax
+    0.00 :   11d08:  je     11d30 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e0>
+         : 176   if (map->unknown_inline_[index].name) {
+    0.00 :   11d0a:  cmpq   $0x0,0x5b0(%rdi)
+    0.45 :   11d12:  jne    12936 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xde6>
+         : 179   while (index < UNKNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   11d18:  test   %rax,%rax
+    0.00 :   11d1b:  jne    11d30 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e0>
+         : 182   if (map->unknown_inline_[index].name) {
+    0.00 :   11d1d:  cmpq   $0x0,0x5d0(%rdi)
+    0.00 :   11d25:  jne    1365b <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1b0b>
+    0.00 :   11d2b:  nopl   0x0(%rax,%rax,1)
+         : 186   unknown_chunk = map->unknown_chunks_;
+    0.00 :   11d30:  mov    0x5f0(%rbx),%rdi
+         : 188   while (unknown_chunk) {
+    0.00 :   11d37:  xor    %eax,%eax
+    0.00 :   11d39:  test   %rdi,%rdi
+    0.00 :   11d3c:  je     11e10 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x2c0>
+         : 192   phase = 3;
+    0.00 :   11d42:  mov    $0x3,%esi
+         : 194   while (unknown_chunk) {
+    0.00 :   11d47:  xor    %eax,%eax
+         : 196   if (unknown_chunk->entries[index].name) {
+    0.00 :   11d49:  mov    %rax,%r8
+    0.00 :   11d4c:  shl    $0x5,%r8
+    0.00 :   11d50:  add    %rdi,%r8
+    0.00 :   11d53:  cmpq   $0x0,(%r8)
+    0.00 :   11d57:  jne    11c12 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xc2>
+         : 202   ++index;
+    0.00 :   11d5d:  lea    0x1(%rax),%r9
+         : 204   while (index < UNKNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   11d61:  cmp    $0x7,%rax
+    0.00 :   11d65:  je     11dfb <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x2ab>
+         : 207   if (unknown_chunk->entries[index].name) {
+    0.00 :   11d6b:  cmpq   $0x0,0x20(%r8)
+    0.00 :   11d70:  jne    12c70 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1120>
+         : 210   ++index;
+    0.00 :   11d76:  lea    0x2(%rax),%r9
+         : 212   while (index < UNKNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   11d7a:  cmp    $0x6,%rax
+    0.00 :   11d7e:  je     11dfb <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x2ab>
+         : 215   if (unknown_chunk->entries[index].name) {
+    0.00 :   11d80:  cmpq   $0x0,0x40(%r8)
+    0.00 :   11d85:  jne    12c70 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1120>
+         : 218   ++index;
+    0.00 :   11d8b:  lea    0x3(%rax),%r9
+         : 220   while (index < UNKNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   11d8f:  cmp    $0x5,%rax
+    0.00 :   11d93:  je     11dfb <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x2ab>
+         : 223   if (unknown_chunk->entries[index].name) {
+    0.00 :   11d95:  cmpq   $0x0,0x60(%r8)
+    0.00 :   11d9a:  jne    12c70 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1120>
+         : 226   ++index;
+    0.00 :   11da0:  lea    0x4(%rax),%r9
+         : 228   while (index < UNKNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   11da4:  cmp    $0x4,%rax
+    0.00 :   11da8:  je     11dfb <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x2ab>
+         : 231   if (unknown_chunk->entries[index].name) {
+    0.00 :   11daa:  cmpq   $0x0,0x80(%r8)
+    0.00 :   11db2:  jne    12c70 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1120>
+         : 234   ++index;
+    0.00 :   11db8:  lea    0x5(%rax),%r9
+         : 236   while (index < UNKNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   11dbc:  cmp    $0x3,%rax
+    0.00 :   11dc0:  je     11dfb <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x2ab>
+         : 239   if (unknown_chunk->entries[index].name) {
+    0.00 :   11dc2:  cmpq   $0x0,0xa0(%r8)
+    0.00 :   11dca:  jne    12c70 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1120>
+         : 242   ++index;
+    0.00 :   11dd0:  lea    0x6(%rax),%r9
+         : 244   while (index < UNKNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   11dd4:  cmp    $0x2,%rax
+    0.00 :   11dd8:  je     11dfb <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x2ab>
+         : 247   if (unknown_chunk->entries[index].name) {
+    0.00 :   11dda:  cmpq   $0x0,0xc0(%r8)
+    0.00 :   11de2:  jne    12c70 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1120>
+         : 250   while (index < UNKNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   11de8:  test   %rax,%rax
+    0.00 :   11deb:  jne    11dfb <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x2ab>
+         : 253   if (unknown_chunk->entries[index].name) {
+    0.00 :   11ded:  cmpq   $0x0,0xe0(%r8)
+    0.00 :   11df5:  jne    13701 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1bb1>
+         : 256   unknown_chunk = unknown_chunk->next;
+    0.00 :   11dfb:  mov    0x100(%rdi),%rdi
+         : 258   index = 0;
+    0.00 :   11e02:  xor    %eax,%eax
+         : 260   while (unknown_chunk) {
+    0.00 :   11e04:  test   %rdi,%rdi
+    0.00 :   11e07:  jne    11d49 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1f9>
+    0.00 :   11e0d:  nopl   (%rax)
+         : 264   phase = 4;
+    0.00 :   11e10:  mov    $0x4,%esi
+         : 266   return;
+    0.22 :   11e15:  xor    %edi,%edi
+    0.00 :   11e17:  nopw   0x0(%rax,%rax,1)
+         : 269   return phase != other.phase || index != other.index ||
+    0.00 :   11e20:  test   %rax,%rax
+    0.45 :   11e23:  je     12248 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x6f8>
+    0.00 :   11e29:  mov    %rax,%r8
+         : 273   ++index;
+    0.00 :   11e2c:  inc    %rax
+    0.00 :   11e2f:  shl    $0x5,%r8
+         : 276   std::string_view(entry.value, entry.value_length)};
+    0.00 :   11e33:  movzwl 0x18(%rdi,%r8,1),%r9d
+    0.00 :   11e39:  lea    0x4(%rdx,%r9,1),%r9
+         : 279   return {std::string_view(entry.name, entry.name_length),
+    0.00 :   11e3e:  movzwl 0x8(%rdi,%r8,1),%edx
+    0.00 :   11e44:  add    %r9,%rdx
+         : 282   if (phase == 1) {
+    0.00 :   11e47:  cmp    $0x1,%sil
+    0.00 :   11e4b:  je     12234 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x6e4>
+         : 285   if (phase == 2) {
+    0.00 :   11e51:  cmp    $0x2,%sil
+    0.00 :   11e55:  je     11c60 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x110>
+         : 288   while (unknown_chunk) {
+    0.00 :   11e5b:  test   %rdi,%rdi
+    0.00 :   11e5e:  je     11e10 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x2c0>
+         : 291   while (index < UNKNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   11e60:  cmp    $0x7,%rax
+    0.00 :   11e64:  ja     11dfb <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x2ab>
+    0.00 :   11e66:  jmp    11d49 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1f9>
+    0.00 :   11e6b:  nopl   0x0(%rax,%rax,1)
+         : 296   ++index;
+    0.00 :   11e70:  mov    %rcx,%rax
+         : 298   return {field_to_string(entry.key), std::string_view(entry.value, entry.length)};
+    0.22 :   11e73:  lea    (%rax,%rax,2),%rsi
+         : 300   auto idx = static_cast<size_t>(f);
+    0.22 :   11e77:  movzwl 0x360(%rbx,%rsi,8),%edi
+    0.00 :   11e7f:  lea    (%rbx,%rsi,8),%rcx
+         : 303   }
+         : 304   return "unknown";
+    0.22 :   11e83:  mov    $0x7,%esi
+         : 306   if (idx < table.size()) {
+    0.00 :   11e88:  cmp    $0x164,%rdi
+    0.00 :   11e8f:  ja     11e99 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x349>
+         : 309   return table[idx];
+    0.00 :   11e91:  shl    $0x4,%rdi
+    0.00 :   11e95:  mov    (%r10,%rdi,1),%rsi
+    2.68 :   11e99:  movzwl 0x370(%rcx),%ecx
+    0.00 :   11ea0:  lea    0x4(%rdx,%rcx,1),%rdx
+         : 314   ++index;
+    0.00 :   11ea5:  lea    0x1(%rax),%rcx
+    0.00 :   11ea9:  add    %rsi,%rdx
+         : 317   while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.45 :   11eac:  cmp    $0xf,%rcx
+    0.00 :   11eb0:  ja     12058 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x508>
+    0.00 :   11eb6:  lea    (%rcx,%rcx,2),%rsi
+         : 321   if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   11eba:  cmpw   $0x0,0x360(%rbx,%rsi,8)
+    0.67 :   11ec3:  lea    (%rbx,%rsi,8),%rdi
+    0.00 :   11ec7:  jne    11e70 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x320>
+         : 325   ++index;
+    0.22 :   11ec9:  lea    0x2(%rax),%rcx
+         : 327   while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   11ecd:  cmp    $0xe,%rax
+    0.00 :   11ed1:  je     12058 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x508>
+         : 330   if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   11ed7:  cmpw   $0x0,0x378(%rdi)
+    0.22 :   11edf:  jne    11e70 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x320>
+         : 333   ++index;
+    0.00 :   11ee1:  lea    0x3(%rax),%rcx
+         : 335   while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   11ee5:  cmp    $0xd,%rax
+    0.00 :   11ee9:  je     12058 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x508>
+         : 338   if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   11eef:  cmpw   $0x0,0x390(%rdi)
+    0.22 :   11ef7:  jne    11e70 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x320>
+         : 341   ++index;
+    0.00 :   11efd:  lea    0x4(%rax),%rcx
+         : 343   while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   11f01:  cmp    $0xc,%rax
+    0.00 :   11f05:  je     12058 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x508>
+         : 346   if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   11f0b:  cmpw   $0x0,0x3a8(%rdi)
+    0.00 :   11f13:  jne    11e70 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x320>
+         : 349   ++index;
+    0.00 :   11f19:  lea    0x5(%rax),%rcx
+         : 351   while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   11f1d:  cmp    $0xb,%rax
+    0.00 :   11f21:  je     12058 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x508>
+         : 354   if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   11f27:  cmpw   $0x0,0x3c0(%rdi)
+    0.00 :   11f2f:  jne    11e70 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x320>
+         : 357   ++index;
+    0.22 :   11f35:  lea    0x6(%rax),%rcx
+         : 359   while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   11f39:  cmp    $0xa,%rax
+    0.22 :   11f3d:  je     12058 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x508>
+         : 362   if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   11f43:  cmpw   $0x0,0x3d8(%rdi)
+    0.89 :   11f4b:  jne    11e70 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x320>
+         : 365   ++index;
+    0.22 :   11f51:  lea    0x7(%rax),%rcx
+         : 367   while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   11f55:  cmp    $0x9,%rax
+    0.00 :   11f59:  je     12058 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x508>
+         : 370   if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   11f5f:  cmpw   $0x0,0x3f0(%rdi)
+    0.67 :   11f67:  jne    11e70 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x320>
+         : 373   ++index;
+    0.00 :   11f6d:  lea    0x8(%rax),%rcx
+         : 375   while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   11f71:  cmp    $0x8,%rax
+    0.22 :   11f75:  je     12058 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x508>
+         : 378   if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   11f7b:  cmpw   $0x0,0x408(%rdi)
+    0.00 :   11f83:  jne    11e70 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x320>
+         : 381   ++index;
+    0.22 :   11f89:  lea    0x9(%rax),%rcx
+         : 383   while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   11f8d:  cmp    $0x7,%rax
+    0.22 :   11f91:  je     12058 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x508>
+         : 386   if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   11f97:  cmpw   $0x0,0x420(%rdi)
+    0.00 :   11f9f:  jne    11e70 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x320>
+         : 389   ++index;
+    0.45 :   11fa5:  lea    0xa(%rax),%rcx
+         : 391   while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   11fa9:  cmp    $0x6,%rax
+    0.00 :   11fad:  je     12058 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x508>
+         : 394   if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   11fb3:  cmpw   $0x0,0x438(%rdi)
+    0.00 :   11fbb:  jne    11e70 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x320>
+         : 397   ++index;
+    0.45 :   11fc1:  lea    0xb(%rax),%rcx
+         : 399   while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   11fc5:  cmp    $0x5,%rax
+    0.00 :   11fc9:  je     12058 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x508>
+         : 402   if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   11fcf:  cmpw   $0x0,0x450(%rdi)
+    0.00 :   11fd7:  jne    11e70 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x320>
+         : 405   ++index;
+    0.45 :   11fdd:  lea    0xc(%rax),%rcx
+         : 407   while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   11fe1:  cmp    $0x4,%rax
+    0.00 :   11fe5:  je     12058 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x508>
+         : 410   if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   11fe7:  cmpw   $0x0,0x468(%rdi)
+    0.00 :   11fef:  jne    11e70 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x320>
+         : 413   ++index;
+    0.00 :   11ff5:  lea    0xd(%rax),%rcx
+         : 415   while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   11ff9:  cmp    $0x3,%rax
+    0.22 :   11ffd:  je     12058 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x508>
+         : 418   if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   11fff:  cmpw   $0x0,0x480(%rdi)
+    1.12 :   12007:  jne    11e70 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x320>
+         : 421   ++index;
+    0.22 :   1200d:  lea    0xe(%rax),%rcx
+         : 423   while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   12011:  cmp    $0x2,%rax
+    0.00 :   12015:  je     12058 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x508>
+         : 426   if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   12017:  cmpw   $0x0,0x498(%rdi)
+    0.00 :   1201f:  jne    11e70 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x320>
+         : 429   ++index;
+    0.22 :   12025:  lea    0xf(%rax),%rcx
+         : 431   while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   12029:  cmp    $0x1,%rax
+    0.00 :   1202d:  je     12058 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x508>
+         : 434   if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   1202f:  cmpw   $0x0,0x4b0(%rdi)
+    0.00 :   12037:  jne    11e70 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x320>
+         : 437   while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   1203d:  cmp    $0xffffffffffffffff,%rax
+    0.00 :   12041:  jne    12058 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x508>
+         : 440   if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   12043:  cmpw   $0x0,0x4c8(%rdi)
+    0.00 :   1204b:  jne    13832 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1ce2>
+    0.00 :   12051:  nopl   0x0(%rax)
+         : 444   known_chunk = map->known_chunks_;
+    0.00 :   12058:  mov    0x4e0(%rbx),%rcx
+         : 446   while (known_chunk) {
+    1.12 :   1205f:  xor    %eax,%eax
+    0.00 :   12061:  test   %rcx,%rcx
+    0.22 :   12064:  je     121f6 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x6a6>
+    0.00 :   1206a:  lea    (%rax,%rax,2),%rsi
+    0.00 :   1206e:  lea    (%rcx,%rsi,8),%rsi
+         : 452   if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   12072:  cmpw   $0x0,(%rsi)
+    0.00 :   12076:  jne    12203 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x6b3>
+         : 455   ++index;
+    0.00 :   1207c:  lea    0x1(%rax),%rdi
+         : 457   while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   12080:  cmp    $0xf,%rax
+    0.00 :   12084:  je     121e4 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x694>
+         : 460   if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   1208a:  cmpw   $0x0,0x18(%rsi)
+    0.00 :   1208f:  jne    12200 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x6b0>
+         : 463   ++index;
+    0.00 :   12095:  lea    0x2(%rax),%rdi
+         : 465   while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   12099:  cmp    $0xe,%rax
+    0.00 :   1209d:  je     121e4 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x694>
+         : 468   if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   120a3:  cmpw   $0x0,0x30(%rsi)
+    0.00 :   120a8:  jne    12200 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x6b0>
+         : 471   ++index;
+    0.00 :   120ae:  lea    0x3(%rax),%rdi
+         : 473   while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   120b2:  cmp    $0xd,%rax
+    0.00 :   120b6:  je     121e4 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x694>
+         : 476   if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   120bc:  cmpw   $0x0,0x48(%rsi)
+    0.00 :   120c1:  jne    12200 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x6b0>
+         : 479   ++index;
+    0.00 :   120c7:  lea    0x4(%rax),%rdi
+         : 481   while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   120cb:  cmp    $0xc,%rax
+    0.00 :   120cf:  je     121e4 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x694>
+         : 484   if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   120d5:  cmpw   $0x0,0x60(%rsi)
+    0.00 :   120da:  jne    12200 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x6b0>
+         : 487   ++index;
+    0.00 :   120e0:  lea    0x5(%rax),%rdi
+         : 489   while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   120e4:  cmp    $0xb,%rax
+    0.00 :   120e8:  je     121e4 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x694>
+         : 492   if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   120ee:  cmpw   $0x0,0x78(%rsi)
+    0.00 :   120f3:  jne    12200 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x6b0>
+         : 495   ++index;
+    0.00 :   120f9:  lea    0x6(%rax),%rdi
+         : 497   while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   120fd:  cmp    $0xa,%rax
+    0.00 :   12101:  je     121e4 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x694>
+         : 500   if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   12107:  cmpw   $0x0,0x90(%rsi)
+    0.00 :   1210f:  jne    12200 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x6b0>
+         : 503   ++index;
+    0.00 :   12115:  lea    0x7(%rax),%rdi
+         : 505   while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   12119:  cmp    $0x9,%rax
+    0.00 :   1211d:  je     121e4 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x694>
+         : 508   if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   12123:  cmpw   $0x0,0xa8(%rsi)
+    0.00 :   1212b:  jne    12200 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x6b0>
+         : 511   ++index;
+    0.00 :   12131:  lea    0x8(%rax),%rdi
+         : 513   while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   12135:  cmp    $0x8,%rax
+    0.00 :   12139:  je     121e4 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x694>
+         : 516   if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   1213f:  cmpw   $0x0,0xc0(%rsi)
+    0.00 :   12147:  jne    12200 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x6b0>
+         : 519   ++index;
+    0.00 :   1214d:  lea    0x9(%rax),%rdi
+         : 521   while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   12151:  cmp    $0x7,%rax
+    0.00 :   12155:  je     121e4 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x694>
+         : 524   if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   1215b:  cmpw   $0x0,0xd8(%rsi)
+    0.00 :   12163:  jne    12200 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x6b0>
+         : 527   ++index;
+    0.00 :   12169:  lea    0xa(%rax),%rdi
+         : 529   while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   1216d:  cmp    $0x6,%rax
+    0.00 :   12171:  je     121e4 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x694>
+         : 532   if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   12173:  cmpw   $0x0,0xf0(%rsi)
+    0.00 :   1217b:  jne    12200 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x6b0>
+         : 535   ++index;
+    0.00 :   12181:  lea    0xb(%rax),%rdi
+         : 537   while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   12185:  cmp    $0x5,%rax
+    0.00 :   12189:  je     121e4 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x694>
+         : 540   if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   1218b:  cmpw   $0x0,0x108(%rsi)
+    0.00 :   12193:  jne    12200 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x6b0>
+         : 543   ++index;
+    0.00 :   12195:  lea    0xc(%rax),%rdi
+         : 545   while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   12199:  cmp    $0x4,%rax
+    0.00 :   1219d:  je     121e4 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x694>
+         : 548   if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   1219f:  cmpw   $0x0,0x120(%rsi)
+    0.00 :   121a7:  jne    12200 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x6b0>
+         : 551   ++index;
+    0.00 :   121a9:  lea    0xd(%rax),%rdi
+         : 553   while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   121ad:  cmp    $0x3,%rax
+    0.00 :   121b1:  je     121e4 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x694>
+         : 556   if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   121b3:  cmpw   $0x0,0x138(%rsi)
+    0.00 :   121bb:  jne    12200 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x6b0>
+         : 559   ++index;
+    0.00 :   121bd:  lea    0xe(%rax),%rdi
+         : 561   while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   121c1:  cmp    $0x2,%rax
+    0.00 :   121c5:  je     121e4 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x694>
+         : 564   if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   121c7:  cmpw   $0x0,0x150(%rsi)
+    0.00 :   121cf:  jne    12200 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x6b0>
+         : 567   while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   121d1:  test   %rax,%rax
+    0.00 :   121d4:  jne    121e4 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x694>
+         : 570   if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   121d6:  cmpw   $0x0,0x168(%rsi)
+    0.00 :   121de:  jne    13006 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x14b6>
+         : 573   known_chunk = known_chunk->next;
+    0.00 :   121e4:  mov    0x180(%rcx),%rcx
+         : 575   index = 0;
+    0.00 :   121eb:  xor    %eax,%eax
+         : 577   while (known_chunk) {
+    0.00 :   121ed:  test   %rcx,%rcx
+    0.00 :   121f0:  jne    1206a <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x51a>
+    0.00 :   121f6:  xor    %eax,%eax
+    0.00 :   121f8:  xor    %ecx,%ecx
+    0.00 :   121fa:  jmp    11c6a <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x11a>
+    0.00 :   121ff:  nop
+         : 584   ++index;
+    0.00 :   12200:  mov    %rdi,%rax
+         : 586   std::pair<std::string_view, std::string_view> operator*() const {
+    0.00 :   12203:  lea    (%rax,%rax,2),%rsi
+         : 588   return "unknown";
+    0.00 :   12207:  mov    $0x7,%r8d
+    0.00 :   1220d:  lea    (%rcx,%rsi,8),%rdi
+         : 591   auto idx = static_cast<size_t>(f);
+    0.00 :   12211:  movzwl (%rdi),%esi
+         : 593   if (idx < table.size()) {
+    0.00 :   12214:  cmp    $0x164,%rsi
+    0.00 :   1221b:  ja     12225 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x6d5>
+         : 596   return table[idx];
+    0.00 :   1221d:  shl    $0x4,%rsi
+    0.00 :   12221:  mov    (%r10,%rsi,1),%r8
+         : 599   return {field_to_string(entry.key), std::string_view(entry.value, entry.length)};
+    0.00 :   12225:  movzwl 0x10(%rdi),%esi
+         : 601   ++index;
+    0.00 :   12229:  inc    %rax
+    0.00 :   1222c:  lea    0x4(%rdx,%rsi,1),%rdx
+    0.00 :   12231:  add    %r8,%rdx
+         : 605   while (known_chunk) {
+    0.00 :   12234:  test   %rcx,%rcx
+    0.00 :   12237:  je     121f6 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x6a6>
+         : 608   while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   12239:  cmp    $0xf,%rax
+    0.00 :   1223d:  ja     121e4 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x694>
+    0.00 :   1223f:  jmp    1206a <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x51a>
+    0.00 :   12244:  nopl   0x0(%rax)
+         : 613   return phase != other.phase || index != other.index ||
+    0.00 :   12248:  test   %rcx,%rcx
+    0.67 :   1224b:  jne    11e29 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x2d9>
+         : 616   known_chunk != other.known_chunk || unknown_chunk != other.unknown_chunk;
+    0.00 :   12251:  test   %rdi,%rdi
+    0.22 :   12254:  jne    11e29 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x2d9>
+         : 619   }
+         :
+         : 621   // Add space for Content-Length header if we're adding it
+         : 622   if (!content_length_value.empty()) {
+    0.00 :   1225a:  test   %r15,%r15
+    0.00 :   1225d:  je     12264 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x714>
+         : 625   headers_size += 14 + HEADER_SEPARATOR.size() + content_length_value.size() +
+    0.00 :   1225f:  lea    0x12(%r15,%rdx,1),%rdx
+         : 627   { _M_string_length = __length; }
+         :
+         : 629   _GLIBCXX20_CONSTEXPR
+         : 630   pointer
+         : 631   _M_data() const
+         : 632   { return _M_dataplus._M_p; }
+    0.00 :   12264:  mov    (%r12),%rax
+         : 634   _GLIBCXX20_CONSTEXPR
+         : 635   const_pointer
+         : 636   _M_local_data() const
+         : 637   {
+         : 638   #if __cplusplus >= 201103L
+         : 639   return std::pointer_traits<const_pointer>::pointer_to(*_M_local_buf);
+    0.00 :   12268:  lea    0x10(%r12),%rcx
+    0.00 :   1226d:  mov    %rcx,0x58(%rsp)
+         :
+         : 643   _GLIBCXX20_CONSTEXPR
+         : 644   bool
+         : 645   _M_is_local() const
+         : 646   {
+         : 647   if (_M_data() == _M_local_data())
+    0.22 :   12272:  cmp    %rcx,%rax
+    0.00 :   12275:  je     13768 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1c18>
+         : 650   */
+         : 651   _GLIBCXX_NODISCARD _GLIBCXX20_CONSTEXPR
+         : 652   size_type
+         : 653   capacity() const _GLIBCXX_NOEXCEPT
+         : 654   {
+         : 655   return _M_is_local() ? size_type(_S_local_capacity)
+    0.00 :   1227b:  mov    0x10(%r12),%r14
+         : 657   { _M_string_length = __length; }
+    0.22 :   12280:  movq   $0x0,0x8(%r12)
+         : 659   #if __cpp_constexpr_dynamic_alloc
+         : 660   if (std::__is_constant_evaluated())
+         : 661   std::construct_at(__builtin_addressof(__c1), __c2);
+         : 662   else
+         : 663   #endif
+         : 664   __c1 = __c2;
+    0.22 :   12289:  movb   $0x0,(%rax)
+         : 666   CRLF.size(); // "Content-Length"
+         : 667   }
+         :
+         : 669   const size_t old_capacity = out.capacity();
+         : 670   out.clear();
+         : 671   out.reserve(32 + reason.size() + headers_size + body.size());
+    0.45 :   1228c:  mov    %r12,%rdi
+    0.00 :   1228f:  mov    0x608(%rbx),%rax
+    0.22 :   12296:  add    0x10(%rbx),%rax
+    0.89 :   1229a:  lea    0x20(%rdx,%rax,1),%rsi
+    0.00 :   1229f:  call   bc98 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::reserve(unsigned long)>
+         :
+         : 678   char status_buf[16];
+         : 679   auto [ptr, ec] = std::to_chars(status_buf, status_buf + sizeof(status_buf), status);
+    0.00 :   122a4:  mov    (%rbx),%eax
+         : 681   _Up __unsigned_val = __value;
+         :
+         : 683   if (__first == __last) [[__unlikely__]]
+         : 684   return { __last, errc::value_too_large };
+         :
+         : 686   if (__value == 0)
+    0.22 :   122a6:  test   %eax,%eax
+    0.22 :   122a8:  jne    13245 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x16f5>
+         : 689   {
+         : 690   *__first = '0';
+    0.00 :   122ae:  movb   $0x30,0x90(%rsp)
+    0.00 :   122b6:  lea    0x90(%rsp),%r13
+         : 693   return { __first + 1, errc{} };
+    0.00 :   122be:  mov    $0x1,%eax
+         : 695   _GLIBCXX20_CONSTEXPR
+         : 696   _If_sv<_Tp, basic_string&>
+         : 697   append(const _Tp& __svt)
+         : 698   {
+         : 699   __sv_type __sv = __svt;
+         : 700   return this->append(__sv.data(), __sv.size());
+    0.00 :   122c3:  lea    0x13e73(%rip),%rsi        # 2613d <_IO_stdin_used+0x13d>
+    0.00 :   122ca:  mov    %rax,0x30(%rsp)
+    0.00 :   122cf:  mov    $0x9,%edx
+    0.00 :   122d4:  mov    %r12,%rdi
+    0.00 :   122d7:  call   1c420 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .isra.0]>
+         :
+         : 707   out.append(HTTP_VERSION_PREFIX);
+         : 708   out.append(status_buf, static_cast<size_t>(ptr - status_buf));
+    0.67 :   122dc:  mov    0x30(%rsp),%rdx
+    0.22 :   122e1:  mov    %r13,%rsi
+    0.00 :   122e4:  mov    %r12,%rdi
+    0.00 :   122e7:  call   1c420 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .isra.0]>
+         : 713   out.push_back(' ');
+    0.00 :   122ec:  mov    $0x20,%esi
+    0.00 :   122f1:  mov    %r12,%rdi
+    0.00 :   122f4:  call   bd98 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::push_back(char)>
+         : 717   { return this->append(__str._M_data(), __str.size()); }
+    0.00 :   122f9:  mov    0x10(%rbx),%rdx
+    0.00 :   122fd:  mov    %r12,%rdi
+    0.00 :   12300:  mov    0x8(%rbx),%rsi
+    0.22 :   12304:  call   1c420 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .isra.0]>
+         : 722   return this->append(__sv.data(), __sv.size());
+    0.45 :   12309:  mov    %r12,%rdi
+    0.00 :   1230c:  call   1c7b0 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .constprop.0] [clone .isra.0]>
+         : 725   it.map = this;
+    0.00 :   12311:  mov    0x50(%rsp),%rax
+         : 727   iterator it;
+    0.00 :   12316:  movq   $0x0,0x68(%rsp)
+         : 729   it.advance();
+    0.00 :   1231f:  mov    0x48(%rsp),%rdi
+         : 731   iterator it;
+    0.45 :   12324:  movb   $0x0,0x70(%rsp)
+    0.00 :   12329:  movq   $0x0,0x78(%rsp)
+    0.22 :   12332:  movq   $0x0,0x80(%rsp)
+         : 735   it.map = this;
+    0.67 :   1233e:  mov    %rax,0x60(%rsp)
+         : 737   it.advance();
+    0.89 :   12343:  call   eb00 <katana::http::headers_map::iterator::advance()>
+         : 739   return phase != other.phase || index != other.index ||
+    0.00 :   12348:  movzbl 0x70(%rsp),%r10d
+    0.00 :   1234e:  mov    %r14,0x28(%rsp)
+    0.00 :   12353:  mov    %r15,0x30(%rsp)
+    0.22 :   12358:  mov    %r10d,%r14d
+    0.00 :   1235b:  vzeroupper
+         : 745   known_chunk != other.known_chunk || unknown_chunk != other.unknown_chunk;
+    0.00 :   1235e:  cmp    $0x4,%r14b
+    0.67 :   12362:  je     12b4f <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xfff>
+         : 748   if (phase == 0) {
+    0.00 :   12368:  test   %r14b,%r14b
+    0.00 :   1236b:  je     128e3 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xd93>
+         : 751   if (phase == 1) {
+    0.00 :   12371:  cmp    $0x1,%r14b
+    0.00 :   12375:  je     129ae <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe5e>
+         : 754   return phase != other.phase || index != other.index ||
+    0.00 :   1237b:  mov    0x68(%rsp),%r13
+         : 756   (phase == 2) ? map->unknown_inline_[index] : unknown_chunk->entries[index];
+    0.00 :   12380:  cmp    $0x2,%r14b
+    0.00 :   12384:  jne    13102 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x15b2>
+    0.00 :   1238a:  mov    %r13,%rax
+    0.00 :   1238d:  shl    $0x5,%rax
+    0.00 :   12391:  lea    0x4f0(%rbx,%rax,1),%rax
+         : 762   return {std::string_view(entry.name, entry.name_length),
+    0.00 :   12399:  movzwl 0x8(%rax),%ecx
+         : 764   std::string_view(entry.value, entry.value_length)};
+    0.00 :   1239d:  movzwl 0x18(%rax),%r15d
+         : 766   return {std::string_view(entry.name, entry.name_length),
+    0.00 :   123a2:  mov    (%rax),%r11
+         : 768   std::string_view(entry.value, entry.value_length)};
+    0.00 :   123a5:  mov    0x10(%rax),%rax
+    0.00 :   123a9:  mov    %rax,0x50(%rsp)
+         : 771   { return _M_string_length; }
+    0.00 :   123ae:  mov    0x8(%r12),%rdx
+         : 773   if (this->max_size() - (this->size() - __n1) < __n2)
+    0.00 :   123b3:  movabs $0x7fffffffffffffff,%rax
+    0.22 :   123bd:  sub    %rdx,%rax
+    0.00 :   123c0:  cmp    %rcx,%rax
+    0.00 :   123c3:  jb     1391b <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1dcb>
+         : 778   { return _M_dataplus._M_p; }
+    0.00 :   123c9:  mov    (%r12),%r9
+         : 780   _GLIBCXX20_CONSTEXPR
+         : 781   basic_string<_CharT, _Traits, _Alloc>&
+         : 782   basic_string<_CharT, _Traits, _Alloc>::
+         : 783   _M_append(const _CharT* __s, size_type __n)
+         : 784   {
+         : 785   const size_type __len = __n + this->size();
+    0.00 :   123cd:  lea    (%rdx,%rcx,1),%r8
+         : 787   if (_M_data() == _M_local_data())
+    0.00 :   123d1:  cmp    %r9,0x58(%rsp)
+    0.45 :   123d6:  je     12fd6 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1486>
+         : 790   return _M_is_local() ? size_type(_S_local_capacity)
+    0.00 :   123dc:  mov    0x10(%r12),%rax
+         :
+         : 793   if (__len <= this->capacity())
+    0.00 :   123e1:  cmp    %r8,%rax
+    0.22 :   123e4:  jb     12d18 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x11c8>
+         : 796   {
+         : 797   if (__n)
+    0.00 :   123ea:  test   %rcx,%rcx
+    0.00 :   123ed:  je     12416 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x8c6>
+         : 800   this->_S_copy(this->_M_data() + this->size(), __s, __n);
+    0.00 :   123ef:  lea    (%r9,%rdx,1),%rdi
+         : 802   if (__n == 1)
+    0.00 :   123f3:  cmp    $0x1,%rcx
+    0.00 :   123f7:  je     1310f <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x15bf>
+         : 805   return __s1;
+         : 806   #if __cplusplus >= 202002L
+         : 807   if (std::__is_constant_evaluated())
+         : 808   return __gnu_cxx::char_traits<char_type>::copy(__s1, __s2, __n);
+         : 809   #endif
+         : 810   return static_cast<char_type*>(__builtin_memcpy(__s1, __s2, __n));
+    0.00 :   123fd:  mov    %rcx,%rdx
+    0.00 :   12400:  mov    %r8,0x48(%rsp)
+    0.22 :   12405:  mov    %r11,%rsi
+    0.00 :   12408:  call   6880 <memcpy@plt>
+         : 815   { return _M_dataplus._M_p; }
+    0.22 :   1240d:  mov    (%r12),%r9
+    0.22 :   12411:  mov    0x48(%rsp),%r8
+         : 818   { _M_string_length = __length; }
+    0.45 :   12416:  mov    %r8,0x8(%r12)
+         : 820   __c1 = __c2;
+    0.45 :   1241b:  movb   $0x0,(%r9,%r8,1)
+         : 822   if (this->max_size() - (this->size() - __n1) < __n2)
+    0.45 :   12420:  movabs $0x7fffffffffffffff,%rax
+         : 824   { return _M_string_length; }
+    0.00 :   1242a:  mov    0x8(%r12),%rdx
+         : 826   if (this->max_size() - (this->size() - __n1) < __n2)
+    0.89 :   1242f:  sub    %rdx,%rax
+    0.67 :   12432:  cmp    $0x1,%rax
+    0.89 :   12436:  jbe    1391b <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1dcb>
+         : 830   { return _M_dataplus._M_p; }
+    0.00 :   1243c:  mov    (%r12),%rax
+         : 832   const size_type __len = __n + this->size();
+    0.00 :   12440:  lea    0x2(%rdx),%rcx
+         : 834   if (_M_data() == _M_local_data())
+    0.00 :   12444:  cmp    %rax,0x58(%rsp)
+    0.00 :   12449:  je     13037 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x14e7>
+         : 837   return _M_is_local() ? size_type(_S_local_capacity)
+    0.00 :   1244f:  mov    0x10(%r12),%r9
+         : 839   if (__len <= this->capacity())
+    0.22 :   12454:  cmp    %rcx,%r9
+    0.89 :   12457:  jb     12c78 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1128>
+         : 842   return static_cast<char_type*>(__builtin_memcpy(__s1, __s2, __n));
+    0.00 :   1245d:  movw   $0x203a,(%rax,%rdx,1)
+         : 844   { return _M_dataplus._M_p; }
+    0.45 :   12463:  mov    (%r12),%r8
+         : 846   { _M_string_length = __length; }
+    0.00 :   12467:  mov    %rcx,0x8(%r12)
+         : 848   __c1 = __c2;
+    0.45 :   1246c:  movb   $0x0,(%r8,%rcx,1)
+         : 850   if (this->max_size() - (this->size() - __n1) < __n2)
+    0.45 :   12471:  movabs $0x7fffffffffffffff,%rax
+         : 852   { return _M_string_length; }
+    0.00 :   1247b:  mov    0x8(%r12),%rdx
+         : 854   if (this->max_size() - (this->size() - __n1) < __n2)
+    1.79 :   12480:  sub    %rdx,%rax
+    0.67 :   12483:  cmp    %r15,%rax
+    1.12 :   12486:  jb     1391b <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1dcb>
+         : 858   { return _M_dataplus._M_p; }
+    0.00 :   1248c:  mov    (%r12),%r8
+         : 860   const size_type __len = __n + this->size();
+    0.00 :   12490:  lea    (%rdx,%r15,1),%rcx
+         : 862   if (_M_data() == _M_local_data())
+    0.00 :   12494:  cmp    %r8,0x58(%rsp)
+    0.22 :   12499:  je     13010 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x14c0>
+         : 865   return _M_is_local() ? size_type(_S_local_capacity)
+    0.00 :   1249f:  mov    0x10(%r12),%rax
+         : 867   if (__len <= this->capacity())
+    0.00 :   124a4:  cmp    %rcx,%rax
+    0.45 :   124a7:  jb     12ebc <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x136c>
+         : 870   if (__n)
+    0.00 :   124ad:  test   %r15,%r15
+    0.00 :   124b0:  je     124db <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x98b>
+         : 873   this->_S_copy(this->_M_data() + this->size(), __s, __n);
+    0.00 :   124b2:  lea    (%r8,%rdx,1),%rdi
+         : 875   if (__n == 1)
+    0.22 :   124b6:  cmp    $0x1,%r15
+    0.00 :   124ba:  je     131d8 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1688>
+         : 878   return static_cast<char_type*>(__builtin_memcpy(__s1, __s2, __n));
+    0.00 :   124c0:  mov    0x50(%rsp),%rsi
+    0.00 :   124c5:  mov    %r15,%rdx
+    0.00 :   124c8:  mov    %rcx,0x48(%rsp)
+    0.00 :   124cd:  call   6880 <memcpy@plt>
+         : 883   { return _M_dataplus._M_p; }
+    0.00 :   124d2:  mov    (%r12),%r8
+    0.00 :   124d6:  mov    0x48(%rsp),%rcx
+         : 886   { _M_string_length = __length; }
+    0.22 :   124db:  mov    %rcx,0x8(%r12)
+         : 888   __c1 = __c2;
+    0.45 :   124e0:  movb   $0x0,(%r8,%rcx,1)
+         : 890   if (this->max_size() - (this->size() - __n1) < __n2)
+    0.45 :   124e5:  movabs $0x7fffffffffffffff,%rax
+         : 892   { return _M_string_length; }
+    0.00 :   124ef:  mov    0x8(%r12),%rdx
+         : 894   if (this->max_size() - (this->size() - __n1) < __n2)
+    2.01 :   124f4:  sub    %rdx,%rax
+    0.00 :   124f7:  cmp    $0x1,%rax
+    0.22 :   124fb:  jbe    1391b <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1dcb>
+         : 898   { return _M_dataplus._M_p; }
+    0.00 :   12501:  mov    (%r12),%rax
+         : 900   const size_type __len = __n + this->size();
+    0.00 :   12505:  lea    0x2(%rdx),%r15
+         : 902   if (_M_data() == _M_local_data())
+    0.00 :   12509:  cmp    %rax,0x58(%rsp)
+    0.22 :   1250e:  je     130af <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x155f>
+         : 905   return _M_is_local() ? size_type(_S_local_capacity)
+    0.00 :   12514:  mov    0x10(%r12),%r9
+         : 907   if (__len <= this->capacity())
+    0.00 :   12519:  cmp    %r15,%r9
+    0.00 :   1251c:  jb     12e30 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x12e0>
+         : 910   return static_cast<char_type*>(__builtin_memcpy(__s1, __s2, __n));
+    0.00 :   12522:  movw   $0xa0d,(%rax,%rdx,1)
+         : 912   { return _M_dataplus._M_p; }
+    0.67 :   12528:  mov    (%r12),%r8
+         : 914   ++index;
+    0.00 :   1252c:  lea    0x1(%r13),%rax
+         : 916   { _M_string_length = __length; }
+    0.00 :   12530:  mov    %r15,0x8(%r12)
+    0.00 :   12535:  mov    %rax,0x68(%rsp)
+         : 919   __c1 = __c2;
+    0.00 :   1253a:  movb   $0x0,(%r8,%r15,1)
+         : 921   if (phase == 0) {
+    0.89 :   1253f:  test   %r14b,%r14b
+    0.00 :   12542:  je     12738 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xbe8>
+         : 924   if (phase == 1) {
+    0.00 :   12548:  cmp    $0x1,%r14b
+    0.00 :   1254c:  jne    129f5 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xea5>
+         : 927   while (known_chunk) {
+    0.00 :   12552:  mov    0x78(%rsp),%rsi
+    0.00 :   12557:  test   %rsi,%rsi
+    0.00 :   1255a:  je     12b7a <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x102a>
+         : 931   while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   12560:  xor    %edi,%edi
+    0.00 :   12562:  cmp    $0xf,%rax
+    0.00 :   12566:  jbe    13974 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e24>
+         : 935   known_chunk = known_chunk->next;
+    0.00 :   1256c:  mov    0x180(%rsi),%rsi
+    0.00 :   12573:  mov    $0x1,%ecx
+         : 938   index = 0;
+    0.00 :   12578:  xor    %eax,%eax
+         : 940   known_chunk = known_chunk->next;
+    0.00 :   1257a:  mov    %rsi,0x78(%rsp)
+         : 942   while (known_chunk) {
+    0.00 :   1257f:  test   %rsi,%rsi
+    0.00 :   12582:  je     12b7a <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x102a>
+    0.00 :   12588:  lea    (%rax,%rax,2),%rdx
+    0.00 :   1258c:  lea    (%rsi,%rdx,8),%rdx
+         : 947   if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   12590:  cmpw   $0x0,(%rdx)
+    0.00 :   12594:  jne    12971 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe21>
+         : 950   ++index;
+    0.00 :   1259a:  lea    0x1(%rax),%rcx
+         : 952   while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   1259e:  cmp    $0xf,%rax
+    0.00 :   125a2:  je     1256c <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xa1c>
+         : 955   if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   125a4:  cmpw   $0x0,0x18(%rdx)
+    0.00 :   125a9:  jne    12990 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe40>
+         : 958   ++index;
+    0.00 :   125af:  lea    0x2(%rax),%rcx
+         : 960   while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   125b3:  cmp    $0xe,%rax
+    0.00 :   125b7:  je     1256c <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xa1c>
+         : 963   if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   125b9:  cmpw   $0x0,0x30(%rdx)
+    0.00 :   125be:  jne    12990 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe40>
+         : 966   ++index;
+    0.00 :   125c4:  lea    0x3(%rax),%rcx
+         : 968   while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   125c8:  cmp    $0xd,%rax
+    0.00 :   125cc:  je     1256c <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xa1c>
+         : 971   if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   125ce:  cmpw   $0x0,0x48(%rdx)
+    0.00 :   125d3:  jne    12990 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe40>
+         : 974   ++index;
+    0.00 :   125d9:  lea    0x4(%rax),%rcx
+         : 976   while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   125dd:  cmp    $0xc,%rax
+    0.00 :   125e1:  je     1256c <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xa1c>
+         : 979   if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   125e3:  cmpw   $0x0,0x60(%rdx)
+    0.00 :   125e8:  jne    12990 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe40>
+         : 982   ++index;
+    0.00 :   125ee:  lea    0x5(%rax),%rcx
+         : 984   while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   125f2:  cmp    $0xb,%rax
+    0.00 :   125f6:  je     1256c <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xa1c>
+         : 987   if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   125fc:  cmpw   $0x0,0x78(%rdx)
+    0.00 :   12601:  jne    12990 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe40>
+         : 990   ++index;
+    0.00 :   12607:  lea    0x6(%rax),%rcx
+         : 992   while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   1260b:  cmp    $0xa,%rax
+    0.00 :   1260f:  je     1256c <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xa1c>
+         : 995   if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   12615:  cmpw   $0x0,0x90(%rdx)
+    0.00 :   1261d:  jne    12990 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe40>
+         : 998   ++index;
+    0.00 :   12623:  lea    0x7(%rax),%rcx
+         : 1000  while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   12627:  cmp    $0x9,%rax
+    0.00 :   1262b:  je     1256c <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xa1c>
+         : 1003  if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   12631:  cmpw   $0x0,0xa8(%rdx)
+    0.00 :   12639:  jne    12990 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe40>
+         : 1006  ++index;
+    0.00 :   1263f:  lea    0x8(%rax),%rcx
+         : 1008  while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   12643:  cmp    $0x8,%rax
+    0.00 :   12647:  je     1256c <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xa1c>
+         : 1011  if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   1264d:  cmpw   $0x0,0xc0(%rdx)
+    0.00 :   12655:  jne    12990 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe40>
+         : 1014  ++index;
+    0.00 :   1265b:  lea    0x9(%rax),%rcx
+         : 1016  while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   1265f:  cmp    $0x7,%rax
+    0.00 :   12663:  je     1256c <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xa1c>
+         : 1019  if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   12669:  cmpw   $0x0,0xd8(%rdx)
+    0.00 :   12671:  jne    12990 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe40>
+         : 1022  ++index;
+    0.00 :   12677:  lea    0xa(%rax),%rcx
+         : 1024  while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   1267b:  cmp    $0x6,%rax
+    0.00 :   1267f:  je     1256c <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xa1c>
+         : 1027  if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   12685:  cmpw   $0x0,0xf0(%rdx)
+    0.00 :   1268d:  jne    12990 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe40>
+         : 1030  ++index;
+    0.00 :   12693:  lea    0xb(%rax),%rcx
+         : 1032  while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   12697:  cmp    $0x5,%rax
+    0.00 :   1269b:  je     1256c <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xa1c>
+         : 1035  if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   126a1:  cmpw   $0x0,0x108(%rdx)
+    0.00 :   126a9:  jne    12990 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe40>
+         : 1038  ++index;
+    0.00 :   126af:  lea    0xc(%rax),%rcx
+         : 1040  while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   126b3:  cmp    $0x4,%rax
+    0.00 :   126b7:  je     1256c <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xa1c>
+         : 1043  if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   126bd:  cmpw   $0x0,0x120(%rdx)
+    0.00 :   126c5:  jne    12990 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe40>
+         : 1046  ++index;
+    0.00 :   126cb:  lea    0xd(%rax),%rcx
+         : 1048  while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   126cf:  cmp    $0x3,%rax
+    0.00 :   126d3:  je     1256c <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xa1c>
+         : 1051  if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   126d9:  cmpw   $0x0,0x138(%rdx)
+    0.00 :   126e1:  jne    12990 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe40>
+         : 1054  ++index;
+    0.00 :   126e7:  lea    0xe(%rax),%rcx
+         : 1056  while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   126eb:  cmp    $0x2,%rax
+    0.00 :   126ef:  je     1256c <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xa1c>
+         : 1059  if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   126f5:  cmpw   $0x0,0x150(%rdx)
+    0.00 :   126fd:  jne    12990 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe40>
+         : 1062  while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   12703:  test   %rax,%rax
+    0.00 :   12706:  jne    1256c <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xa1c>
+         : 1065  if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   1270c:  cmpw   $0x0,0x168(%rdx)
+    0.00 :   12714:  je     1256c <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xa1c>
+    0.00 :   1271a:  test   %dil,%dil
+    0.00 :   1271d:  je     13808 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1cb8>
+    0.00 :   12723:  movb   $0x1,0x70(%rsp)
+    0.00 :   12728:  mov    $0x1,%r14d
+         : 1072  ++index;
+    0.00 :   1272e:  mov    $0xf,%ecx
+    0.00 :   12733:  jmp    129a0 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe50>
+         : 1075  while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   12738:  cmp    $0xf,%rax
+    0.22 :   1273c:  ja     1293e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xdee>
+    0.00 :   12742:  lea    (%rax,%rax,2),%rax
+         : 1079  if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   12746:  cmpw   $0x0,0x360(%rbx,%rax,8)
+    0.89 :   1274f:  lea    (%rbx,%rax,8),%rdx
+    0.00 :   12753:  jne    128e3 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xd93>
+         : 1083  ++index;
+    0.00 :   12759:  lea    0x2(%r13),%rax
+         : 1085  while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   1275d:  cmp    $0xe,%r13
+    0.22 :   12761:  je     1293e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xdee>
+         : 1088  if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   12767:  cmpw   $0x0,0x378(%rdx)
+    0.00 :   1276f:  jne    128de <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xd8e>
+         : 1091  ++index;
+    0.00 :   12775:  lea    0x3(%r13),%rax
+         : 1093  while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.22 :   12779:  cmp    $0xd,%r13
+    0.00 :   1277d:  je     1293e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xdee>
+         : 1096  if (map->known_inline_[index].key != field::unknown) {
+    0.45 :   12783:  cmpw   $0x0,0x390(%rdx)
+    0.22 :   1278b:  jne    128de <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xd8e>
+         : 1099  ++index;
+    0.00 :   12791:  lea    0x4(%r13),%rax
+         : 1101  while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   12795:  cmp    $0xc,%r13
+    0.00 :   12799:  je     1293e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xdee>
+         : 1104  if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   1279f:  cmpw   $0x0,0x3a8(%rdx)
+    0.45 :   127a7:  jne    128de <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xd8e>
+         : 1107  ++index;
+    0.00 :   127ad:  lea    0x5(%r13),%rax
+         : 1109  while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   127b1:  cmp    $0xb,%r13
+    0.00 :   127b5:  je     1293e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xdee>
+         : 1112  if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   127bb:  cmpw   $0x0,0x3c0(%rdx)
+    1.12 :   127c3:  jne    128de <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xd8e>
+         : 1115  ++index;
+    0.67 :   127c9:  lea    0x6(%r13),%rax
+         : 1117  while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   127cd:  cmp    $0xa,%r13
+    0.22 :   127d1:  je     1293e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xdee>
+         : 1120  if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   127d7:  cmpw   $0x0,0x3d8(%rdx)
+    0.45 :   127df:  jne    128de <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xd8e>
+         : 1123  ++index;
+    0.22 :   127e5:  lea    0x7(%r13),%rax
+         : 1125  while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   127e9:  cmp    $0x9,%r13
+    0.00 :   127ed:  je     1293e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xdee>
+         : 1128  if (map->known_inline_[index].key != field::unknown) {
+    0.22 :   127f3:  cmpw   $0x0,0x3f0(%rdx)
+    0.00 :   127fb:  jne    128de <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xd8e>
+         : 1131  ++index;
+    0.22 :   12801:  lea    0x8(%r13),%rax
+         : 1133  while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   12805:  cmp    $0x8,%r13
+    0.00 :   12809:  je     1293e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xdee>
+         : 1136  if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   1280f:  cmpw   $0x0,0x408(%rdx)
+    0.00 :   12817:  jne    128de <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xd8e>
+         : 1139  ++index;
+    0.00 :   1281d:  lea    0x9(%r13),%rax
+         : 1141  while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   12821:  cmp    $0x7,%r13
+    0.00 :   12825:  je     1293e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xdee>
+         : 1144  if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   1282b:  cmpw   $0x0,0x420(%rdx)
+    0.22 :   12833:  jne    128de <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xd8e>
+         : 1147  ++index;
+    0.22 :   12839:  lea    0xa(%r13),%rax
+         : 1149  while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   1283d:  cmp    $0x6,%r13
+    0.00 :   12841:  je     1293e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xdee>
+         : 1152  if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   12847:  cmpw   $0x0,0x438(%rdx)
+    0.67 :   1284f:  jne    128de <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xd8e>
+         : 1155  ++index;
+    0.00 :   12855:  lea    0xb(%r13),%rax
+         : 1157  while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   12859:  cmp    $0x5,%r13
+    0.00 :   1285d:  je     1293e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xdee>
+         : 1160  if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   12863:  cmpw   $0x0,0x450(%rdx)
+    0.00 :   1286b:  jne    128de <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xd8e>
+         : 1163  ++index;
+    0.00 :   1286d:  lea    0xc(%r13),%rax
+         : 1165  while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   12871:  cmp    $0x4,%r13
+    0.00 :   12875:  je     1293e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xdee>
+         : 1168  if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   1287b:  cmpw   $0x0,0x468(%rdx)
+    0.45 :   12883:  jne    128de <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xd8e>
+         : 1171  ++index;
+    0.22 :   12885:  lea    0xd(%r13),%rax
+         : 1173  while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   12889:  cmp    $0x3,%r13
+    0.00 :   1288d:  je     1293e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xdee>
+         : 1176  if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   12893:  cmpw   $0x0,0x480(%rdx)
+    0.00 :   1289b:  jne    128de <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xd8e>
+         : 1179  ++index;
+    0.00 :   1289d:  lea    0xe(%r13),%rax
+         : 1181  while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.22 :   128a1:  cmp    $0x2,%r13
+    0.00 :   128a5:  je     1293e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xdee>
+         : 1184  if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   128ab:  cmpw   $0x0,0x498(%rdx)
+    0.67 :   128b3:  jne    128de <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xd8e>
+         : 1187  ++index;
+    0.00 :   128b5:  lea    0xf(%r13),%rax
+         : 1189  while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   128b9:  cmp    $0x1,%r13
+    0.00 :   128bd:  je     1293e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xdee>
+         : 1192  if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   128bf:  cmpw   $0x0,0x4b0(%rdx)
+    0.00 :   128c7:  jne    128de <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xd8e>
+         : 1195  while (index < KNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   128c9:  cmp    $0xffffffffffffffff,%r13
+    0.00 :   128cd:  jne    1293e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xdee>
+         : 1198  if (map->known_inline_[index].key != field::unknown) {
+    0.00 :   128cf:  cmpw   $0x0,0x4c8(%rdx)
+    0.00 :   128d7:  je     1293e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xdee>
+         : 1201  ++index;
+    0.00 :   128d9:  mov    $0xf,%eax
+    0.00 :   128de:  mov    %rax,0x68(%rsp)
+         : 1204  const auto& entry = map->known_inline_[index];
+    0.00 :   128e3:  mov    0x68(%rsp),%r13
+         : 1206  return {field_to_string(entry.key), std::string_view(entry.value, entry.length)};
+    1.34 :   128e8:  lea    0x0(%r13,%r13,2),%rax
+    0.00 :   128ed:  lea    (%rbx,%rax,8),%rdx
+         : 1209  auto idx = static_cast<size_t>(f);
+    0.00 :   128f1:  movzwl 0x360(%rbx,%rax,8),%eax
+         : 1211  if (idx < table.size()) {
+    0.22 :   128f9:  cmp    $0x164,%rax
+    0.22 :   128ff:  ja     1309e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x154e>
+         : 1214  return table[idx];
+    0.00 :   12905:  lea    0x197f4(%rip),%rcx        # 2c100 <_ZZN6katana4http6detail20get_field_name_tableEvE5table.lto_priv.0>
+    0.45 :   1290c:  shl    $0x4,%rax
+    0.00 :   12910:  add    %rcx,%rax
+    0.89 :   12913:  mov    (%rax),%rcx
+    2.46 :   12916:  mov    0x8(%rax),%r11
+    0.67 :   1291a:  mov    0x368(%rdx),%rax
+    0.00 :   12921:  movzwl 0x370(%rdx),%r15d
+    0.22 :   12929:  xor    %r14d,%r14d
+    0.00 :   1292c:  mov    %rax,0x50(%rsp)
+         :
+         : 1225  /// Constructor accepting two values of arbitrary types
+         : 1226  template<typename _U1, typename _U2>
+         : 1227  requires (_S_constructible<_U1, _U2>()) && (!_S_dangles<_U1, _U2>())
+         : 1228  constexpr explicit(!_S_convertible<_U1, _U2>())
+         : 1229  pair(_U1&& __x, _U2&& __y)
+    0.22 :   12931:  jmp    123ae <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x85e>
+         : 1231  ++index;
+    0.00 :   12936:  mov    %rsi,%rax
+    0.00 :   12939:  jmp    11c39 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe9>
+         : 1234  known_chunk = map->known_chunks_;
+    0.00 :   1293e:  mov    0x4e0(%rbx),%rsi
+    0.45 :   12945:  mov    %rsi,0x78(%rsp)
+         : 1237  while (known_chunk) {
+    0.00 :   1294a:  test   %rsi,%rsi
+    0.00 :   1294d:  je     12b7a <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x102a>
+    0.00 :   12953:  xor    %eax,%eax
+    0.00 :   12955:  mov    $0x1,%edi
+    0.00 :   1295a:  mov    $0x1,%ecx
+    0.00 :   1295f:  lea    (%rax,%rax,2),%rdx
+    0.00 :   12963:  lea    (%rsi,%rdx,8),%rdx
+         : 1245  if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   12967:  cmpw   $0x0,(%rdx)
+    0.00 :   1296b:  je     1259a <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xa4a>
+    0.00 :   12971:  test   %dil,%dil
+    0.00 :   12974:  je     1393a <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1dea>
+    0.00 :   1297a:  movb   $0x1,0x70(%rsp)
+    0.00 :   1297f:  test   %cl,%cl
+    0.00 :   12981:  je     129ae <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe5e>
+    0.00 :   12983:  mov    %rax,%rcx
+    0.00 :   12986:  mov    $0x1,%r14d
+    0.00 :   1298c:  jmp    129a0 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe50>
+    0.00 :   1298e:  xchg   %ax,%ax
+    0.00 :   12990:  test   %dil,%dil
+    0.00 :   12993:  je     129a0 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe50>
+    0.00 :   12995:  movb   $0x1,0x70(%rsp)
+    0.00 :   1299a:  mov    $0x1,%r14d
+    0.00 :   129a0:  mov    %rcx,0x68(%rsp)
+         : 1262  if (phase == 0) {
+    0.00 :   129a5:  test   %r14b,%r14b
+    0.00 :   129a8:  je     128e3 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xd93>
+    0.00 :   129ae:  mov    0x68(%rsp),%r13
+         : 1266  std::pair<std::string_view, std::string_view> operator*() const {
+    0.00 :   129b3:  mov    0x78(%rsp),%rax
+    0.00 :   129b8:  lea    0x0(%r13,%r13,2),%rdx
+    0.00 :   129bd:  lea    (%rax,%rdx,8),%rdx
+         : 1270  auto idx = static_cast<size_t>(f);
+    0.00 :   129c1:  movzwl (%rdx),%eax
+         : 1272  if (idx < table.size()) {
+    0.00 :   129c4:  cmp    $0x164,%rax
+    0.00 :   129ca:  jbe    133b4 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1864>
+         : 1275  return "unknown";
+    0.00 :   129d0:  lea    0x1374f(%rip),%r11        # 26126 <_IO_stdin_used+0x126>
+    0.00 :   129d7:  mov    $0x7,%ecx
+         : 1278  return {field_to_string(entry.key), std::string_view(entry.value, entry.length)};
+    0.00 :   129dc:  mov    0x8(%rdx),%rax
+    0.00 :   129e0:  movzwl 0x10(%rdx),%r15d
+    0.00 :   129e5:  mov    $0x1,%r14d
+    0.00 :   129eb:  mov    %rax,0x50(%rsp)
+    0.00 :   129f0:  jmp    123ae <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x85e>
+    0.00 :   129f5:  mov    %rax,%rdx
+    0.00 :   129f8:  xor    %esi,%esi
+         : 1286  if (phase == 2) {
+    0.00 :   129fa:  cmp    $0x2,%r14b
+    0.00 :   129fe:  jne    13773 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1c23>
+         : 1289  while (index < UNKNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   12a04:  cmp    $0x7,%rax
+    0.00 :   12a08:  jbe    12b81 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1031>
+         : 1292  unknown_chunk = map->unknown_chunks_;
+    0.45 :   12a0e:  mov    0x5f0(%rbx),%rdx
+    0.67 :   12a15:  movb   $0x3,0x70(%rsp)
+    0.00 :   12a1a:  mov    $0x3,%r14d
+    0.00 :   12a20:  xor    %eax,%eax
+    0.00 :   12a22:  movq   $0x0,0x68(%rsp)
+    0.00 :   12a2b:  mov    %rdx,0x80(%rsp)
+         : 1299  while (unknown_chunk) {
+    0.22 :   12a33:  test   %rdx,%rdx
+    0.00 :   12a36:  je     13995 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e45>
+         : 1302  while (index < UNKNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   12a3c:  xor    %edi,%edi
+    0.00 :   12a3e:  cmp    $0x7,%rax
+    0.00 :   12a42:  ja     12afa <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xfaa>
+         : 1306  if (unknown_chunk->entries[index].name) {
+    0.00 :   12a48:  mov    %rax,%rcx
+    0.00 :   12a4b:  shl    $0x5,%rcx
+    0.00 :   12a4f:  add    %rdx,%rcx
+    0.00 :   12a52:  cmpq   $0x0,(%rcx)
+    0.00 :   12a56:  jne    12b2a <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xfda>
+         : 1312  ++index;
+    0.00 :   12a5c:  lea    0x1(%rax),%rsi
+         : 1314  while (index < UNKNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   12a60:  cmp    $0x7,%rax
+    0.00 :   12a64:  je     12afa <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xfaa>
+         : 1317  if (unknown_chunk->entries[index].name) {
+    0.00 :   12a6a:  cmpq   $0x0,0x20(%rcx)
+    0.00 :   12a6f:  jne    13730 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1be0>
+         : 1320  ++index;
+    0.00 :   12a75:  lea    0x2(%rax),%rsi
+         : 1322  while (index < UNKNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   12a79:  cmp    $0x6,%rax
+    0.00 :   12a7d:  je     12afa <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xfaa>
+         : 1325  if (unknown_chunk->entries[index].name) {
+    0.00 :   12a7f:  cmpq   $0x0,0x40(%rcx)
+    0.00 :   12a84:  jne    13730 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1be0>
+         : 1328  ++index;
+    0.00 :   12a8a:  lea    0x3(%rax),%rsi
+         : 1330  while (index < UNKNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   12a8e:  cmp    $0x5,%rax
+    0.00 :   12a92:  je     12afa <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xfaa>
+         : 1333  if (unknown_chunk->entries[index].name) {
+    0.00 :   12a94:  cmpq   $0x0,0x60(%rcx)
+    0.00 :   12a99:  jne    13730 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1be0>
+         : 1336  ++index;
+    0.00 :   12a9f:  lea    0x4(%rax),%rsi
+         : 1338  while (index < UNKNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   12aa3:  cmp    $0x4,%rax
+    0.00 :   12aa7:  je     12afa <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xfaa>
+         : 1341  if (unknown_chunk->entries[index].name) {
+    0.00 :   12aa9:  cmpq   $0x0,0x80(%rcx)
+    0.00 :   12ab1:  jne    13730 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1be0>
+         : 1344  ++index;
+    0.00 :   12ab7:  lea    0x5(%rax),%rsi
+         : 1346  while (index < UNKNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   12abb:  cmp    $0x3,%rax
+    0.00 :   12abf:  je     12afa <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xfaa>
+         : 1349  if (unknown_chunk->entries[index].name) {
+    0.00 :   12ac1:  cmpq   $0x0,0xa0(%rcx)
+    0.00 :   12ac9:  jne    13730 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1be0>
+         : 1352  ++index;
+    0.00 :   12acf:  lea    0x6(%rax),%rsi
+         : 1354  while (index < UNKNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   12ad3:  cmp    $0x2,%rax
+    0.00 :   12ad7:  je     12afa <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xfaa>
+         : 1357  if (unknown_chunk->entries[index].name) {
+    0.00 :   12ad9:  cmpq   $0x0,0xc0(%rcx)
+    0.00 :   12ae1:  jne    13730 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1be0>
+         : 1360  while (index < UNKNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   12ae7:  test   %rax,%rax
+    0.00 :   12aea:  jne    12afa <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xfaa>
+         : 1363  if (unknown_chunk->entries[index].name) {
+    0.00 :   12aec:  cmpq   $0x0,0xe0(%rcx)
+    0.00 :   12af4:  jne    1372b <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1bdb>
+         : 1366  unknown_chunk = unknown_chunk->next;
+    0.00 :   12afa:  mov    0x100(%rdx),%rdx
+         : 1368  while (unknown_chunk) {
+    0.00 :   12b01:  mov    $0x1,%edi
+    0.00 :   12b06:  test   %rdx,%rdx
+    0.00 :   12b09:  je     13980 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e30>
+         : 1372  index = 0;
+    0.00 :   12b0f:  xor    %eax,%eax
+         : 1374  unknown_chunk = unknown_chunk->next;
+    0.00 :   12b11:  mov    %rdx,0x38(%rsp)
+    0.00 :   12b16:  mov    %rax,%rcx
+    0.00 :   12b19:  shl    $0x5,%rcx
+    0.00 :   12b1d:  add    %rdx,%rcx
+         : 1379  if (unknown_chunk->entries[index].name) {
+    0.00 :   12b20:  cmpq   $0x0,(%rcx)
+    0.00 :   12b24:  je     12a5c <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xf0c>
+    0.00 :   12b2a:  test   %dil,%dil
+    0.00 :   12b2d:  je     1235e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x80e>
+    0.00 :   12b33:  mov    0x38(%rsp),%rdx
+    0.00 :   12b38:  mov    %rdx,0x80(%rsp)
+    0.00 :   12b40:  mov    %rax,0x68(%rsp)
+         : 1387  known_chunk != other.known_chunk || unknown_chunk != other.unknown_chunk;
+    0.00 :   12b45:  cmp    $0x4,%r14b
+    0.00 :   12b49:  jne    12368 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x818>
+         : 1390  return phase != other.phase || index != other.index ||
+    0.22 :   12b4f:  mov    0x68(%rsp),%r13
+         : 1392  known_chunk != other.known_chunk || unknown_chunk != other.unknown_chunk;
+    0.67 :   12b54:  mov    0x80(%rsp),%rax
+    0.00 :   12b5c:  mov    $0x4,%r14d
+         : 1395  return phase != other.phase || index != other.index ||
+    0.00 :   12b62:  test   %r13,%r13
+    0.00 :   12b65:  je     1311e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x15ce>
+    0.00 :   12b6b:  mov    %r13,%rdx
+    0.00 :   12b6e:  shl    $0x5,%rdx
+    0.00 :   12b72:  add    %rdx,%rax
+    0.00 :   12b75:  jmp    12399 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x849>
+    0.00 :   12b7a:  xor    %edx,%edx
+    0.45 :   12b7c:  mov    $0x1,%esi
+    0.22 :   12b81:  mov    %rdx,%rax
+    0.00 :   12b84:  shl    $0x5,%rax
+         : 1406  if (map->unknown_inline_[index].name) {
+    0.00 :   12b88:  cmpq   $0x0,0x4f0(%rbx,%rax,1)
+    1.56 :   12b91:  lea    (%rbx,%rax,1),%rcx
+    0.00 :   12b95:  jne    13437 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x18e7>
+         : 1410  ++index;
+    0.22 :   12b9b:  lea    0x1(%rdx),%rax
+         : 1412  while (index < UNKNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   12b9f:  cmp    $0x7,%rdx
+    0.00 :   12ba3:  je     12a0e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xebe>
+         : 1415  if (map->unknown_inline_[index].name) {
+    0.00 :   12ba9:  cmpq   $0x0,0x510(%rcx)
+    0.22 :   12bb1:  jne    13203 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x16b3>
+         : 1418  ++index;
+    0.22 :   12bb7:  lea    0x2(%rdx),%rax
+         : 1420  while (index < UNKNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   12bbb:  cmp    $0x6,%rdx
+    0.00 :   12bbf:  je     12a0e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xebe>
+         : 1423  if (map->unknown_inline_[index].name) {
+    0.00 :   12bc5:  cmpq   $0x0,0x530(%rcx)
+    0.00 :   12bcd:  jne    13203 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x16b3>
+         : 1426  ++index;
+    0.22 :   12bd3:  lea    0x3(%rdx),%rax
+         : 1428  while (index < UNKNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   12bd7:  cmp    $0x5,%rdx
+    0.00 :   12bdb:  je     12a0e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xebe>
+         : 1431  if (map->unknown_inline_[index].name) {
+    0.00 :   12be1:  cmpq   $0x0,0x550(%rcx)
+    0.22 :   12be9:  jne    13203 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x16b3>
+         : 1434  ++index;
+    0.00 :   12bef:  lea    0x4(%rdx),%rax
+         : 1436  while (index < UNKNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   12bf3:  cmp    $0x4,%rdx
+    0.00 :   12bf7:  je     12a0e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xebe>
+         : 1439  if (map->unknown_inline_[index].name) {
+    0.00 :   12bfd:  cmpq   $0x0,0x570(%rcx)
+    0.67 :   12c05:  jne    13203 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x16b3>
+         : 1442  ++index;
+    0.00 :   12c0b:  lea    0x5(%rdx),%rax
+         : 1444  while (index < UNKNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   12c0f:  cmp    $0x3,%rdx
+    0.00 :   12c13:  je     12a0e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xebe>
+         : 1447  if (map->unknown_inline_[index].name) {
+    0.00 :   12c19:  cmpq   $0x0,0x590(%rcx)
+    0.22 :   12c21:  jne    13203 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x16b3>
+         : 1450  ++index;
+    0.22 :   12c27:  lea    0x6(%rdx),%rax
+         : 1452  while (index < UNKNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   12c2b:  cmp    $0x2,%rdx
+    0.00 :   12c2f:  je     12a0e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xebe>
+         : 1455  if (map->unknown_inline_[index].name) {
+    0.00 :   12c35:  cmpq   $0x0,0x5b0(%rcx)
+    0.00 :   12c3d:  jne    13203 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x16b3>
+         : 1458  while (index < UNKNOWN_HEADERS_INLINE_SIZE) {
+    0.00 :   12c43:  test   %rdx,%rdx
+    0.00 :   12c46:  jne    12a0e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xebe>
+         : 1461  if (map->unknown_inline_[index].name) {
+    0.00 :   12c4c:  cmpq   $0x0,0x5d0(%rcx)
+    0.45 :   12c54:  mov    $0x1,%eax
+         : 1464  ++index;
+    0.00 :   12c59:  mov    $0x7,%edx
+         : 1466  if (map->unknown_inline_[index].name) {
+    0.00 :   12c5e:  je     12a0e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xebe>
+    0.00 :   12c64:  jmp    1320b <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x16bb>
+    0.00 :   12c69:  nopl   0x0(%rax)
+         : 1470  ++index;
+    0.00 :   12c70:  mov    %r9,%rax
+    0.00 :   12c73:  jmp    11c12 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xc2>
+         : 1473  if (__capacity > max_size())
+    0.00 :   12c78:  test   %rcx,%rcx
+    0.00 :   12c7b:  js     13950 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e00>
+         : 1476  if (__capacity > __old_capacity && __capacity < 2 * __old_capacity)
+    0.00 :   12c81:  add    %r9,%r9
+    0.00 :   12c84:  cmp    %r9,%rcx
+    0.00 :   12c87:  jb     133d1 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1881>
+         : 1480  // _GLIBCXX_RESOLVE_LIB_DEFECTS
+         : 1481  // 3308. std::allocator<void>().allocate(n)
+         : 1482  static_assert(sizeof(_Tp) != 0, "cannot allocate incomplete types");
+         : 1483  #endif
+         :
+         : 1485  if (__builtin_expect(__n > this->_M_max_size(), false))
+    0.00 :   12c8d:  mov    %rdx,%rdi
+    0.00 :   12c90:  add    $0x3,%rdi
+    0.00 :   12c94:  js     12fba <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x146a>
+    0.00 :   12c9a:  mov    %rcx,%r9
+    0.00 :   12c9d:  mov    %rcx,0x18(%rsp)
+    0.00 :   12ca2:  mov    %rdx,0x20(%rsp)
+    0.00 :   12ca7:  mov    %r9,0x48(%rsp)
+         : 1493  std::align_val_t __al = std::align_val_t(alignof(_Tp));
+         : 1494  return static_cast<_Tp*>(_GLIBCXX_OPERATOR_NEW(__n * sizeof(_Tp),
+         : 1495  __al));
+         : 1496  }
+         : 1497  #endif
+         : 1498  return static_cast<_Tp*>(_GLIBCXX_OPERATOR_NEW(__n * sizeof(_Tp)));
+    0.00 :   12cac:  call   6900 <operator new(unsigned long)@plt>
+         : 1500  if (__pos)
+    0.00 :   12cb1:  mov    0x20(%rsp),%rdx
+         : 1502  { return _M_dataplus._M_p; }
+    0.00 :   12cb6:  mov    (%r12),%rdi
+    0.00 :   12cba:  mov    0x48(%rsp),%r9
+    0.00 :   12cbf:  mov    0x18(%rsp),%rcx
+    0.00 :   12cc4:  mov    %rax,%r8
+    0.00 :   12cc7:  test   %rdx,%rdx
+    0.00 :   12cca:  jne    131eb <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x169b>
+         : 1509  return static_cast<char_type*>(__builtin_memcpy(__s1, __s2, __n));
+    0.00 :   12cd0:  movw   $0x203a,(%r8,%rdx,1)
+         : 1511  if (_M_data() == _M_local_data())
+    0.00 :   12cd7:  cmp    %rdi,0x58(%rsp)
+    0.00 :   12cdc:  je     12d0a <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x11ba>
+         : 1514  { _Alloc_traits::deallocate(_M_get_allocator(), _M_data(), __size + 1); }
+    0.00 :   12cde:  mov    0x10(%r12),%rax
+    0.00 :   12ce3:  mov    %r8,0x18(%rsp)
+    0.00 :   12ce8:  mov    %rcx,0x20(%rsp)
+    0.00 :   12ced:  mov    %r9,0x48(%rsp)
+    0.00 :   12cf2:  lea    0x1(%rax),%rsi
+         : 1520  _GLIBCXX_OPERATOR_DELETE(_GLIBCXX_SIZED_DEALLOC(__p, __n),
+         : 1521  std::align_val_t(alignof(_Tp)));
+         : 1522  return;
+         : 1523  }
+         : 1524  #endif
+         : 1525  _GLIBCXX_OPERATOR_DELETE(_GLIBCXX_SIZED_DEALLOC(__p, __n));
+    0.00 :   12cf6:  call   6910 <operator delete(void*, unsigned long)@plt>
+    0.00 :   12cfb:  mov    0x18(%rsp),%r8
+    0.00 :   12d00:  mov    0x20(%rsp),%rcx
+    0.00 :   12d05:  mov    0x48(%rsp),%r9
+         : 1530  { _M_dataplus._M_p = __p; }
+    0.00 :   12d0a:  mov    %r8,(%r12)
+         : 1532  { _M_allocated_capacity = __capacity; }
+    0.00 :   12d0e:  mov    %r9,0x10(%r12)
+         : 1534  }
+    0.00 :   12d13:  jmp    12467 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x917>
+         : 1536  if (__capacity > max_size())
+    0.00 :   12d18:  test   %r8,%r8
+    0.00 :   12d1b:  js     13950 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e00>
+         : 1539  if (__capacity > __old_capacity && __capacity < 2 * __old_capacity)
+    0.00 :   12d21:  add    %rax,%rax
+    0.00 :   12d24:  mov    %rax,0x48(%rsp)
+    0.00 :   12d29:  cmp    %rax,%r8
+    0.00 :   12d2c:  jb     12fb1 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1461>
+         : 1544  if (__builtin_expect(__n > this->_M_max_size(), false))
+    0.00 :   12d32:  mov    %r8,%rdi
+    0.00 :   12d35:  inc    %rdi
+    0.00 :   12d38:  js     12fba <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x146a>
+    0.00 :   12d3e:  mov    %r8,0x48(%rsp)
+    0.00 :   12d43:  mov    %r8,0x8(%rsp)
+    0.00 :   12d48:  mov    %r11,0x10(%rsp)
+    0.00 :   12d4d:  mov    %rcx,0x18(%rsp)
+    0.00 :   12d52:  mov    %rdx,0x20(%rsp)
+         : 1553  return static_cast<_Tp*>(_GLIBCXX_OPERATOR_NEW(__n * sizeof(_Tp)));
+    0.00 :   12d57:  call   6900 <operator new(unsigned long)@plt>
+         : 1555  if (__pos)
+    0.00 :   12d5c:  mov    0x20(%rsp),%rdx
+    0.00 :   12d61:  mov    0x18(%rsp),%rcx
+    0.00 :   12d66:  mov    0x10(%rsp),%r11
+    0.00 :   12d6b:  mov    %rax,%r9
+    0.00 :   12d6e:  mov    0x8(%rsp),%r8
+    0.00 :   12d73:  test   %rdx,%rdx
+    0.00 :   12d76:  je     12db9 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1269>
+         : 1563  { return _M_dataplus._M_p; }
+    0.00 :   12d78:  mov    (%r12),%rsi
+         : 1565  if (__n == 1)
+    0.00 :   12d7c:  cmp    $0x1,%rdx
+    0.00 :   12d80:  je     13642 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1af2>
+    0.00 :   12d86:  mov    %r8,0x8(%rsp)
+    0.00 :   12d8b:  mov    %r11,0x10(%rsp)
+    0.00 :   12d90:  mov    %rax,%rdi
+    0.00 :   12d93:  mov    %rcx,0x18(%rsp)
+    0.00 :   12d98:  mov    %rdx,0x20(%rsp)
+    0.00 :   12d9d:  call   6880 <memcpy@plt>
+    0.00 :   12da2:  mov    0x8(%rsp),%r8
+    0.00 :   12da7:  mov    0x10(%rsp),%r11
+    0.00 :   12dac:  mov    0x18(%rsp),%rcx
+    0.00 :   12db1:  mov    %rax,%r9
+    0.00 :   12db4:  mov    0x20(%rsp),%rdx
+         : 1579  if (__s && __len2)
+    0.00 :   12db9:  test   %r11,%r11
+    0.00 :   12dbc:  je     12df0 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x12a0>
+    0.00 :   12dbe:  test   %rcx,%rcx
+    0.00 :   12dc1:  je     12df0 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x12a0>
+         : 1584  this->_S_copy(__r + __pos, __s, __len2);
+    0.00 :   12dc3:  lea    (%r9,%rdx,1),%rdi
+    0.00 :   12dc7:  cmp    $0x1,%rcx
+    0.00 :   12dcb:  je     13637 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1ae7>
+    0.00 :   12dd1:  mov    %r9,0x18(%rsp)
+    0.00 :   12dd6:  mov    %r8,0x20(%rsp)
+    0.00 :   12ddb:  mov    %rcx,%rdx
+    0.00 :   12dde:  mov    %r11,%rsi
+    0.00 :   12de1:  call   6880 <memcpy@plt>
+    0.00 :   12de6:  mov    0x18(%rsp),%r9
+    0.00 :   12deb:  mov    0x20(%rsp),%r8
+         : 1595  { return _M_dataplus._M_p; }
+    0.00 :   12df0:  mov    (%r12),%rdi
+         : 1597  if (_M_data() == _M_local_data())
+    0.00 :   12df4:  cmp    %rdi,0x58(%rsp)
+    0.00 :   12df9:  je     12e1d <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x12cd>
+         : 1600  { _Alloc_traits::deallocate(_M_get_allocator(), _M_data(), __size + 1); }
+    0.00 :   12dfb:  mov    0x10(%r12),%rax
+    0.00 :   12e00:  mov    %r9,0x18(%rsp)
+    0.00 :   12e05:  mov    %r8,0x20(%rsp)
+    0.00 :   12e0a:  lea    0x1(%rax),%rsi
+         : 1605  _GLIBCXX_OPERATOR_DELETE(_GLIBCXX_SIZED_DEALLOC(__p, __n));
+    0.00 :   12e0e:  call   6910 <operator delete(void*, unsigned long)@plt>
+    0.00 :   12e13:  mov    0x18(%rsp),%r9
+    0.00 :   12e18:  mov    0x20(%rsp),%r8
+         : 1609  { _M_allocated_capacity = __capacity; }
+    0.00 :   12e1d:  mov    0x48(%rsp),%rax
+         : 1611  { _M_dataplus._M_p = __p; }
+    0.00 :   12e22:  mov    %r9,(%r12)
+         : 1613  { _M_allocated_capacity = __capacity; }
+    0.00 :   12e26:  mov    %rax,0x10(%r12)
+         : 1615  }
+    0.00 :   12e2b:  jmp    12416 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x8c6>
+         : 1617  if (__capacity > max_size())
+    0.00 :   12e30:  test   %r15,%r15
+    0.00 :   12e33:  js     13950 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e00>
+         : 1620  if (__capacity > __old_capacity && __capacity < 2 * __old_capacity)
+    0.00 :   12e39:  add    %r9,%r9
+    0.00 :   12e3c:  cmp    %r9,%r15
+    0.00 :   12e3f:  jb     13400 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x18b0>
+         : 1624  if (__builtin_expect(__n > this->_M_max_size(), false))
+    0.00 :   12e45:  mov    %rdx,%rdi
+    0.00 :   12e48:  add    $0x3,%rdi
+    0.00 :   12e4c:  js     12fba <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x146a>
+    0.00 :   12e52:  mov    %r15,%r9
+    0.00 :   12e55:  mov    %rdx,0x48(%rsp)
+    0.00 :   12e5a:  mov    %r9,0x50(%rsp)
+         : 1631  return static_cast<_Tp*>(_GLIBCXX_OPERATOR_NEW(__n * sizeof(_Tp)));
+    0.00 :   12e5f:  call   6900 <operator new(unsigned long)@plt>
+         : 1633  if (__pos)
+    0.00 :   12e64:  mov    0x48(%rsp),%rdx
+         : 1635  { return _M_dataplus._M_p; }
+    0.00 :   12e69:  mov    (%r12),%rdi
+    0.00 :   12e6d:  mov    0x50(%rsp),%r9
+    0.00 :   12e72:  mov    %rax,%r8
+    0.00 :   12e75:  test   %rdx,%rdx
+    0.00 :   12e78:  jne    1322d <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x16dd>
+    0.00 :   12e7e:  movw   $0xa0d,(%r8,%rdx,1)
+         : 1642  if (_M_data() == _M_local_data())
+    0.00 :   12e85:  cmp    %rdi,0x58(%rsp)
+    0.00 :   12e8a:  je     12eae <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x135e>
+         : 1645  { _Alloc_traits::deallocate(_M_get_allocator(), _M_data(), __size + 1); }
+    0.00 :   12e8c:  mov    0x10(%r12),%rax
+    0.00 :   12e91:  mov    %r8,0x48(%rsp)
+    0.00 :   12e96:  mov    %r9,0x50(%rsp)
+    0.00 :   12e9b:  lea    0x1(%rax),%rsi
+         : 1650  _GLIBCXX_OPERATOR_DELETE(_GLIBCXX_SIZED_DEALLOC(__p, __n));
+    0.00 :   12e9f:  call   6910 <operator delete(void*, unsigned long)@plt>
+    0.00 :   12ea4:  mov    0x48(%rsp),%r8
+    0.00 :   12ea9:  mov    0x50(%rsp),%r9
+         : 1654  { _M_dataplus._M_p = __p; }
+    0.00 :   12eae:  mov    %r8,(%r12)
+         : 1656  { _M_allocated_capacity = __capacity; }
+    0.00 :   12eb2:  mov    %r9,0x10(%r12)
+         : 1658  }
+    0.00 :   12eb7:  jmp    1252c <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x9dc>
+         : 1660  if (__capacity > max_size())
+    0.00 :   12ebc:  test   %rcx,%rcx
+    0.00 :   12ebf:  js     13950 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e00>
+         : 1663  if (__capacity > __old_capacity && __capacity < 2 * __old_capacity)
+    0.00 :   12ec5:  add    %rax,%rax
+    0.00 :   12ec8:  mov    %rax,0x48(%rsp)
+    0.00 :   12ecd:  cmp    %rax,%rcx
+    0.00 :   12ed0:  jb     133e8 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1898>
+         : 1668  if (__builtin_expect(__n > this->_M_max_size(), false))
+    0.00 :   12ed6:  mov    %rcx,%rdi
+    0.00 :   12ed9:  inc    %rdi
+    0.00 :   12edc:  js     12fba <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x146a>
+    0.00 :   12ee2:  mov    %rcx,0x48(%rsp)
+    0.00 :   12ee7:  mov    %rcx,0x18(%rsp)
+    0.00 :   12eec:  mov    %rdx,0x20(%rsp)
+         : 1675  return static_cast<_Tp*>(_GLIBCXX_OPERATOR_NEW(__n * sizeof(_Tp)));
+    0.00 :   12ef1:  call   6900 <operator new(unsigned long)@plt>
+         : 1677  if (__pos)
+    0.00 :   12ef6:  mov    0x20(%rsp),%rdx
+    0.00 :   12efb:  mov    0x18(%rsp),%rcx
+    0.00 :   12f00:  mov    %rax,%r8
+    0.00 :   12f03:  test   %rdx,%rdx
+    0.00 :   12f06:  je     12f35 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x13e5>
+         : 1683  { return _M_dataplus._M_p; }
+    0.00 :   12f08:  mov    (%r12),%rsi
+         : 1685  if (__n == 1)
+    0.00 :   12f0c:  cmp    $0x1,%rdx
+    0.00 :   12f10:  je     1362c <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1adc>
+    0.00 :   12f16:  mov    %rcx,0x18(%rsp)
+    0.00 :   12f1b:  mov    %rdx,0x20(%rsp)
+    0.00 :   12f20:  mov    %rax,%rdi
+    0.00 :   12f23:  call   6880 <memcpy@plt>
+    0.00 :   12f28:  mov    0x18(%rsp),%rcx
+    0.00 :   12f2d:  mov    0x20(%rsp),%rdx
+    0.00 :   12f32:  mov    %rax,%r8
+         : 1695  if (__s && __len2)
+    0.00 :   12f35:  cmpq   $0x0,0x50(%rsp)
+    0.00 :   12f3b:  je     12f71 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1421>
+    0.00 :   12f3d:  test   %r15,%r15
+    0.00 :   12f40:  je     12f71 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1421>
+         : 1700  this->_S_copy(__r + __pos, __s, __len2);
+    0.00 :   12f42:  lea    (%r8,%rdx,1),%rdi
+    0.00 :   12f46:  cmp    $0x1,%r15
+    0.00 :   12f4a:  je     1361d <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1acd>
+    0.00 :   12f50:  mov    0x50(%rsp),%rsi
+    0.00 :   12f55:  mov    %r15,%rdx
+    0.00 :   12f58:  mov    %r8,0x18(%rsp)
+    0.00 :   12f5d:  mov    %rcx,0x20(%rsp)
+    0.00 :   12f62:  call   6880 <memcpy@plt>
+    0.00 :   12f67:  mov    0x18(%rsp),%r8
+    0.00 :   12f6c:  mov    0x20(%rsp),%rcx
+         : 1711  { return _M_dataplus._M_p; }
+    0.00 :   12f71:  mov    (%r12),%rdi
+         : 1713  if (_M_data() == _M_local_data())
+    0.00 :   12f75:  cmp    %rdi,0x58(%rsp)
+    0.00 :   12f7a:  je     12f9e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x144e>
+         : 1716  { _Alloc_traits::deallocate(_M_get_allocator(), _M_data(), __size + 1); }
+    0.00 :   12f7c:  mov    0x10(%r12),%rax
+    0.00 :   12f81:  mov    %r8,0x20(%rsp)
+    0.00 :   12f86:  mov    %rcx,0x50(%rsp)
+    0.00 :   12f8b:  lea    0x1(%rax),%rsi
+         : 1721  _GLIBCXX_OPERATOR_DELETE(_GLIBCXX_SIZED_DEALLOC(__p, __n));
+    0.00 :   12f8f:  call   6910 <operator delete(void*, unsigned long)@plt>
+    0.00 :   12f94:  mov    0x20(%rsp),%r8
+    0.00 :   12f99:  mov    0x50(%rsp),%rcx
+         : 1725  { _M_allocated_capacity = __capacity; }
+    0.00 :   12f9e:  mov    0x48(%rsp),%rax
+         : 1727  { _M_dataplus._M_p = __p; }
+    0.00 :   12fa3:  mov    %r8,(%r12)
+         : 1729  { _M_allocated_capacity = __capacity; }
+    0.00 :   12fa7:  mov    %rax,0x10(%r12)
+         : 1731  }
+    0.00 :   12fac:  jmp    124db <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x98b>
+         : 1733  if (__capacity > max_size())
+    0.00 :   12fb1:  test   %rax,%rax
+    0.00 :   12fb4:  jns    139cd <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e7d>
+         : 1736  std::__throw_bad_alloc();
+    0.00 :   12fba:  mov    0x198(%rsp),%rax
+    0.00 :   12fc2:  sub    %fs:0x28,%rax
+    0.00 :   12fcb:  jne    1396f <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e1f>
+    0.00 :   12fd1:  call   6730 <std::__throw_bad_alloc()@plt>
+         : 1741  if (__len <= this->capacity())
+    0.00 :   12fd6:  cmp    $0xf,%r8
+    0.00 :   12fda:  jbe    123ea <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x89a>
+         : 1744  if (__capacity > max_size())
+    0.00 :   12fe0:  test   %r8,%r8
+    0.00 :   12fe3:  js     13950 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e00>
+         : 1747  if (__capacity > __old_capacity && __capacity < 2 * __old_capacity)
+    0.00 :   12fe9:  cmp    $0x1d,%r8
+    0.00 :   12fed:  ja     12d32 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x11e2>
+    0.00 :   12ff3:  movq   $0x1e,0x48(%rsp)
+    0.00 :   12ffc:  mov    $0x1f,%edi
+    0.00 :   13001:  jmp    12d43 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x11f3>
+         : 1753  ++index;
+    0.00 :   13006:  mov    $0xf,%eax
+    0.00 :   1300b:  jmp    12203 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x6b3>
+         : 1756  if (__len <= this->capacity())
+    0.00 :   13010:  cmp    $0xf,%rcx
+    0.00 :   13014:  jbe    124ad <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x95d>
+         : 1759  if (__capacity > __old_capacity && __capacity < 2 * __old_capacity)
+    0.00 :   1301a:  cmp    $0x1d,%rcx
+    0.00 :   1301e:  ja     1364d <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1afd>
+    0.00 :   13024:  movq   $0x1e,0x48(%rsp)
+    0.00 :   1302d:  mov    $0x1f,%edi
+    0.00 :   13032:  jmp    12ee7 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1397>
+         : 1765  if (__len <= this->capacity())
+    0.00 :   13037:  cmp    $0xf,%rcx
+    0.00 :   1303b:  jbe    1245d <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x90d>
+    0.00 :   13041:  mov    %rcx,0x20(%rsp)
+    0.00 :   13046:  mov    %rdx,0x48(%rsp)
+         : 1770  return static_cast<_Tp*>(_GLIBCXX_OPERATOR_NEW(__n * sizeof(_Tp)));
+    0.00 :   1304b:  mov    $0x1f,%edi
+    0.00 :   13050:  call   6900 <operator new(unsigned long)@plt>
+         : 1773  { return _M_dataplus._M_p; }
+    0.00 :   13055:  mov    (%r12),%rsi
+    0.00 :   13059:  mov    0x48(%rsp),%rdx
+         : 1776  __capacity = 2 * __old_capacity;
+    0.00 :   1305e:  mov    $0x1e,%r9d
+    0.00 :   13064:  mov    0x20(%rsp),%rcx
+    0.00 :   13069:  mov    %rax,%r8
+    0.00 :   1306c:  mov    %rcx,0x18(%rsp)
+    0.00 :   13071:  mov    %r9,0x20(%rsp)
+    0.00 :   13076:  mov    %r8,%rdi
+    0.00 :   13079:  mov    %rdx,0x48(%rsp)
+    0.00 :   1307e:  call   6880 <memcpy@plt>
+    0.00 :   13083:  mov    (%r12),%rdi
+    0.00 :   13087:  mov    0x18(%rsp),%rcx
+    0.00 :   1308c:  mov    0x20(%rsp),%r9
+    0.00 :   13091:  mov    0x48(%rsp),%rdx
+    0.00 :   13096:  mov    %rax,%r8
+    0.00 :   13099:  jmp    12cd0 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1180>
+    0.00 :   1309e:  lea    0x13081(%rip),%r11        # 26126 <_IO_stdin_used+0x126>
+    0.00 :   130a5:  mov    $0x7,%ecx
+    0.00 :   130aa:  jmp    1291a <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xdca>
+         : 1794  if (__len <= this->capacity())
+    0.00 :   130af:  cmp    $0xf,%r15
+    0.00 :   130b3:  jbe    12522 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x9d2>
+    0.00 :   130b9:  mov    $0x1f,%edi
+    0.00 :   130be:  mov    %rdx,0x50(%rsp)
+    0.00 :   130c3:  call   6900 <operator new(unsigned long)@plt>
+    0.00 :   130c8:  mov    (%r12),%rsi
+    0.00 :   130cc:  mov    0x50(%rsp),%rdx
+         : 1802  __capacity = 2 * __old_capacity;
+    0.00 :   130d1:  mov    $0x1e,%r9d
+    0.00 :   130d7:  mov    %rax,%r8
+    0.00 :   130da:  mov    %r9,0x48(%rsp)
+    0.00 :   130df:  mov    %rdx,0x50(%rsp)
+    0.00 :   130e4:  mov    %r8,%rdi
+    0.00 :   130e7:  call   6880 <memcpy@plt>
+    0.00 :   130ec:  mov    (%r12),%rdi
+    0.00 :   130f0:  mov    0x48(%rsp),%r9
+    0.00 :   130f5:  mov    0x50(%rsp),%rdx
+    0.00 :   130fa:  mov    %rax,%r8
+    0.00 :   130fd:  jmp    12e7e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x132e>
+         : 1814  known_chunk != other.known_chunk || unknown_chunk != other.unknown_chunk;
+    0.00 :   13102:  mov    0x80(%rsp),%rax
+    0.00 :   1310a:  jmp    12b6b <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x101b>
+         : 1817  __c1 = __c2;
+    0.00 :   1310f:  movzbl (%r11),%eax
+    0.00 :   13113:  mov    %al,(%rdi)
+    0.00 :   13115:  mov    (%r12),%r9
+         : 1821  }
+    0.00 :   13119:  jmp    12416 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x8c6>
+         : 1823  return phase != other.phase || index != other.index ||
+    0.00 :   1311e:  cmpq   $0x0,0x78(%rsp)
+    1.12 :   13124:  jne    12b6b <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x101b>
+         : 1826  known_chunk != other.known_chunk || unknown_chunk != other.unknown_chunk;
+    0.00 :   1312a:  test   %rax,%rax
+    0.00 :   1312d:  jne    12b6b <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x101b>
+         : 1829  out.append(value);
+         : 1830  out.append(CRLF);
+         : 1831  }
+         :
+         : 1833  // Add Content-Length header if needed
+         : 1834  if (!content_length_value.empty()) {
+    0.00 :   13133:  mov    0x30(%rsp),%r15
+    0.00 :   13138:  mov    0x28(%rsp),%r14
+    0.00 :   1313d:  test   %r15,%r15
+    0.22 :   13140:  jne    13793 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1c43>
+         : 1839  return this->append(__sv.data(), __sv.size());
+    0.00 :   13146:  mov    %r12,%rdi
+    0.00 :   13149:  call   1c7b0 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .constprop.0] [clone .isra.0]>
+         : 1842  { return this->append(__str._M_data(), __str.size()); }
+    0.22 :   1314e:  mov    0x608(%rbx),%rdx
+    0.22 :   13155:  mov    0x600(%rbx),%rsi
+    0.00 :   1315c:  mov    %r12,%rdi
+    0.22 :   1315f:  call   1c420 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .isra.0]>
+         : 1847  out.append(CRLF);
+         : 1848  }
+         :
+         : 1850  out.append(CRLF);
+         : 1851  out.append(body);
+         : 1852  ::katana::detail::syscall_metrics_registry::instance().note_response_serialize(
+    0.22 :   13164:  call   1c220 <katana::detail::syscall_metrics_registry::instance()>
+         : 1854  if (_M_data() == _M_local_data())
+    0.22 :   13169:  mov    0x58(%rsp),%rbx
+    0.00 :   1316e:  cmp    (%r12),%rbx
+    0.67 :   13172:  je     13854 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1d04>
+         : 1858  return _M_is_local() ? size_type(_S_local_capacity)
+    0.00 :   13178:  mov    0x10(%r12),%rbx
+         : 1860  }
+         :
+         : 1862  void syscall_metrics_registry::note_response_serialize(size_t bytes,
+         : 1863  size_t old_capacity,
+         : 1864  size_t new_capacity) noexcept {
+         : 1865  auto* slot = reinterpret_cast<slot_counters*>(local_slot());
+    0.22 :   1317d:  movzbl (%rax),%edi
+         : 1867  { return _M_string_length; }
+    0.00 :   13180:  mov    0x8(%r12),%r12
+    0.22 :   13185:  call   1edc0 <katana::detail::syscall_metrics_registry::local_slot() [clone .isra.0]>
+         : 1870  if (!slot) {
+    0.45 :   1318a:  test   %rax,%rax
+    0.00 :   1318d:  je     131a8 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1658>
+         : 1873  #endif // __cpp_lib_atomic_wait
+         :
+         : 1875  _GLIBCXX_ALWAYS_INLINE __int_type
+         : 1876  fetch_add(__int_type __i,
+         : 1877  memory_order __m = memory_order_seq_cst) noexcept
+         : 1878  { return __atomic_fetch_add(&_M_i, __i, int(__m)); }
+    0.00 :   1318f:  lock incq 0xa0(%rax)
+    0.00 :   13197:  lock add %r12,0xa8(%rax)
+         : 1881  return;
+         : 1882  }
+         : 1883  slot->response_serialize_calls.fetch_add(1, std::memory_order_relaxed);
+         : 1884  slot->response_serialize_bytes.fetch_add(static_cast<uint64_t>(bytes),
+         : 1885  std::memory_order_relaxed);
+         : 1886  if (new_capacity > old_capacity) {
+    0.00 :   1319f:  cmp    %rbx,%r14
+    0.00 :   131a2:  jb     1383c <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1cec>
+         : 1889  out.size(), old_capacity, out.capacity());
+         : 1890  }
+    0.00 :   131a8:  mov    0x198(%rsp),%rax
+    1.12 :   131b0:  sub    %fs:0x28,%rax
+    0.45 :   131b9:  jne    1396f <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e1f>
+    0.00 :   131bf:  add    $0x1a8,%rsp
+    0.00 :   131c6:  pop    %rbx
+    0.22 :   131c7:  pop    %r12
+    0.00 :   131c9:  pop    %r13
+    0.00 :   131cb:  pop    %r14
+    0.22 :   131cd:  pop    %r15
+    0.00 :   131cf:  pop    %rbp
+    0.00 :   131d0:  ret
+    0.00 :   131d1:  nopl   0x0(%rax)
+         : 1903  __c1 = __c2;
+    0.00 :   131d8:  mov    0x50(%rsp),%rax
+    0.00 :   131dd:  movzbl (%rax),%eax
+    0.00 :   131e0:  mov    %al,(%rdi)
+         : 1907  { return _M_dataplus._M_p; }
+    0.00 :   131e2:  mov    (%r12),%r8
+         : 1909  }
+    0.00 :   131e6:  jmp    124db <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x98b>
+    0.00 :   131eb:  mov    %rdi,%rsi
+         : 1912  if (__n == 1)
+    0.00 :   131ee:  cmp    $0x1,%rdx
+    0.00 :   131f2:  jne    1306c <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x151c>
+         : 1915  __c1 = __c2;
+    0.00 :   131f8:  movzbl (%rdi),%eax
+    0.00 :   131fb:  mov    %al,(%r8)
+         : 1918  }
+    0.00 :   131fe:  jmp    12cd0 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1180>
+         : 1920  ++index;
+    0.00 :   13203:  mov    %rax,%rdx
+         : 1922  if (map->unknown_inline_[index].name) {
+    0.00 :   13206:  mov    $0x1,%eax
+    0.00 :   1320b:  test   %sil,%sil
+    0.00 :   1320e:  je     13442 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x18f2>
+    0.00 :   13214:  movb   $0x2,0x70(%rsp)
+    0.00 :   13219:  test   %al,%al
+    0.00 :   1321b:  je     13222 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x16d2>
+    0.00 :   1321d:  mov    %rdx,0x68(%rsp)
+    0.00 :   13222:  mov    $0x2,%r14d
+    0.00 :   13228:  jmp    1237b <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x82b>
+         : 1932  { return _M_dataplus._M_p; }
+    0.00 :   1322d:  mov    %rdi,%rsi
+         : 1934  if (__n == 1)
+    0.00 :   13230:  cmp    $0x1,%rdx
+    0.00 :   13234:  jne    130da <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x158a>
+         : 1937  __c1 = __c2;
+    0.00 :   1323a:  movzbl (%rdi),%eax
+    0.00 :   1323d:  mov    %al,(%r8)
+         : 1940  }
+    0.00 :   13240:  jmp    12e7e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x132e>
+         : 1942  }
+         : 1943  else if _GLIBCXX17_CONSTEXPR (std::is_signed<_Tp>::value)
+         : 1944  if (__value < 0)
+    0.00 :   13245:  js     13418 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x18c8>
+    0.45 :   1324b:  lea    0x90(%rsp),%r13
+    0.00 :   13253:  mov    %r13,%rdi
+         : 1948  const unsigned __b2 = __base  * __base;
+         : 1949  const unsigned __b3 = __b2 * __base;
+         : 1950  const unsigned long __b4 = __b3 * __base;
+         : 1951  for (;;)
+         : 1952  {
+         : 1953  if (__value < (unsigned)__base) return __n;
+    0.00 :   13256:  cmp    $0x9,%eax
+    0.00 :   13259:  jbe    1399f <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e4f>
+         : 1956  if (__value < __b2) return __n + 1;
+    0.00 :   1325f:  cmp    $0x63,%eax
+    0.00 :   13262:  jbe    13665 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1b15>
+         : 1959  if (__value < __b3) return __n + 2;
+    0.00 :   13268:  cmp    $0x3e7,%eax
+    0.00 :   1326d:  jbe    139a9 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e59>
+         : 1962  if (__value < __b4) return __n + 3;
+    0.00 :   13273:  cmp    $0x270f,%eax
+    0.00 :   13278:  jbe    139b5 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e65>
+         : 1965  __value /= __b4;
+    0.00 :   1327e:  mov    %eax,%ecx
+         : 1967  for (;;)
+    0.00 :   13280:  mov    $0x5,%edx
+         : 1969  if (__value < (unsigned)__base) return __n;
+    0.00 :   13285:  cmp    $0x1869f,%eax
+    0.00 :   1328a:  jbe    132c1 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1771>
+         : 1972  if (__value < __b2) return __n + 1;
+    0.00 :   1328c:  cmp    $0xf423f,%eax
+    0.00 :   13291:  jbe    139c1 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e71>
+         : 1975  if (__value < __b3) return __n + 2;
+    0.00 :   13297:  cmp    $0x98967f,%eax
+    0.00 :   1329c:  jbe    1374a <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1bfa>
+         : 1978  if (__value < __b4) return __n + 3;
+    0.00 :   132a2:  cmp    $0x5f5e0ff,%eax
+    0.00 :   132a7:  jbe    1375e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1c0e>
+         : 1981  if (__value < (unsigned)__base) return __n;
+    0.00 :   132ad:  cmp    $0x3b9ac9ff,%rcx
+    0.00 :   132b4:  jbe    13754 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1c04>
+         : 1984  __n += 4;
+    0.00 :   132ba:  mov    $0x9,%edx
+         : 1986  if (__value < __b2) return __n + 1;
+    0.00 :   132bf:  inc    %edx
+         : 1988  {
+         : 1989  #if __cpp_variable_templates
+         : 1990  static_assert(__integer_to_chars_is_unsigned<_Tp>, "implementation bug");
+         : 1991  #endif
+         :
+         : 1993  constexpr char __digits[201] =
+    0.00 :   132c1:  vmovdqu 0x14727(%rip),%ymm0        # 279f0 <_IO_stdin_used+0x19f0>
+    2.46 :   132c9:  vmovdqu 0x147d8(%rip),%xmm4        # 27aa9 <_IO_stdin_used+0x1aa9>
+         : 1996  "0001020304050607080910111213141516171819"
+         : 1997  "2021222324252627282930313233343536373839"
+         : 1998  "4041424344454647484950515253545556575859"
+         : 1999  "6061626364656667686970717273747576777879"
+         : 2000  "8081828384858687888990919293949596979899";
+         : 2001  unsigned __pos = __len - 1;
+    0.00 :   132d1:  lea    -0x1(%rdx),%esi
+         : 2003  constexpr char __digits[201] =
+    0.00 :   132d4:  vmovdqu %ymm0,0xc0(%rsp)
+    0.45 :   132dd:  vmovdqu 0x1472b(%rip),%ymm0        # 27a10 <_IO_stdin_used+0x1a10>
+    0.00 :   132e5:  vmovdqu %ymm0,0xe0(%rsp)
+    0.00 :   132ee:  vmovdqu 0x1473a(%rip),%ymm0        # 27a30 <_IO_stdin_used+0x1a30>
+    0.22 :   132f6:  vmovdqu %ymm0,0x100(%rsp)
+    0.22 :   132ff:  vmovdqu 0x14749(%rip),%ymm0        # 27a50 <_IO_stdin_used+0x1a50>
+    0.00 :   13307:  vmovdqu %ymm0,0x120(%rsp)
+    0.22 :   13310:  vmovdqu 0x14758(%rip),%ymm0        # 27a70 <_IO_stdin_used+0x1a70>
+    0.22 :   13318:  vmovdqu %ymm0,0x140(%rsp)
+    0.22 :   13321:  vmovdqu 0x14767(%rip),%ymm0        # 27a90 <_IO_stdin_used+0x1a90>
+    0.00 :   13329:  vmovdqu %ymm0,0x160(%rsp)
+    0.67 :   13332:  vmovdqu %xmm4,0x179(%rsp)
+    0.00 :   1333b:  jmp    1333f <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x17ef>
+    0.00 :   1333d:  mov    %eax,%ecx
+         : 2018  while (__val >= 100)
+         : 2019  {
+         : 2020  auto const __num = (__val % 100) * 2;
+    0.00 :   1333f:  imul   $0x51eb851f,%rcx,%rcx
+    0.22 :   13346:  mov    %eax,%r9d
+    0.00 :   13349:  shr    $0x25,%rcx
+    0.67 :   1334d:  lea    (%rcx,%rcx,4),%r8d
+    0.45 :   13351:  lea    (%r8,%r8,4),%r8d
+    0.00 :   13355:  shl    $0x2,%r8d
+    0.22 :   13359:  sub    %r8d,%r9d
+    0.00 :   1335c:  mov    %eax,%r8d
+         : 2029  __val /= 100;
+    0.00 :   1335f:  mov    %ecx,%eax
+         : 2031  __first[__pos] = __digits[__num + 1];
+    0.00 :   13361:  mov    %esi,%ecx
+         : 2033  auto const __num = (__val % 100) * 2;
+    0.00 :   13363:  add    %r9d,%r9d
+         : 2035  __first[__pos] = __digits[__num + 1];
+    0.00 :   13366:  lea    0x1(%r9),%r10d
+         : 2037  __first[__pos - 1] = __digits[__num];
+    0.22 :   1336a:  movzbl 0xc0(%rsp,%r9,1),%r9d
+         : 2039  __first[__pos] = __digits[__num + 1];
+    1.12 :   13373:  movzbl 0xc0(%rsp,%r10,1),%r10d
+    0.45 :   1337c:  mov    %r10b,(%rdi,%rcx,1)
+         : 2042  __first[__pos - 1] = __digits[__num];
+    0.00 :   13380:  lea    -0x1(%rsi),%ecx
+         : 2044  __pos -= 2;
+    0.00 :   13383:  sub    $0x2,%esi
+         : 2046  __first[__pos - 1] = __digits[__num];
+    0.00 :   13386:  mov    %r9b,(%rdi,%rcx,1)
+         : 2048  while (__val >= 100)
+    0.00 :   1338a:  cmp    $0x270f,%r8d
+    0.00 :   13391:  ja     1333d <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x17ed>
+         : 2051  }
+         : 2052  if (__val >= 10)
+    0.00 :   13393:  cmp    $0x3e7,%r8d
+    0.00 :   1339a:  ja     136e1 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1b91>
+    0.00 :   133a0:  vzeroupper
+         : 2056  auto const __num = __val * 2;
+         : 2057  __first[1] = __digits[__num + 1];
+         : 2058  __first[0] = __digits[__num];
+         : 2059  }
+         : 2060  else
+         : 2061  __first[0] = '0' + __val;
+    0.22 :   133a3:  add    $0x30,%eax
+    0.00 :   133a6:  mov    %al,(%rdi)
+         : 2064  __res.ptr = __first + __len;
+    0.22 :   133a8:  lea    (%rdi,%rdx,1),%rax
+         : 2066  out.append(status_buf, static_cast<size_t>(ptr - status_buf));
+    0.00 :   133ac:  sub    %r13,%rax
+    0.00 :   133af:  jmp    122c3 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x773>
+         : 2069  return table[idx];
+    0.00 :   133b4:  shl    $0x4,%rax
+    0.00 :   133b8:  mov    %rax,%rcx
+    0.00 :   133bb:  lea    0x18d3e(%rip),%rax        # 2c100 <_ZZN6katana4http6detail20get_field_name_tableEvE5table.lto_priv.0>
+    0.00 :   133c2:  add    %rcx,%rax
+    0.00 :   133c5:  mov    (%rax),%rcx
+    0.00 :   133c8:  mov    0x8(%rax),%r11
+    0.00 :   133cc:  jmp    129dc <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe8c>
+         : 2077  if (__capacity > max_size())
+    0.00 :   133d1:  test   %r9,%r9
+    0.00 :   133d4:  js     12fba <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x146a>
+         : 2080  return _S_allocate(_M_get_allocator(), __capacity + 1);
+    0.00 :   133da:  lea    0x1(%r9),%rdi
+         : 2082  allocate(size_type __n, const void* = static_cast<const void*>(0))
+    0.00 :   133de:  jmp    12c9d <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x114d>
+    0.00 :   133e3:  nopl   0x0(%rax,%rax,1)
+         : 2085  if (__capacity > max_size())
+    0.00 :   133e8:  test   %rax,%rax
+    0.00 :   133eb:  js     12fba <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x146a>
+         : 2088  return _S_allocate(_M_get_allocator(), __capacity + 1);
+    0.00 :   133f1:  lea    0x1(%rax),%rdi
+    0.00 :   133f5:  jmp    12ee7 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1397>
+    0.00 :   133fa:  nopw   0x0(%rax,%rax,1)
+         : 2092  if (__capacity > max_size())
+    0.00 :   13400:  test   %r9,%r9
+    0.00 :   13403:  js     12fba <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x146a>
+         : 2095  return _S_allocate(_M_get_allocator(), __capacity + 1);
+    0.00 :   13409:  lea    0x1(%r9),%rdi
+    0.00 :   1340d:  jmp    12e55 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1305>
+    0.00 :   13412:  nopw   0x0(%rax,%rax,1)
+         : 2099  {
+         : 2100  *__first++ = '-';
+    0.00 :   13418:  movb   $0x2d,0x90(%rsp)
+    0.00 :   13420:  lea    0x91(%rsp),%rdi
+         : 2103  __unsigned_val = _Up(~__value) + _Up(1);
+    0.00 :   13428:  neg    %eax
+    0.00 :   1342a:  lea    0x90(%rsp),%r13
+    0.00 :   13432:  jmp    13256 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1706>
+    0.00 :   13437:  mov    %esi,%eax
+    0.00 :   13439:  test   %sil,%sil
+    0.00 :   1343c:  jne    13214 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x16c4>
+    0.00 :   13442:  test   %al,%al
+    0.00 :   13444:  je     1235e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x80e>
+    0.00 :   1344a:  mov    %rdx,0x68(%rsp)
+    0.00 :   1344f:  jmp    1235e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x80e>
+    0.00 :   13454:  nopl   0x0(%rax)
+         : 2115  { return _M_string_length; }
+    0.00 :   13458:  mov    0x608(%rbx),%rcx
+         : 2117  if (__value == 0)
+    0.89 :   1345f:  test   %rcx,%rcx
+    0.00 :   13462:  je     1370b <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1bbb>
+         : 2120  if (__value < (unsigned)__base) return __n;
+    0.00 :   13468:  cmp    $0x9,%rcx
+    0.00 :   1346c:  jbe    1378b <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1c3b>
+         : 2123  if (__value < __b2) return __n + 1;
+    0.00 :   13472:  cmp    $0x63,%rcx
+    0.00 :   13476:  jbe    1386e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1d1e>
+         : 2126  if (__value < __b3) return __n + 2;
+    0.00 :   1347c:  cmp    $0x3e7,%rcx
+    0.00 :   13483:  jbe    1385e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1d0e>
+         : 2129  if (__value < __b4) return __n + 3;
+    0.00 :   13489:  cmp    $0x270f,%rcx
+    0.00 :   13490:  jbe    1390b <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1dbb>
+    0.00 :   13496:  mov    %rcx,%rax
+         : 2133  unsigned __n = 1;
+    0.00 :   13499:  mov    $0x1,%r15d
+         : 2135  __value /= __b4;
+    0.00 :   1349f:  movabs $0x346dc5d63886594b,%r8
+    0.00 :   134a9:  jmp    134d2 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1982>
+         : 2138  if (__value < __b2) return __n + 1;
+    0.00 :   134ab:  cmp    $0xf423f,%rsi
+    0.00 :   134b2:  jbe    13902 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1db2>
+         : 2141  if (__value < __b3) return __n + 2;
+    0.00 :   134b8:  cmp    $0x98967f,%rsi
+    0.00 :   134bf:  jbe    138f9 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1da9>
+         : 2144  if (__value < __b4) return __n + 3;
+    0.00 :   134c5:  cmp    $0x5f5e0ff,%rsi
+    0.00 :   134cc:  jbe    138f0 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1da0>
+    0.00 :   134d2:  mov    %rax,%rsi
+         : 2148  __value /= __b4;
+    0.00 :   134d5:  mul    %r8
+    0.00 :   134d8:  mov    %rdx,%rax
+    0.00 :   134db:  mov    %r15d,%edx
+         : 2152  __n += 4;
+    0.00 :   134de:  add    $0x4,%r15d
+         : 2154  __value /= __b4;
+    0.00 :   134e2:  shr    $0xb,%rax
+         : 2156  if (__value < (unsigned)__base) return __n;
+    0.00 :   134e6:  cmp    $0x1869f,%rsi
+    0.00 :   134ed:  ja     134ab <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x195b>
+         : 2159  if (__builtin_expect((__last - __first) < __len, 0))
+    0.00 :   134ef:  cmp    $0x20,%r15d
+    0.00 :   134f3:  ja     11baf <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x5f>
+         : 2162  unsigned __pos = __len - 1;
+    0.00 :   134f9:  lea    -0x1(%r15),%edi
+         : 2164  constexpr char __digits[201] =
+    0.00 :   134fd:  vmovdqu 0x144eb(%rip),%ymm0        # 279f0 <_IO_stdin_used+0x19f0>
+    0.00 :   13505:  vmovdqu 0x1459c(%rip),%xmm2        # 27aa9 <_IO_stdin_used+0x1aa9>
+         : 2167  auto const __num = (__val % 100) * 2;
+    0.00 :   1350d:  movabs $0x28f5c28f5c28f5c3,%rsi
+         : 2169  constexpr char __digits[201] =
+    0.00 :   13517:  vmovdqu %ymm0,0xc0(%rsp)
+    0.00 :   13520:  vmovdqu 0x144e8(%rip),%ymm0        # 27a10 <_IO_stdin_used+0x1a10>
+    0.00 :   13528:  vmovdqu %ymm0,0xe0(%rsp)
+    0.00 :   13531:  vmovdqu 0x144f7(%rip),%ymm0        # 27a30 <_IO_stdin_used+0x1a30>
+    0.00 :   13539:  vmovdqu %ymm0,0x100(%rsp)
+    0.00 :   13542:  vmovdqu 0x14506(%rip),%ymm0        # 27a50 <_IO_stdin_used+0x1a50>
+    0.00 :   1354a:  vmovdqu %ymm0,0x120(%rsp)
+    0.00 :   13553:  vmovdqu 0x14515(%rip),%ymm0        # 27a70 <_IO_stdin_used+0x1a70>
+    0.00 :   1355b:  vmovdqu %ymm0,0x140(%rsp)
+    0.00 :   13564:  vmovdqu 0x14524(%rip),%ymm0        # 27a90 <_IO_stdin_used+0x1a90>
+    0.00 :   1356c:  vmovdqu %ymm0,0x160(%rsp)
+    0.00 :   13575:  vmovdqu %xmm2,0x179(%rsp)
+         : 2182  auto const __num = (__val % 100) * 2;
+    0.00 :   1357e:  mov    %rcx,%rdx
+    0.00 :   13581:  shr    $0x2,%rdx
+    0.00 :   13585:  mov    %rdx,%rax
+    0.00 :   13588:  mul    %rsi
+    0.00 :   1358b:  mov    %rdx,%r8
+    0.00 :   1358e:  mov    %rdx,%rax
+    0.00 :   13591:  shr    $0x2,%r8
+    0.00 :   13595:  and    $0xfffffffffffffffc,%rax
+    0.00 :   13599:  add    %r8,%rax
+    0.00 :   1359c:  lea    (%rax,%rax,4),%rdx
+    0.00 :   135a0:  mov    %rcx,%rax
+    0.00 :   135a3:  shl    $0x2,%rdx
+    0.00 :   135a7:  sub    %rdx,%rax
+    0.00 :   135aa:  mov    %rcx,%rdx
+         : 2197  __val /= 100;
+    0.00 :   135ad:  mov    %r8,%rcx
+         : 2199  __first[__pos] = __digits[__num + 1];
+    0.00 :   135b0:  mov    %edi,%r8d
+         : 2201  auto const __num = (__val % 100) * 2;
+    0.00 :   135b3:  add    %rax,%rax
+         : 2203  __first[__pos] = __digits[__num + 1];
+    0.00 :   135b6:  movzbl 0xc1(%rsp,%rax,1),%r9d
+         : 2205  __first[__pos - 1] = __digits[__num];
+    0.00 :   135bf:  movzbl 0xc0(%rsp,%rax,1),%eax
+         : 2207  __first[__pos] = __digits[__num + 1];
+    0.00 :   135c7:  mov    %r9b,0xa0(%rsp,%r8,1)
+         : 2209  __first[__pos - 1] = __digits[__num];
+    0.00 :   135cf:  lea    -0x1(%rdi),%r8d
+         : 2211  __pos -= 2;
+    0.00 :   135d3:  sub    $0x2,%edi
+         : 2213  __first[__pos - 1] = __digits[__num];
+    0.00 :   135d6:  mov    %al,0xa0(%rsp,%r8,1)
+         : 2215  while (__val >= 100)
+    0.00 :   135de:  cmp    $0x270f,%rdx
+    0.00 :   135e5:  ja     1357e <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1a2e>
+         : 2218  if (__val >= 10)
+    0.00 :   135e7:  cmp    $0x3e7,%rdx
+    0.00 :   135ee:  jbe    13780 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1c30>
+         : 2221  auto const __num = __val * 2;
+    0.00 :   135f4:  add    %rcx,%rcx
+         : 2223  __first[1] = __digits[__num + 1];
+    0.00 :   135f7:  movzbl 0xc1(%rsp,%rcx,1),%eax
+         : 2225  __first[0] = __digits[__num];
+    0.89 :   135ff:  movzbl 0xc0(%rsp,%rcx,1),%ecx
+         : 2227  __first[1] = __digits[__num + 1];
+    0.00 :   13607:  mov    %al,0xa1(%rsp)
+    0.00 :   1360e:  vzeroupper
+    0.00 :   13611:  mov    %cl,0xa0(%rsp)
+         : 2231  if (ec == std::errc()) {
+    0.00 :   13618:  jmp    13719 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1bc9>
+         : 2233  __c1 = __c2;
+    0.00 :   1361d:  mov    0x50(%rsp),%rax
+    0.00 :   13622:  movzbl (%rax),%eax
+    0.00 :   13625:  mov    %al,(%rdi)
+         : 2237  }
+    0.00 :   13627:  jmp    12f71 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1421>
+         : 2239  __c1 = __c2;
+    0.00 :   1362c:  movzbl (%rsi),%eax
+    0.00 :   1362f:  mov    %al,(%r8)
+         : 2242  }
+    0.00 :   13632:  jmp    12f35 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x13e5>
+         : 2244  __c1 = __c2;
+    0.00 :   13637:  movzbl (%r11),%eax
+    0.00 :   1363b:  mov    %al,(%rdi)
+         : 2247  }
+    0.00 :   1363d:  jmp    12df0 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x12a0>
+         : 2249  __c1 = __c2;
+    0.00 :   13642:  movzbl (%rsi),%eax
+    0.00 :   13645:  mov    %al,(%r9)
+         : 2252  }
+    0.00 :   13648:  jmp    12db9 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1269>
+    0.00 :   1364d:  mov    %rcx,0x48(%rsp)
+    0.00 :   13652:  lea    0x1(%rcx),%rdi
+    0.00 :   13656:  jmp    12ee7 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1397>
+         : 2257  ++index;
+    0.00 :   1365b:  mov    $0x7,%eax
+    0.00 :   13660:  jmp    11c39 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe9>
+         : 2260  constexpr char __digits[201] =
+    0.00 :   13665:  vmovdqu 0x14383(%rip),%ymm0        # 279f0 <_IO_stdin_used+0x19f0>
+    0.00 :   1366d:  vmovdqu 0x14434(%rip),%xmm3        # 27aa9 <_IO_stdin_used+0x1aa9>
+         : 2263  __res.ptr = __first + __len;
+    0.00 :   13675:  mov    $0x2,%edx
+    0.00 :   1367a:  vmovdqu %ymm0,0xc0(%rsp)
+    0.00 :   13683:  vmovdqu 0x14385(%rip),%ymm0        # 27a10 <_IO_stdin_used+0x1a10>
+    0.00 :   1368b:  vmovdqu %ymm0,0xe0(%rsp)
+    0.00 :   13694:  vmovdqu 0x14394(%rip),%ymm0        # 27a30 <_IO_stdin_used+0x1a30>
+    0.00 :   1369c:  vmovdqu %ymm0,0x100(%rsp)
+    0.00 :   136a5:  vmovdqu 0x143a3(%rip),%ymm0        # 27a50 <_IO_stdin_used+0x1a50>
+    0.00 :   136ad:  vmovdqu %ymm0,0x120(%rsp)
+    0.00 :   136b6:  vmovdqu 0x143b2(%rip),%ymm0        # 27a70 <_IO_stdin_used+0x1a70>
+    0.00 :   136be:  vmovdqu %ymm0,0x140(%rsp)
+    0.00 :   136c7:  vmovdqu 0x143c1(%rip),%ymm0        # 27a90 <_IO_stdin_used+0x1a90>
+    0.00 :   136cf:  vmovdqu %ymm0,0x160(%rsp)
+    0.00 :   136d8:  vmovdqu %xmm3,0x179(%rsp)
+         : 2277  auto const __num = __val * 2;
+    0.00 :   136e1:  add    %eax,%eax
+         : 2279  __first[1] = __digits[__num + 1];
+    0.00 :   136e3:  lea    0x1(%rax),%ecx
+         : 2281  __first[0] = __digits[__num];
+    0.00 :   136e6:  movzbl 0xc0(%rsp,%rax,1),%eax
+         : 2283  __first[1] = __digits[__num + 1];
+    0.00 :   136ee:  movzbl 0xc0(%rsp,%rcx,1),%ecx
+    0.00 :   136f6:  mov    %cl,0x1(%rdi)
+    0.00 :   136f9:  vzeroupper
+    0.00 :   136fc:  jmp    133a6 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1856>
+         : 2288  ++index;
+    0.00 :   13701:  mov    $0x7,%eax
+    0.00 :   13706:  jmp    11c12 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xc2>
+         : 2291  *__first = '0';
+    0.00 :   1370b:  movb   $0x30,0xa0(%rsp)
+    0.00 :   13713:  mov    $0x1,%r15d
+         : 2294  content_length_value =
+    0.00 :   13719:  lea    0xa0(%rsp),%rax
+    0.22 :   13721:  mov    %rax,0x40(%rsp)
+    0.00 :   13726:  jmp    11bbb <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x6b>
+    0.00 :   1372b:  mov    $0x7,%esi
+    0.00 :   13730:  test   %dil,%dil
+    0.00 :   13733:  je     13742 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1bf2>
+    0.00 :   13735:  mov    0x38(%rsp),%rax
+    0.00 :   1373a:  mov    %rax,0x80(%rsp)
+         : 2303  return { __first + 1, errc{} };
+    0.00 :   13742:  mov    %rsi,%rax
+    0.00 :   13745:  jmp    12b40 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xff0>
+         : 2306  if (__value < __b3) return __n + 2;
+    0.00 :   1374a:  mov    $0x7,%edx
+    0.00 :   1374f:  jmp    132c1 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1771>
+         : 2309  __n += 4;
+    0.00 :   13754:  mov    $0x9,%edx
+    0.00 :   13759:  jmp    132c1 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1771>
+         : 2312  if (__value < __b4) return __n + 3;
+    0.00 :   1375e:  mov    $0x8,%edx
+    0.00 :   13763:  jmp    132c1 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1771>
+         : 2315  return _M_is_local() ? size_type(_S_local_capacity)
+    0.00 :   13768:  mov    $0xf,%r14d
+    0.00 :   1376e:  jmp    12280 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x730>
+         : 2318  known_chunk != other.known_chunk || unknown_chunk != other.unknown_chunk;
+    0.00 :   13773:  mov    0x80(%rsp),%rdx
+    0.00 :   1377b:  jmp    12a33 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xee3>
+    0.00 :   13780:  vzeroupper
+         : 2322  __first[0] = '0' + __val;
+    0.00 :   13783:  add    $0x30,%ecx
+    0.00 :   13786:  jmp    13611 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1ac1>
+         : 2325  if (__value < (unsigned)__base) return __n;
+    0.00 :   1378b:  mov    $0x1,%r15d
+    0.00 :   13791:  jmp    13783 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1c33>
+         : 2328  out.append("Content-Length");
+    0.22 :   13793:  lea    0x12994(%rip),%rsi        # 2612e <_IO_stdin_used+0x12e>
+    0.22 :   1379a:  mov    %r12,%rdi
+    0.00 :   1379d:  call   1c360 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*) [clone .isra.0]>
+         : 2332  { return _M_string_length; }
+    0.22 :   137a2:  mov    0x8(%r12),%rsi
+         : 2334  if (this->max_size() - (this->size() - __n1) < __n2)
+    0.22 :   137a7:  movabs $0x7fffffffffffffff,%rax
+    0.00 :   137b1:  sub    %rsi,%rax
+    0.22 :   137b4:  cmp    $0x1,%rax
+    0.00 :   137b8:  jbe    1391b <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1dcb>
+         : 2339  { return _M_dataplus._M_p; }
+    0.00 :   137be:  mov    (%r12),%rax
+         : 2341  const size_type __len = __n + this->size();
+    0.89 :   137c2:  lea    0x2(%rsi),%r13
+         : 2343  if (_M_data() == _M_local_data())
+    0.00 :   137c6:  cmp    %rax,0x58(%rsp)
+    0.89 :   137cb:  je     1382b <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1cdb>
+         : 2346  return _M_is_local() ? size_type(_S_local_capacity)
+    0.00 :   137cd:  mov    0x10(%r12),%rdx
+         : 2348  if (__len <= this->capacity())
+    0.00 :   137d2:  cmp    %r13,%rdx
+    0.00 :   137d5:  jb     13812 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1cc2>
+         : 2351  return static_cast<char_type*>(__builtin_memcpy(__s1, __s2, __n));
+    0.00 :   137d7:  movw   $0x203a,(%rax,%rsi,1)
+         : 2353  __c1 = __c2;
+    0.67 :   137dd:  mov    (%r12),%rax
+         : 2355  { _M_string_length = __length; }
+    0.00 :   137e1:  mov    %r13,0x8(%r12)
+         : 2357  return this->append(__sv.data(), __sv.size());
+    0.22 :   137e6:  mov    %r12,%rdi
+    0.00 :   137e9:  mov    %r15,%rdx
+    0.00 :   137ec:  mov    0x40(%rsp),%rsi
+    0.00 :   137f1:  movb   $0x0,(%rax,%r13,1)
+    0.67 :   137f6:  call   1c420 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .isra.0]>
+    0.22 :   137fb:  mov    %r12,%rdi
+    0.00 :   137fe:  call   1c7b0 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .constprop.0] [clone .isra.0]>
+    0.00 :   13803:  jmp    13146 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x15f6>
+         : 2366  ++index;
+    0.00 :   13808:  mov    $0xf,%ecx
+    0.00 :   1380d:  jmp    129a0 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe50>
+         : 2369  }
+         : 2370  else
+         : 2371  this->_M_mutate(this->size(), size_type(0), __s, __n);
+    0.00 :   13812:  mov    $0x2,%r8d
+    0.00 :   13818:  lea    0x12bd3(%rip),%rcx        # 263f2 <_IO_stdin_used+0x3f2>
+    0.00 :   1381f:  xor    %edx,%edx
+    0.00 :   13821:  mov    %r12,%rdi
+    0.00 :   13824:  call   ba38 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_mutate(unsigned long, unsigned long, char const*, unsigned long)>
+    0.00 :   13829:  jmp    137dd <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1c8d>
+         : 2378  return _M_is_local() ? size_type(_S_local_capacity)
+    0.00 :   1382b:  mov    $0xf,%edx
+    0.00 :   13830:  jmp    137d2 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1c82>
+         : 2381  ++index;
+    0.00 :   13832:  mov    $0xf,%eax
+    0.00 :   13837:  jmp    11e73 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x323>
+    0.00 :   1383c:  lock incq 0xb0(%rax)
+         : 2385  slot->response_output_grow_calls.fetch_add(1, std::memory_order_relaxed);
+         : 2386  slot->response_output_grow_bytes.fetch_add(
+         : 2387  static_cast<uint64_t>(new_capacity - old_capacity), std::memory_order_relaxed);
+    0.00 :   13844:  sub    %r14,%rbx
+    0.00 :   13847:  lock add %rbx,0xb8(%rax)
+    0.00 :   1384f:  jmp    131a8 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1658>
+    0.00 :   13854:  mov    $0xf,%ebx
+    0.00 :   13859:  jmp    1317d <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x162d>
+         : 2393  if (__value < __b3) return __n + 2;
+    0.00 :   1385e:  mov    $0x3,%r15d
+    0.00 :   13864:  mov    $0x2,%edi
+    0.00 :   13869:  jmp    134fd <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x19ad>
+         : 2397  constexpr char __digits[201] =
+    0.00 :   1386e:  vmovdqu 0x1417a(%rip),%ymm0        # 279f0 <_IO_stdin_used+0x19f0>
+    1.12 :   13876:  vmovdqu 0x1422b(%rip),%xmm1        # 27aa9 <_IO_stdin_used+0x1aa9>
+    0.22 :   1387e:  mov    $0x2,%r15d
+    0.45 :   13884:  vmovdqu %ymm0,0xc0(%rsp)
+    0.00 :   1388d:  vmovdqu 0x1417b(%rip),%ymm0        # 27a10 <_IO_stdin_used+0x1a10>
+    0.00 :   13895:  vmovdqu %ymm0,0xe0(%rsp)
+    0.22 :   1389e:  vmovdqu 0x1418a(%rip),%ymm0        # 27a30 <_IO_stdin_used+0x1a30>
+    0.89 :   138a6:  vmovdqu %ymm0,0x100(%rsp)
+    0.22 :   138af:  vmovdqu 0x14199(%rip),%ymm0        # 27a50 <_IO_stdin_used+0x1a50>
+    0.00 :   138b7:  vmovdqu %ymm0,0x120(%rsp)
+    0.00 :   138c0:  vmovdqu 0x141a8(%rip),%ymm0        # 27a70 <_IO_stdin_used+0x1a70>
+    0.67 :   138c8:  vmovdqu %ymm0,0x140(%rsp)
+    0.45 :   138d1:  vmovdqu 0x141b7(%rip),%ymm0        # 27a90 <_IO_stdin_used+0x1a90>
+    0.00 :   138d9:  vmovdqu %ymm0,0x160(%rsp)
+    0.45 :   138e2:  vmovdqu %xmm1,0x179(%rsp)
+         : 2413  while (__val >= 100)
+    0.22 :   138eb:  jmp    135f4 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1aa4>
+         : 2415  if (__value < __b4) return __n + 3;
+    0.00 :   138f0:  lea    0x7(%rdx),%r15d
+    0.00 :   138f4:  jmp    134ef <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x199f>
+         : 2418  if (__value < __b3) return __n + 2;
+    0.00 :   138f9:  lea    0x6(%rdx),%r15d
+    0.00 :   138fd:  jmp    134ef <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x199f>
+         : 2421  if (__value < __b2) return __n + 1;
+    0.00 :   13902:  lea    0x5(%rdx),%r15d
+    0.00 :   13906:  jmp    134ef <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x199f>
+         : 2424  if (__value < __b4) return __n + 3;
+    0.00 :   1390b:  mov    $0x4,%r15d
+    0.00 :   13911:  mov    $0x3,%edi
+    0.00 :   13916:  jmp    134fd <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x19ad>
+         : 2428  __throw_length_error(__N(__s));
+    0.00 :   1391b:  mov    0x198(%rsp),%rax
+    0.00 :   13923:  sub    %fs:0x28,%rax
+    0.00 :   1392c:  jne    1396f <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e1f>
+    0.00 :   1392e:  lea    0x12812(%rip),%rdi        # 26147 <_IO_stdin_used+0x147>
+    0.00 :   13935:  call   67d0 <std::__throw_length_error(char const*)@plt>
+    0.00 :   1393a:  test   %cl,%cl
+    0.00 :   1393c:  je     129a5 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe55>
+         : 2436  if (known_chunk->entries[index].key != field::unknown) {
+    0.00 :   13942:  mov    %rax,%rcx
+    0.00 :   13945:  jmp    129a0 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xe50>
+    0.00 :   1394a:  nopw   0x0(%rax,%rax,1)
+         : 2440  std::__throw_length_error(__N("basic_string::_M_create"));
+    0.00 :   13950:  mov    0x198(%rsp),%rax
+    0.00 :   13958:  sub    %fs:0x28,%rax
+    0.00 :   13961:  jne    1396f <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1e1f>
+    0.00 :   13963:  lea    0x12767(%rip),%rdi        # 260d1 <_IO_stdin_used+0xd1>
+    0.00 :   1396a:  call   67d0 <std::__throw_length_error(char const*)@plt>
+         : 2446  }
+    0.00 :   1396f:  call   6960 <__stack_chk_fail@plt>
+         : 2448  while (index < KNOWN_HEADERS_CHUNK_SIZE) {
+    0.00 :   13974:  xor    %ecx,%ecx
+    0.00 :   13976:  jmp    12588 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xa38>
+    0.00 :   1397b:  nopl   0x0(%rax,%rax,1)
+    0.00 :   13980:  movq   $0x0,0x80(%rsp)
+    0.00 :   1398c:  movq   $0x0,0x68(%rsp)
+         : 2454  phase = 4;
+    0.00 :   13995:  movb   $0x4,0x70(%rsp)
+         : 2456  return phase != other.phase || index != other.index ||
+    0.45 :   1399a:  jmp    12b4f <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0xfff>
+         : 2458  if (__value < (unsigned)__base) return __n;
+    0.00 :   1399f:  mov    $0x1,%edx
+    0.00 :   139a4:  jmp    133a3 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1853>
+         : 2461  if (__value < __b3) return __n + 2;
+    0.00 :   139a9:  mov    $0x3,%edx
+    1.12 :   139ae:  mov    %eax,%ecx
+    0.00 :   139b0:  jmp    132c1 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1771>
+         : 2465  if (__value < __b4) return __n + 3;
+    0.00 :   139b5:  mov    $0x4,%edx
+    0.00 :   139ba:  mov    %eax,%ecx
+    0.00 :   139bc:  jmp    132c1 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1771>
+    0.00 :   139c1:  mov    $0x5,%edx
+         : 2470  if (__value < __b2) return __n + 1;
+    0.00 :   139c6:  inc    %edx
+    0.00 :   139c8:  jmp    132c1 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x1771>
+         : 2473  return _S_allocate(_M_get_allocator(), __capacity + 1);
+    0.00 :   139cd:  lea    0x1(%rax),%rdi
+    0.00 :   139d1:  jmp    12d43 <katana::http::response::serialize_into(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const [clone .part.0]+0x11f3>

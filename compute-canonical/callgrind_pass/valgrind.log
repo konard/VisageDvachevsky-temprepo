@@ -1,0 +1,7 @@
+==7998== Callgrind, a call-graph generating cache profiler
+==7998== Copyright (C) 2002-2017, and GNU GPL'd, by Josef Weidendorfer et al.
+==7998== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==7998== Command: build/perf-e2e/examples/codegen/compute_api/compute_api
+==7998== Parent PID: 7997
+==7998== 
+==7998== For interactive control, run 'callgrind_control -h'.

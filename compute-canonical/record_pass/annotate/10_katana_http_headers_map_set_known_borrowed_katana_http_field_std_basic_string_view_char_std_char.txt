@@ -1,0 +1,458 @@
+ Percent |	Source code & Disassembly of compute_api for cpu-clock:u (108 samples, percent: local period)
+-------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3    Disassembly of section .text:
+         :
+         : 5    000000000000ed30 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)>:
+         : 6    entry->key = f;
+         : 7    entry->value = value_ptr;
+         : 8    entry->length = static_cast<uint16_t>(value.size());
+         : 9    }
+         :
+         : 11   void set_known_borrowed(field f, std::string_view value) noexcept {
+    0.93 :   ed30:   endbr64
+         : 13   if (f == field::unknown || f >= field::MAX_FIELD_VALUE) {
+    2.78 :   ed34:   lea    -0x1(%rsi),%eax
+    0.93 :   ed37:   cmp    $0x163,%ax
+    0.00 :   ed3b:   ja     f1d8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x4a8>
+         : 17   void set_known_borrowed(field f, std::string_view value) noexcept {
+    1.85 :   ed41:   push   %rbp
+    0.93 :   ed42:   mov    %rsp,%rbp
+    0.00 :   ed45:   push   %r14
+    0.00 :   ed47:   mov    %rcx,%r14
+    0.00 :   ed4a:   push   %r13
+         : 23   }
+         :
+         : 25   [[__nodiscard__, __gnu__::__const__, __gnu__::__always_inline__]]
+         : 26   _GLIBCXX17_CONSTEXPR pointer
+         : 27   data() noexcept
+         : 28   { return static_cast<pointer>(_M_elems); }
+    0.93 :   ed4c:   lea    0x338(%rdi),%rcx
+    3.70 :   ed53:   mov    %rdx,%r13
+    0.00 :   ed56:   mov    %esi,%edx
+    0.00 :   ed58:   push   %r12
+    0.93 :   ed5a:   push   %rbx
+    0.93 :   ed5b:   mov    %esi,%r12d
+         : 35   end() noexcept
+    0.00 :   ed5e:   mov    %rdi,%rbx
+         : 37   { return iterator(data() + _Nm); }
+    0.00 :   ed61:   lea    0x4b8(%rdi),%rsi
+         : 39   [[nodiscard]] monotonic_arena* allocator() noexcept {
+         : 40   return arena_ ? arena_ : fallback_arena_;
+         : 41   }
+         :
+         : 43   [[nodiscard]] known_entry* find_known_entry(field f) noexcept {
+         : 44   for (auto& entry : known_inline_) {
+    0.00 :   ed68:   cmp    %rcx,%rsi
+    0.93 :   ed6b:   je     f1e2 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x4b2>
+         : 47   if (entry.key == f) {
+    0.00 :   ed71:   cmp    0x338(%rdi),%r12w
+    6.48 :   ed79:   je     f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+    0.00 :   ed7f:   cmp    0x350(%rdi),%r12w
+    4.63 :   ed87:   je     f208 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x4d8>
+    0.00 :   ed8d:   cmp    0x368(%rdi),%r12w
+    3.70 :   ed95:   je     f217 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x4e7>
+    0.00 :   ed9b:   cmp    0x380(%rdi),%r12w
+    1.85 :   eda3:   je     f1d9 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x4a9>
+    0.00 :   eda9:   cmp    0x398(%rdi),%r12w
+    1.85 :   edb1:   je     f22c <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x4fc>
+    0.00 :   edb7:   cmp    0x3b0(%rdi),%r12w
+    0.93 :   edbf:   je     f23e <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x50e>
+    2.78 :   edc5:   cmp    0x3c8(%rdi),%r12w
+    1.85 :   edcd:   je     f256 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x526>
+    1.85 :   edd3:   cmp    0x3e0(%rdi),%r12w
+    0.93 :   eddb:   je     f27a <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x54a>
+    0.00 :   ede1:   cmp    0x3f8(%rdi),%r12w
+    1.85 :   ede9:   je     f292 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x562>
+    0.00 :   edef:   cmp    0x410(%rdi),%r12w
+    4.63 :   edf7:   je     f2aa <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x57a>
+    0.00 :   edfd:   cmp    0x428(%rdi),%r12w
+    5.56 :   ee05:   je     f2b6 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x586>
+    0.00 :   ee0b:   cmp    0x440(%rdi),%r12w
+    4.63 :   ee13:   je     f2da <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x5aa>
+    0.00 :   ee19:   cmp    0x458(%rdi),%r12w
+    0.93 :   ee21:   je     f2f2 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x5c2>
+    0.00 :   ee27:   cmp    0x470(%rdi),%r12w
+    1.85 :   ee2f:   je     f30a <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x5da>
+    0.00 :   ee35:   cmp    0x488(%rdi),%r12w
+    0.00 :   ee3d:   je     f316 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x5e6>
+    0.93 :   ee43:   cmp    0x4a0(%rdi),%r12w
+    2.78 :   ee4b:   je     f322 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x5f2>
+    0.00 :   ee51:   mov    0x4b8(%rdi),%rax
+         : 81   return &entry;
+         : 82   }
+         : 83   }
+         : 84   for (auto* chunk = known_chunks_; chunk; chunk = chunk->next) {
+    0.93 :   ee58:   test   %rax,%rax
+    0.93 :   ee5b:   je     ef37 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x207>
+         : 87   for (auto& entry : chunk->entries) {
+         : 88   if (entry.key == f) {
+    0.00 :   ee61:   cmp    (%rax),%dx
+    0.00 :   ee64:   je     f1f7 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x4c7>
+    0.00 :   ee6a:   cmp    0x18(%rax),%dx
+    0.00 :   ee6e:   je     f1fc <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x4cc>
+    0.00 :   ee74:   cmp    0x30(%rax),%dx
+    0.00 :   ee78:   je     f202 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x4d2>
+    0.00 :   ee7e:   cmp    0x48(%rax),%dx
+    0.00 :   ee82:   je     f211 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x4e1>
+    0.00 :   ee88:   cmp    0x60(%rax),%dx
+    0.00 :   ee8c:   je     f220 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x4f0>
+    0.00 :   ee92:   cmp    0x78(%rax),%dx
+    0.00 :   ee96:   je     f226 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x4f6>
+    0.00 :   ee9c:   cmp    0x90(%rax),%dx
+    0.00 :   eea3:   je     f235 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x505>
+    0.00 :   eea9:   cmp    0xa8(%rax),%dx
+    0.00 :   eeb0:   je     f24a <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x51a>
+    0.00 :   eeb6:   cmp    0xc0(%rax),%dx
+    0.00 :   eebd:   je     f262 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x532>
+    0.00 :   eec3:   cmp    0xd8(%rax),%dx
+    0.00 :   eeca:   je     f26e <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x53e>
+    0.00 :   eed0:   cmp    0xf0(%rax),%dx
+    0.00 :   eed7:   je     f286 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x556>
+    0.00 :   eedd:   cmp    0x108(%rax),%dx
+    0.00 :   eee4:   je     f29e <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x56e>
+    0.00 :   eeea:   cmp    0x120(%rax),%dx
+    0.00 :   eef1:   je     f2c2 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x592>
+    0.00 :   eef7:   cmp    0x138(%rax),%dx
+    0.00 :   eefe:   je     f2ce <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x59e>
+    0.00 :   ef04:   cmp    0x150(%rax),%dx
+    0.00 :   ef0b:   je     f2e6 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x5b6>
+    0.00 :   ef11:   cmp    0x168(%rax),%dx
+    0.00 :   ef18:   je     f2fe <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x5ce>
+         : 121  for (auto* chunk = known_chunks_; chunk; chunk = chunk->next) {
+    0.00 :   ef1e:   mov    0x180(%rax),%rax
+    0.00 :   ef25:   test   %rax,%rax
+    0.00 :   ef28:   jne    ee61 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x131>
+         : 125  [[nodiscard]] const known_entry* find_known_entry(field f) const noexcept {
+         : 126  return const_cast<headers_map*>(this)->find_known_entry(f);
+         : 127  }
+         :
+         : 129  [[nodiscard]] known_entry* append_known_entry() noexcept {
+         : 130  for (auto& entry : known_inline_) {
+    0.00 :   ef2e:   cmp    %rcx,%rsi
+    0.00 :   ef31:   je     f080 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x350>
+         : 133  if (entry.key == field::unknown) {
+    0.00 :   ef37:   cmpw   $0x0,0x338(%rbx)
+    6.48 :   ef3f:   je     f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    1.85 :   ef45:   cmpw   $0x0,0x350(%rbx)
+         : 137  for (auto& entry : known_inline_) {
+    1.85 :   ef4d:   lea    0x350(%rbx),%rcx
+         : 139  if (entry.key == field::unknown) {
+    0.00 :   ef54:   je     f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   ef5a:   cmpw   $0x0,0x368(%rbx)
+         : 142  for (auto& entry : known_inline_) {
+    4.63 :   ef62:   lea    0x368(%rbx),%rcx
+         : 144  if (entry.key == field::unknown) {
+    0.00 :   ef69:   je     f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   ef6f:   cmpw   $0x0,0x380(%rbx)
+         : 147  for (auto& entry : known_inline_) {
+    0.00 :   ef77:   lea    0x380(%rbx),%rcx
+         : 149  if (entry.key == field::unknown) {
+    0.00 :   ef7e:   je     f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   ef84:   cmpw   $0x0,0x398(%rbx)
+         : 152  for (auto& entry : known_inline_) {
+    0.00 :   ef8c:   lea    0x398(%rbx),%rcx
+         : 154  if (entry.key == field::unknown) {
+    0.00 :   ef93:   je     f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   ef99:   cmpw   $0x0,0x3b0(%rbx)
+         : 157  for (auto& entry : known_inline_) {
+    0.00 :   efa1:   lea    0x3b0(%rbx),%rcx
+         : 159  if (entry.key == field::unknown) {
+    0.00 :   efa8:   je     f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   efae:   cmpw   $0x0,0x3c8(%rbx)
+         : 162  for (auto& entry : known_inline_) {
+    0.00 :   efb6:   lea    0x3c8(%rbx),%rcx
+         : 164  if (entry.key == field::unknown) {
+    0.00 :   efbd:   je     f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   efc3:   cmpw   $0x0,0x3e0(%rbx)
+         : 167  for (auto& entry : known_inline_) {
+    0.00 :   efcb:   lea    0x3e0(%rbx),%rcx
+         : 169  if (entry.key == field::unknown) {
+    0.00 :   efd2:   je     f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   efd8:   cmpw   $0x0,0x3f8(%rbx)
+         : 172  for (auto& entry : known_inline_) {
+    0.00 :   efe0:   lea    0x3f8(%rbx),%rcx
+         : 174  if (entry.key == field::unknown) {
+    0.00 :   efe7:   je     f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   efed:   cmpw   $0x0,0x410(%rbx)
+         : 177  for (auto& entry : known_inline_) {
+    0.00 :   eff5:   lea    0x410(%rbx),%rcx
+         : 179  if (entry.key == field::unknown) {
+    0.00 :   effc:   je     f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   f002:   cmpw   $0x0,0x428(%rbx)
+         : 182  for (auto& entry : known_inline_) {
+    0.00 :   f00a:   lea    0x428(%rbx),%rcx
+         : 184  if (entry.key == field::unknown) {
+    0.00 :   f011:   je     f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   f017:   cmpw   $0x0,0x440(%rbx)
+         : 187  for (auto& entry : known_inline_) {
+    0.00 :   f01f:   lea    0x440(%rbx),%rcx
+         : 189  if (entry.key == field::unknown) {
+    0.00 :   f026:   je     f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   f02c:   cmpw   $0x0,0x458(%rbx)
+         : 192  for (auto& entry : known_inline_) {
+    0.00 :   f034:   lea    0x458(%rbx),%rcx
+         : 194  if (entry.key == field::unknown) {
+    0.00 :   f03b:   je     f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   f041:   cmpw   $0x0,0x470(%rbx)
+         : 197  for (auto& entry : known_inline_) {
+    0.00 :   f049:   lea    0x470(%rbx),%rcx
+         : 199  if (entry.key == field::unknown) {
+    0.00 :   f050:   je     f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   f056:   cmpw   $0x0,0x488(%rbx)
+         : 202  for (auto& entry : known_inline_) {
+    0.00 :   f05e:   lea    0x488(%rbx),%rcx
+         : 204  if (entry.key == field::unknown) {
+    0.00 :   f065:   je     f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   f06b:   cmpw   $0x0,0x4a0(%rbx)
+         : 207  for (auto& entry : known_inline_) {
+    0.00 :   f073:   lea    0x4a0(%rbx),%rcx
+         : 209  if (entry.key == field::unknown) {
+    0.00 :   f07a:   je     f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+         : 211  return &entry;
+         : 212  }
+         : 213  }
+         : 214  for (auto* chunk = known_chunks_; chunk; chunk = chunk->next) {
+    0.00 :   f080:   mov    0x4b8(%rbx),%rcx
+    0.00 :   f087:   test   %rcx,%rcx
+    0.00 :   f08a:   je     f16d <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x43d>
+         : 218  for (auto& entry : chunk->entries) {
+         : 219  if (entry.key == field::unknown) {
+    0.00 :   f090:   cmpw   $0x0,(%rcx)
+    0.00 :   f094:   je     f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   f09a:   cmpw   $0x0,0x18(%rcx)
+    0.00 :   f09f:   je     f32e <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x5fe>
+    0.00 :   f0a5:   cmpw   $0x0,0x30(%rcx)
+    0.00 :   f0aa:   je     f337 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x607>
+    0.00 :   f0b0:   cmpw   $0x0,0x48(%rcx)
+    0.00 :   f0b5:   je     f340 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x610>
+    0.00 :   f0bb:   cmpw   $0x0,0x60(%rcx)
+    0.00 :   f0c0:   je     f349 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x619>
+    0.00 :   f0c6:   cmpw   $0x0,0x78(%rcx)
+    0.00 :   f0cb:   je     f352 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x622>
+    0.00 :   f0d1:   cmpw   $0x0,0x90(%rcx)
+    0.00 :   f0d9:   je     f35b <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x62b>
+    0.00 :   f0df:   cmpw   $0x0,0xa8(%rcx)
+    0.00 :   f0e7:   je     f367 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x637>
+    0.00 :   f0ed:   cmpw   $0x0,0xc0(%rcx)
+    0.00 :   f0f5:   je     f37f <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x64f>
+    0.00 :   f0fb:   cmpw   $0x0,0xd8(%rcx)
+    0.00 :   f103:   je     f373 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x643>
+    0.00 :   f109:   cmpw   $0x0,0xf0(%rcx)
+    0.00 :   f111:   je     f397 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x667>
+    0.00 :   f117:   cmpw   $0x0,0x108(%rcx)
+    0.00 :   f11f:   je     f38b <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x65b>
+    0.00 :   f125:   cmpw   $0x0,0x120(%rcx)
+    0.00 :   f12d:   je     f3a3 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x673>
+    0.00 :   f133:   cmpw   $0x0,0x138(%rcx)
+    0.00 :   f13b:   je     f3af <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x67f>
+    0.00 :   f141:   cmpw   $0x0,0x150(%rcx)
+    0.00 :   f149:   je     f3c7 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x697>
+    0.00 :   f14f:   cmpw   $0x0,0x168(%rcx)
+    0.00 :   f157:   je     f3bb <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x68b>
+         : 252  for (auto* chunk = known_chunks_; chunk; chunk = chunk->next) {
+    0.00 :   f15d:   mov    0x180(%rcx),%rcx
+    0.00 :   f164:   test   %rcx,%rcx
+    0.00 :   f167:   jne    f090 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x360>
+         : 256  return arena_ ? arena_ : fallback_arena_;
+    0.00 :   f16d:   mov    (%rbx),%rdi
+    0.00 :   f170:   test   %rdi,%rdi
+    0.00 :   f173:   je     f3d3 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x6a3>
+         : 260  }
+         :
+         : 262  using chunk_t = entry_chunk<known_entry, KNOWN_HEADERS_CHUNK_SIZE>;
+         : 263  auto* alloc = allocator();
+         : 264  auto* chunk =
+         : 265  alloc ? static_cast<chunk_t*>(alloc->allocate(sizeof(chunk_t), alignof(chunk_t)))
+    0.00 :   f179:   mov    $0x8,%edx
+    0.00 :   f17e:   mov    $0x188,%esi
+    0.00 :   f183:   call   cb98 <katana::monotonic_arena::allocate(unsigned long, unsigned long)>
+    0.00 :   f188:   mov    %rax,%rdx
+         : 270  : nullptr;
+         : 271  if (!chunk) {
+    0.00 :   f18b:   test   %rax,%rax
+    0.00 :   f18e:   je     f1cd <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x49d>
+         : 274  return nullptr;
+         : 275  }
+         : 276  new (chunk) chunk_t{};
+    0.00 :   f190:   xor    %eax,%eax
+    0.00 :   f192:   mov    $0x31,%ecx
+    0.00 :   f197:   mov    %rdx,%rdi
+    0.00 :   f19a:   rep stos %rax,%es:(%rdi)
+         : 281  chunk->next = known_chunks_;
+    0.00 :   f19d:   mov    0x4b8(%rbx),%rax
+         : 283  return _M_elems[__n];
+    0.00 :   f1a4:   mov    %rdx,%rcx
+    0.00 :   f1a7:   mov    %rax,0x180(%rdx)
+         : 286  known_chunks_ = chunk;
+    0.00 :   f1ae:   mov    %rdx,0x4b8(%rbx)
+         : 288  if (!entry) {
+    0.00 :   f1b5:   nopl   (%rax)
+         : 290  ++known_size_;
+    1.85 :   f1b8:   incq   0x4c0(%rbx)
+    5.56 :   f1bf:   nop
+         : 293  entry->key = f;
+    0.00 :   f1c0:   mov    %r12w,(%rcx)
+         : 295  entry->value = value.data();
+    3.70 :   f1c4:   mov    %r14,0x8(%rcx)
+         : 297  entry->length = static_cast<uint16_t>(value.size());
+    0.93 :   f1c8:   mov    %r13w,0x10(%rcx)
+         : 299  }
+    0.00 :   f1cd:   pop    %rbx
+    1.85 :   f1ce:   pop    %r12
+    0.00 :   f1d0:   pop    %r13
+    1.85 :   f1d2:   pop    %r14
+    2.78 :   f1d4:   pop    %rbp
+    0.00 :   f1d5:   ret
+    0.00 :   f1d6:   xchg   %ax,%ax
+    0.00 :   f1d8:   ret
+         : 308  for (auto& entry : known_inline_) {
+    0.00 :   f1d9:   lea    0x380(%rdi),%rcx
+    0.00 :   f1e0:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+    0.00 :   f1e2:   mov    0x4b8(%rdi),%rax
+         : 312  for (auto* chunk = known_chunks_; chunk; chunk = chunk->next) {
+    0.00 :   f1e9:   test   %rax,%rax
+    0.00 :   f1ec:   jne    ee61 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x131>
+    0.00 :   f1f2:   jmp    f080 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x350>
+         : 316  { return static_cast<pointer>(_M_elems); }
+    0.00 :   f1f7:   mov    %rax,%rcx
+         : 318  if (!entry) {
+    0.00 :   f1fa:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 320  for (auto& entry : chunk->entries) {
+    0.00 :   f1fc:   lea    0x18(%rax),%rcx
+         : 322  if (!entry) {
+    0.00 :   f200:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 324  for (auto& entry : chunk->entries) {
+    0.00 :   f202:   lea    0x30(%rax),%rcx
+         : 326  if (!entry) {
+    0.00 :   f206:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 328  for (auto& entry : known_inline_) {
+    0.00 :   f208:   lea    0x350(%rdi),%rcx
+    0.00 :   f20f:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 331  for (auto& entry : chunk->entries) {
+    0.00 :   f211:   lea    0x48(%rax),%rcx
+         : 333  if (!entry) {
+    0.00 :   f215:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 335  for (auto& entry : known_inline_) {
+    0.00 :   f217:   lea    0x368(%rdi),%rcx
+    0.00 :   f21e:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 338  for (auto& entry : chunk->entries) {
+    0.00 :   f220:   lea    0x60(%rax),%rcx
+         : 340  if (!entry) {
+    0.00 :   f224:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 342  for (auto& entry : chunk->entries) {
+    0.00 :   f226:   lea    0x78(%rax),%rcx
+         : 344  if (!entry) {
+    0.00 :   f22a:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 346  for (auto& entry : known_inline_) {
+    0.00 :   f22c:   lea    0x398(%rdi),%rcx
+    0.00 :   f233:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 349  for (auto& entry : chunk->entries) {
+    0.00 :   f235:   lea    0x90(%rax),%rcx
+         : 351  if (!entry) {
+    0.00 :   f23c:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 353  for (auto& entry : known_inline_) {
+    0.00 :   f23e:   lea    0x3b0(%rdi),%rcx
+    0.00 :   f245:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 356  for (auto& entry : chunk->entries) {
+    0.00 :   f24a:   lea    0xa8(%rax),%rcx
+         : 358  if (!entry) {
+    0.00 :   f251:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 360  for (auto& entry : known_inline_) {
+    0.00 :   f256:   lea    0x3c8(%rdi),%rcx
+    0.00 :   f25d:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 363  for (auto& entry : chunk->entries) {
+    0.00 :   f262:   lea    0xc0(%rax),%rcx
+         : 365  if (!entry) {
+    0.00 :   f269:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 367  for (auto& entry : chunk->entries) {
+    0.00 :   f26e:   lea    0xd8(%rax),%rcx
+         : 369  if (!entry) {
+    0.00 :   f275:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 371  for (auto& entry : known_inline_) {
+    0.00 :   f27a:   lea    0x3e0(%rdi),%rcx
+    0.00 :   f281:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 374  for (auto& entry : chunk->entries) {
+    0.00 :   f286:   lea    0xf0(%rax),%rcx
+         : 376  if (!entry) {
+    0.00 :   f28d:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 378  for (auto& entry : known_inline_) {
+    0.00 :   f292:   lea    0x3f8(%rdi),%rcx
+    0.00 :   f299:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 381  for (auto& entry : chunk->entries) {
+    0.00 :   f29e:   lea    0x108(%rax),%rcx
+         : 383  if (!entry) {
+    0.00 :   f2a5:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 385  for (auto& entry : known_inline_) {
+    0.00 :   f2aa:   lea    0x410(%rdi),%rcx
+    0.00 :   f2b1:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+    0.00 :   f2b6:   lea    0x428(%rdi),%rcx
+    0.00 :   f2bd:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 390  for (auto& entry : chunk->entries) {
+    0.00 :   f2c2:   lea    0x120(%rax),%rcx
+         : 392  if (!entry) {
+    0.00 :   f2c9:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 394  for (auto& entry : chunk->entries) {
+    0.00 :   f2ce:   lea    0x138(%rax),%rcx
+         : 396  if (!entry) {
+    0.00 :   f2d5:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 398  for (auto& entry : known_inline_) {
+    0.00 :   f2da:   lea    0x440(%rdi),%rcx
+    0.00 :   f2e1:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 401  for (auto& entry : chunk->entries) {
+    0.00 :   f2e6:   lea    0x150(%rax),%rcx
+         : 403  if (!entry) {
+    0.00 :   f2ed:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 405  for (auto& entry : known_inline_) {
+    0.00 :   f2f2:   lea    0x458(%rdi),%rcx
+    0.00 :   f2f9:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 408  for (auto& entry : chunk->entries) {
+    0.00 :   f2fe:   lea    0x168(%rax),%rcx
+         : 410  if (!entry) {
+    0.00 :   f305:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 412  for (auto& entry : known_inline_) {
+    0.00 :   f30a:   lea    0x470(%rdi),%rcx
+    0.00 :   f311:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+    0.00 :   f316:   lea    0x488(%rdi),%rcx
+    0.00 :   f31d:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+    0.00 :   f322:   lea    0x4a0(%rdi),%rcx
+    0.00 :   f329:   jmp    f1c0 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x490>
+         : 419  for (auto& entry : chunk->entries) {
+    0.00 :   f32e:   add    $0x18,%rcx
+    0.00 :   f332:   jmp    f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   f337:   add    $0x30,%rcx
+    0.00 :   f33b:   jmp    f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   f340:   add    $0x48,%rcx
+    0.00 :   f344:   jmp    f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   f349:   add    $0x60,%rcx
+    0.00 :   f34d:   jmp    f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   f352:   add    $0x78,%rcx
+    0.00 :   f356:   jmp    f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   f35b:   add    $0x90,%rcx
+    0.00 :   f362:   jmp    f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   f367:   add    $0xa8,%rcx
+    0.00 :   f36e:   jmp    f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   f373:   add    $0xd8,%rcx
+    0.00 :   f37a:   jmp    f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   f37f:   add    $0xc0,%rcx
+    0.00 :   f386:   jmp    f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   f38b:   add    $0x108,%rcx
+    0.00 :   f392:   jmp    f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   f397:   add    $0xf0,%rcx
+    0.00 :   f39e:   jmp    f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   f3a3:   add    $0x120,%rcx
+    0.00 :   f3aa:   jmp    f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   f3af:   add    $0x138,%rcx
+    0.00 :   f3b6:   jmp    f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   f3bb:   add    $0x168,%rcx
+    0.00 :   f3c2:   jmp    f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+    0.00 :   f3c7:   add    $0x150,%rcx
+    0.00 :   f3ce:   jmp    f1b8 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x488>
+         : 450  return arena_ ? arena_ : fallback_arena_;
+    0.00 :   f3d3:   mov    0x8(%rbx),%rdi
+         : 452  alloc ? static_cast<chunk_t*>(alloc->allocate(sizeof(chunk_t), alignof(chunk_t)))
+    0.00 :   f3d7:   test   %rdi,%rdi
+    0.00 :   f3da:   jne    f179 <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x449>
+    0.00 :   f3e0:   jmp    f1cd <katana::http::headers_map::set_known_borrowed(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)+0x49d>

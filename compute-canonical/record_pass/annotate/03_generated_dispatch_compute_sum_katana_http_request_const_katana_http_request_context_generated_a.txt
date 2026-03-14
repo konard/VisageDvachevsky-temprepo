@@ -1,0 +1,2692 @@
+ Percent |	Source code & Disassembly of compute_api for cpu-clock:u (481 samples, percent: local period)
+-------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     00000000000114e0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)>:
+         : 6     // ============================================================
+         : 7     // Route Dispatch Functions
+         : 8     // ============================================================
+         :
+         : 10    // Dispatch for /compute/sum
+         : 11    inline katana::result<void> dispatch_compute_sum(const katana::http::request& req, katana::http::request_context& ctx, api_handler& handler, katana::http::response& out) {
+    0.00 :   114e0:  push   %rbp
+    0.00 :   114e1:  mov    %rsp,%rbp
+    0.21 :   114e4:  push   %r15
+    0.00 :   114e6:  mov    %rsi,%r15
+    0.00 :   114e9:  push   %r14
+    0.00 :   114eb:  push   %r13
+    0.00 :   114ed:  mov    %rdi,%r14
+    0.00 :   114f0:  push   %r12
+    0.21 :   114f2:  push   %rbx
+         : 21    }
+         :
+         : 23    [[__nodiscard__, __gnu__::__const__, __gnu__::__always_inline__]]
+         : 24    _GLIBCXX17_CONSTEXPR pointer
+         : 25    data() noexcept
+         : 26    { return static_cast<pointer>(_M_elems); }
+    0.00 :   114f3:  lea    0x350(%rsi),%r12
+         : 28    { return iterator(data() + _Nm); }
+    0.00 :   114fa:  lea    0x4d0(%rsi),%rbx
+    0.00 :   11501:  sub    $0x208,%rsp
+    0.00 :   11508:  mov    %rdx,-0x208(%rbp)
+    0.00 :   1150f:  mov    %rcx,-0x210(%rbp)
+    0.00 :   11516:  mov    %r8,-0x1f8(%rbp)
+    0.00 :   1151d:  mov    %fs:0x28,%rax
+    0.00 :   11526:  mov    %rax,-0x38(%rbp)
+    0.21 :   1152a:  xor    %eax,%eax
+         : 37    [[nodiscard]] monotonic_arena* allocator() noexcept {
+         : 38    return arena_ ? arena_ : fallback_arena_;
+         : 39    }
+         :
+         : 41    [[nodiscard]] known_entry* find_known_entry(field f) noexcept {
+         : 42    for (auto& entry : known_inline_) {
+    0.00 :   1152c:  cmp    %rbx,%r12
+    0.00 :   1152f:  je     11e5e <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x97e>
+         : 45    if (entry.key == f) {
+    0.00 :   11535:  cmpw   $0x2,0x350(%rsi)
+    0.00 :   1153d:  je     11783 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2a3>
+    0.00 :   11543:  cmpw   $0x2,0x368(%rsi)
+         : 49    for (auto& entry : known_inline_) {
+    0.83 :   1154b:  lea    0x368(%rsi),%rax
+         : 51    if (entry.key == f) {
+    0.00 :   11552:  je     11790 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2b0>
+    0.00 :   11558:  cmpw   $0x2,0x380(%rsi)
+         : 54    for (auto& entry : known_inline_) {
+    0.00 :   11560:  lea    0x380(%rsi),%rax
+         : 56    if (entry.key == f) {
+    0.00 :   11567:  je     11790 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2b0>
+    0.00 :   1156d:  cmpw   $0x2,0x398(%rsi)
+         : 59    for (auto& entry : known_inline_) {
+    0.00 :   11575:  lea    0x398(%rsi),%rax
+         : 61    if (entry.key == f) {
+    0.00 :   1157c:  je     11790 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2b0>
+    0.00 :   11582:  cmpw   $0x2,0x3b0(%rsi)
+         : 64    for (auto& entry : known_inline_) {
+    0.00 :   1158a:  lea    0x3b0(%rsi),%rax
+         : 66    if (entry.key == f) {
+    0.00 :   11591:  je     11790 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2b0>
+    0.00 :   11597:  cmpw   $0x2,0x3c8(%rsi)
+         : 69    for (auto& entry : known_inline_) {
+    0.00 :   1159f:  lea    0x3c8(%rsi),%rax
+         : 71    if (entry.key == f) {
+    0.00 :   115a6:  je     11790 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2b0>
+    0.00 :   115ac:  cmpw   $0x2,0x3e0(%rsi)
+         : 74    for (auto& entry : known_inline_) {
+    0.00 :   115b4:  lea    0x3e0(%rsi),%rax
+         : 76    if (entry.key == f) {
+    0.00 :   115bb:  je     11790 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2b0>
+    0.00 :   115c1:  cmpw   $0x2,0x3f8(%rsi)
+         : 79    for (auto& entry : known_inline_) {
+    0.00 :   115c9:  lea    0x3f8(%rsi),%rax
+         : 81    if (entry.key == f) {
+    0.00 :   115d0:  je     11790 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2b0>
+    0.00 :   115d6:  cmpw   $0x2,0x410(%rsi)
+         : 84    for (auto& entry : known_inline_) {
+    0.00 :   115de:  lea    0x410(%rsi),%rax
+         : 86    if (entry.key == f) {
+    0.00 :   115e5:  je     11790 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2b0>
+    0.00 :   115eb:  cmpw   $0x2,0x428(%rsi)
+         : 89    for (auto& entry : known_inline_) {
+    0.00 :   115f3:  lea    0x428(%rsi),%rax
+         : 91    if (entry.key == f) {
+    0.00 :   115fa:  je     11790 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2b0>
+    0.00 :   11600:  cmpw   $0x2,0x440(%rsi)
+         : 94    for (auto& entry : known_inline_) {
+    0.00 :   11608:  lea    0x440(%rsi),%rax
+         : 96    if (entry.key == f) {
+    0.00 :   1160f:  je     11790 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2b0>
+    0.00 :   11615:  cmpw   $0x2,0x458(%rsi)
+         : 99    for (auto& entry : known_inline_) {
+    0.00 :   1161d:  lea    0x458(%rsi),%rax
+         : 101   if (entry.key == f) {
+    0.00 :   11624:  je     11790 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2b0>
+    0.00 :   1162a:  cmpw   $0x2,0x470(%rsi)
+         : 104   for (auto& entry : known_inline_) {
+    0.00 :   11632:  lea    0x470(%rsi),%rax
+         : 106   if (entry.key == f) {
+    0.00 :   11639:  je     11790 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2b0>
+    0.00 :   1163f:  cmpw   $0x2,0x488(%rsi)
+         : 109   for (auto& entry : known_inline_) {
+    0.00 :   11647:  lea    0x488(%rsi),%rax
+         : 111   if (entry.key == f) {
+    0.00 :   1164e:  je     11790 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2b0>
+    0.00 :   11654:  cmpw   $0x2,0x4a0(%rsi)
+         : 114   for (auto& entry : known_inline_) {
+    0.00 :   1165c:  lea    0x4a0(%rsi),%rax
+         : 116   if (entry.key == f) {
+    0.00 :   11663:  je     11790 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2b0>
+    0.00 :   11669:  cmpw   $0x2,0x4b8(%rsi)
+         : 119   for (auto& entry : known_inline_) {
+    0.00 :   11671:  lea    0x4b8(%rsi),%rax
+         : 121   if (entry.key == f) {
+    0.00 :   11678:  je     11790 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2b0>
+    0.00 :   1167e:  mov    0x4d0(%rsi),%rax
+         : 124   return &entry;
+         : 125   }
+         : 126   }
+         : 127   for (auto* chunk = known_chunks_; chunk; chunk = chunk->next) {
+    0.00 :   11685:  test   %rax,%rax
+    0.00 :   11688:  je     1176b <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x28b>
+         : 130   for (auto& entry : chunk->entries) {
+         : 131   if (entry.key == f) {
+    0.00 :   1168e:  cmpw   $0x2,(%rax)
+    0.00 :   11692:  je     11b80 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x6a0>
+    0.00 :   11698:  cmpw   $0x2,0x18(%rax)
+    0.00 :   1169d:  je     11b77 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x697>
+    0.00 :   116a3:  cmpw   $0x2,0x30(%rax)
+    0.00 :   116a8:  je     12388 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xea8>
+    0.00 :   116ae:  cmpw   $0x2,0x48(%rax)
+    0.00 :   116b3:  je     12391 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xeb1>
+    0.00 :   116b9:  cmpw   $0x2,0x60(%rax)
+    0.00 :   116be:  je     1244f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xf6f>
+    0.00 :   116c4:  cmpw   $0x2,0x78(%rax)
+    0.00 :   116c9:  je     12461 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xf81>
+    0.00 :   116cf:  cmpw   $0x2,0x90(%rax)
+    0.00 :   116d7:  je     12473 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xf93>
+    0.00 :   116dd:  cmpw   $0x2,0xa8(%rax)
+    0.00 :   116e5:  je     12598 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x10b8>
+    0.00 :   116eb:  cmpw   $0x2,0xc0(%rax)
+    0.00 :   116f3:  je     125ac <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x10cc>
+    0.00 :   116f9:  cmpw   $0x2,0xd8(%rax)
+    0.00 :   11701:  je     125c0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x10e0>
+    0.00 :   11707:  cmpw   $0x2,0xf0(%rax)
+    0.00 :   1170f:  je     125d7 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x10f7>
+    0.00 :   11715:  cmpw   $0x2,0x108(%rax)
+    0.00 :   1171d:  je     125ee <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x110e>
+    0.00 :   11723:  cmpw   $0x2,0x120(%rax)
+    0.00 :   1172b:  je     12605 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1125>
+    0.00 :   11731:  cmpw   $0x2,0x138(%rax)
+    0.00 :   11739:  je     1261c <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x113c>
+    0.00 :   1173f:  cmpw   $0x2,0x150(%rax)
+    0.00 :   11747:  je     12633 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1153>
+    0.00 :   1174d:  cmpw   $0x2,0x168(%rax)
+    0.00 :   11755:  je     12656 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1176>
+         : 164   for (auto* chunk = known_chunks_; chunk; chunk = chunk->next) {
+    0.00 :   1175b:  mov    0x180(%rax),%rax
+    0.00 :   11762:  test   %rax,%rax
+    0.00 :   11765:  jne    1168e <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1ae>
+    0.00 :   1176b:  lea    -0x1c0(%rbp),%rax
+    0.00 :   11772:  mov    %rax,-0x200(%rbp)
+         : 170   for (auto& entry : known_inline_) {
+    0.00 :   11779:  cmp    %rbx,%r12
+    0.00 :   1177c:  jne    117af <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2cf>
+    0.00 :   1177e:  jmp    11901 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x421>
+         : 174   return &entry;
+    0.00 :   11783:  mov    %r12,%rax
+    0.83 :   11786:  cs nopw 0x0(%rax,%rax,1)
+         : 177   return std::string_view(entry->value, entry->length);
+    0.00 :   11790:  movzwl 0x10(%rax),%edx
+    0.42 :   11794:  mov    0x8(%rax),%rax
+         : 180   constexpr std::string_view kJsonContentType = "application/json";
+         : 181   auto accept = req.headers.get(katana::http::field::accept);
+         : 182   if (accept && !accept->empty() && *accept != "*/*" && *accept != kJsonContentType) {
+    0.00 :   11798:  test   %rdx,%rdx
+    0.00 :   1179b:  jne    11b98 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x6b8>
+    0.00 :   117a1:  lea    -0x1c0(%rbp),%rax
+    0.00 :   117a8:  mov    %rax,-0x200(%rbp)
+         : 187   if (entry.key == f) {
+    0.00 :   117af:  cmpw   $0x4e,0x350(%r15)
+    0.21 :   117b8:  je     11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+    0.21 :   117be:  cmpw   $0x4e,0x368(%r15)
+         : 191   for (auto& entry : known_inline_) {
+    0.00 :   117c7:  lea    0x368(%r15),%r12
+         : 193   if (entry.key == f) {
+    0.00 :   117ce:  je     11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+    0.00 :   117d4:  cmpw   $0x4e,0x380(%r15)
+         : 196   for (auto& entry : known_inline_) {
+    0.21 :   117dd:  lea    0x380(%r15),%r12
+         : 198   if (entry.key == f) {
+    0.00 :   117e4:  je     11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+    0.00 :   117ea:  cmpw   $0x4e,0x398(%r15)
+         : 201   for (auto& entry : known_inline_) {
+    0.00 :   117f3:  lea    0x398(%r15),%r12
+         : 203   if (entry.key == f) {
+    0.00 :   117fa:  je     11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+    0.00 :   11800:  cmpw   $0x4e,0x3b0(%r15)
+         : 206   for (auto& entry : known_inline_) {
+    0.00 :   11809:  lea    0x3b0(%r15),%r12
+         : 208   if (entry.key == f) {
+    0.00 :   11810:  je     11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+    0.00 :   11816:  cmpw   $0x4e,0x3c8(%r15)
+         : 211   for (auto& entry : known_inline_) {
+    0.00 :   1181f:  lea    0x3c8(%r15),%r12
+         : 213   if (entry.key == f) {
+    0.00 :   11826:  je     11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+    0.00 :   1182c:  cmpw   $0x4e,0x3e0(%r15)
+         : 216   for (auto& entry : known_inline_) {
+    0.00 :   11835:  lea    0x3e0(%r15),%r12
+         : 218   if (entry.key == f) {
+    0.00 :   1183c:  je     11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+    0.00 :   11842:  cmpw   $0x4e,0x3f8(%r15)
+         : 221   for (auto& entry : known_inline_) {
+    0.00 :   1184b:  lea    0x3f8(%r15),%r12
+         : 223   if (entry.key == f) {
+    0.00 :   11852:  je     11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+    0.00 :   11858:  cmpw   $0x4e,0x410(%r15)
+         : 226   for (auto& entry : known_inline_) {
+    0.00 :   11861:  lea    0x410(%r15),%r12
+         : 228   if (entry.key == f) {
+    0.00 :   11868:  je     11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+    0.00 :   1186e:  cmpw   $0x4e,0x428(%r15)
+         : 231   for (auto& entry : known_inline_) {
+    0.00 :   11877:  lea    0x428(%r15),%r12
+         : 233   if (entry.key == f) {
+    0.00 :   1187e:  je     11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+    0.00 :   11884:  cmpw   $0x4e,0x440(%r15)
+         : 236   for (auto& entry : known_inline_) {
+    0.00 :   1188d:  lea    0x440(%r15),%r12
+         : 238   if (entry.key == f) {
+    0.00 :   11894:  je     11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+    0.00 :   1189a:  cmpw   $0x4e,0x458(%r15)
+         : 241   for (auto& entry : known_inline_) {
+    0.00 :   118a3:  lea    0x458(%r15),%r12
+         : 243   if (entry.key == f) {
+    0.00 :   118aa:  je     11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+    0.00 :   118b0:  cmpw   $0x4e,0x470(%r15)
+         : 246   for (auto& entry : known_inline_) {
+    0.00 :   118b9:  lea    0x470(%r15),%r12
+         : 248   if (entry.key == f) {
+    0.00 :   118c0:  je     11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+    0.00 :   118c6:  cmpw   $0x4e,0x488(%r15)
+         : 251   for (auto& entry : known_inline_) {
+    0.00 :   118cf:  lea    0x488(%r15),%r12
+         : 253   if (entry.key == f) {
+    0.00 :   118d6:  je     11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+    0.00 :   118dc:  cmpw   $0x4e,0x4a0(%r15)
+         : 256   for (auto& entry : known_inline_) {
+    0.00 :   118e5:  lea    0x4a0(%r15),%r12
+         : 258   if (entry.key == f) {
+    0.00 :   118ec:  je     11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+    0.00 :   118f2:  cmpw   $0x4e,0x4b8(%r15)
+    0.00 :   118fb:  je     129d7 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x14f7>
+    0.00 :   11901:  mov    0x4d0(%r15),%rdx
+    0.00 :   11908:  mov    %rdx,%rax
+         : 264   for (auto* chunk = known_chunks_; chunk; chunk = chunk->next) {
+    0.00 :   1190b:  test   %rdx,%rdx
+    0.00 :   1190e:  je     119f8 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x518>
+         : 267   if (entry.key == f) {
+    0.00 :   11914:  cmpw   $0x4e,(%rax)
+    0.00 :   11918:  je     11ca5 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7c5>
+    0.00 :   1191e:  cmpw   $0x4e,0x18(%rax)
+    0.00 :   11923:  je     12458 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xf78>
+    0.00 :   11929:  cmpw   $0x4e,0x30(%rax)
+    0.00 :   1192e:  je     1246a <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xf8a>
+    0.00 :   11934:  cmpw   $0x4e,0x48(%rax)
+    0.00 :   11939:  je     1247e <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xf9e>
+    0.00 :   1193f:  cmpw   $0x4e,0x60(%rax)
+    0.00 :   11944:  je     125a3 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x10c3>
+    0.00 :   1194a:  cmpw   $0x4e,0x78(%rax)
+    0.00 :   1194f:  je     125b7 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x10d7>
+    0.00 :   11955:  cmpw   $0x4e,0x90(%rax)
+    0.00 :   1195d:  je     125cb <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x10eb>
+    0.00 :   11963:  cmpw   $0x4e,0xa8(%rax)
+    0.00 :   1196b:  je     125e2 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1102>
+    0.00 :   11971:  cmpw   $0x4e,0xc0(%rax)
+    0.00 :   11979:  je     125f9 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1119>
+    0.00 :   1197f:  cmpw   $0x4e,0xd8(%rax)
+    0.00 :   11987:  je     12610 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1130>
+    0.00 :   1198d:  cmpw   $0x4e,0xf0(%rax)
+    0.00 :   11995:  je     12627 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1147>
+    0.00 :   1199b:  cmpw   $0x4e,0x108(%rax)
+    0.00 :   119a3:  je     1263e <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x115e>
+    0.00 :   119a9:  cmpw   $0x4e,0x120(%rax)
+    0.00 :   119b1:  je     1264a <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x116a>
+    0.00 :   119b7:  cmpw   $0x4e,0x138(%rax)
+    0.00 :   119bf:  je     12661 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1181>
+    0.00 :   119c5:  cmpw   $0x4e,0x150(%rax)
+    0.00 :   119cd:  je     12959 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1479>
+    0.00 :   119d3:  cmpw   $0x4e,0x168(%rax)
+    0.00 :   119db:  je     12965 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1485>
+         : 300   for (auto* chunk = known_chunks_; chunk; chunk = chunk->next) {
+    0.00 :   119e1:  mov    0x180(%rax),%rax
+    0.00 :   119e8:  test   %rax,%rax
+    0.00 :   119eb:  jne    11914 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x434>
+    0.00 :   119f1:  nopl   0x0(%rax)
+         : 305   int status = 500;
+         : 306   std::optional<std::string> detail;
+         : 307   std::optional<std::string> instance;
+         : 308   std::unordered_map<std::string, std::string> extensions;
+         :
+         : 310   problem_details() = default;
+    0.00 :   119f8:  mov    -0x200(%rbp),%rdx
+    0.00 :   119ff:  lea    -0x110(%rbp),%rbx
+    0.00 :   11a06:  lea    0x1789b(%rip),%rsi        # 292a8 <_IO_stdin_used+0x2a8>
+    0.00 :   11a0d:  mov    %rbx,%rdi
+    0.00 :   11a10:  call   afc0 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<std::allocator<char> >(char const*, std::allocator<char> const&) [clone .lto_priv.0]>
+         : 316   _Alloc_hider(pointer __dat, const _Alloc& __a)
+         : 317   : allocator_type(__a), _M_p(__dat) { }
+         :
+         : 319   _GLIBCXX20_CONSTEXPR
+         : 320   _Alloc_hider(pointer __dat, _Alloc&& __a = _Alloc())
+         : 321   : allocator_type(std::move(__a)), _M_p(__dat) { }
+    0.00 :   11a15:  lea    -0xe0(%rbp),%rax
+         : 323   _GLIBCXX20_CONSTEXPR
+         : 324   basic_string&
+         : 325   assign(const _CharT* __s)
+         : 326   {
+         : 327   __glibcxx_requires_string(__s);
+         : 328   return _M_replace(size_type(0), this->size(), __s,
+    0.00 :   11a1c:  lea    -0xf0(%rbp),%rdi
+    0.00 :   11a23:  mov    $0x16,%ecx
+         : 331   : allocator_type(std::move(__a)), _M_p(__dat) { }
+    0.00 :   11a28:  mov    %rax,-0xf0(%rbp)
+         : 333   return _M_replace(size_type(0), this->size(), __s,
+    0.00 :   11a2f:  lea    0x1787e(%rip),%rdx        # 292b4 <_IO_stdin_used+0x2b4>
+    0.00 :   11a36:  xor    %esi,%esi
+         : 336   const _Hash&, const _Equal&, const allocator_type&,
+         : 337   false_type __uks);
+         :
+         : 339   public:
+         : 340   // Constructor, destructor, assignment, swap
+         : 341   _Hashtable() = default;
+    0.00 :   11a38:  lea    -0x48(%rbp),%rax
+         : 343   { _M_string_length = __length; }
+    0.00 :   11a3c:  movq   $0x0,-0xe8(%rbp)
+         : 345   #if __cpp_constexpr_dynamic_alloc
+         : 346   if (std::__is_constant_evaluated())
+         : 347   std::construct_at(__builtin_addressof(__c1), __c2);
+         : 348   else
+         : 349   #endif
+         : 350   __c1 = __c2;
+    0.00 :   11a47:  movb   $0x0,-0xe0(%rbp)
+         : 352   template <typename _Tp>
+         : 353   struct _Optional_payload_base
+         : 354   {
+         : 355   using _Stored_type = remove_const_t<_Tp>;
+         :
+         : 357   _Optional_payload_base() = default;
+    0.00 :   11a4e:  movb   $0x0,-0xa8(%rbp)
+    0.00 :   11a55:  movb   $0x0,-0x80(%rbp)
+    0.00 :   11a59:  mov    %rax,-0x78(%rbp)
+    0.00 :   11a5d:  movq   $0x1,-0x70(%rbp)
+         : 362   */
+         : 363   struct _Hash_node_base
+         : 364   {
+         : 365   _Hash_node_base* _M_nxt;
+         :
+         : 367   _Hash_node_base() noexcept : _M_nxt() { }
+    0.00 :   11a65:  movq   $0x0,-0x68(%rbp)
+    0.00 :   11a6d:  movq   $0x0,-0x60(%rbp)
+         : 370   struct _Prime_rehash_policy
+         : 371   {
+         : 372   using __has_load_factor = true_type;
+         :
+         : 374   _Prime_rehash_policy(float __z = 1.0) noexcept
+         : 375   : _M_max_load_factor(__z), _M_next_resize(0) { }
+    0.00 :   11a75:  movl   $0x3f800000,-0x58(%rbp)
+    0.00 :   11a7c:  movq   $0x0,-0x50(%rbp)
+    0.00 :   11a84:  movq   $0x0,-0x48(%rbp)
+         : 379   return p;
+         : 380   }
+         :
+         : 382   problem_details problem_details::unsupported_media_type(std::string_view detail) {
+         : 383   problem_details p;
+         : 384   p.status = 415;
+    0.00 :   11a8c:  movl   $0x19f,-0xd0(%rbp)
+         : 386   return _M_replace(size_type(0), this->size(), __s,
+    0.00 :   11a96:  call   1fbb8 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace(unsigned long, unsigned long, char const*, unsigned long) [clone .constprop.0]>
+         : 388   : basic_string(__svw._M_sv.data(), __svw._M_sv.size(), __a) { }
+    0.00 :   11a9b:  lea    -0x180(%rbp),%r12
+    0.00 :   11aa2:  lea    0x17822(%rip),%rsi        # 292cb <_IO_stdin_used+0x2cb>
+    0.00 :   11aa9:  mov    $0x18,%edx
+    0.00 :   11aae:  mov    %r12,%rdi
+    0.00 :   11ab1:  call   279b0 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, unsigned long, std::allocator<char> const&) [clone .isra.0]>
+         : 394   optional&>
+         : 395   operator=(_Up&& __u)
+         : 396   noexcept(__and_v<is_nothrow_constructible<_Tp, _Up>,
+         : 397   is_nothrow_assignable<_Tp&, _Up>>)
+         : 398   {
+         : 399   if (this->_M_is_engaged())
+    0.00 :   11ab6:  cmpb   $0x0,-0xa8(%rbp)
+    0.00 :   11abd:  jne    11df0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x910>
+         : 402   { return _M_dataplus._M_p; }
+    0.00 :   11ac3:  mov    -0x180(%rbp),%rdx
+         : 404   : allocator_type(std::move(__a)), _M_p(__dat) { }
+    0.00 :   11aca:  lea    -0xb8(%rbp),%rcx
+         : 406   if (_M_data() == _M_local_data())
+    0.00 :   11ad1:  lea    -0x170(%rbp),%rax
+         : 408   if (_M_string_length > _S_local_capacity)
+    0.00 :   11ad8:  mov    -0x178(%rbp),%rsi
+         : 410   : allocator_type(std::move(__a)), _M_p(__dat) { }
+    0.00 :   11adf:  mov    %rcx,-0xc8(%rbp)
+         : 412   if (_M_data() == _M_local_data())
+    0.00 :   11ae6:  cmp    %rax,%rdx
+    0.00 :   11ae9:  je     12971 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1491>
+         : 415   { _M_dataplus._M_p = __p; }
+    0.00 :   11aef:  mov    %rdx,-0xc8(%rbp)
+         : 417   { _M_allocated_capacity = __capacity; }
+    0.00 :   11af6:  mov    -0x170(%rbp),%rdx
+    0.00 :   11afd:  mov    %rdx,-0xb8(%rbp)
+         : 420   { _M_string_length = __length; }
+    0.00 :   11b04:  mov    %rsi,-0xc0(%rbp)
+         : 422   { _M_dataplus._M_p = __p; }
+    0.00 :   11b0b:  mov    %rax,-0x180(%rbp)
+         : 424   { _M_string_length = __length; }
+    0.00 :   11b12:  movq   $0x0,-0x178(%rbp)
+    0.00 :   11b1d:  movb   $0x0,-0x170(%rbp)
+         : 427   this->_M_engaged = true;
+    0.00 :   11b24:  movb   $0x1,-0xa8(%rbp)
+         : 429   { _M_dispose(); }
+    0.00 :   11b2b:  mov    %r12,%rdi
+    0.00 :   11b2e:  call   b9f0 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()>
+         : 432   }
+         : 433   auto content_type = req.headers.get(katana::http::field::content_type);
+         : 434   if (!content_type || !katana::http_utils::detail::ascii_iequals(
+         : 435   katana::http_utils::detail::media_type_token(*content_type),
+         : 436   kJsonContentType)) {
+         : 437   out.assign_error(katana::problem_details::unsupported_media_type("unsupported Content-Type")); return {};
+    0.00 :   11b33:  mov    -0x1f8(%rbp),%rdi
+    0.00 :   11b3a:  mov    %rbx,%rsi
+    0.00 :   11b3d:  call   fa48 <katana::http::response::assign_error(katana::problem_details const&)>
+    0.00 :   11b42:  mov    %rbx,%rdi
+    0.00 :   11b45:  call   ba20 <katana::problem_details::~problem_details() [clone .lto_priv.0]>
+         : 443   template<typename _Up>
+         : 444   using rebind = expected<_Up, error_type>;
+         :
+         : 446   constexpr
+         : 447   expected() noexcept
+         : 448   : _M_void(), _M_has_value(true)
+    0.00 :   11b4a:  movb   $0x1,0x10(%r14)
+         : 450   }
+         : 451   if (out.status != 204 && !out.body.empty() && !out.headers.get(katana::http::field::content_type)) {
+         : 452   out.set_header("Content-Type", kJsonContentType);
+         : 453   }
+         : 454   return {};
+         : 455   }
+    0.00 :   11b4f:  mov    -0x38(%rbp),%rax
+    0.62 :   11b53:  sub    %fs:0x28,%rax
+    0.42 :   11b5c:  jne    13761 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2281>
+    0.00 :   11b62:  add    $0x208,%rsp
+    0.00 :   11b69:  mov    %r14,%rax
+    0.00 :   11b6c:  pop    %rbx
+    0.00 :   11b6d:  pop    %r12
+    0.00 :   11b6f:  pop    %r13
+    0.00 :   11b71:  pop    %r14
+    0.00 :   11b73:  pop    %r15
+    0.00 :   11b75:  pop    %rbp
+    0.00 :   11b76:  ret
+         : 468   for (auto& entry : chunk->entries) {
+    0.00 :   11b77:  add    $0x18,%rax
+         : 470   if (!entry) {
+    0.00 :   11b7b:  nopl   0x0(%rax,%rax,1)
+         : 472   return std::string_view(entry->value, entry->length);
+    0.00 :   11b80:  movzwl 0x10(%rax),%edx
+    0.00 :   11b84:  mov    0x8(%rax),%rax
+         : 475   if (accept && !accept->empty() && *accept != "*/*" && *accept != kJsonContentType) {
+    0.00 :   11b88:  test   %rdx,%rdx
+    0.00 :   11b8b:  je     1176b <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x28b>
+    0.00 :   11b91:  nopl   0x0(%rax)
+         : 479   {
+         : 480   #if __cplusplus >= 201703L
+         : 481   if (std::__is_constant_evaluated())
+         : 482   return __gnu_cxx::char_traits<char_type>::length(__s);
+         : 483   #endif
+         : 484   return __builtin_strlen(__s);
+    0.00 :   11b98:  mov    %rdx,-0x1c0(%rbp)
+    0.83 :   11b9f:  mov    %rax,-0x1b8(%rbp)
+         : 487   [[nodiscard]]
+         : 488   constexpr bool
+         : 489   operator==(basic_string_view<_CharT, _Traits> __x,
+         : 490   __type_identity_t<basic_string_view<_CharT, _Traits>> __y)
+         : 491   noexcept
+         : 492   { return __x.size() == __y.size() && __x.compare(__y) == 0; }
+    0.00 :   11ba6:  cmp    $0x3,%rdx
+    0.00 :   11baa:  je     11e04 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x924>
+         : 495   operator==(basic_string_view<_CharT, _Traits> __x,
+    0.00 :   11bb0:  lea    0x176b7(%rip),%rax        # 2926e <_IO_stdin_used+0x26e>
+         : 497   { return __x.size() == __y.size() && __x.compare(__y) == 0; }
+    0.00 :   11bb7:  cmp    $0x10,%rdx
+    0.00 :   11bbb:  je     11e33 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x953>
+         : 500   problem_details p;
+    0.00 :   11bc1:  lea    -0x110(%rbp),%rbx
+         : 502   return _M_replace(size_type(0), this->size(), __s,
+    0.00 :   11bc8:  mov    $0xe,%ecx
+    0.00 :   11bcd:  mov    %rbx,%rdi
+    0.00 :   11bd0:  call   bbf8 <katana::problem_details::problem_details() [clone .lto_priv.0]>
+    0.00 :   11bd5:  mov    -0xe8(%rbp),%rsi
+    0.00 :   11bdc:  lea    -0xf0(%rbp),%rdi
+    0.00 :   11be3:  lea    0x17695(%rip),%rdx        # 2927f <_IO_stdin_used+0x27f>
+         : 509   p.status = 406;
+    0.00 :   11bea:  movl   $0x196,-0xd0(%rbp)
+    0.00 :   11bf4:  call   1fbb8 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace(unsigned long, unsigned long, char const*, unsigned long) [clone .constprop.0]>
+         : 512   : basic_string(__svw._M_sv.data(), __svw._M_sv.size(), __a) { }
+    0.00 :   11bf9:  lea    -0x180(%rbp),%r12
+    0.00 :   11c00:  lea    0x17687(%rip),%rsi        # 2928e <_IO_stdin_used+0x28e>
+    0.00 :   11c07:  mov    $0x19,%edx
+    0.00 :   11c0c:  mov    %r12,%rdi
+    0.00 :   11c0f:  call   279b0 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, unsigned long, std::allocator<char> const&) [clone .isra.0]>
+         : 518   if (this->_M_is_engaged())
+    0.00 :   11c14:  cmpb   $0x0,-0xa8(%rbp)
+    0.00 :   11c1b:  jne    11e84 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x9a4>
+         : 521   { return _M_dataplus._M_p; }
+    0.00 :   11c21:  mov    -0x180(%rbp),%r9
+         : 523   : allocator_type(std::move(__a)), _M_p(__dat) { }
+    0.00 :   11c28:  lea    -0xb8(%rbp),%rcx
+         : 525   if (_M_data() == _M_local_data())
+    0.00 :   11c2f:  lea    -0x170(%rbp),%rax
+         : 527   if (_M_string_length > _S_local_capacity)
+    0.00 :   11c36:  mov    -0x178(%rbp),%rdi
+         : 529   : allocator_type(std::move(__a)), _M_p(__dat) { }
+    0.00 :   11c3d:  mov    %rcx,-0xc8(%rbp)
+         : 531   if (_M_data() == _M_local_data())
+    0.00 :   11c44:  cmp    %rax,%r9
+    0.00 :   11c47:  je     13245 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1d65>
+         : 534   { _M_allocated_capacity = __capacity; }
+    0.00 :   11c4d:  mov    -0x170(%rbp),%rdx
+         : 536   { _M_dataplus._M_p = __p; }
+    0.00 :   11c54:  mov    %r9,-0xc8(%rbp)
+         : 538   { _M_allocated_capacity = __capacity; }
+    0.00 :   11c5b:  mov    %rdx,-0xb8(%rbp)
+         : 540   { _M_string_length = __length; }
+    0.00 :   11c62:  mov    %rdi,-0xc0(%rbp)
+         : 542   { _M_dataplus._M_p = __p; }
+    0.00 :   11c69:  mov    %rax,-0x180(%rbp)
+         : 544   { _M_string_length = __length; }
+    0.00 :   11c70:  movq   $0x0,-0x178(%rbp)
+         : 546   __c1 = __c2;
+    0.00 :   11c7b:  movb   $0x0,-0x170(%rbp)
+         : 548   this->_M_engaged = true;
+    0.00 :   11c82:  movb   $0x1,-0xa8(%rbp)
+         : 550   { _M_dispose(); }
+    0.00 :   11c89:  mov    %r12,%rdi
+    0.00 :   11c8c:  call   b9f0 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()>
+         : 553   out.assign_error(katana::problem_details::not_acceptable("unsupported Accept header"));
+    0.00 :   11c91:  mov    -0x1f8(%rbp),%rdi
+    0.00 :   11c98:  mov    %rbx,%rsi
+    0.00 :   11c9b:  call   fa48 <katana::http::response::assign_error(katana::problem_details const&)>
+    0.00 :   11ca0:  jmp    11b42 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x662>
+         : 558   { return static_cast<pointer>(_M_elems); }
+    0.00 :   11ca5:  mov    %rax,%r12
+         : 560   if (!entry) {
+    0.00 :   11ca8:  nopl   0x0(%rax,%rax,1)
+         : 562   return std::string_view(entry->value, entry->length);
+    0.00 :   11cb0:  movzwl 0x10(%r12),%ebx
+    0.62 :   11cb6:  mov    0x8(%r12),%r13
+         : 565   inline constexpr bool is_json_whitespace(unsigned char c) noexcept {
+         : 566   return is_json_whitespace_table[c];
+         : 567   }
+         :
+         : 569   inline std::string_view trim_view(std::string_view sv) noexcept {
+         : 570   while (!sv.empty() && is_json_whitespace(static_cast<unsigned char>(sv.front()))) {
+    0.00 :   11cbb:  lea    0x19cde(%rip),%rdx        # 2b9a0 <katana::serde::is_json_whitespace_table>
+    0.21 :   11cc2:  test   %rbx,%rbx
+    0.00 :   11cc5:  jne    11cd8 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7f8>
+    0.00 :   11cc7:  jmp    11ce3 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x803>
+    0.00 :   11cc9:  nopl   0x0(%rax)
+         : 576   this->_M_str += __n;
+    0.00 :   11cd0:  inc    %r13
+    0.00 :   11cd3:  dec    %rbx
+    0.00 :   11cd6:  je     11ce3 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x803>
+         : 580   return is_json_whitespace_table[c];
+    0.00 :   11cd8:  movzbl 0x0(%r13),%eax
+         : 582   while (!sv.empty() && is_json_whitespace(static_cast<unsigned char>(sv.front()))) {
+    0.21 :   11cdd:  cmpb   $0x0,(%rdx,%rax,1)
+    2.49 :   11ce1:  jne    11cd0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7f0>
+         : 585   return is_json_whitespace_table[c];
+    0.00 :   11ce3:  lea    0x19cb6(%rip),%r12        # 2b9a0 <katana::serde::is_json_whitespace_table>
+    0.00 :   11cea:  jmp    11d04 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x824>
+    0.00 :   11cec:  nopl   0x0(%rax)
+    0.00 :   11cf0:  movzbl -0x1(%r13,%rbx,1),%eax
+         : 590   return *(this->_M_str + this->_M_len - 1);
+    0.00 :   11cf6:  lea    -0x1(%rbx),%rdx
+         : 592   sv.remove_prefix(1);
+         : 593   }
+         : 594   while (!sv.empty() && is_json_whitespace(static_cast<unsigned char>(sv.back()))) {
+    0.00 :   11cfa:  cmpb   $0x0,(%r12,%rax,1)
+    0.21 :   11cff:  je     11d10 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x830>
+         : 597   this->_M_len -= __n;
+    0.00 :   11d01:  mov    %rdx,%rbx
+    0.00 :   11d04:  test   %rbx,%rbx
+    0.00 :   11d07:  jne    11cf0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x810>
+    0.00 :   11d09:  jmp    119f8 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x518>
+    0.00 :   11d0e:  xchg   %ax,%ax
+         : 603   return 0;
+         : 604   #if __cplusplus >= 201703L
+         : 605   if (std::__is_constant_evaluated())
+         : 606   return __gnu_cxx::char_traits<char_type>::find(__s, __n, __a);
+         : 607   #endif
+         : 608   return static_cast<const char_type*>(__builtin_memchr(__s, __a, __n));
+    0.00 :   11d10:  mov    %rbx,%rdx
+    0.00 :   11d13:  mov    $0x3b,%esi
+    0.00 :   11d18:  mov    %r13,%rdi
+    0.00 :   11d1b:  call   69c0 <memchr@plt>
+    0.00 :   11d20:  mov    %rax,%rcx
+         : 614   size_type __ret = npos;
+         : 615   if (__pos < this->_M_len)
+         : 616   {
+         : 617   const size_type __n = this->_M_len - __pos;
+         : 618   const _CharT* __p = traits_type::find(this->_M_str + __pos, __n, __c);
+         : 619   if (__p)
+    0.00 :   11d23:  test   %rax,%rax
+    0.00 :   11d26:  je     11d4d <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x86d>
+         : 622   __ret = __p - this->_M_str;
+    0.00 :   11d28:  sub    %r13,%rcx
+         : 624   }
+         :
+         : 626   [[nodiscard]] inline std::string_view media_type_token(std::string_view value) noexcept {
+         : 627   value = katana::serde::trim_view(value);
+         : 628   auto semicolon = value.find(';');
+         : 629   if (semicolon != std::string_view::npos) {
+    0.00 :   11d2b:  cmp    $0xffffffffffffffff,%rcx
+    0.00 :   11d2f:  je     11d4d <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x86d>
+         : 632   value = value.substr(0, semicolon);
+    0.00 :   11d31:  mov    %r13,%rsi
+    0.00 :   11d34:  mov    %rbx,%rdi
+    0.00 :   11d37:  xor    %edx,%edx
+    0.00 :   11d39:  call   28048 <std::basic_string_view<char, std::char_traits<char> >::substr(unsigned long, unsigned long) const [clone .isra.0]>
+    0.00 :   11d3e:  mov    %rax,%rbx
+    0.00 :   11d41:  mov    %rdx,%r13
+         : 639   while (!sv.empty() && is_json_whitespace(static_cast<unsigned char>(sv.front()))) {
+    0.00 :   11d44:  test   %rax,%rax
+    0.00 :   11d47:  je     119f8 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x518>
+    0.00 :   11d4d:  add    %r13,%rbx
+    0.83 :   11d50:  jmp    11d64 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x884>
+    0.00 :   11d52:  nopw   0x0(%rax,%rax,1)
+         : 645   this->_M_str += __n;
+    0.00 :   11d58:  inc    %r13
+    0.00 :   11d5b:  cmp    %rbx,%r13
+    0.00 :   11d5e:  je     119f8 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x518>
+         : 649   return is_json_whitespace_table[c];
+    0.00 :   11d64:  movzbl 0x0(%r13),%eax
+         : 651   while (!sv.empty() && is_json_whitespace(static_cast<unsigned char>(sv.front()))) {
+    0.42 :   11d69:  cmpb   $0x0,(%r12,%rax,1)
+    0.42 :   11d6e:  jne    11d58 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x878>
+    0.00 :   11d70:  mov    %rbx,%rax
+    0.00 :   11d73:  sub    %r13,%rax
+    0.00 :   11d76:  jmp    11d7b <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x89b>
+         : 657   this->_M_len -= __n;
+    0.00 :   11d78:  mov    %rcx,%rax
+         : 659   while (!sv.empty() && is_json_whitespace(static_cast<unsigned char>(sv.back()))) {
+    0.00 :   11d7b:  test   %rax,%rax
+    0.21 :   11d7e:  je     119f8 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x518>
+         : 662   return is_json_whitespace_table[c];
+    0.00 :   11d84:  movzbl -0x1(%r13,%rax,1),%edx
+         : 664   return *(this->_M_str + this->_M_len - 1);
+    0.00 :   11d8a:  lea    -0x1(%rax),%rcx
+         : 666   while (!sv.empty() && is_json_whitespace(static_cast<unsigned char>(sv.back()))) {
+    0.00 :   11d8e:  cmpb   $0x0,(%r12,%rdx,1)
+    0.42 :   11d93:  jne    11d78 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x898>
+         : 669   if (lhs.size() != rhs.size()) {
+    0.00 :   11d95:  cmp    $0x10,%rax
+    0.00 :   11d99:  jne    119f8 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x518>
+    0.00 :   11d9f:  lea    0x174c8(%rip),%rax        # 2926e <_IO_stdin_used+0x26e>
+    0.00 :   11da6:  mov    %r15,-0x218(%rbp)
+         : 674   for (size_t i = 0; i < lhs.size(); ++i) {
+    0.00 :   11dad:  xor    %r12d,%r12d
+    0.00 :   11db0:  mov    %r12,%r15
+    0.00 :   11db3:  mov    %rax,-0x220(%rbp)
+    0.00 :   11dba:  mov    %rax,%r12
+    0.21 :   11dbd:  jmp    11dcd <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x8ed>
+    0.00 :   11dbf:  nop
+    0.00 :   11dc0:  inc    %r15
+    0.21 :   11dc3:  cmp    $0x10,%r15
+    0.00 :   11dc7:  je     11e98 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x9b8>
+         : 684   if (std::tolower(lc) != std::tolower(rc)) {
+    0.00 :   11dcd:  movzbl 0x0(%r13,%r15,1),%edi
+    0.42 :   11dd3:  call   6b50 <tolower@plt>
+    0.00 :   11dd8:  movzbl (%r12,%r15,1),%edi
+    0.21 :   11ddd:  mov    %eax,%ebx
+    0.00 :   11ddf:  call   6b50 <tolower@plt>
+    0.00 :   11de4:  cmp    %eax,%ebx
+    1.87 :   11de6:  je     11dc0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x8e0>
+    0.00 :   11de8:  jmp    119f8 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x518>
+    0.00 :   11ded:  nopl   (%rax)
+         : 694   this->_M_get() = std::forward<_Up>(__u);
+    0.00 :   11df0:  lea    -0xc8(%rbp),%rdi
+    0.00 :   11df7:  mov    %r12,%rsi
+    0.00 :   11dfa:  call   27d20 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [clone .isra.0]>
+    0.00 :   11dff:  jmp    11b2b <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x64b>
+         : 699   { return __x.size() == __y.size() && __x.compare(__y) == 0; }
+    0.00 :   11e04:  lea    -0x1c0(%rbp),%rax
+    0.00 :   11e0b:  lea    0x17458(%rip),%rdx        # 2926a <_IO_stdin_used+0x26a>
+    0.00 :   11e12:  mov    $0x3,%esi
+    0.00 :   11e17:  mov    %rax,%rdi
+    0.00 :   11e1a:  mov    %rax,-0x200(%rbp)
+    0.00 :   11e21:  call   bf40 <std::basic_string_view<char, std::char_traits<char> >::compare(std::basic_string_view<char, std::char_traits<char> >) const>
+    0.00 :   11e26:  test   %eax,%eax
+    0.00 :   11e28:  jne    11bc1 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x6e1>
+    0.00 :   11e2e:  jmp    11779 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x299>
+         : 709   { return __x.size() == __y.size() && __x.compare(__y) == 0; }
+    0.00 :   11e33:  lea    -0x1c0(%rbp),%rsi
+    1.04 :   11e3a:  mov    %rax,%rdx
+    0.00 :   11e3d:  mov    %rsi,-0x200(%rbp)
+    0.42 :   11e44:  mov    %rsi,%rdi
+    0.00 :   11e47:  mov    $0x10,%esi
+    0.00 :   11e4c:  call   bf40 <std::basic_string_view<char, std::char_traits<char> >::compare(std::basic_string_view<char, std::char_traits<char> >) const>
+    0.00 :   11e51:  test   %eax,%eax
+    0.00 :   11e53:  je     11779 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x299>
+    0.00 :   11e59:  jmp    11bc1 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x6e1>
+    0.00 :   11e5e:  mov    0x4d0(%rsi),%rdx
+    0.00 :   11e65:  mov    %rdx,%rax
+         : 721   for (auto* chunk = known_chunks_; chunk; chunk = chunk->next) {
+    0.00 :   11e68:  test   %rdx,%rdx
+    0.00 :   11e6b:  jne    1168e <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1ae>
+    0.00 :   11e71:  lea    -0x1c0(%rbp),%rax
+    0.00 :   11e78:  mov    %rax,-0x200(%rbp)
+    0.00 :   11e7f:  jmp    11908 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x428>
+    0.00 :   11e84:  lea    -0xc8(%rbp),%rdi
+    0.00 :   11e8b:  mov    %r12,%rsi
+    0.00 :   11e8e:  call   27d20 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) [clone .isra.0]>
+    0.00 :   11e93:  jmp    11c89 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7a9>
+    0.00 :   11e98:  mov    -0x218(%rbp),%r15
+         : 732   auto parsed_body = parse_compute_sum_request(req.body, &ctx.arena);
+    0.00 :   11e9f:  mov    -0x208(%rbp),%rax
+         : 734   ++ptr;
+         : 735   }
+         : 736   }
+         :
+         : 738   bool consume(char c) noexcept {
+         : 739   skip_ws();
+    0.00 :   11ea6:  mov    -0x200(%rbp),%rdi
+    0.00 :   11ead:  mov    (%rax),%r10
+         : 742   }
+         : 743   return result;
+         : 744   }
+         :
+         : 746   [[nodiscard]] inline std::optional<compute_sum_request> parse_compute_sum_request(std::string_view json, monotonic_arena* arena) {
+         : 747   katana::serde::json_cursor cur{json.data(), json.data() + json.size()};
+    0.00 :   11eb0:  mov    0x5f0(%r15),%r9
+    0.00 :   11eb7:  mov    0x5f8(%r15),%rax
+         : 750   json_cursor(const char* p, const char* e) : ptr(p), end(e), start(p) {}
+    0.00 :   11ebe:  mov    %rax,-0x1c0(%rbp)
+    0.00 :   11ec5:  mov    %rax,-0x1b0(%rbp)
+    0.00 :   11ecc:  add    %rax,%r9
+    0.00 :   11ecf:  mov    %r9,-0x1b8(%rbp)
+         : 755   skip_ws();
+    0.00 :   11ed6:  call   ad30 <katana::serde::json_cursor::skip_ws()>
+         : 757   bool eof() const noexcept { return ptr >= end; }
+    0.42 :   11edb:  mov    -0x1c0(%rbp),%rax
+         : 759   if (eof() || *ptr != c) {
+    0.00 :   11ee2:  cmp    %r9,%rax
+    0.00 :   11ee5:  jae    12170 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xc90>
+    0.00 :   11eeb:  cmpb   $0x5b,(%rax)
+    0.00 :   11eee:  jne    12170 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xc90>
+         :
+         : 765   arena_vector() noexcept(noexcept(arena_allocator<T>(nullptr)))
+         : 766   : allocator_(nullptr), data_(inline_data()), size_(0), capacity_(InlineCapacity) {}
+         :
+         : 768   explicit arena_vector(allocator_type alloc) noexcept
+         : 769   : allocator_(alloc), data_(inline_data()), size_(0), capacity_(InlineCapacity) {}
+    0.00 :   11ef4:  lea    -0xf0(%rbp),%rbx
+         : 771   return false;
+         : 772   }
+         : 773   ++ptr;
+    0.00 :   11efb:  lea    0x1(%rax),%rdx
+    0.00 :   11eff:  mov    $0x8,%ecx
+    0.00 :   11f04:  xor    %eax,%eax
+    0.00 :   11f06:  mov    %r10,-0x110(%rbp)
+    0.00 :   11f0d:  mov    %rbx,-0x108(%rbp)
+    0.00 :   11f14:  mov    %rbx,%rdi
+    0.00 :   11f17:  movq   $0x0,-0x100(%rbp)
+    0.00 :   11f22:  movq   $0x8,-0xf8(%rbp)
+    0.42 :   11f2d:  mov    %rdx,-0x1c0(%rbp)
+    4.78 :   11f34:  rep stos %rax,%es:(%rdi)
+         : 784   if (!cur.try_array_start()) return std::nullopt;
+         : 785   compute_sum_request result{arena_allocator<schema>(arena)};
+         : 786   while (!cur.eof()) {
+    0.00 :   11f37:  cmp    %r9,%rdx
+    0.00 :   11f3a:  jae    132a0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1dc0>
+    0.00 :   11f40:  lea    -0x1e8(%rbp),%rax
+    0.00 :   11f47:  mov    %rax,-0x218(%rbp)
+    0.21 :   11f4e:  vmovq  -0x218(%rbp),%xmm4
+    0.21 :   11f56:  vpinsrq $0x1,-0x200(%rbp),%xmm4,%xmm3
+    0.21 :   11f60:  vmovdqa %xmm3,-0x230(%rbp)
+         : 794   cur.skip_ws();
+    0.21 :   11f68:  mov    -0x200(%rbp),%r10
+    1.04 :   11f6f:  mov    %r10,%rdi
+    0.00 :   11f72:  call   ad30 <katana::serde::json_cursor::skip_ws()>
+         : 798   skip_ws();
+    0.00 :   11f77:  mov    %r10,%rdi
+    0.21 :   11f7a:  call   ad30 <katana::serde::json_cursor::skip_ws()>
+         : 801   bool eof() const noexcept { return ptr >= end; }
+    0.00 :   11f7f:  mov    -0x1c0(%rbp),%rax
+         : 803   if (eof() || *ptr != c) {
+    1.46 :   11f86:  cmp    %r9,%rax
+    0.42 :   11f89:  jae    121b3 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xcd3>
+    0.00 :   11f8f:  cmpb   $0x5d,(%rax)
+    2.29 :   11f92:  jne    121b3 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xcd3>
+         : 808   ++ptr;
+    0.00 :   11f98:  inc    %rax
+         :
+         : 811   [[nodiscard]] const_pointer inline_data() const noexcept {
+         : 812   return reinterpret_cast<const_pointer>(inline_storage_.data());
+         : 813   }
+         :
+         : 815   [[nodiscard]] bool using_inline_storage() const noexcept { return data_ == inline_data(); }
+    0.21 :   11f9b:  mov    -0x108(%rbp),%rdx
+         : 817   }
+         : 818   }
+         :
+         : 820   void move_from(arena_vector&& other) {
+         : 821   if (other.using_inline_storage()) {
+         : 822   reserve(other.size_);
+    0.21 :   11fa2:  mov    -0x100(%rbp),%r12
+    0.00 :   11fa9:  mov    %rax,-0x1c0(%rbp)
+         : 825   : allocator_(other.allocator_), data_(inline_data()), size_(0), capacity_(InlineCapacity) {
+    0.00 :   11fb0:  mov    -0x110(%rbp),%rax
+    0.00 :   11fb7:  lea    -0x160(%rbp),%r13
+    0.00 :   11fbe:  movq   $0x0,-0x170(%rbp)
+    0.62 :   11fc9:  mov    $0x8,%ecx
+    0.00 :   11fce:  mov    %r13,-0x178(%rbp)
+    0.21 :   11fd5:  movq   $0x8,-0x168(%rbp)
+    0.00 :   11fe0:  mov    %r13,%rdi
+    0.00 :   11fe3:  mov    %rax,-0x180(%rbp)
+    0.00 :   11fea:  xor    %eax,%eax
+    2.91 :   11fec:  rep stos %rax,%es:(%rdi)
+         : 836   if (other.using_inline_storage()) {
+    0.00 :   11fef:  cmp    %rbx,%rdx
+    0.00 :   11ff2:  je     12d97 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x18b7>
+         : 839   return;
+         : 840   }
+         :
+         : 842   data_ = other.data_;
+         : 843   size_ = other.size_;
+         : 844   capacity_ = other.capacity_;
+    0.00 :   11ff8:  mov    -0xf8(%rbp),%rax
+         : 846   data_ = other.data_;
+    0.00 :   11fff:  mov    %rdx,-0x178(%rbp)
+         : 848   size_ = other.size_;
+    0.00 :   12006:  mov    %r12,-0x170(%rbp)
+         : 850   _M_engaged(true)
+    0.00 :   1200d:  movb   $0x1,-0x120(%rbp)
+         : 852   capacity_ = other.capacity_;
+    0.00 :   12014:  mov    %rax,-0x168(%rbp)
+         : 854   [[nodiscard]] size_type size() const noexcept { return size_; }
+    0.00 :   1201b:  mov    -0x170(%rbp),%rax
+         : 856   : _M_value(std::forward<_Args>(__args)...)
+    0.42 :   12022:  mov    $0xe,%ebx
+         : 858   // ============================================================
+         : 859   // Validation Functions
+         : 860   // ============================================================
+         :
+         : 862   [[nodiscard]] inline std::optional<validation_error> validate_compute_sum_request(const compute_sum_request& arr) {
+         : 863   if (arr.size() < 1) return validation_error{"", validation_error_code::array_too_small, 1};
+    0.00 :   12027:  test   %rax,%rax
+    0.83 :   1202a:  je     1239a <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xeba>
+    0.00 :   12030:  mov    $0xf,%ebx
+         : 867   if (arr.size() > 1024) return validation_error{"", validation_error_code::array_too_large, 1024};
+    0.00 :   12035:  cmp    $0x400,%rax
+    0.00 :   1203b:  ja     1239a <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xeba>
+         : 870   // RAII scope guard for setting context
+         : 871   // Automatically sets and clears thread-local context
+         : 872   class scope {
+         : 873   public:
+         : 874   scope(const request& req, request_context& ctx)
+         : 875   : prev_request_(current_request_), prev_context_(current_context_) {
+    0.00 :   12041:  mov    0x1ff60(%rip),%r12        # 31fa8 <TLS init function for katana::http::handler_context::current_request_@Base>
+    0.42 :   12048:  test   %r12,%r12
+    0.00 :   1204b:  je     12052 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xb72>
+    0.00 :   1204d:  call   6680 <TLS init function for katana::http::handler_context::current_request_@plt>
+    0.00 :   12052:  mov    0x1ff47(%rip),%rbx        # 31fa0 <TLS init function for katana::http::handler_context::current_context_@Base>
+    0.42 :   12059:  mov    %fs:0xffffffffffffffc0,%r13
+    0.62 :   12062:  test   %rbx,%rbx
+    0.00 :   12065:  je     1206c <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xb8c>
+    0.00 :   12067:  call   6670 <TLS init function for katana::http::handler_context::current_context_@plt>
+    0.00 :   1206c:  mov    %fs:0xffffffffffffffb8,%rax
+    0.00 :   12075:  mov    %rax,-0x218(%rbp)
+         : 887   current_request_ = &req;
+    0.00 :   1207c:  test   %r12,%r12
+    0.00 :   1207f:  je     12086 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xba6>
+    0.00 :   12081:  call   6680 <TLS init function for katana::http::handler_context::current_request_@plt>
+    0.00 :   12086:  mov    %r15,%fs:0xffffffffffffffc0
+         : 892   current_context_ = &ctx;
+    0.62 :   1208f:  test   %rbx,%rbx
+    0.00 :   12092:  je     12099 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xbb9>
+    0.00 :   12094:  call   6670 <TLS init function for katana::http::handler_context::current_context_@plt>
+    0.00 :   12099:  mov    -0x208(%rbp),%rax
+         : 897   auto handler_result = handler.compute_sum(*parsed_body, out);
+    0.00 :   120a0:  lea    -0x180(%rbp),%rdx
+    0.00 :   120a7:  mov    %rax,%fs:0xffffffffffffffb8
+    0.42 :   120b0:  mov    -0x210(%rbp),%rsi
+    0.00 :   120b7:  mov    -0x1f8(%rbp),%rcx
+    0.00 :   120be:  mov    -0x200(%rbp),%rdi
+    0.00 :   120c5:  mov    (%rsi),%rax
+    0.62 :   120c8:  call   *0x10(%rax)
+         : 905   if (!handler_result) {
+    0.21 :   120cb:  cmpb   $0x0,-0x1b0(%rbp)
+    0.21 :   120d2:  jne    1266d <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x118d>
+         : 908   template<typename _Gr = _Er>
+         : 909   requires is_constructible_v<_Er, _Gr>
+         : 910   constexpr explicit(!is_convertible_v<_Gr, _Er>)
+         : 911   expected(unexpected<_Gr>&& __u)
+         : 912   noexcept(is_nothrow_constructible_v<_Er, _Gr>)
+         : 913   : _M_unex(std::move(__u).error()), _M_has_value(false)
+    0.00 :   120d8:  vmovdqa -0x1c0(%rbp),%xmm7
+    0.00 :   120e0:  movb   $0x0,0x10(%r14)
+    0.00 :   120e5:  vmovdqu %xmm7,(%r14)
+         : 917   }
+         :
+         : 919   ~scope() {
+         : 920   current_request_ = prev_request_;
+    0.00 :   120ea:  test   %r12,%r12
+    0.21 :   120ed:  je     120f4 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xc14>
+    0.00 :   120ef:  call   6680 <TLS init function for katana::http::handler_context::current_request_@plt>
+    0.00 :   120f4:  mov    %r13,%fs:0xffffffffffffffc0
+         : 925   current_context_ = prev_context_;
+    0.00 :   120fd:  test   %rbx,%rbx
+    0.00 :   12100:  je     12107 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xc27>
+    0.00 :   12102:  call   6670 <TLS init function for katana::http::handler_context::current_context_@plt>
+    0.21 :   12107:  mov    -0x218(%rbp),%rax
+    0.00 :   1210e:  mov    %rax,%fs:0xffffffffffffffb8
+         : 931   if (this->_M_engaged)
+    0.00 :   12117:  cmpb   $0x0,-0x120(%rbp)
+    0.21 :   1211e:  je     11b4f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x66f>
+         : 934   [[nodiscard]] bool using_inline_storage() const noexcept { return data_ == inline_data(); }
+    0.21 :   12124:  mov    -0x178(%rbp),%rdi
+         : 936   if (!using_inline_storage()) {
+    0.00 :   1212b:  lea    -0x160(%rbp),%rax
+         : 938   _M_engaged = false;
+    0.00 :   12132:  movb   $0x0,-0x120(%rbp)
+         : 940   size_ = 0;
+    0.00 :   12139:  movq   $0x0,-0x170(%rbp)
+         : 942   if (!using_inline_storage()) {
+    0.00 :   12144:  cmp    %rax,%rdi
+    0.00 :   12147:  je     11b4f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x66f>
+         : 945   if (!arena_ && ptr) {
+    0.00 :   1214d:  cmpq   $0x0,-0x180(%rbp)
+    0.00 :   12155:  jne    11b4f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x66f>
+    0.00 :   1215b:  test   %rdi,%rdi
+    0.00 :   1215e:  je     11b4f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x66f>
+         : 950   ::operator delete(ptr);
+    0.00 :   12164:  call   6940 <operator delete(void*)@plt>
+         : 952   class optional
+    0.00 :   12169:  jmp    11b4f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x66f>
+    0.00 :   1216e:  xchg   %ax,%ax
+         : 955   _Optional_payload_base() = default;
+    0.00 :   12170:  movb   $0x0,-0x120(%rbp)
+         : 957   out.assign_error(katana::problem_details::bad_request("invalid request body")); return {};
+    0.00 :   12177:  lea    -0x110(%rbp),%rbx
+    0.00 :   1217e:  lea    0x1715f(%rip),%rdx        # 292e4 <_IO_stdin_used+0x2e4>
+    0.00 :   12185:  mov    $0x14,%esi
+    0.00 :   1218a:  mov    %rbx,%rdi
+    0.00 :   1218d:  call   e710 <katana::problem_details::bad_request(std::basic_string_view<char, std::char_traits<char> >)>
+    0.00 :   12192:  mov    -0x1f8(%rbp),%rdi
+    0.00 :   12199:  mov    %rbx,%rsi
+    0.00 :   1219c:  call   fa48 <katana::http::response::assign_error(katana::problem_details const&)>
+    0.00 :   121a1:  mov    %rbx,%rdi
+    0.00 :   121a4:  call   ba20 <katana::problem_details::~problem_details() [clone .lto_priv.0]>
+         : 968   : _M_void(), _M_has_value(true)
+    0.00 :   121a9:  movb   $0x1,0x10(%r14)
+         : 970   { }
+    0.00 :   121ae:  jmp    12117 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xc37>
+         : 972   return std::nullopt;
+         : 973   return static_cast<int64_t>(val);
+         : 974   }
+         :
+         : 976   inline std::optional<double> parse_double(json_cursor& cur) noexcept {
+         : 977   cur.skip_ws();
+    0.00 :   121b3:  mov    -0x200(%rbp),%rdi
+    1.66 :   121ba:  call   ad30 <katana::serde::json_cursor::skip_ws()>
+         : 980   bool eof() const noexcept { return ptr >= end; }
+    0.00 :   121bf:  mov    -0x1c0(%rbp),%rax
+         : 982   if (cur.eof()) {
+    0.42 :   121c6:  cmp    %r9,%rax
+    0.42 :   121c9:  jae    124f4 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1014>
+         : 985   return std::nullopt;
+         : 986   }
+         : 987   if (*cur.ptr == '\"') {
+    0.00 :   121cf:  cmpb   $0x22,(%rax)
+    2.08 :   121d2:  je     12487 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xfa7>
+         : 990   if (ec != std::errc() || parsed_end == start) {
+         : 991   return std::nullopt;
+         : 992   }
+         : 993   cur.ptr = parsed_end;
+         : 994   return v;
+         : 995   };
+    0.00 :   121d8:  vmovdqa -0x230(%rbp),%xmm6
+         : 997   const char* start = cur.ptr;
+    0.42 :   121e0:  mov    %rax,-0x1e8(%rbp)
+         : 999   };
+    0.21 :   121e7:  vmovdqa %xmm6,-0x1e0(%rbp)
+         :
+         : 1002  const char* p = start;
+         : 1003  bool negative = false;
+         :
+         : 1005  if (*p == '-' || *p == '+') {
+    0.00 :   121ef:  movzbl (%rax),%edx
+    0.00 :   121f2:  lea    -0x2b(%rdx),%ecx
+    0.42 :   121f5:  and    $0xfd,%ecx
+    0.83 :   121fb:  jne    129e3 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1503>
+         : 1010  negative = (*p == '-');
+         : 1011  ++p;
+    0.00 :   12201:  inc    %rax
+         : 1013  if (p >= cur.end) {
+    0.00 :   12204:  cmp    %r9,%rax
+    0.00 :   12207:  jae    124f4 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1014>
+         : 1016  if (*p == '-' || *p == '+') {
+    0.00 :   1220d:  cmp    $0x2d,%dl
+    0.00 :   12210:  sete   %r13b
+         : 1019  int digits = 0;
+         : 1020  int frac_digits = 0;
+         : 1021  bool seen_digit = false;
+         : 1022  bool seen_dot = false;
+         :
+         : 1024  while (p < cur.end) {
+    0.00 :   12214:  inc    %rax
+         : 1026  bool seen_digit = false;
+    0.42 :   12217:  xor    %r12d,%r12d
+         : 1028  bool seen_dot = false;
+    0.00 :   1221a:  xor    %r10d,%r10d
+         : 1030  int frac_digits = 0;
+    0.00 :   1221d:  xor    %edi,%edi
+         : 1032  uint64_t mantissa = 0;
+    0.00 :   1221f:  xor    %edx,%edx
+         : 1034  int digits = 0;
+    0.00 :   12221:  xor    %r11d,%r11d
+         : 1036  const unsigned char ch = static_cast<unsigned char>(*p);
+    0.42 :   12224:  movzbl -0x1(%rax),%esi
+    2.49 :   12228:  mov    %rax,%rcx
+    0.00 :   1222b:  mov    %esi,%r8d
+         : 1040  const unsigned digit = static_cast<unsigned>(ch - '0');
+    0.00 :   1222e:  sub    $0x30,%esi
+         : 1042  if (digit <= 9u) {
+    1.25 :   12231:  cmp    $0x9,%esi
+    1.04 :   12234:  ja     129b8 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x14d8>
+         : 1045  seen_digit = true;
+         : 1046  // Keep a small exact mantissa fast path; larger/longer numbers fallback.
+         : 1047  if (digits >= 15) {
+    0.00 :   1223a:  cmp    $0xe,%r11d
+    0.00 :   1223e:  jg     129eb <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x150b>
+         : 1050  return fallback_from_chars();
+         : 1051  }
+         : 1052  mantissa = mantissa * 10u + digit;
+    0.21 :   12244:  lea    (%rdx,%rdx,4),%rdx
+    0.00 :   12248:  movslq %esi,%rsi
+         : 1055  ++digits;
+    1.04 :   1224b:  inc    %r11d
+         : 1057  if (seen_dot) {
+         : 1058  ++frac_digits;
+    0.00 :   1224e:  cmp    $0x1,%r10b
+         : 1060  mantissa = mantissa * 10u + digit;
+    0.21 :   12252:  lea    (%rsi,%rdx,2),%rdx
+         : 1062  ++frac_digits;
+    1.66 :   12256:  sbb    $0xffffffff,%edi
+         : 1064  seen_digit = true;
+    0.21 :   12259:  mov    $0x1,%r12d
+         : 1066  while (p < cur.end) {
+    0.00 :   1225f:  inc    %rax
+    0.00 :   12262:  cmp    %r9,%rcx
+    0.00 :   12265:  jb     12224 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xd44>
+         : 1070  continue;
+         : 1071  }
+         : 1072  break;
+         : 1073  }
+         :
+         : 1075  if (!seen_digit) {
+    0.21 :   12267:  test   %r12b,%r12b
+    0.83 :   1226a:  je     124f4 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1014>
+         : 1078  return std::nullopt;
+         : 1079  }
+         :
+         : 1081  if (seen_dot && frac_digits == 0) {
+    0.00 :   12270:  test   %edi,%edi
+    0.00 :   12272:  sete   %sil
+    0.83 :   12276:  and    %r10b,%sil
+    0.42 :   12279:  jne    129eb <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x150b>
+         : 1086  return fallback_from_chars();
+         : 1087  }
+         :
+         : 1089  int exp10 = 0;
+         : 1090  if (p < cur.end && (*p == 'e' || *p == 'E')) {
+    0.00 :   1227f:  cmp    %r9,%rcx
+    0.00 :   12282:  jae    132f6 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1e16>
+    0.00 :   12288:  movzbl (%rcx),%eax
+    1.66 :   1228b:  and    $0xffffffdf,%eax
+    0.21 :   1228e:  cmp    $0x45,%al
+    0.62 :   12290:  jne    132f6 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1e16>
+         : 1097  const char* exp_ptr = p + 1;
+    0.00 :   12296:  lea    0x1(%rcx),%rax
+         : 1099  bool exp_negative = false;
+         : 1100  if (exp_ptr < cur.end && (*exp_ptr == '+' || *exp_ptr == '-')) {
+    0.00 :   1229a:  cmp    %r9,%rax
+    0.00 :   1229d:  jae    129eb <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x150b>
+    0.00 :   122a3:  movzbl 0x1(%rcx),%r8d
+    0.00 :   122a8:  lea    -0x2b(%r8),%r10d
+    0.00 :   122ac:  and    $0xfd,%r10b
+    0.00 :   122b0:  jne    1373f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x225f>
+    0.00 :   122b6:  cmp    $0x2d,%r8b
+    0.00 :   122ba:  sete   %sil
+         : 1109  exp_negative = (*exp_ptr == '-');
+         : 1110  ++exp_ptr;
+    0.00 :   122be:  add    $0x2,%rcx
+         : 1112  }
+         : 1113  if (exp_ptr >= cur.end ||
+    0.00 :   122c2:  cmp    %r9,%rcx
+    0.00 :   122c5:  jae    129eb <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x150b>
+         : 1116  static_cast<unsigned>(static_cast<unsigned char>(*exp_ptr) - '0') > 9u) {
+    0.00 :   122cb:  movzbl (%rcx),%eax
+    0.00 :   122ce:  sub    $0x30,%eax
+         : 1119  if (exp_ptr >= cur.end ||
+    0.00 :   122d1:  cmp    $0x9,%eax
+    0.00 :   122d4:  ja     129eb <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x150b>
+         : 1122  return fallback_from_chars();
+         : 1123  }
+         :
+         : 1125  int exp_value = 0;
+    0.00 :   122da:  xor    %eax,%eax
+    0.00 :   122dc:  jmp    122f6 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xe16>
+         : 1128  while (exp_ptr < cur.end) {
+         : 1129  const unsigned d = static_cast<unsigned>(static_cast<unsigned char>(*exp_ptr) - '0');
+         : 1130  if (d > 9u) {
+         : 1131  break;
+         : 1132  }
+         : 1133  if (exp_value > 100) {
+    0.00 :   122de:  cmp    $0x64,%eax
+    0.00 :   122e1:  jg     129eb <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x150b>
+         : 1136  return fallback_from_chars();
+         : 1137  }
+         : 1138  exp_value = exp_value * 10 + static_cast<int>(d);
+    0.00 :   122e7:  lea    (%rax,%rax,4),%eax
+         : 1140  ++exp_ptr;
+    0.00 :   122ea:  inc    %rcx
+         : 1142  exp_value = exp_value * 10 + static_cast<int>(d);
+    0.00 :   122ed:  lea    (%r8,%rax,2),%eax
+         : 1144  while (exp_ptr < cur.end) {
+    0.00 :   122f1:  cmp    %r9,%rcx
+    0.00 :   122f4:  je     12304 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xe24>
+         : 1147  const unsigned d = static_cast<unsigned>(static_cast<unsigned char>(*exp_ptr) - '0');
+    0.00 :   122f6:  movzbl (%rcx),%r8d
+    0.00 :   122fa:  sub    $0x30,%r8d
+         : 1150  if (d > 9u) {
+    0.00 :   122fe:  cmp    $0x9,%r8d
+    0.00 :   12302:  jbe    122de <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xdfe>
+         : 1153  }
+         : 1154  exp10 = exp_negative ? -exp_value : exp_value;
+    0.00 :   12304:  test   %sil,%sil
+    0.00 :   12307:  je     1230b <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xe2b>
+    0.00 :   12309:  neg    %eax
+         : 1158  1e-15,
+         : 1159  1e-16,
+         : 1160  1e-17,
+         : 1161  1e-18};
+         :
+         : 1163  double value = static_cast<double>(mantissa);
+    0.00 :   1230b:  test   %rdx,%rdx
+    0.00 :   1230e:  js     13719 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2239>
+    0.00 :   12314:  vxorpd %xmm6,%xmm6,%xmm6
+    0.00 :   12318:  vcvtsi2sd %rdx,%xmm6,%xmm0
+    0.00 :   1231d:  vmovsd %xmm0,-0x218(%rbp)
+         : 1169  if (frac_digits > 0) {
+    0.00 :   12325:  test   %edi,%edi
+    0.00 :   12327:  jle    12348 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xe68>
+         : 1172  value *= pow10_neg[frac_digits];
+    0.00 :   12329:  vmovsd -0x218(%rbp),%xmm4
+    0.00 :   12331:  movslq %edi,%rdi
+    0.00 :   12334:  lea    0x195c5(%rip),%rdx        # 2b900 <katana::serde::parse_double(katana::serde::json_cursor&)::pow10_neg>
+    0.00 :   1233b:  vmulsd (%rdx,%rdi,8),%xmm4,%xmm3
+    0.00 :   12340:  vmovsd %xmm3,-0x218(%rbp)
+         : 1178  }
+         : 1179  if (exp10 != 0) {
+    0.00 :   12348:  test   %eax,%eax
+    0.00 :   1234a:  je     13333 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1e53>
+         : 1182  if (exp10 >= -18 && exp10 <= 18) {
+    0.00 :   12350:  lea    0x12(%rax),%edx
+    0.00 :   12353:  cmp    $0x24,%edx
+    0.00 :   12356:  ja     129eb <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x150b>
+         : 1186  value *= (exp10 > 0) ? pow10_pos[exp10] : pow10_neg[-exp10];
+    0.00 :   1235c:  test   %eax,%eax
+    0.00 :   1235e:  jle    13704 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2224>
+    0.00 :   12364:  cltq
+    0.00 :   12366:  lea    0x194f3(%rip),%rdx        # 2b860 <katana::serde::parse_double(katana::serde::json_cursor&)::pow10_pos>
+    0.00 :   1236d:  vmovsd (%rdx,%rax,8),%xmm0
+    0.00 :   12372:  vmulsd -0x218(%rbp),%xmm0,%xmm5
+    0.00 :   1237a:  vmovsd %xmm5,-0x218(%rbp)
+    0.00 :   12382:  jmp    13333 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1e53>
+    0.00 :   12387:  nop
+         : 1196  for (auto& entry : chunk->entries) {
+    0.00 :   12388:  add    $0x30,%rax
+         : 1198  if (!entry) {
+    0.00 :   1238c:  jmp    11b80 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x6a0>
+         : 1200  for (auto& entry : chunk->entries) {
+    0.00 :   12391:  add    $0x48,%rax
+         : 1202  if (!entry) {
+    0.00 :   12395:  jmp    11b80 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x6a0>
+         : 1204  : allocator_type(std::move(__a)), _M_p(__dat) { }
+    0.00 :   1239a:  lea    -0x190(%rbp),%rax
+         : 1206  { _M_string_length = __length; }
+    0.00 :   123a1:  movq   $0x0,-0x198(%rbp)
+         : 1208  std::string_view field;        // Field that failed validation
+         : 1209  validation_error_code code;    // Error code (type-safe)
+         : 1210  double constraint_value = 0.0; // Optional: constraint value for context (min/max/etc)
+         :
+         : 1212  [[nodiscard]] constexpr std::string_view message() const noexcept {
+         : 1213  return validation_error_message(code);
+    0.00 :   123ac:  mov    %ebx,%edi
+         : 1215  : allocator_type(std::move(__a)), _M_p(__dat) { }
+    0.00 :   123ae:  mov    %rax,-0x1a0(%rbp)
+         : 1217  __c1 = __c2;
+    0.00 :   123b5:  movb   $0x0,-0x190(%rbp)
+    0.00 :   123bc:  call   a4b8 <katana::validation_error_message(katana::validation_error_code)>
+    0.00 :   123c1:  lea    -0x1a0(%rbp),%r12
+         : 1221  }
+         :
+         : 1223  inline void format_validation_error_into(katana::http::response& out,
+         : 1224  const katana::validation_error& err) {
+         : 1225  std::string error_msg;
+         : 1226  error_msg.reserve(err.field.size() + err.message().size() + 2);
+    0.00 :   123c8:  lea    0x2(%rax),%rsi
+    0.00 :   123cc:  mov    %r12,%rdi
+    0.00 :   123cf:  call   bca0 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::reserve(unsigned long)>
+         : 1230  return this->append(__sv.data(), __sv.size());
+    0.00 :   123d4:  xor    %edx,%edx
+    0.00 :   123d6:  lea    0x17041(%rip),%rsi        # 2941e <_IO_stdin_used+0x41e>
+    0.00 :   123dd:  mov    %r12,%rdi
+    0.00 :   123e0:  call   27ee0 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .isra.0]>
+         : 1235  error_msg.append(err.field);
+         : 1236  error_msg.append(": ");
+    0.00 :   123e5:  lea    0x17019(%rip),%rsi        # 29405 <_IO_stdin_used+0x405>
+    0.00 :   123ec:  mov    %r12,%rdi
+    0.00 :   123ef:  call   27e20 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*) [clone .isra.0]>
+    0.00 :   123f4:  mov    %ebx,%edi
+    0.00 :   123f6:  call   a4b8 <katana::validation_error_message(katana::validation_error_code)>
+    0.00 :   123fb:  mov    %r12,%rdi
+    0.00 :   123fe:  mov    %rdx,%rsi
+    0.00 :   12401:  mov    %rax,%rdx
+    0.00 :   12404:  call   27ee0 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) [clone .isra.0]>
+         : 1246  error_msg.append(err.message());
+         : 1247  out.assign_error(katana::problem_details::bad_request(std::move(error_msg)));
+    0.00 :   12409:  mov    -0x198(%rbp),%rsi
+    0.00 :   12410:  lea    -0x110(%rbp),%rbx
+    0.00 :   12417:  mov    -0x1a0(%rbp),%rdx
+    0.00 :   1241e:  mov    %rbx,%rdi
+    0.00 :   12421:  call   e710 <katana::problem_details::bad_request(std::basic_string_view<char, std::char_traits<char> >)>
+    0.00 :   12426:  mov    -0x1f8(%rbp),%rdi
+    0.00 :   1242d:  mov    %rbx,%rsi
+    0.00 :   12430:  call   fa48 <katana::http::response::assign_error(katana::problem_details const&)>
+    0.00 :   12435:  mov    %rbx,%rdi
+    0.00 :   12438:  call   ba20 <katana::problem_details::~problem_details() [clone .lto_priv.0]>
+         : 1258  { _M_dispose(); }
+    0.00 :   1243d:  mov    %r12,%rdi
+    0.00 :   12440:  call   b9f0 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()>
+         : 1261  : _M_void(), _M_has_value(true)
+    0.00 :   12445:  movb   $0x1,0x10(%r14)
+    0.00 :   1244a:  jmp    12117 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xc37>
+         : 1264  for (auto& entry : chunk->entries) {
+    0.00 :   1244f:  add    $0x60,%rax
+         : 1266  if (!entry) {
+    0.00 :   12453:  jmp    11b80 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x6a0>
+         : 1268  for (auto& entry : chunk->entries) {
+    0.00 :   12458:  lea    0x18(%rax),%r12
+         : 1270  if (!entry) {
+    0.00 :   1245c:  jmp    11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+         : 1272  for (auto& entry : chunk->entries) {
+    0.00 :   12461:  add    $0x78,%rax
+         : 1274  if (!entry) {
+    0.00 :   12465:  jmp    11b80 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x6a0>
+         : 1276  for (auto& entry : chunk->entries) {
+    0.00 :   1246a:  lea    0x30(%rax),%r12
+         : 1278  if (!entry) {
+    0.00 :   1246e:  jmp    11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+         : 1280  for (auto& entry : chunk->entries) {
+    0.00 :   12473:  add    $0x90,%rax
+         : 1282  if (!entry) {
+    0.00 :   12479:  jmp    11b80 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x6a0>
+         : 1284  for (auto& entry : chunk->entries) {
+    0.00 :   1247e:  lea    0x48(%rax),%r12
+         : 1286  if (!entry) {
+    0.00 :   12482:  jmp    11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+         : 1288  skip_ws();
+    0.00 :   12487:  mov    -0x200(%rbp),%rdi
+    0.00 :   1248e:  call   ad30 <katana::serde::json_cursor::skip_ws()>
+         : 1291  bool eof() const noexcept { return ptr >= end; }
+    0.00 :   12493:  mov    -0x1c0(%rbp),%rax
+         : 1293  if (eof() || *ptr != '\"') {
+    0.00 :   1249a:  cmp    %r9,%rax
+    0.00 :   1249d:  jae    124f4 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1014>
+    0.00 :   1249f:  cmpb   $0x22,(%rax)
+    0.00 :   124a2:  jne    124f4 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1014>
+         : 1298  ++ptr;
+    0.00 :   124a4:  lea    0x1(%rax),%rdi
+    0.00 :   124a8:  mov    %rdi,-0x1c0(%rbp)
+         : 1301  bool eof() const noexcept { return ptr >= end; }
+    0.00 :   124af:  mov    %rdi,%rsi
+         : 1303  while (!eof() && *ptr != '\"') {
+    0.00 :   124b2:  cmp    %r9,%rdi
+    0.00 :   124b5:  jb     124cf <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xfef>
+    0.00 :   124b7:  jmp    124f4 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1014>
+    0.00 :   124b9:  nopl   0x0(%rax)
+         : 1308  ++ptr;
+    0.00 :   124c0:  mov    %rax,%rsi
+    0.00 :   124c3:  mov    %rsi,-0x1c0(%rbp)
+         : 1311  while (!eof() && *ptr != '\"') {
+    0.00 :   124ca:  cmp    %r9,%rsi
+    0.00 :   124cd:  jae    124f4 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1014>
+    0.00 :   124cf:  movzbl (%rsi),%edx
+    0.00 :   124d2:  cmp    $0x22,%dl
+    0.00 :   124d5:  je     13572 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2092>
+         : 1317  if (*ptr == '\\' && (ptr + 1) < end) {
+    0.00 :   124db:  lea    0x1(%rsi),%rax
+    0.00 :   124df:  cmp    $0x5c,%dl
+    0.00 :   124e2:  jne    124c0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xfe0>
+    0.00 :   124e4:  cmp    %r9,%rax
+    0.00 :   124e7:  jb     135e3 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2103>
+    0.00 :   124ed:  mov    %rax,-0x1c0(%rbp)
+         : 1324  skip_ws();
+    0.00 :   124f4:  mov    -0x200(%rbp),%rdi
+    0.00 :   124fb:  call   ad30 <katana::serde::json_cursor::skip_ws()>
+         : 1327  bool eof() const noexcept { return ptr >= end; }
+    0.00 :   12500:  mov    -0x1c0(%rbp),%rax
+    0.00 :   12507:  mov    -0x1b8(%rbp),%r9
+         : 1330  if (eof())
+    0.00 :   1250e:  cmp    %r9,%rax
+    0.00 :   12511:  jae    12551 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1071>
+         : 1333  char ch = *ptr;
+    0.00 :   12513:  movzbl (%rax),%edi
+         : 1335  if (ch == '{' || ch == '[') {
+    0.00 :   12516:  mov    %edi,%edx
+    0.00 :   12518:  and    $0xffffffdf,%edx
+    0.00 :   1251b:  cmp    $0x5b,%dl
+    0.00 :   1251e:  je     12cdf <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x17ff>
+         : 1340  if (ch == '\"') {
+    0.00 :   12524:  cmp    $0x22,%dil
+    0.00 :   12528:  jne    12544 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1064>
+    0.00 :   1252a:  jmp    1349a <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1fba>
+    0.00 :   1252f:  nop
+         : 1345  while (!eof() && *ptr != ',' && *ptr != '}' && *ptr != ']') {
+    0.00 :   12530:  cmp    $0x2c,%dl
+    0.00 :   12533:  je     12551 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1071>
+         : 1348  ++ptr;
+    0.00 :   12535:  inc    %rax
+    0.00 :   12538:  mov    %rax,-0x1c0(%rbp)
+         : 1351  while (!eof() && *ptr != ',' && *ptr != '}' && *ptr != ']') {
+    0.00 :   1253f:  cmp    %rax,%r9
+    0.00 :   12542:  je     12551 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1071>
+    0.00 :   12544:  movzbl (%rax),%edx
+    0.00 :   12547:  mov    %edx,%ecx
+    0.00 :   12549:  and    $0xffffffdf,%ecx
+    0.00 :   1254c:  cmp    $0x5d,%cl
+    0.00 :   1254f:  jne    12530 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1050>
+         : 1359  skip_ws();
+    0.00 :   12551:  mov    -0x200(%rbp),%rdi
+    0.62 :   12558:  call   ad30 <katana::serde::json_cursor::skip_ws()>
+         : 1362  bool eof() const noexcept { return ptr >= end; }
+    0.21 :   1255d:  mov    -0x1c0(%rbp),%rax
+         : 1364  if (eof() || *ptr != c) {
+    0.00 :   12564:  cmp    %r9,%rax
+    0.00 :   12567:  jae    12585 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x10a5>
+    0.00 :   12569:  cmpb   $0x2c,(%rax)
+    1.66 :   1256c:  jne    11f68 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xa88>
+         : 1369  ++ptr;
+    0.00 :   12572:  inc    %rax
+    0.62 :   12575:  mov    %rax,-0x1c0(%rbp)
+         : 1372  while (!cur.eof()) {
+    0.00 :   1257c:  cmp    %r9,%rax
+    0.00 :   1257f:  jb     11f68 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xa88>
+         : 1375  [[nodiscard]] bool using_inline_storage() const noexcept { return data_ == inline_data(); }
+    0.00 :   12585:  mov    -0x108(%rbp),%rdx
+         : 1377  reserve(other.size_);
+    0.00 :   1258c:  mov    -0x100(%rbp),%r12
+    0.00 :   12593:  jmp    11fb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xad0>
+         : 1380  for (auto& entry : chunk->entries) {
+    0.00 :   12598:  add    $0xa8,%rax
+         : 1382  if (!entry) {
+    0.00 :   1259e:  jmp    11b80 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x6a0>
+         : 1384  for (auto& entry : chunk->entries) {
+    0.00 :   125a3:  lea    0x60(%rax),%r12
+         : 1386  if (!entry) {
+    0.00 :   125a7:  jmp    11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+         : 1388  for (auto& entry : chunk->entries) {
+    0.00 :   125ac:  add    $0xc0,%rax
+         : 1390  if (!entry) {
+    0.00 :   125b2:  jmp    11b80 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x6a0>
+         : 1392  for (auto& entry : chunk->entries) {
+    0.00 :   125b7:  lea    0x78(%rax),%r12
+         : 1394  if (!entry) {
+    0.00 :   125bb:  jmp    11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+         : 1396  for (auto& entry : chunk->entries) {
+    0.00 :   125c0:  add    $0xd8,%rax
+         : 1398  if (!entry) {
+    0.00 :   125c6:  jmp    11b80 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x6a0>
+         : 1400  for (auto& entry : chunk->entries) {
+    0.00 :   125cb:  lea    0x90(%rax),%r12
+         : 1402  if (!entry) {
+    0.00 :   125d2:  jmp    11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+         : 1404  for (auto& entry : chunk->entries) {
+    0.00 :   125d7:  add    $0xf0,%rax
+         : 1406  if (!entry) {
+    0.00 :   125dd:  jmp    11b80 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x6a0>
+         : 1408  for (auto& entry : chunk->entries) {
+    0.00 :   125e2:  lea    0xa8(%rax),%r12
+         : 1410  if (!entry) {
+    0.00 :   125e9:  jmp    11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+         : 1412  for (auto& entry : chunk->entries) {
+    0.00 :   125ee:  add    $0x108,%rax
+         : 1414  if (!entry) {
+    0.00 :   125f4:  jmp    11b80 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x6a0>
+         : 1416  for (auto& entry : chunk->entries) {
+    0.00 :   125f9:  lea    0xc0(%rax),%r12
+         : 1418  if (!entry) {
+    0.00 :   12600:  jmp    11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+         : 1420  for (auto& entry : chunk->entries) {
+    0.00 :   12605:  add    $0x120,%rax
+         : 1422  if (!entry) {
+    0.00 :   1260b:  jmp    11b80 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x6a0>
+         : 1424  for (auto& entry : chunk->entries) {
+    0.00 :   12610:  lea    0xd8(%rax),%r12
+         : 1426  if (!entry) {
+    0.00 :   12617:  jmp    11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+         : 1428  for (auto& entry : chunk->entries) {
+    0.00 :   1261c:  add    $0x138,%rax
+         : 1430  if (!entry) {
+    0.00 :   12622:  jmp    11b80 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x6a0>
+         : 1432  for (auto& entry : chunk->entries) {
+    0.00 :   12627:  lea    0xf0(%rax),%r12
+         : 1434  if (!entry) {
+    0.00 :   1262e:  jmp    11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+         : 1436  for (auto& entry : chunk->entries) {
+    0.00 :   12633:  add    $0x150,%rax
+         : 1438  if (!entry) {
+    0.00 :   12639:  jmp    11b80 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x6a0>
+         : 1440  for (auto& entry : chunk->entries) {
+    0.00 :   1263e:  lea    0x108(%rax),%r12
+         : 1442  if (!entry) {
+    0.00 :   12645:  jmp    11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+         : 1444  for (auto& entry : chunk->entries) {
+    0.00 :   1264a:  lea    0x120(%rax),%r12
+         : 1446  if (!entry) {
+    0.00 :   12651:  jmp    11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+         : 1448  for (auto& entry : chunk->entries) {
+    0.00 :   12656:  add    $0x168,%rax
+         : 1450  if (!entry) {
+    0.00 :   1265c:  jmp    11b80 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x6a0>
+         : 1452  for (auto& entry : chunk->entries) {
+    0.00 :   12661:  lea    0x138(%rax),%r12
+         : 1454  if (!entry) {
+    0.00 :   12668:  jmp    11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+         : 1456  if (out.status != 204 && !out.body.empty() && !out.headers.get(katana::http::field::content_type)) {
+    0.00 :   1266d:  mov    -0x1f8(%rbp),%rax
+    0.62 :   12674:  cmpl   $0xcc,(%rax)
+    0.62 :   1267a:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   12680:  cmpq   $0x0,0x608(%rax)
+    0.00 :   12688:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+         : 1462  if (entry.key == f) {
+    0.21 :   1268e:  cmpw   $0x4e,0x360(%rax)
+    0.00 :   12696:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   1269c:  cmpw   $0x4e,0x378(%rax)
+    0.00 :   126a4:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   126aa:  cmpw   $0x4e,0x390(%rax)
+    0.00 :   126b2:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   126b8:  cmpw   $0x4e,0x3a8(%rax)
+    0.00 :   126c0:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   126c6:  cmpw   $0x4e,0x3c0(%rax)
+    0.00 :   126ce:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   126d4:  cmpw   $0x4e,0x3d8(%rax)
+    0.00 :   126dc:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   126e2:  cmpw   $0x4e,0x3f0(%rax)
+    0.00 :   126ea:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   126f0:  cmpw   $0x4e,0x408(%rax)
+    0.00 :   126f8:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   126fe:  cmpw   $0x4e,0x420(%rax)
+    0.00 :   12706:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   1270c:  cmpw   $0x4e,0x438(%rax)
+    0.00 :   12714:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   1271a:  cmpw   $0x4e,0x450(%rax)
+    0.00 :   12722:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   12728:  cmpw   $0x4e,0x468(%rax)
+    0.00 :   12730:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   12736:  cmpw   $0x4e,0x480(%rax)
+    0.00 :   1273e:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   12744:  cmpw   $0x4e,0x498(%rax)
+    0.00 :   1274c:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   12752:  cmpw   $0x4e,0x4b0(%rax)
+    0.00 :   1275a:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   12760:  cmpw   $0x4e,0x4c8(%rax)
+    0.00 :   12768:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   1276e:  mov    0x4e0(%rax),%rax
+         : 1496  for (auto* chunk = known_chunks_; chunk; chunk = chunk->next) {
+    0.00 :   12775:  test   %rax,%rax
+    0.00 :   12778:  je     1285b <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x137b>
+         : 1499  if (entry.key == f) {
+    0.00 :   1277e:  cmpw   $0x4e,(%rax)
+    0.00 :   12782:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   12788:  cmpw   $0x4e,0x18(%rax)
+    0.00 :   1278d:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   12793:  cmpw   $0x4e,0x30(%rax)
+    0.00 :   12798:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   1279e:  cmpw   $0x4e,0x48(%rax)
+    0.00 :   127a3:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   127a9:  cmpw   $0x4e,0x60(%rax)
+    0.00 :   127ae:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   127b4:  cmpw   $0x4e,0x78(%rax)
+    0.00 :   127b9:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   127bf:  cmpw   $0x4e,0x90(%rax)
+    0.00 :   127c7:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   127cd:  cmpw   $0x4e,0xa8(%rax)
+    0.00 :   127d5:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   127db:  cmpw   $0x4e,0xc0(%rax)
+    0.00 :   127e3:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   127e9:  cmpw   $0x4e,0xd8(%rax)
+    0.00 :   127f1:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   127f7:  cmpw   $0x4e,0xf0(%rax)
+    0.00 :   127ff:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   12805:  cmpw   $0x4e,0x108(%rax)
+    0.00 :   1280d:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   12813:  cmpw   $0x4e,0x120(%rax)
+    0.00 :   1281b:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   12821:  cmpw   $0x4e,0x138(%rax)
+    0.00 :   12829:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   1282f:  cmpw   $0x4e,0x150(%rax)
+    0.00 :   12837:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   1283d:  cmpw   $0x4e,0x168(%rax)
+    0.00 :   12845:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+         : 1532  for (auto* chunk = known_chunks_; chunk; chunk = chunk->next) {
+    0.00 :   1284b:  mov    0x180(%rax),%rax
+    0.00 :   12852:  test   %rax,%rax
+    0.00 :   12855:  jne    1277e <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x129e>
+    0.00 :   1285b:  mov    -0x1f8(%rbp),%r15
+         : 1537  field f = string_to_field(name);
+    0.00 :   12862:  lea    0x16a6e(%rip),%rsi        # 292d7 <_IO_stdin_used+0x2d7>
+    0.00 :   12869:  mov    $0xc,%edi
+    0.00 :   1286e:  lea    0x28(%r15),%rax
+    0.00 :   12872:  mov    %rax,-0x200(%rbp)
+    0.00 :   12879:  call   10cd0 <katana::http::string_to_field(std::basic_string_view<char, std::char_traits<char> >)>
+    0.00 :   1287e:  mov    %eax,%esi
+         : 1544  if (f == field::unknown) {
+    0.00 :   12880:  test   %ax,%ax
+    0.00 :   12883:  jne    13555 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2075>
+         : 1547  return arena_ ? arena_ : fallback_arena_;
+    0.00 :   12889:  mov    0x28(%r15),%r15
+    0.00 :   1288d:  test   %r15,%r15
+    0.00 :   12890:  je     136a9 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x21c9>
+         : 1551  char* ptr = static_cast<char*>(allocate(str.size() + 1, 1));
+    0.00 :   12896:  mov    $0x1,%edx
+    0.00 :   1289b:  mov    $0xd,%esi
+    0.00 :   128a0:  mov    %r15,%rdi
+    0.00 :   128a3:  call   cb98 <katana::monotonic_arena::allocate(unsigned long, unsigned long)>
+    0.00 :   128a8:  mov    %rax,%r9
+         : 1557  if (ptr) {
+    0.00 :   128ab:  test   %rax,%rax
+    0.00 :   128ae:  je     13516 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2036>
+         :
+         : 1561  __fortify_function void *
+         : 1562  __NTH (memcpy (void *__restrict __dest, const void *__restrict __src,
+         : 1563  size_t __len))
+         : 1564  {
+         : 1565  return __builtin___memcpy_chk (__dest, __src, __len,
+    0.00 :   128b4:  movabs $0x2d746e65746e6f43,%rax
+    0.00 :   128be:  movl   $0x65707954,0x8(%r9)
+         : 1568  char* ptr = static_cast<char*>(allocate(str.size() + 1, 1));
+    0.00 :   128c6:  mov    %r15,%rdi
+    0.00 :   128c9:  mov    $0x1,%edx
+    0.00 :   128ce:  mov    %rax,(%r9)
+         : 1572  ptr[str.size()] = '\0';
+    0.00 :   128d1:  movb   $0x0,0xc(%r9)
+         : 1574  char* ptr = static_cast<char*>(allocate(str.size() + 1, 1));
+    0.00 :   128d6:  mov    $0x11,%esi
+         : 1576  ptr[str.size()] = '\0';
+    0.00 :   128db:  mov    %r9,-0x208(%rbp)
+         : 1578  char* ptr = static_cast<char*>(allocate(str.size() + 1, 1));
+    0.00 :   128e2:  call   cb98 <katana::monotonic_arena::allocate(unsigned long, unsigned long)>
+         : 1580  if (ptr) {
+    0.00 :   128e7:  mov    -0x208(%rbp),%r9
+    0.00 :   128ee:  test   %rax,%rax
+         : 1583  char* ptr = static_cast<char*>(allocate(str.size() + 1, 1));
+    0.00 :   128f1:  mov    %rax,%r15
+         : 1585  if (ptr) {
+    0.00 :   128f4:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   128f6:  movabs $0x746163696c707061,%rax
+         : 1588  ptr[str.size()] = '\0';
+    0.00 :   12900:  movb   $0x0,0x10(%r15)
+         : 1590  if (unknown_entry* entry = find_unknown_entry(name)) {
+    0.00 :   12905:  mov    -0x200(%rbp),%rdi
+    0.00 :   1290c:  mov    $0xc,%esi
+    0.00 :   12911:  mov    %rax,(%r15)
+    0.00 :   12914:  lea    0x169bc(%rip),%rdx        # 292d7 <_IO_stdin_used+0x2d7>
+    0.00 :   1291b:  movabs $0x6e6f736a2f6e6f69,%rax
+    0.00 :   12925:  mov    %rax,0x8(%r15)
+    0.00 :   12929:  mov    %r9,-0x208(%rbp)
+    0.00 :   12930:  call   b410 <katana::http::headers_map::find_unknown_entry(std::basic_string_view<char, std::char_traits<char> >)>
+    0.00 :   12935:  mov    -0x208(%rbp),%r9
+    0.00 :   1293c:  test   %rax,%rax
+    0.00 :   1293f:  je     135f6 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2116>
+         : 1602  entry->value = value_ptr;
+    0.00 :   12945:  mov    %r15,0x10(%rax)
+         : 1604  entry->value_length = static_cast<uint16_t>(value.size());
+    0.00 :   12949:  movw   $0x10,0x18(%rax)
+    0.00 :   1294f:  movb   $0x1,0x10(%r14)
+         : 1607  { }
+    0.83 :   12954:  jmp    120ea <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xc0a>
+         : 1609  for (auto& entry : chunk->entries) {
+    0.00 :   12959:  lea    0x150(%rax),%r12
+         : 1611  if (!entry) {
+    0.00 :   12960:  jmp    11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+         : 1613  for (auto& entry : chunk->entries) {
+    0.00 :   12965:  lea    0x168(%rax),%r12
+         : 1615  if (!entry) {
+    0.00 :   1296c:  jmp    11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+         : 1617  traits_type::copy(_M_local_buf, __str._M_local_buf,
+    0.00 :   12971:  lea    0x1(%rsi),%rdi
+         : 1619  return __s1;
+         : 1620  #if __cplusplus >= 202002L
+         : 1621  if (std::__is_constant_evaluated())
+         : 1622  return __gnu_cxx::char_traits<char_type>::copy(__s1, __s2, __n);
+         : 1623  #endif
+         : 1624  return static_cast<char_type*>(__builtin_memcpy(__s1, __s2, __n));
+    0.00 :   12975:  cmp    $0x8,%edi
+    0.00 :   12978:  jae    12ca8 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x17c8>
+    0.00 :   1297e:  test   $0x4,%dil
+    0.00 :   12982:  jne    135cc <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x20ec>
+    0.00 :   12988:  test   %edi,%edi
+    0.00 :   1298a:  je     11b04 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x624>
+    0.00 :   12990:  movzbl (%rax),%edx
+    0.00 :   12993:  mov    %dl,-0xb8(%rbp)
+    0.00 :   12999:  test   $0x2,%dil
+    0.00 :   1299d:  je     11b04 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x624>
+    0.00 :   129a3:  mov    %edi,%edi
+    0.00 :   129a5:  movzwl -0x2(%rax,%rdi,1),%edx
+    0.00 :   129aa:  mov    %dx,-0x2(%rcx,%rdi,1)
+    0.00 :   129af:  jmp    11b04 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x624>
+    0.00 :   129b4:  nopl   0x0(%rax)
+         : 1640  if (!seen_dot && ch == '.') {
+    0.00 :   129b8:  mov    %r10d,%esi
+    0.42 :   129bb:  xor    $0x1,%esi
+    0.21 :   129be:  cmp    $0x2e,%r8b
+    0.21 :   129c2:  sete   %r8b
+    0.62 :   129c6:  and    %r8b,%sil
+    1.87 :   129c9:  jne    12d8f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x18af>
+    0.00 :   129cf:  dec    %rcx
+    0.00 :   129d2:  jmp    12267 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xd87>
+         : 1649  for (auto& entry : known_inline_) {
+    0.00 :   129d7:  lea    0x4b8(%r15),%r12
+    0.00 :   129de:  jmp    11cb0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x7d0>
+         : 1652  bool negative = false;
+    0.00 :   129e3:  xor    %r13d,%r13d
+    0.83 :   129e6:  jmp    12214 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xd34>
+         : 1655  } else {
+         : 1656  return fallback_from_chars();
+    0.00 :   129eb:  lea    -0x1e0(%rbp),%rdi
+    0.00 :   129f2:  call   aee0 <katana::serde::parse_double(katana::serde::json_cursor&)::{lambda()#1}::operator()() const>
+    0.00 :   129f7:  mov    %rax,-0x1c8(%rbp)
+    0.00 :   129fe:  vmovsd %xmm0,-0x1d0(%rbp)
+    0.00 :   12a06:  vmovsd %xmm0,-0x218(%rbp)
+         : 1662  if (cur.try_array_end()) break;
+         : 1663  if (auto v = katana::serde::parse_double(cur)) {
+    0.00 :   12a0e:  test   %al,%al
+    0.00 :   12a10:  je     124f4 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1014>
+         : 1666  if (size_ < capacity_) {
+    0.00 :   12a16:  mov    -0x100(%rbp),%rdx
+    3.74 :   12a1d:  mov    -0xf8(%rbp),%rax
+    0.00 :   12a24:  cmp    %rax,%rdx
+    0.83 :   12a27:  jb     12bdb <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x16fb>
+    0.00 :   12a2d:  mov    -0x110(%rbp),%rdi
+         : 1672  const size_t grown = capacity_ > 0 ? capacity_ * 2 : 1;
+    0.00 :   12a34:  test   %rax,%rax
+    0.00 :   12a37:  je     12bcb <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x16eb>
+         : 1675  if (n == 0) {
+    0.00 :   12a3d:  mov    %rax,%r12
+    0.00 :   12a40:  add    %r12,%r12
+    0.00 :   12a43:  je     1323e <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1d5e>
+         : 1679  void* ptr = arena_->allocate(n * sizeof(T), alignof(T));
+    0.00 :   12a49:  shl    $0x4,%rax
+         : 1681  if (arena_) {
+    0.00 :   12a4d:  test   %rdi,%rdi
+    0.00 :   12a50:  je     12be4 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1704>
+         : 1684  void* ptr = arena_->allocate(n * sizeof(T), alignof(T));
+    0.00 :   12a56:  mov    $0x8,%edx
+    0.00 :   12a5b:  mov    %rax,%rsi
+    0.00 :   12a5e:  call   cb98 <katana::monotonic_arena::allocate(unsigned long, unsigned long)>
+    0.00 :   12a63:  mov    %rax,%rcx
+         : 1689  if (!ptr) {
+    0.00 :   12a66:  test   %rax,%rax
+    0.00 :   12a69:  je     6eb8 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&) [clone .cold]+0x13d>
+         : 1692  for (; moved < size_; ++moved) {
+    0.00 :   12a6f:  mov    -0x100(%rbp),%rdx
+         : 1694  pointer old_data = data_;
+    0.00 :   12a76:  mov    -0x108(%rbp),%rdi
+         : 1696  for (; moved < size_; ++moved) {
+    0.00 :   12a7d:  test   %rdx,%rdx
+    0.00 :   12a80:  je     12b82 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x16a2>
+    0.00 :   12a86:  lea    -0x1(%rdx),%rax
+    0.00 :   12a8a:  cmp    $0x1,%rax
+    0.00 :   12a8e:  jbe    12d88 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x18a8>
+    0.00 :   12a94:  lea    0x8(%rdi),%rax
+    0.00 :   12a98:  cmp    %rax,%rcx
+    0.00 :   12a9b:  jne    12bf4 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1714>
+    0.00 :   12aa1:  cmp    $0x8,%rdx
+    0.00 :   12aa5:  jbe    12d88 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x18a8>
+    0.00 :   12aab:  lea    -0x9(%rdx),%rax
+    0.00 :   12aaf:  lea    0xc8(%rdi),%r8
+         : 1709  size_t moved = 0;
+    0.00 :   12ab6:  xor    %r9d,%r9d
+    0.00 :   12ab9:  shr    $0x3,%rax
+    0.00 :   12abd:  lea    0xd0(%rdi),%rsi
+    0.00 :   12ac4:  lea    0x8(,%rax,8),%rax
+         : 1714  new (new_data + moved) T(std::move_if_noexcept(data_[moved]));
+    0.00 :   12acc:  vmovsd -0xc8(%r8),%xmm0
+    0.00 :   12ad5:  prefetcht0 (%r8)
+         : 1717  for (; moved < size_; ++moved) {
+    0.00 :   12ad9:  add    $0x8,%r9
+    0.00 :   12add:  prefetchw (%rsi)
+    0.00 :   12ae0:  add    $0x40,%r8
+    0.00 :   12ae4:  add    $0x40,%rsi
+         : 1722  new (new_data + moved) T(std::move_if_noexcept(data_[moved]));
+    0.00 :   12ae8:  vmovsd %xmm0,-0x108(%rsi)
+    0.00 :   12af0:  vmovsd -0x100(%r8),%xmm0
+    0.00 :   12af9:  vmovsd %xmm0,-0x100(%rsi)
+    0.00 :   12b01:  vmovsd -0xf8(%r8),%xmm0
+    0.00 :   12b0a:  vmovsd %xmm0,-0xf8(%rsi)
+    0.00 :   12b12:  vmovsd -0xf0(%r8),%xmm0
+    0.00 :   12b1b:  vmovsd %xmm0,-0xf0(%rsi)
+    0.00 :   12b23:  vmovsd -0xe8(%r8),%xmm0
+    0.00 :   12b2c:  vmovsd %xmm0,-0xe8(%rsi)
+    0.00 :   12b34:  vmovsd -0xe0(%r8),%xmm0
+    0.00 :   12b3d:  vmovsd %xmm0,-0xe0(%rsi)
+    0.00 :   12b45:  vmovsd -0xd8(%r8),%xmm0
+    0.00 :   12b4e:  vmovsd %xmm0,-0xd8(%rsi)
+    0.00 :   12b56:  vmovsd -0xd0(%r8),%xmm0
+    0.00 :   12b5f:  vmovsd %xmm0,-0xd0(%rsi)
+         : 1738  for (; moved < size_; ++moved) {
+    0.00 :   12b67:  cmp    %rax,%r9
+    0.00 :   12b6a:  jne    12acc <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x15ec>
+         : 1741  new (new_data + moved) T(std::move_if_noexcept(data_[moved]));
+    0.00 :   12b70:  vmovsd (%rdi,%rax,8),%xmm0
+    0.00 :   12b75:  vmovsd %xmm0,(%rcx,%rax,8)
+         : 1744  for (; moved < size_; ++moved) {
+    0.00 :   12b7a:  inc    %rax
+    0.00 :   12b7d:  cmp    %rdx,%rax
+    0.00 :   12b80:  jb     12b70 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1690>
+         : 1748  data_ = new_data;
+    0.00 :   12b82:  mov    %rcx,-0x108(%rbp)
+         : 1750  capacity_ = new_capacity;
+    0.00 :   12b89:  mov    %r12,-0xf8(%rbp)
+         : 1752  if (old_data != inline_data()) {
+    0.00 :   12b90:  cmp    %rbx,%rdi
+    0.00 :   12b93:  je     12ba8 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x16c8>
+         : 1755  if (!arena_ && ptr) {
+    0.00 :   12b95:  cmpq   $0x0,-0x110(%rbp)
+    0.00 :   12b9d:  jne    12ba8 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x16c8>
+    0.00 :   12b9f:  test   %rdi,%rdi
+    0.00 :   12ba2:  jne    1335c <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1e7c>
+         : 1760  new (data_ + size_) T(std::forward<Args>(args)...);
+    0.00 :   12ba8:  vmovsd -0x218(%rbp),%xmm5
+         : 1762  bool eof() const noexcept { return ptr >= end; }
+    3.53 :   12bb0:  mov    -0x1b8(%rbp),%r9
+    0.21 :   12bb7:  vmovsd %xmm5,(%rcx,%rdx,8)
+         : 1765  ++size_;
+    3.12 :   12bbc:  inc    %rdx
+    0.00 :   12bbf:  mov    %rdx,-0x100(%rbp)
+         : 1768  return back();
+    0.21 :   12bc6:  jmp    12551 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1071>
+    0.00 :   12bcb:  mov    $0x8,%eax
+         : 1771  const size_t grown = capacity_ > 0 ? capacity_ * 2 : 1;
+    0.00 :   12bd0:  mov    $0x1,%r12d
+    0.00 :   12bd6:  jmp    12a4d <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x156d>
+         : 1774  pointer old_data = data_;
+    0.00 :   12bdb:  mov    -0x108(%rbp),%rcx
+    1.66 :   12be2:  jmp    12ba8 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x16c8>
+         : 1777  return static_cast<T*>(::operator new(n * sizeof(T)));
+    0.00 :   12be4:  mov    %rax,%rdi
+    0.00 :   12be7:  call   6970 <operator new(unsigned long)@plt>
+    0.00 :   12bec:  mov    %rax,%rcx
+    0.00 :   12bef:  jmp    12a6f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x158f>
+    0.00 :   12bf4:  mov    %rdx,%r9
+    0.00 :   12bf7:  shr    $1,%r9
+    0.00 :   12bfa:  cmp    $0x9,%rdx
+    0.00 :   12bfe:  jbe    135bf <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x20df>
+    0.00 :   12c04:  lea    -0x5(%r9),%rsi
+         : 1787  for (; moved < size_; ++moved) {
+    0.00 :   12c08:  mov    %rcx,%r8
+    0.00 :   12c0b:  mov    %rdi,%r10
+    0.00 :   12c0e:  xor    %eax,%eax
+    0.00 :   12c10:  and    $0xfffffffffffffffc,%rsi
+         : 1792  new (new_data + moved) T(std::move_if_noexcept(data_[moved]));
+    0.00 :   12c14:  vmovupd (%r10),%xmm3
+    0.00 :   12c19:  prefetcht0 0x1d0(%r10)
+    0.00 :   12c21:  mov    %rax,%r11
+    0.00 :   12c24:  prefetchw 0x1d0(%r8)
+         : 1797  for (; moved < size_; ++moved) {
+    0.00 :   12c2c:  add    $0x40,%r10
+    0.00 :   12c30:  add    $0x40,%r8
+    0.00 :   12c34:  add    $0x4,%rax
+         : 1801  new (new_data + moved) T(std::move_if_noexcept(data_[moved]));
+    0.00 :   12c38:  vmovupd %xmm3,-0x40(%r8)
+    0.00 :   12c3e:  vmovupd -0x30(%r10),%xmm4
+    0.00 :   12c44:  vmovupd %xmm4,-0x30(%r8)
+    0.00 :   12c4a:  vmovupd -0x20(%r10),%xmm5
+    0.00 :   12c50:  vmovupd %xmm5,-0x20(%r8)
+    0.00 :   12c56:  vmovupd -0x10(%r10),%xmm6
+    0.00 :   12c5c:  vmovupd %xmm6,-0x10(%r8)
+         : 1809  for (; moved < size_; ++moved) {
+    0.00 :   12c62:  cmp    %rsi,%r11
+    0.00 :   12c65:  jne    12c14 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1734>
+    0.00 :   12c67:  add    $0x4,%rsi
+    0.00 :   12c6b:  xor    %eax,%eax
+         : 1814  new (new_data + moved) T(std::move_if_noexcept(data_[moved]));
+    0.00 :   12c6d:  vmovupd (%r10,%rax,1),%xmm2
+    0.00 :   12c73:  inc    %rsi
+    0.00 :   12c76:  vmovupd %xmm2,(%r8,%rax,1)
+         : 1818  for (; moved < size_; ++moved) {
+    0.00 :   12c7c:  add    $0x10,%rax
+    0.00 :   12c80:  cmp    %r9,%rsi
+    0.00 :   12c83:  jb     12c6d <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x178d>
+    0.00 :   12c85:  mov    %rdx,%rax
+    0.00 :   12c88:  and    $0xfffffffffffffffe,%rax
+    0.00 :   12c8c:  test   $0x1,%dl
+    0.00 :   12c8f:  je     12b82 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x16a2>
+         : 1826  new (new_data + moved) T(std::move_if_noexcept(data_[moved]));
+    0.00 :   12c95:  shl    $0x3,%rax
+    0.00 :   12c99:  vmovsd (%rdi,%rax,1),%xmm0
+    0.00 :   12c9e:  vmovsd %xmm0,(%rcx,%rax,1)
+         : 1830  for (; moved < size_; ++moved) {
+    0.00 :   12ca3:  jmp    12b82 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x16a2>
+    0.00 :   12ca8:  mov    %edi,%r8d
+    0.00 :   12cab:  dec    %edi
+    0.00 :   12cad:  mov    -0x8(%rdx,%r8,1),%r9
+    0.00 :   12cb2:  mov    %r9,-0x8(%rcx,%r8,1)
+    0.00 :   12cb7:  cmp    $0x8,%edi
+    0.00 :   12cba:  jb     11b04 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x624>
+    0.00 :   12cc0:  and    $0xfffffff8,%edi
+    0.00 :   12cc3:  xor    %r8d,%r8d
+    0.00 :   12cc6:  mov    %r8d,%r9d
+    0.00 :   12cc9:  add    $0x8,%r8d
+    0.00 :   12ccd:  mov    (%rdx,%r9,1),%r10
+    0.00 :   12cd1:  mov    %r10,(%rcx,%r9,1)
+    0.00 :   12cd5:  cmp    %edi,%r8d
+    0.00 :   12cd8:  jb     12cc6 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x17e6>
+    0.00 :   12cda:  jmp    11b04 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x624>
+         : 1847  char close = (ch == '{') ? '}' : ']';
+    0.00 :   12cdf:  cmp    $0x7b,%dil
+    0.00 :   12ce3:  mov    $0x5d,%r8d
+    0.00 :   12ce9:  mov    $0x7d,%edx
+         : 1851  int depth = 1;
+    0.00 :   12cee:  mov    $0x1,%esi
+         : 1853  char close = (ch == '{') ? '}' : ']';
+    0.00 :   12cf3:  cmove  %edx,%r8d
+         : 1855  ++ptr;
+    0.00 :   12cf7:  inc    %rax
+    0.00 :   12cfa:  mov    %rax,-0x1c0(%rbp)
+         : 1858  while (!eof() && depth > 0) {
+    0.00 :   12d01:  cmp    %r9,%rax
+    0.00 :   12d04:  jb     12d36 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1856>
+    0.00 :   12d06:  jmp    12551 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1071>
+    0.00 :   12d0b:  nopl   0x0(%rax,%rax,1)
+         : 1863  --depth;
+    0.00 :   12d10:  cmp    %r8b,%cl
+    0.00 :   12d13:  mov    %rax,%rdx
+    0.00 :   12d16:  sete   %cl
+    0.00 :   12d19:  movzbl %cl,%ecx
+    0.00 :   12d1c:  sub    %ecx,%esi
+         : 1869  ++ptr;
+    0.00 :   12d1e:  mov    %rdx,-0x1c0(%rbp)
+         : 1871  while (!eof() && depth > 0) {
+    0.00 :   12d25:  test   %esi,%esi
+    0.00 :   12d27:  je     12551 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1071>
+    0.00 :   12d2d:  cmp    %r9,%rax
+    0.00 :   12d30:  jae    12551 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1071>
+         : 1876  ch = *ptr;
+    0.00 :   12d36:  movzbl (%rax),%ecx
+         : 1878  ++ptr;
+    0.00 :   12d39:  inc    %rax
+         : 1880  if (ch == '\"') {
+    0.00 :   12d3c:  cmp    $0x22,%cl
+    0.00 :   12d3f:  je     12d51 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1871>
+         : 1883  } else if (ch == open) {
+    0.00 :   12d41:  cmp    %cl,%dil
+    0.00 :   12d44:  jne    12d10 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1830>
+         : 1886  ++depth;
+    0.00 :   12d46:  inc    %esi
+         : 1888  ++ptr;
+    0.00 :   12d48:  mov    %rax,%rdx
+    0.00 :   12d4b:  jmp    12d1e <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x183e>
+         : 1891  ptr += 2;
+    0.00 :   12d4d:  add    $0x2,%rax
+         : 1893  ++ptr;
+    0.00 :   12d51:  mov    %rax,-0x1c0(%rbp)
+         : 1895  while (!eof()) {
+    0.00 :   12d58:  cmp    %r9,%rax
+    0.00 :   12d5b:  jae    12551 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1071>
+         : 1898  if (*ptr == '\\' && (ptr + 1) < end) {
+    0.00 :   12d61:  movzbl (%rax),%ecx
+    0.00 :   12d64:  lea    0x1(%rax),%rdx
+    0.00 :   12d68:  cmp    $0x5c,%cl
+    0.00 :   12d6b:  je     12d77 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1897>
+         : 1903  if (*ptr == '\"') {
+    0.00 :   12d6d:  mov    %rdx,%rax
+    0.00 :   12d70:  cmp    $0x22,%cl
+    0.00 :   12d73:  jne    12d51 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1871>
+    0.00 :   12d75:  jmp    12d1e <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x183e>
+         : 1908  if (*ptr == '\\' && (ptr + 1) < end) {
+    0.00 :   12d77:  cmp    %r9,%rdx
+    0.00 :   12d7a:  jb     12d4d <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x186d>
+    0.00 :   12d7c:  mov    %rdx,-0x1c0(%rbp)
+         : 1912  bool eof() const noexcept { return ptr >= end; }
+    0.00 :   12d83:  jmp    12551 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1071>
+    0.00 :   12d88:  xor    %eax,%eax
+    0.00 :   12d8a:  jmp    12b70 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1690>
+         : 1916  seen_dot = true;
+    0.00 :   12d8f:  mov    %esi,%r10d
+    0.00 :   12d92:  jmp    1225f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xd7f>
+         : 1919  if (new_capacity <= capacity_) {
+    0.00 :   12d97:  cmp    $0x8,%r12
+    0.42 :   12d9b:  jbe    132e0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1e00>
+    0.00 :   12da1:  mov    -0x180(%rbp),%rdi
+         : 1923  void* ptr = arena_->allocate(n * sizeof(T), alignof(T));
+    0.00 :   12da8:  lea    0x0(,%r12,8),%rax
+         : 1925  if (arena_) {
+    0.00 :   12db0:  test   %rdi,%rdi
+    0.00 :   12db3:  je     133cd <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1eed>
+         : 1928  void* ptr = arena_->allocate(n * sizeof(T), alignof(T));
+    0.00 :   12db9:  mov    $0x8,%edx
+    0.00 :   12dbe:  mov    %rax,%rsi
+    0.00 :   12dc1:  call   cb98 <katana::monotonic_arena::allocate(unsigned long, unsigned long)>
+         : 1932  if (!ptr) {
+    0.00 :   12dc6:  test   %rax,%rax
+    0.00 :   12dc9:  je     6dbc <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&) [clone .cold]+0x41>
+         : 1935  for (; moved < size_; ++moved) {
+    0.00 :   12dcf:  mov    -0x170(%rbp),%rdx
+         : 1937  pointer old_data = data_;
+    0.00 :   12dd6:  mov    -0x178(%rbp),%rdi
+         : 1939  for (; moved < size_; ++moved) {
+    0.00 :   12ddd:  test   %rdx,%rdx
+    0.00 :   12de0:  je     12ee2 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1a02>
+    0.00 :   12de6:  lea    -0x1(%rdx),%rcx
+    0.00 :   12dea:  cmp    $0x1,%rcx
+    0.00 :   12dee:  jbe    1350f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x202f>
+    0.00 :   12df4:  lea    0x8(%rdi),%rcx
+    0.00 :   12df8:  cmp    %rcx,%rax
+    0.00 :   12dfb:  jne    133e7 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1f07>
+    0.00 :   12e01:  cmp    $0x8,%rdx
+    0.00 :   12e05:  jbe    1350f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x202f>
+    0.00 :   12e0b:  lea    -0x9(%rdx),%rcx
+    0.00 :   12e0f:  lea    0xc8(%rdi),%r8
+         : 1952  size_t moved = 0;
+    0.00 :   12e16:  xor    %r9d,%r9d
+    0.00 :   12e19:  shr    $0x3,%rcx
+    0.00 :   12e1d:  lea    0xd0(%rdi),%rsi
+    0.00 :   12e24:  lea    0x8(,%rcx,8),%rcx
+         : 1957  new (new_data + moved) T(std::move_if_noexcept(data_[moved]));
+    0.00 :   12e2c:  vmovsd -0xc8(%r8),%xmm0
+    0.00 :   12e35:  prefetcht0 (%r8)
+         : 1960  for (; moved < size_; ++moved) {
+    0.00 :   12e39:  add    $0x8,%r9
+    0.00 :   12e3d:  prefetchw (%rsi)
+    0.00 :   12e40:  add    $0x40,%r8
+    0.00 :   12e44:  add    $0x40,%rsi
+         : 1965  new (new_data + moved) T(std::move_if_noexcept(data_[moved]));
+    0.00 :   12e48:  vmovsd %xmm0,-0x108(%rsi)
+    0.00 :   12e50:  vmovsd -0x100(%r8),%xmm0
+    0.00 :   12e59:  vmovsd %xmm0,-0x100(%rsi)
+    0.00 :   12e61:  vmovsd -0xf8(%r8),%xmm0
+    0.00 :   12e6a:  vmovsd %xmm0,-0xf8(%rsi)
+    0.00 :   12e72:  vmovsd -0xf0(%r8),%xmm0
+    0.00 :   12e7b:  vmovsd %xmm0,-0xf0(%rsi)
+    0.00 :   12e83:  vmovsd -0xe8(%r8),%xmm0
+    0.00 :   12e8c:  vmovsd %xmm0,-0xe8(%rsi)
+    0.00 :   12e94:  vmovsd -0xe0(%r8),%xmm0
+    0.00 :   12e9d:  vmovsd %xmm0,-0xe0(%rsi)
+    0.00 :   12ea5:  vmovsd -0xd8(%r8),%xmm0
+    0.00 :   12eae:  vmovsd %xmm0,-0xd8(%rsi)
+    0.00 :   12eb6:  vmovsd -0xd0(%r8),%xmm0
+    0.00 :   12ebf:  vmovsd %xmm0,-0xd0(%rsi)
+         : 1981  for (; moved < size_; ++moved) {
+    0.00 :   12ec7:  cmp    %rcx,%r9
+    0.00 :   12eca:  jne    12e2c <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x194c>
+         : 1984  new (new_data + moved) T(std::move_if_noexcept(data_[moved]));
+    0.00 :   12ed0:  vmovsd (%rdi,%rcx,8),%xmm0
+    0.00 :   12ed5:  vmovsd %xmm0,(%rax,%rcx,8)
+         : 1987  for (; moved < size_; ++moved) {
+    0.00 :   12eda:  inc    %rcx
+    0.00 :   12edd:  cmp    %rdx,%rcx
+    0.00 :   12ee0:  jb     12ed0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x19f0>
+         : 1991  data_ = new_data;
+    0.00 :   12ee2:  mov    %rax,-0x178(%rbp)
+         : 1993  capacity_ = new_capacity;
+    0.00 :   12ee9:  mov    %r12,-0x168(%rbp)
+         : 1995  if (old_data != inline_data()) {
+    0.00 :   12ef0:  cmp    %r13,%rdi
+    0.00 :   12ef3:  je     12f08 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1a28>
+         : 1998  if (!arena_ && ptr) {
+    0.00 :   12ef5:  cmpq   $0x0,-0x180(%rbp)
+    0.00 :   12efd:  jne    12f08 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1a28>
+    0.00 :   12eff:  test   %rdi,%rdi
+    0.00 :   12f02:  jne    135ec <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x210c>
+         : 2003  [[nodiscard]] iterator begin() noexcept { return data_; }
+    0.00 :   12f08:  mov    -0x108(%rbp),%rdi
+         : 2005  [[nodiscard]] iterator end() noexcept { return data_ + size_; }
+    0.00 :   12f0f:  mov    -0x100(%rbp),%rax
+    0.00 :   12f16:  lea    (%rdi,%rax,8),%rax
+         : 2008  for (auto& value : other) {
+    0.00 :   12f1a:  cmp    %rdi,%rax
+    0.00 :   12f1d:  je     13106 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1c26>
+    0.00 :   12f23:  mov    %r14,-0x218(%rbp)
+         : 2012  if (size_ < capacity_) {
+    1.04 :   12f2a:  mov    -0x170(%rbp),%r11
+    0.21 :   12f31:  mov    %rdi,%r12
+    0.00 :   12f34:  mov    %rbx,-0x230(%rbp)
+    0.21 :   12f3b:  mov    %rax,%rbx
+    0.00 :   12f3e:  mov    -0x168(%rbp),%rax
+    1.04 :   12f45:  cmp    %rax,%r11
+    0.00 :   12f48:  jb     1314f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1c6f>
+    0.00 :   12f4e:  mov    -0x180(%rbp),%rdi
+         : 2021  const size_t grown = capacity_ > 0 ? capacity_ * 2 : 1;
+    0.00 :   12f55:  test   %rax,%rax
+    0.00 :   12f58:  je     1315b <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1c7b>
+         : 2024  if (n == 0) {
+    0.00 :   12f5e:  mov    %rax,%r14
+    0.00 :   12f61:  add    %r14,%r14
+    0.00 :   12f64:  je     13237 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1d57>
+         : 2028  void* ptr = arena_->allocate(n * sizeof(T), alignof(T));
+    0.00 :   12f6a:  shl    $0x4,%rax
+    0.00 :   12f6e:  mov    %rax,%rsi
+         : 2031  if (arena_) {
+    0.00 :   12f71:  test   %rdi,%rdi
+    0.00 :   12f74:  je     13223 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1d43>
+         : 2034  void* ptr = arena_->allocate(n * sizeof(T), alignof(T));
+    0.00 :   12f7a:  mov    $0x8,%edx
+    0.00 :   12f7f:  call   cb98 <katana::monotonic_arena::allocate(unsigned long, unsigned long)>
+         : 2037  if (!ptr) {
+    0.00 :   12f84:  test   %rax,%rax
+    0.00 :   12f87:  je     6d7b <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&) [clone .cold]>
+         : 2040  for (; moved < size_; ++moved) {
+    0.00 :   12f8d:  mov    -0x170(%rbp),%r11
+         : 2042  pointer old_data = data_;
+    0.00 :   12f94:  mov    -0x178(%rbp),%rdi
+         : 2044  for (; moved < size_; ++moved) {
+    0.00 :   12f9b:  test   %r11,%r11
+    0.00 :   12f9e:  je     130a8 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1bc8>
+    0.00 :   12fa4:  lea    -0x1(%r11),%rdx
+    0.00 :   12fa8:  cmp    $0x1,%rdx
+    0.00 :   12fac:  jbe    13230 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1d50>
+    0.00 :   12fb2:  lea    0x8(%rdi),%rdx
+    0.00 :   12fb6:  cmp    %rdx,%rax
+    0.00 :   12fb9:  jne    1316b <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1c8b>
+    0.00 :   12fbf:  cmp    $0x8,%r11
+    0.00 :   12fc3:  jbe    13230 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1d50>
+    0.00 :   12fc9:  lea    -0x9(%r11),%rdx
+    0.00 :   12fcd:  lea    0xc8(%rdi),%r8
+         : 2057  size_t moved = 0;
+    0.00 :   12fd4:  xor    %r9d,%r9d
+    0.00 :   12fd7:  shr    $0x3,%rdx
+    0.00 :   12fdb:  lea    0xd0(%rdi),%rsi
+    0.00 :   12fe2:  lea    0x8(,%rdx,8),%rdx
+         : 2062  new (new_data + moved) T(std::move_if_noexcept(data_[moved]));
+    0.00 :   12fea:  vmovsd -0xc8(%r8),%xmm0
+    0.00 :   12ff3:  prefetcht0 (%r8)
+         : 2065  for (; moved < size_; ++moved) {
+    0.00 :   12ff7:  add    $0x8,%r9
+    0.00 :   12ffb:  prefetchw (%rsi)
+    0.00 :   12ffe:  add    $0x40,%r8
+    0.00 :   13002:  add    $0x40,%rsi
+         : 2070  new (new_data + moved) T(std::move_if_noexcept(data_[moved]));
+    0.00 :   13006:  vmovsd %xmm0,-0x108(%rsi)
+    0.00 :   1300e:  vmovsd -0x100(%r8),%xmm0
+    0.00 :   13017:  vmovsd %xmm0,-0x100(%rsi)
+    0.00 :   1301f:  vmovsd -0xf8(%r8),%xmm0
+    0.00 :   13028:  vmovsd %xmm0,-0xf8(%rsi)
+    0.00 :   13030:  vmovsd -0xf0(%r8),%xmm0
+    0.00 :   13039:  vmovsd %xmm0,-0xf0(%rsi)
+    0.00 :   13041:  vmovsd -0xe8(%r8),%xmm0
+    0.00 :   1304a:  vmovsd %xmm0,-0xe8(%rsi)
+    0.00 :   13052:  vmovsd -0xe0(%r8),%xmm0
+    0.00 :   1305b:  vmovsd %xmm0,-0xe0(%rsi)
+    0.00 :   13063:  vmovsd -0xd8(%r8),%xmm0
+    0.00 :   1306c:  vmovsd %xmm0,-0xd8(%rsi)
+    0.00 :   13074:  vmovsd -0xd0(%r8),%xmm0
+    0.00 :   1307d:  vmovsd %xmm0,-0xd0(%rsi)
+         : 2086  for (; moved < size_; ++moved) {
+    0.00 :   13085:  cmp    %r9,%rdx
+    0.00 :   13088:  jne    12fea <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1b0a>
+    0.00 :   1308e:  xchg   %ax,%ax
+         : 2090  new (new_data + moved) T(std::move_if_noexcept(data_[moved]));
+    0.00 :   13090:  vmovsd (%rdi,%rdx,8),%xmm0
+    0.00 :   13095:  vmovsd %xmm0,(%rax,%rdx,8)
+         : 2093  for (; moved < size_; ++moved) {
+    0.00 :   1309a:  inc    %rdx
+    0.00 :   1309d:  cmp    %r11,%rdx
+    0.00 :   130a0:  jb     13090 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1bb0>
+    0.00 :   130a2:  nopw   0x0(%rax,%rax,1)
+         : 2098  data_ = new_data;
+    0.00 :   130a8:  mov    %rax,-0x178(%rbp)
+         : 2100  capacity_ = new_capacity;
+    0.00 :   130af:  mov    %r14,-0x168(%rbp)
+         : 2102  if (old_data != inline_data()) {
+    0.00 :   130b6:  cmp    %r13,%rdi
+    0.00 :   130b9:  je     130ce <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1bee>
+         : 2105  if (!arena_ && ptr) {
+    0.00 :   130bb:  cmpq   $0x0,-0x180(%rbp)
+    0.00 :   130c3:  jne    130ce <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1bee>
+    0.00 :   130c5:  test   %rdi,%rdi
+    0.00 :   130c8:  jne    13288 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1da8>
+         : 2110  new (data_ + size_) T(std::forward<Args>(args)...);
+    0.00 :   130ce:  vmovsd (%r12),%xmm0
+         : 2112  for (auto& value : other) {
+    3.53 :   130d4:  add    $0x8,%r12
+         : 2114  new (data_ + size_) T(std::forward<Args>(args)...);
+    0.00 :   130d8:  vmovsd %xmm0,(%rax,%r11,8)
+         : 2116  ++size_;
+    2.91 :   130de:  inc    %r11
+    0.00 :   130e1:  mov    %r11,-0x170(%rbp)
+         : 2119  for (auto& value : other) {
+    0.00 :   130e8:  cmp    %r12,%rbx
+    0.00 :   130eb:  jne    12f3e <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1a5e>
+         : 2122  [[nodiscard]] bool using_inline_storage() const noexcept { return data_ == inline_data(); }
+    0.00 :   130f1:  mov    -0x218(%rbp),%r14
+    0.83 :   130f8:  mov    -0x230(%rbp),%rbx
+    0.21 :   130ff:  mov    -0x108(%rbp),%rdi
+         : 2126  _M_engaged(true)
+    1.04 :   13106:  movb   $0x1,-0x120(%rbp)
+         : 2128  size_ = 0;
+    0.00 :   1310d:  movq   $0x0,-0x100(%rbp)
+         : 2130  if (!using_inline_storage()) {
+    0.00 :   13118:  cmp    %rbx,%rdi
+    0.00 :   1311b:  je     1201b <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xb3b>
+         : 2133  if (!arena_ && ptr) {
+    0.00 :   13121:  cmpq   $0x0,-0x110(%rbp)
+    0.00 :   13129:  jne    1201b <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xb3b>
+    0.00 :   1312f:  test   %rdi,%rdi
+    0.00 :   13132:  je     1201b <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xb3b>
+         : 2138  ::operator delete(ptr);
+    0.00 :   13138:  call   6940 <operator delete(void*)@plt>
+         : 2140  if (!parsed_body) {
+    0.00 :   1313d:  cmpb   $0x0,-0x120(%rbp)
+    0.00 :   13144:  jne    1201b <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xb3b>
+    0.00 :   1314a:  jmp    12177 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xc97>
+         : 2144  pointer old_data = data_;
+    0.00 :   1314f:  mov    -0x178(%rbp),%rax
+    0.83 :   13156:  jmp    130ce <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1bee>
+    0.00 :   1315b:  mov    $0x8,%esi
+         : 2148  const size_t grown = capacity_ > 0 ? capacity_ * 2 : 1;
+    0.00 :   13160:  mov    $0x1,%r14d
+    0.00 :   13166:  jmp    12f71 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1a91>
+    0.00 :   1316b:  mov    %r11,%r10
+    0.00 :   1316e:  shr    $1,%r10
+    0.00 :   13171:  cmp    $0x9,%r11
+    0.00 :   13175:  jbe    133da <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1efa>
+    0.00 :   1317b:  lea    -0x5(%r10),%rdx
+         : 2156  for (; moved < size_; ++moved) {
+    0.00 :   1317f:  mov    %rax,%r9
+    0.00 :   13182:  mov    %rdi,%r8
+    0.00 :   13185:  and    $0xfffffffffffffffc,%rdx
+    0.00 :   13189:  lea    0x8(%rdx),%rcx
+    0.00 :   1318d:  mov    $0x4,%edx
+         : 2162  new (new_data + moved) T(std::move_if_noexcept(data_[moved]));
+    0.00 :   13192:  vmovupd (%r8),%xmm6
+    0.00 :   13197:  prefetcht0 0x1d0(%r8)
+    0.00 :   1319f:  mov    %rdx,%rsi
+    0.00 :   131a2:  add    $0x4,%rdx
+    0.00 :   131a6:  prefetchw 0x1d0(%r9)
+         : 2168  for (; moved < size_; ++moved) {
+    0.00 :   131ae:  add    $0x40,%r8
+    0.00 :   131b2:  add    $0x40,%r9
+         : 2171  new (new_data + moved) T(std::move_if_noexcept(data_[moved]));
+    0.00 :   131b6:  vmovupd %xmm6,-0x40(%r9)
+    0.00 :   131bc:  vmovupd -0x30(%r8),%xmm7
+    0.00 :   131c2:  vmovupd %xmm7,-0x30(%r9)
+    0.00 :   131c8:  vmovupd -0x20(%r8),%xmm2
+    0.00 :   131ce:  vmovupd %xmm2,-0x20(%r9)
+    0.00 :   131d4:  vmovupd -0x10(%r8),%xmm3
+    0.00 :   131da:  vmovupd %xmm3,-0x10(%r9)
+         : 2179  for (; moved < size_; ++moved) {
+    0.00 :   131e0:  cmp    %rdx,%rcx
+    0.00 :   131e3:  jne    13192 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1cb2>
+    0.00 :   131e5:  xor    %edx,%edx
+         : 2183  new (new_data + moved) T(std::move_if_noexcept(data_[moved]));
+    0.00 :   131e7:  vmovupd (%r8,%rdx,1),%xmm1
+    0.00 :   131ed:  inc    %rsi
+    0.00 :   131f0:  vmovupd %xmm1,(%r9,%rdx,1)
+         : 2187  for (; moved < size_; ++moved) {
+    0.00 :   131f6:  add    $0x10,%rdx
+    0.00 :   131fa:  cmp    %r10,%rsi
+    0.00 :   131fd:  jb     131e7 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1d07>
+    0.00 :   131ff:  mov    %r11,%rdx
+    0.00 :   13202:  and    $0xfffffffffffffffe,%rdx
+    0.00 :   13206:  test   $0x1,%r11b
+    0.00 :   1320a:  je     130a8 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1bc8>
+         : 2195  new (new_data + moved) T(std::move_if_noexcept(data_[moved]));
+    0.00 :   13210:  shl    $0x3,%rdx
+    0.00 :   13214:  vmovsd (%rdi,%rdx,1),%xmm0
+    0.00 :   13219:  vmovsd %xmm0,(%rax,%rdx,1)
+         : 2199  for (; moved < size_; ++moved) {
+    0.00 :   1321e:  jmp    130a8 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1bc8>
+         : 2201  return static_cast<T*>(::operator new(n * sizeof(T)));
+    0.00 :   13223:  mov    %rsi,%rdi
+    0.00 :   13226:  call   6970 <operator new(unsigned long)@plt>
+    0.00 :   1322b:  jmp    12f8d <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1aad>
+         : 2205  for (; moved < size_; ++moved) {
+    0.00 :   13230:  xor    %edx,%edx
+    0.00 :   13232:  jmp    13090 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1bb0>
+         : 2208  return nullptr;
+    0.00 :   13237:  xor    %eax,%eax
+    0.00 :   13239:  jmp    12f94 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1ab4>
+    0.00 :   1323e:  xor    %ecx,%ecx
+    0.00 :   13240:  jmp    12a76 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1596>
+    0.00 :   13245:  lea    0x1(%rdi),%rdx
+    0.00 :   13249:  cmp    $0x8,%edx
+    0.00 :   1324c:  jae    13374 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1e94>
+    0.00 :   13252:  test   $0x4,%dl
+    0.00 :   13255:  jne    13766 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2286>
+    0.00 :   1325b:  test   %edx,%edx
+    0.00 :   1325d:  je     11c62 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x782>
+    0.00 :   13263:  movzbl (%rax),%esi
+    0.00 :   13266:  mov    %sil,-0xb8(%rbp)
+    0.00 :   1326d:  test   $0x2,%dl
+    0.00 :   13270:  je     11c62 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x782>
+    0.00 :   13276:  mov    %edx,%edx
+    0.00 :   13278:  movzwl -0x2(%rax,%rdx,1),%esi
+    0.00 :   1327d:  mov    %si,-0x2(%rcx,%rdx,1)
+    0.00 :   13282:  jmp    11c62 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x782>
+    0.00 :   13287:  nop
+         : 2229  ::operator delete(ptr);
+    0.00 :   13288:  call   6940 <operator delete(void*)@plt>
+         : 2231  new (data_ + size_) T(std::forward<Args>(args)...);
+    0.00 :   1328d:  mov    -0x178(%rbp),%rax
+    0.00 :   13294:  mov    -0x170(%rbp),%r11
+    0.00 :   1329b:  jmp    130ce <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1bee>
+         : 2235  : allocator_(other.allocator_), data_(inline_data()), size_(0), capacity_(InlineCapacity) {
+    0.00 :   132a0:  mov    -0x110(%rbp),%rdx
+    0.00 :   132a7:  lea    -0x160(%rbp),%r13
+    0.00 :   132ae:  mov    $0x8,%ecx
+    0.00 :   132b3:  xor    %r12d,%r12d
+    0.00 :   132b6:  mov    %r13,-0x178(%rbp)
+    0.00 :   132bd:  movq   $0x0,-0x170(%rbp)
+    0.00 :   132c8:  mov    %r13,%rdi
+    0.00 :   132cb:  movq   $0x8,-0x168(%rbp)
+    0.00 :   132d6:  mov    %rdx,-0x180(%rbp)
+    0.00 :   132dd:  rep stos %rax,%es:(%rdi)
+         : 2246  [[nodiscard]] iterator end() noexcept { return data_ + size_; }
+    0.00 :   132e0:  shl    $0x3,%r12
+    0.00 :   132e4:  lea    (%rbx,%r12,1),%rax
+         : 2249  for (auto& value : other) {
+    0.00 :   132e8:  je     13747 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2267>
+    0.00 :   132ee:  mov    %rbx,%rdi
+    0.00 :   132f1:  jmp    12f23 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1a43>
+         : 2253  double value = static_cast<double>(mantissa);
+    0.00 :   132f6:  test   %rdx,%rdx
+    0.62 :   132f9:  js     133a7 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1ec7>
+    0.00 :   132ff:  vxorpd %xmm6,%xmm6,%xmm6
+    0.00 :   13303:  vcvtsi2sd %rdx,%xmm6,%xmm0
+    4.16 :   13308:  vmovsd %xmm0,-0x218(%rbp)
+         : 2259  if (frac_digits > 0) {
+    0.83 :   13310:  test   %edi,%edi
+    0.00 :   13312:  jle    13333 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1e53>
+         : 2262  value *= pow10_neg[frac_digits];
+    0.00 :   13314:  vmovsd -0x218(%rbp),%xmm5
+    0.00 :   1331c:  movslq %edi,%rdi
+    0.00 :   1331f:  lea    0x185da(%rip),%rax        # 2b900 <katana::serde::parse_double(katana::serde::json_cursor&)::pow10_neg>
+    0.00 :   13326:  vmulsd (%rax,%rdi,8),%xmm5,%xmm4
+    0.00 :   1332b:  vmovsd %xmm4,-0x218(%rbp)
+         : 2268  }
+         : 2269  }
+         :
+         : 2271  if (negative) {
+    0.00 :   13333:  test   %r13b,%r13b
+    0.00 :   13336:  je     13350 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1e70>
+         : 2274  value = -value;
+    0.00 :   13338:  vmovsd -0x218(%rbp),%xmm2
+    0.00 :   13340:  vxorpd 0x187c8(%rip),%xmm2,%xmm7        # 2bb10 <katana::serde::is_json_whitespace_table+0x170>
+    0.00 :   13348:  vmovsd %xmm7,-0x218(%rbp)
+         : 2278  }
+         : 2279  cur.ptr = p;
+    0.00 :   13350:  mov    %rcx,-0x1c0(%rbp)
+         : 2281  constexpr bool _M_is_engaged() const noexcept
+    1.87 :   13357:  jmp    12a16 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1536>
+         : 2283  ::operator delete(ptr);
+    0.00 :   1335c:  call   6940 <operator delete(void*)@plt>
+         : 2285  new (data_ + size_) T(std::forward<Args>(args)...);
+    0.00 :   13361:  mov    -0x108(%rbp),%rcx
+    0.00 :   13368:  mov    -0x100(%rbp),%rdx
+    0.00 :   1336f:  jmp    12ba8 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x16c8>
+    0.00 :   13374:  mov    %edx,%esi
+    0.00 :   13376:  dec    %edx
+    0.00 :   13378:  mov    -0x8(%r9,%rsi,1),%r8
+    0.00 :   1337d:  mov    %r8,-0x8(%rcx,%rsi,1)
+    0.00 :   13382:  cmp    $0x8,%edx
+    0.00 :   13385:  jb     11c62 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x782>
+    0.00 :   1338b:  and    $0xfffffff8,%edx
+    0.00 :   1338e:  xor    %esi,%esi
+    0.00 :   13390:  mov    %esi,%r8d
+    0.00 :   13393:  add    $0x8,%esi
+    0.00 :   13396:  mov    (%r9,%r8,1),%r10
+    0.00 :   1339a:  mov    %r10,(%rcx,%r8,1)
+    0.00 :   1339e:  cmp    %edx,%esi
+    0.00 :   133a0:  jb     13390 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1eb0>
+    0.00 :   133a2:  jmp    11c62 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x782>
+         : 2304  double value = static_cast<double>(mantissa);
+    0.00 :   133a7:  mov    %rdx,%rax
+    0.00 :   133aa:  vxorpd %xmm7,%xmm7,%xmm7
+    0.00 :   133ae:  and    $0x1,%edx
+    0.00 :   133b1:  shr    $1,%rax
+    0.00 :   133b4:  or     %rdx,%rax
+    0.00 :   133b7:  vcvtsi2sd %rax,%xmm7,%xmm0
+    0.00 :   133bc:  vaddsd %xmm0,%xmm0,%xmm3
+    0.00 :   133c0:  vmovsd %xmm3,-0x218(%rbp)
+    0.00 :   133c8:  jmp    13310 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1e30>
+         : 2314  return static_cast<T*>(::operator new(n * sizeof(T)));
+    0.00 :   133cd:  mov    %rax,%rdi
+    0.00 :   133d0:  call   6970 <operator new(unsigned long)@plt>
+    0.00 :   133d5:  jmp    12dcf <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x18ef>
+         : 2318  for (; moved < size_; ++moved) {
+    0.00 :   133da:  mov    %rax,%r9
+    0.00 :   133dd:  mov    %rdi,%r8
+    0.00 :   133e0:  xor    %esi,%esi
+    0.00 :   133e2:  jmp    131e5 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1d05>
+    0.00 :   133e7:  mov    %rdx,%r10
+    0.00 :   133ea:  shr    $1,%r10
+    0.00 :   133ed:  cmp    $0x9,%rdx
+    0.00 :   133f1:  jbe    13753 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2273>
+    0.00 :   133f7:  lea    -0x5(%r10),%rcx
+    0.00 :   133fb:  mov    %rdi,%rsi
+    0.00 :   133fe:  xor    %r8d,%r8d
+    0.00 :   13401:  and    $0xfffffffffffffffc,%rcx
+    0.00 :   13405:  mov    %rcx,%r11
+    0.00 :   13408:  mov    %rax,%rcx
+         : 2333  new (new_data + moved) T(std::move_if_noexcept(data_[moved]));
+    0.00 :   1340b:  vmovupd (%rsi),%xmm7
+    0.00 :   1340f:  prefetcht0 0x1d0(%rsi)
+    0.00 :   13416:  mov    %r8,%r9
+    0.00 :   13419:  prefetchw 0x1d0(%rcx)
+         : 2338  for (; moved < size_; ++moved) {
+    0.00 :   13420:  add    $0x40,%rsi
+    0.00 :   13424:  add    $0x40,%rcx
+    0.00 :   13428:  add    $0x4,%r8
+         : 2342  new (new_data + moved) T(std::move_if_noexcept(data_[moved]));
+    0.00 :   1342c:  vmovupd %xmm7,-0x40(%rcx)
+    0.00 :   13431:  vmovupd -0x30(%rsi),%xmm2
+    0.00 :   13436:  vmovupd %xmm2,-0x30(%rcx)
+    0.00 :   1343b:  vmovupd -0x20(%rsi),%xmm3
+    0.00 :   13440:  vmovupd %xmm3,-0x20(%rcx)
+    0.00 :   13445:  vmovupd -0x10(%rsi),%xmm4
+    0.00 :   1344a:  vmovupd %xmm4,-0x10(%rcx)
+         : 2350  for (; moved < size_; ++moved) {
+    0.00 :   1344f:  cmp    %r11,%r9
+    0.00 :   13452:  jne    1340b <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1f2b>
+    0.00 :   13454:  lea    0x4(%r11),%r8
+    0.00 :   13458:  xor    %r9d,%r9d
+         : 2355  new (new_data + moved) T(std::move_if_noexcept(data_[moved]));
+    0.00 :   1345b:  vmovupd (%rsi,%r9,1),%xmm5
+    0.00 :   13461:  inc    %r8
+    0.00 :   13464:  vmovupd %xmm5,(%rcx,%r9,1)
+         : 2359  for (; moved < size_; ++moved) {
+    0.00 :   1346a:  add    $0x10,%r9
+    0.00 :   1346e:  cmp    %r10,%r8
+    0.00 :   13471:  jb     1345b <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1f7b>
+    0.00 :   13473:  mov    %rdx,%rcx
+    0.00 :   13476:  and    $0xfffffffffffffffe,%rcx
+    0.00 :   1347a:  and    $0x1,%edx
+    0.00 :   1347d:  je     12ee2 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1a02>
+         : 2367  new (new_data + moved) T(std::move_if_noexcept(data_[moved]));
+    0.00 :   13483:  lea    0x0(,%rcx,8),%rdx
+    0.00 :   1348b:  vmovsd (%rdi,%rdx,1),%xmm0
+    0.00 :   13490:  vmovsd %xmm0,(%rax,%rdx,1)
+         : 2371  for (; moved < size_; ++moved) {
+    0.00 :   13495:  jmp    12ee2 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1a02>
+         : 2373  skip_ws();
+    0.00 :   1349a:  mov    -0x200(%rbp),%rdi
+    0.00 :   134a1:  call   ad30 <katana::serde::json_cursor::skip_ws()>
+         : 2376  bool eof() const noexcept { return ptr >= end; }
+    0.00 :   134a6:  mov    -0x1c0(%rbp),%rax
+         : 2378  if (eof() || *ptr != '\"') {
+    0.00 :   134ad:  cmp    %r9,%rax
+    0.00 :   134b0:  jae    12551 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1071>
+    0.00 :   134b6:  cmpb   $0x22,(%rax)
+    0.00 :   134b9:  jne    12551 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1071>
+         : 2383  ++ptr;
+    0.00 :   134bf:  inc    %rax
+    0.00 :   134c2:  mov    %rax,-0x1c0(%rbp)
+         : 2386  while (!eof() && *ptr != '\"') {
+    0.00 :   134c9:  cmp    %r9,%rax
+    0.00 :   134cc:  jb     134eb <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x200b>
+    0.00 :   134ce:  jmp    12551 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1071>
+    0.00 :   134d3:  nopl   0x0(%rax,%rax,1)
+         : 2391  ++ptr;
+    0.00 :   134d8:  mov    %rdx,%rax
+    0.00 :   134db:  mov    %rax,-0x1c0(%rbp)
+         : 2394  while (!eof() && *ptr != '\"') {
+    0.00 :   134e2:  cmp    %r9,%rax
+    0.00 :   134e5:  jae    12551 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1071>
+    0.00 :   134eb:  movzbl (%rax),%ecx
+    0.00 :   134ee:  cmp    $0x22,%cl
+    0.00 :   134f1:  je     136c2 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x21e2>
+         : 2400  if (*ptr == '\\' && (ptr + 1) < end) {
+    0.00 :   134f7:  lea    0x1(%rax),%rdx
+    0.00 :   134fb:  cmp    $0x5c,%cl
+    0.00 :   134fe:  jne    134d8 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1ff8>
+    0.00 :   13500:  cmp    %r9,%rdx
+    0.00 :   13503:  jae    12d7c <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x189c>
+         : 2406  ptr += 2;
+    0.00 :   13509:  add    $0x2,%rax
+         : 2408  continue;
+    0.00 :   1350d:  jmp    134db <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1ffb>
+    0.00 :   1350f:  xor    %ecx,%ecx
+    0.00 :   13511:  jmp    12ed0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x19f0>
+         : 2412  char* ptr = static_cast<char*>(allocate(str.size() + 1, 1));
+    0.00 :   13516:  mov    $0x1,%edx
+    0.00 :   1351b:  mov    $0x11,%esi
+    0.00 :   13520:  mov    %r15,%rdi
+    0.00 :   13523:  call   cb98 <katana::monotonic_arena::allocate(unsigned long, unsigned long)>
+         : 2417  if (ptr) {
+    0.00 :   13528:  test   %rax,%rax
+    0.00 :   1352b:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   13531:  movabs $0x746163696c707061,%rsi
+         : 2421  ptr[str.size()] = '\0';
+    0.00 :   1353b:  movb   $0x0,0x10(%rax)
+    0.00 :   1353f:  mov    %rsi,(%rax)
+    0.00 :   13542:  movabs $0x6e6f736a2f6e6f69,%rsi
+    0.00 :   1354c:  mov    %rsi,0x8(%rax)
+         : 2426  if (!name_ptr || !value_ptr) {
+    0.00 :   13550:  jmp    1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+         : 2428  set_known(f, value);
+    0.00 :   13555:  mov    -0x220(%rbp),%rcx
+    0.00 :   1355c:  mov    -0x200(%rbp),%rdi
+    0.00 :   13563:  mov    $0x10,%edx
+    0.00 :   13568:  call   ce58 <katana::http::headers_map::set_known(katana::http::field, std::basic_string_view<char, std::char_traits<char> >)>
+    0.00 :   1356d:  jmp    1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+         : 2434  if (eof()) {
+    0.00 :   13572:  cmp    %r9,%rsi
+    0.00 :   13575:  jae    124f4 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1014>
+         : 2437  ++ptr; // consume closing quote
+    0.00 :   1357b:  lea    0x1(%rsi),%rax
+         : 2439  auto [p, ec] = std::from_chars(sv->data(), sv->data() + sv->size(), val);
+    0.00 :   1357f:  lea    -0x1e0(%rbp),%rdx
+    0.00 :   13586:  mov    $0x3,%ecx
+         : 2442  ++ptr; // consume closing quote
+    0.00 :   1358b:  mov    %rax,-0x1c0(%rbp)
+         : 2444  double val = 0.0;
+    0.00 :   13592:  movq   $0x0,-0x1e0(%rbp)
+         : 2446  auto [p, ec] = std::from_chars(sv->data(), sv->data() + sv->size(), val);
+    0.00 :   1359d:  call   6950 <std::from_chars(char const*, char const*, double&, std::chars_format)@plt>
+         : 2448  if (ec == std::errc()) {
+    0.00 :   135a2:  test   %edx,%edx
+    0.00 :   135a4:  jne    124f4 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1014>
+         : 2451  : _M_value(std::forward<_Args>(__args)...)
+    0.00 :   135aa:  vmovsd -0x1e0(%rbp),%xmm7
+    0.00 :   135b2:  vmovsd %xmm7,-0x218(%rbp)
+         : 2454  constexpr bool _M_is_engaged() const noexcept
+    0.00 :   135ba:  jmp    12a16 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1536>
+         : 2456  for (; moved < size_; ++moved) {
+    0.00 :   135bf:  mov    %rcx,%r8
+    0.00 :   135c2:  mov    %rdi,%r10
+    0.00 :   135c5:  xor    %esi,%esi
+    0.00 :   135c7:  jmp    12c6b <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x178b>
+    0.00 :   135cc:  mov    (%rax),%edx
+    0.00 :   135ce:  mov    %edi,%edi
+    0.00 :   135d0:  mov    %edx,-0xb8(%rbp)
+    0.00 :   135d6:  mov    -0x4(%rax,%rdi,1),%edx
+    0.00 :   135da:  mov    %edx,-0x4(%rcx,%rdi,1)
+    0.00 :   135de:  jmp    11b04 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x624>
+         : 2467  ptr += 2;
+    0.00 :   135e3:  add    $0x2,%rsi
+         : 2469  continue;
+    0.00 :   135e7:  jmp    124c3 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xfe3>
+         : 2471  ::operator delete(ptr);
+    0.00 :   135ec:  call   6940 <operator delete(void*)@plt>
+    0.00 :   135f1:  jmp    12f08 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1a28>
+    0.00 :   135f6:  mov    -0x1f8(%rbp),%rax
+    0.00 :   135fd:  lea    0x4f0(%rax),%rdx
+         : 2476  { return iterator(data() + _Nm); }
+    0.00 :   13604:  lea    0x5f0(%rax),%rcx
+         : 2478  [[nodiscard]] const unknown_entry* find_unknown_entry(std::string_view name) const noexcept {
+         : 2479  return const_cast<headers_map*>(this)->find_unknown_entry(name);
+         : 2480  }
+         :
+         : 2482  [[nodiscard]] unknown_entry* append_unknown_entry() noexcept {
+         : 2483  for (auto& entry : unknown_inline_) {
+    0.00 :   1360b:  cmp    %rcx,%rdx
+    0.00 :   1360e:  je     13626 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2146>
+         : 2486  if (!entry.name) {
+    0.00 :   13610:  cmpq   $0x0,(%rdx)
+    0.00 :   13614:  mov    %rdx,%rax
+    0.00 :   13617:  je     136de <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x21fe>
+         : 2490  for (auto& entry : unknown_inline_) {
+    0.00 :   1361d:  add    $0x20,%rdx
+    0.00 :   13621:  cmp    %rdx,%rcx
+    0.00 :   13624:  jne    13610 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2130>
+         : 2494  return &entry;
+         : 2495  }
+         : 2496  }
+         : 2497  for (auto* chunk = unknown_chunks_; chunk; chunk = chunk->next) {
+    0.00 :   13626:  mov    -0x1f8(%rbp),%rax
+    0.00 :   1362d:  mov    0x5f0(%rax),%rax
+    0.00 :   13634:  test   %rax,%rax
+    0.00 :   13637:  je     137b9 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x22d9>
+         : 2502  for (auto& entry : chunk->entries) {
+         : 2503  if (!entry.name) {
+    0.00 :   1363d:  cmpq   $0x0,(%rax)
+    0.00 :   13641:  je     136de <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x21fe>
+    0.00 :   13647:  cmpq   $0x0,0x20(%rax)
+    0.00 :   1364c:  je     136da <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x21fa>
+    0.00 :   13652:  cmpq   $0x0,0x40(%rax)
+    0.00 :   13657:  je     137b0 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x22d0>
+    0.00 :   1365d:  cmpq   $0x0,0x60(%rax)
+    0.00 :   13662:  je     137a7 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x22c7>
+    0.00 :   13668:  cmpq   $0x0,0x80(%rax)
+    0.00 :   13670:  je     1379e <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x22be>
+    0.00 :   13676:  cmpq   $0x0,0xa0(%rax)
+    0.00 :   1367e:  je     13793 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x22b3>
+    0.00 :   13684:  cmpq   $0x0,0xc0(%rax)
+    0.00 :   1368c:  je     13788 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x22a8>
+    0.00 :   13692:  cmpq   $0x0,0xe0(%rax)
+    0.00 :   1369a:  je     1377d <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x229d>
+         : 2520  for (auto* chunk = unknown_chunks_; chunk; chunk = chunk->next) {
+    0.00 :   136a0:  mov    0x100(%rax),%rax
+    0.00 :   136a7:  jmp    13634 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2154>
+         : 2523  return arena_ ? arena_ : fallback_arena_;
+    0.00 :   136a9:  mov    -0x1f8(%rbp),%rax
+    0.00 :   136b0:  mov    0x30(%rax),%r15
+         : 2526  if (!alloc) {
+    0.00 :   136b4:  test   %r15,%r15
+    0.00 :   136b7:  jne    12896 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x13b6>
+    0.00 :   136bd:  jmp    1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+         : 2530  if (eof()) {
+    0.00 :   136c2:  cmp    %r9,%rax
+    0.00 :   136c5:  jae    12551 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1071>
+         : 2533  ++ptr; // consume closing quote
+    0.00 :   136cb:  inc    %rax
+    0.00 :   136ce:  mov    %rax,-0x1c0(%rbp)
+         : 2536  _Storage(in_place_t, _Args&&... __args)
+    0.00 :   136d5:  jmp    12551 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1071>
+         : 2538  for (auto& entry : chunk->entries) {
+    0.00 :   136da:  add    $0x20,%rax
+         : 2540  entry->name = name_ptr;
+    0.00 :   136de:  mov    %r9,(%rax)
+         : 2542  entry->name_length = static_cast<uint16_t>(name.size());
+    0.00 :   136e1:  movw   $0xc,0x8(%rax)
+         : 2544  entry->value = value_ptr;
+    0.00 :   136e7:  mov    %r15,0x10(%rax)
+         : 2546  entry->value_length = static_cast<uint16_t>(value.size());
+    0.00 :   136eb:  movw   $0x10,0x18(%rax)
+         : 2548  ++unknown_size_;
+    0.00 :   136f1:  mov    -0x1f8(%rbp),%rax
+    0.00 :   136f8:  incq   0x5f8(%rax)
+    0.00 :   136ff:  jmp    1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+         : 2552  value *= (exp10 > 0) ? pow10_pos[exp10] : pow10_neg[-exp10];
+    0.00 :   13704:  neg    %eax
+    0.00 :   13706:  lea    0x181f3(%rip),%rdx        # 2b900 <katana::serde::parse_double(katana::serde::json_cursor&)::pow10_neg>
+    0.00 :   1370d:  cltq
+    0.00 :   1370f:  vmovsd (%rdx,%rax,8),%xmm0
+    0.00 :   13714:  jmp    12372 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xe92>
+         : 2558  double value = static_cast<double>(mantissa);
+    0.00 :   13719:  mov    %rdx,%rsi
+    0.00 :   1371c:  vxorpd %xmm7,%xmm7,%xmm7
+    0.00 :   13720:  and    $0x1,%edx
+    0.00 :   13723:  shr    $1,%rsi
+    0.00 :   13726:  or     %rdx,%rsi
+    0.00 :   13729:  vcvtsi2sd %rsi,%xmm7,%xmm0
+    0.00 :   1372e:  vaddsd %xmm0,%xmm0,%xmm2
+    0.00 :   13732:  vmovsd %xmm2,-0x218(%rbp)
+    0.00 :   1373a:  jmp    12325 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xe45>
+         : 2568  const char* exp_ptr = p + 1;
+    0.00 :   1373f:  mov    %rax,%rcx
+    0.00 :   13742:  jmp    122cb <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xdeb>
+         : 2571  _M_engaged(true)
+    0.00 :   13747:  movb   $0x1,-0x120(%rbp)
+         : 2573  void release_heap() noexcept {
+    0.00 :   1374e:  jmp    1201b <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0xb3b>
+         : 2575  for (; moved < size_; ++moved) {
+    0.00 :   13753:  mov    %rax,%rcx
+    0.00 :   13756:  mov    %rdi,%rsi
+    0.00 :   13759:  xor    %r8d,%r8d
+    0.00 :   1375c:  jmp    13458 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x1f78>
+         : 2580  }
+    0.00 :   13761:  call   69d0 <__stack_chk_fail@plt>
+    0.00 :   13766:  mov    (%rax),%esi
+    0.00 :   13768:  mov    %edx,%edx
+    0.00 :   1376a:  mov    %esi,-0xb8(%rbp)
+    0.00 :   13770:  mov    -0x4(%rax,%rdx,1),%esi
+    0.00 :   13774:  mov    %esi,-0x4(%rcx,%rdx,1)
+    0.00 :   13778:  jmp    11c62 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x782>
+         : 2588  for (auto& entry : chunk->entries) {
+    0.00 :   1377d:  add    $0xe0,%rax
+    0.00 :   13783:  jmp    136de <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x21fe>
+    0.00 :   13788:  add    $0xc0,%rax
+    0.00 :   1378e:  jmp    136de <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x21fe>
+    0.00 :   13793:  add    $0xa0,%rax
+    0.00 :   13799:  jmp    136de <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x21fe>
+    0.00 :   1379e:  sub    $0xffffffffffffff80,%rax
+    0.00 :   137a2:  jmp    136de <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x21fe>
+    0.00 :   137a7:  add    $0x60,%rax
+    0.00 :   137ab:  jmp    136de <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x21fe>
+    0.00 :   137b0:  add    $0x40,%rax
+    0.00 :   137b4:  jmp    136de <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x21fe>
+         : 2601  return arena_ ? arena_ : fallback_arena_;
+    0.00 :   137b9:  mov    -0x1f8(%rbp),%rax
+    0.00 :   137c0:  mov    0x28(%rax),%rdi
+    0.00 :   137c4:  test   %rdi,%rdi
+    0.00 :   137c7:  je     13823 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x2343>
+         : 2606  }
+         :
+         : 2608  using chunk_t = entry_chunk<unknown_entry, UNKNOWN_HEADERS_CHUNK_SIZE>;
+         : 2609  auto* alloc = allocator();
+         : 2610  auto* chunk =
+         : 2611  alloc ? static_cast<chunk_t*>(alloc->allocate(sizeof(chunk_t), alignof(chunk_t)))
+    0.00 :   137c9:  mov    $0x8,%edx
+    0.00 :   137ce:  mov    %r9,-0x200(%rbp)
+    0.00 :   137d5:  mov    $0x108,%esi
+    0.00 :   137da:  call   cb98 <katana::monotonic_arena::allocate(unsigned long, unsigned long)>
+    0.00 :   137df:  mov    %rax,%rdx
+         : 2617  : nullptr;
+         : 2618  if (!chunk) {
+    0.00 :   137e2:  test   %rax,%rax
+    0.00 :   137e5:  je     1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+         : 2621  return nullptr;
+         : 2622  }
+         : 2623  new (chunk) chunk_t{};
+         : 2624  chunk->next = unknown_chunks_;
+    0.00 :   137eb:  mov    -0x1f8(%rbp),%rsi
+         : 2626  new (chunk) chunk_t{};
+    0.00 :   137f2:  xor    %eax,%eax
+    0.00 :   137f4:  mov    $0x21,%ecx
+    0.00 :   137f9:  mov    %rdx,%rdi
+    0.00 :   137fc:  rep stos %rax,%es:(%rdi)
+         : 2631  chunk->next = unknown_chunks_;
+    0.00 :   137ff:  mov    -0x200(%rbp),%r9
+    0.00 :   13806:  mov    0x5f0(%rsi),%rax
+    0.00 :   1380d:  mov    %rax,0x100(%rdx)
+         : 2635  unknown_chunks_ = chunk;
+    0.00 :   13814:  mov    %rdx,0x5f0(%rsi)
+         : 2637  return _M_elems[__n];
+    0.00 :   1381b:  mov    %rdx,%rax
+         : 2639  if (!entry) {
+    0.00 :   1381e:  jmp    136de <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x21fe>
+         : 2641  return arena_ ? arena_ : fallback_arena_;
+    0.00 :   13823:  mov    0x30(%rax),%rdi
+         : 2643  alloc ? static_cast<chunk_t*>(alloc->allocate(sizeof(chunk_t), alignof(chunk_t)))
+    0.00 :   13827:  test   %rdi,%rdi
+    0.00 :   1382a:  jne    137c9 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x22e9>
+    0.00 :   1382c:  jmp    1294f <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&)+0x146f>
+    0.00 :   13831:  endbr64
+         : 2648  out.assign_error(katana::problem_details::not_acceptable("unsupported Accept header"));
+    0.00 :   13835:  mov    %rax,%r12
+    0.00 :   13838:  jmp    6e38 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&) [clone .cold]+0xbd>
+    0.00 :   1383d:  endbr64
+    0.00 :   13841:  jmp    6e02 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&) [clone .cold]+0x87>
+    0.00 :   13846:  endbr64
+    0.00 :   1384a:  mov    %rax,%rbx
+    0.00 :   1384d:  vzeroupper
+    0.00 :   13850:  jmp    6e68 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&) [clone .cold]+0xed>
+    0.00 :   13855:  endbr64
+         : 2658  out.assign_error(katana::problem_details::unsupported_media_type("unsupported Content-Type")); return {};
+    0.00 :   13859:  mov    %rax,%r12
+    0.00 :   1385c:  jmp    6f9b <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&) [clone .cold]+0x220>
+    0.00 :   13861:  endbr64
+         : 2662  current_request_ = prev_request_;
+    0.00 :   13865:  mov    %rax,%r15
+    0.00 :   13868:  jmp    6efa <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&) [clone .cold]+0x17f>
+    0.00 :   1386d:  endbr64
+         : 2666  out.assign_error(katana::problem_details::bad_request("invalid request body")); return {};
+    0.00 :   13871:  mov    %rax,%r12
+    0.00 :   13874:  jmp    6e5a <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&) [clone .cold]+0xdf>
+    0.00 :   13879:  endbr64
+    0.00 :   1387d:  mov    %rax,%r13
+    0.00 :   13880:  jmp    6f37 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&) [clone .cold]+0x1bc>
+    0.00 :   13885:  endbr64
+         : 2673  { _M_dispose(); }
+    0.00 :   13889:  mov    %rax,%rbx
+    0.00 :   1388c:  vzeroupper
+    0.00 :   1388f:  jmp    6f45 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&) [clone .cold]+0x1ca>
+    0.00 :   13894:  endbr64
+         : 2678  p.title = "Unsupported Media Type";
+         : 2679  if (!detail.empty()) {
+         : 2680  p.detail = std::string(detail);
+         : 2681  }
+         : 2682  return p;
+         : 2683  }
+    0.00 :   13898:  mov    %rax,%r12
+    0.00 :   1389b:  jmp    6f52 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&) [clone .cold]+0x1d7>
+    0.00 :   138a0:  endbr64
+         : 2687  }
+    0.00 :   138a4:  mov    %rax,%r12
+    0.00 :   138a7:  jmp    6f74 <generated::dispatch_compute_sum(katana::http::request const&, katana::http::request_context&, generated::api_handler&, katana::http::response&) [clone .cold]+0x1f9>

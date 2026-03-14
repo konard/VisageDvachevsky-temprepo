@@ -1,0 +1,777 @@
+ Percent |	Source code & Disassembly of hello_world_server for cpu-clock:u (567 samples, percent: local period)
+--------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3    Disassembly of section .text:
+         :
+         : 5    000000000000c008 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const>:
+         : 6    class router {
+         : 7    public:
+         : 8    explicit router(std::span<const route_entry> routes) : routes_(routes) {}
+         :
+         : 10   dispatch_result
+         : 11   dispatch_with_info(const request& req, request_context& ctx, response& out) const {
+    0.53 :   c008:   endbr64
+    0.35 :   c00c:   push   %rbp
+    0.00 :   c00d:   mov    %rsi,%r9
+    0.00 :   c010:   mov    %rsp,%rbp
+    0.00 :   c013:   push   %r15
+    0.00 :   c015:   push   %r14
+    0.18 :   c017:   push   %r13
+    0.00 :   c019:   mov    %rdi,%r14
+    0.00 :   c01c:   push   %r12
+    0.35 :   c01e:   push   %rbx
+    0.18 :   c01f:   mov    %rcx,%r12
+    0.00 :   c022:   sub    $0x608,%rsp
+    0.00 :   c029:   mov    0x10(%rdx),%rsi
+    0.35 :   c02d:   mov    %fs:0x28,%rax
+    0.00 :   c036:   mov    %rax,-0x38(%rbp)
+    0.00 :   c03a:   mov    0x8(%rdx),%rax
+         : 28   }
+         :
+         : 30   private:
+         : 31   static std::string_view strip_query(std::string_view uri) noexcept {
+         : 32   // Scan for '?' or '#' in a single pass (common case: no query string)
+         : 33   for (size_t i = 0; i < uri.size(); ++i) {
+    0.00 :   c03e:   test   %rax,%rax
+    0.53 :   c041:   je     cad8 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0xad0>
+    0.00 :   c047:   mov    %rsi,%r10
+    0.00 :   c04a:   lea    (%rax,%rsi,1),%rcx
+    0.00 :   c04e:   xchg   %ax,%ax
+         : 39   char c = uri[i];
+    0.00 :   c050:   movzbl (%r10),%eax
+         : 41   if (c == '?' || c == '#') {
+    0.00 :   c054:   cmp    $0x3f,%al
+    0.00 :   c056:   je     c067 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x5f>
+    0.00 :   c058:   cmp    $0x23,%al
+    0.18 :   c05a:   je     c067 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x5f>
+         : 46   for (size_t i = 0; i < uri.size(); ++i) {
+    0.00 :   c05c:   inc    %r10
+    0.00 :   c05f:   cmp    %r10,%rcx
+    0.00 :   c062:   jne    c050 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x48>
+         : 50   const char* end = ptr + path.size();
+    0.00 :   c064:   mov    %rcx,%r10
+         : 52   split_result out{};
+    0.00 :   c067:   lea    -0x560(%rbp),%rdi
+    0.00 :   c06e:   mov    $0x22,%ecx
+    0.00 :   c073:   xor    %eax,%eax
+    0.18 :   c075:   mov    %rdi,-0x5d8(%rbp)
+   11.99 :   c07c:   rep stos %rax,%es:(%rdi)
+         : 58   while (ptr < end) {
+    0.71 :   c07f:   cmp    %r10,%rsi
+    0.00 :   c082:   jae    c15c <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x154>
+    0.00 :   c088:   xor    %r11d,%r11d
+    0.00 :   c08b:   xor    %edi,%edi
+    0.00 :   c08d:   mov    -0x5d8(%rbp),%rcx
+         : 64   while (ptr < end && *ptr == '/')
+    0.00 :   c094:   jmp    c0a4 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x9c>
+    0.00 :   c096:   xchg   %ax,%ax
+         : 67   ++ptr;
+    0.00 :   c098:   inc    %rsi
+         : 69   while (ptr < end && *ptr == '/')
+    0.35 :   c09b:   cmp    %rsi,%r10
+    0.00 :   c09e:   je     c150 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x148>
+    0.00 :   c0a4:   cmpb   $0x2f,(%rsi)
+    0.71 :   c0a7:   je     c098 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x90>
+         : 74   while (ptr < end && *ptr != '/')
+    0.00 :   c0a9:   mov    %rsi,%rax
+    0.00 :   c0ac:   cmp    %r10,%rsi
+    0.00 :   c0af:   jae    c0c5 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0xbd>
+    0.00 :   c0b1:   nopl   0x0(%rax)
+    0.00 :   c0b8:   cmpb   $0x2f,(%rax)
+    0.00 :   c0bb:   je     c120 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x118>
+         : 81   ++ptr;
+    0.00 :   c0bd:   inc    %rax
+         : 83   while (ptr < end && *ptr != '/')
+    0.00 :   c0c0:   cmp    %rax,%r10
+    0.00 :   c0c3:   jne    c0b8 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0xb0>
+    0.00 :   c0c5:   test   %r11b,%r11b
+    0.00 :   c0c8:   je     c8a0 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x898>
+         : 88   if (out.count >= MAX_ROUTE_SEGMENTS) {
+    0.00 :   c0ce:   cmp    $0x10,%rdi
+    0.00 :   c0d2:   jne    c8a2 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x89a>
+         : 91   static error_category const instance;
+         : 92   return instance;
+         : 93   }
+         :
+         : 95   inline std::error_code make_error_code(error_code e) {
+         : 96   return {static_cast<int>(e), get_error_category()};
+    0.00 :   c0d8:   call   b5b8 <katana::get_error_category()>
+         : 98   return dispatch_result{make_error_code(error_code::not_found), true, false, 0};
+    0.00 :   c0dd:   movl   $0x7,(%r14)
+    0.00 :   c0e4:   movw   $0x1,0x10(%r14)
+    0.00 :   c0eb:   movl   $0x0,0x14(%r14)
+    0.00 :   c0f3:   mov    %rax,0x8(%r14)
+         : 103  }
+    0.00 :   c0f7:   mov    -0x38(%rbp),%rax
+    0.88 :   c0fb:   sub    %fs:0x28,%rax
+    0.71 :   c104:   jne    caf3 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0xaeb>
+    0.00 :   c10a:   lea    -0x28(%rbp),%rsp
+    0.00 :   c10e:   mov    %r14,%rax
+    0.00 :   c111:   pop    %rbx
+    0.18 :   c112:   pop    %r12
+    0.00 :   c114:   pop    %r13
+    0.18 :   c116:   pop    %r14
+    0.18 :   c118:   pop    %r15
+    0.18 :   c11a:   pop    %rbp
+    0.35 :   c11b:   ret
+    0.00 :   c11c:   nopl   0x0(%rax)
+         : 117  if (out.count >= MAX_ROUTE_SEGMENTS) {
+    0.00 :   c120:   cmp    $0x10,%rdi
+    0.00 :   c124:   je     c0d8 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0xd0>
+         : 120  std::string_view(seg_start, static_cast<size_t>(ptr - seg_start));
+    0.00 :   c126:   mov    %rax,%r11
+         : 122  out.parts[out.count++] =
+    0.00 :   c129:   mov    %rsi,0x8(%rcx)
+    0.00 :   c12d:   inc    %rdi
+         : 125  while (ptr < end) {
+    0.00 :   c130:   add    $0x10,%rcx
+         : 127  std::string_view(seg_start, static_cast<size_t>(ptr - seg_start));
+    0.00 :   c134:   sub    %rsi,%r11
+    0.00 :   c137:   mov    %r11,-0x10(%rcx)
+         : 130  while (ptr < end) {
+    0.00 :   c13b:   cmp    %r10,%rax
+    0.00 :   c13e:   jae    c155 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x14d>
+    0.00 :   c140:   mov    %rax,%rsi
+    0.00 :   c143:   mov    $0x1,%r11d
+    0.00 :   c149:   jmp    c0a4 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x9c>
+    0.00 :   c14e:   xchg   %ax,%ax
+    0.00 :   c150:   test   %r11b,%r11b
+    0.53 :   c153:   je     c15c <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x154>
+    0.00 :   c155:   mov    %rdi,-0x460(%rbp)
+         : 140  *
+         : 141  *  @tparam  Tp  Type of element. Required to be a complete type.
+         : 142  *  @tparam  Nm  Number of elements.
+         : 143  */
+         : 144  template<typename _Tp, std::size_t _Nm>
+         : 145  struct array
+    0.00 :   c15c:   xor    %eax,%eax
+    0.35 :   c15e:   lea    -0x450(%rbp),%rdi
+    0.00 :   c165:   mov    $0x40,%ecx
+         : 149  _GLIBCXX_CONSTEXPR __normal_iterator() _GLIBCXX_NOEXCEPT
+         : 150  : _M_current(_Iterator()) { }
+         :
+         : 152  explicit _GLIBCXX20_CONSTEXPR
+         : 153  __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+         : 154  : _M_current(__i) { }
+    0.00 :   c16a:   mov    (%r9),%r13
+   22.57 :   c16d:   rep stos %rax,%es:(%rdi)
+         : 157  { return iterator(this->_M_ptr); }
+         :
+         : 159  [[nodiscard]]
+         : 160  constexpr iterator
+         : 161  end() const noexcept
+         : 162  { return iterator(this->_M_ptr + this->size()); }
+    0.53 :   c170:   mov    0x8(%r9),%rax
+         : 164  path_params() noexcept : size_(0) {}
+    0.00 :   c174:   movq   $0x0,-0x250(%rbp)
+         : 166  std::span<const std::string_view> path_segments(split.parts.data(), split.count);
+    0.00 :   c17f:   mov    -0x460(%rbp),%r15
+    0.35 :   c186:   lea    (%rax,%rax,2),%rax
+    0.00 :   c18a:   lea    (%rax,%rax,8),%rax
+    0.00 :   c18e:   shl    $0x5,%rax
+    0.00 :   c192:   lea    0x0(%r13,%rax,1),%r11
+         : 172  for (const auto& entry : routes_) {
+    0.35 :   c197:   cmp    %r11,%r13
+    0.00 :   c19a:   je     c0d8 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0xd0>
+         : 175  const route_entry* best_route = nullptr;
+    0.00 :   c1a0:   xor    %esi,%esi
+    0.00 :   c1a2:   mov    %r8,-0x5f0(%rbp)
+    0.00 :   c1a9:   mov    %r13,%rbx
+    0.00 :   c1ac:   xor    %r10d,%r10d
+         : 180  int best_score = -1;
+    0.00 :   c1af:   movl   $0xffffffff,-0x5dc(%rbp)
+    0.00 :   c1b9:   mov    %r12,-0x5e8(%rbp)
+    0.00 :   c1c0:   mov    %rsi,%r8
+    0.00 :   c1c3:   mov    %r14,%rsi
+    0.00 :   c1c6:   mov    %rdx,%r14
+    0.00 :   c1c9:   mov    %r13,%rdx
+    0.00 :   c1cc:   jmp    c1e0 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x1d8>
+    0.00 :   c1ce:   xchg   %ax,%ax
+         : 189  for (const auto& entry : routes_) {
+    0.00 :   c1d0:   add    $0x360,%rbx
+    0.35 :   c1d7:   cmp    %rbx,%r11
+    0.00 :   c1da:   je     c29a <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x292>
+         : 193  if (entry.pattern.segment_count != split.count) {
+    0.00 :   c1e0:   mov    0x288(%rbx),%r12
+    0.88 :   c1e7:   cmp    %r12,%r15
+    0.18 :   c1ea:   jne    c1d0 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x1c8>
+         : 197  if (entry.method != req.http_method) {
+    0.00 :   c1ec:   movzbl (%r14),%eax
+    0.00 :   c1f0:   cmp    %al,(%rbx)
+    0.53 :   c1f2:   jne    c1d0 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x1c8>
+    0.00 :   c1f4:   lea    -0x240(%rbp),%rdi
+    0.00 :   c1fb:   mov    $0x40,%ecx
+    0.18 :   c200:   mov    %r10,%rax
+   25.93 :   c203:   rep stos %rax,%es:(%rdi)
+         : 205  path_params() noexcept : size_(0) {}
+    0.18 :   c206:   mov    %r10,-0x40(%rbp)
+         : 207  if (segment_count == 0 && path_segment_count == 0) {
+    0.00 :   c20a:   test   %r15,%r15
+    0.00 :   c20d:   je     c662 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x65a>
+    0.00 :   c213:   lea    0x8(%rbx),%rcx
+    0.00 :   c217:   xor    %r9d,%r9d
+    0.00 :   c21a:   movq   $0x0,-0x5f8(%rbp)
+    0.00 :   c225:   mov    -0x5d8(%rbp),%r13
+    0.00 :   c22c:   mov    %r8,-0x600(%rbp)
+    0.00 :   c233:   mov    %r11,-0x608(%rbp)
+    0.00 :   c23a:   mov    %rsi,%r8
+    0.00 :   c23d:   mov    %r12,%r11
+    0.00 :   c240:   mov    %rcx,%r12
+    0.00 :   c243:   mov    %rdx,%rcx
+         : 220  if (segment.kind == segment_kind::literal) {
+    0.00 :   c246:   cmpb   $0x0,(%r12)
+    0.00 :   c24b:   mov    0x0(%r13),%rax
+    0.00 :   c24f:   jne    c5c1 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x5b9>
+    0.00 :   c255:   mov    0x8(%r12),%rdx
+    0.00 :   c25a:   vmovdqu 0x8(%r12),%xmm0
+    0.00 :   c261:   mov    0x8(%r13),%rsi
+    0.00 :   c265:   vmovdqa %xmm0,-0x590(%rbp)
+         : 228  template<typename _CharT, typename _Traits>
+         : 229  [[nodiscard]]
+         : 230  constexpr bool
+         : 231  operator==(basic_string_view<_CharT, _Traits> __x,
+         : 232  basic_string_view<_CharT, _Traits> __y) noexcept
+         : 233  { return __x.size() == __y.size() && __x.compare(__y) == 0; }
+    0.00 :   c26d:   cmp    %rax,%rdx
+    0.00 :   c270:   je     ca7e <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0xa76>
+    0.00 :   c276:   mov    -0x608(%rbp),%r11
+         : 237  for (const auto& entry : routes_) {
+    0.00 :   c27d:   add    $0x360,%rbx
+    0.00 :   c284:   mov    %r8,%rsi
+    0.00 :   c287:   mov    %rcx,%rdx
+    0.00 :   c28a:   mov    -0x600(%rbp),%r8
+    0.00 :   c291:   cmp    %rbx,%r11
+    0.00 :   c294:   jne    c1e0 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x1d8>
+         : 244  if (best_route) {
+    0.00 :   c29a:   mov    %rdx,%r13
+    0.00 :   c29d:   mov    %r14,%rdx
+    0.00 :   c2a0:   mov    %rsi,%r14
+    0.00 :   c2a3:   mov    %r8,%rsi
+    0.00 :   c2a6:   mov    -0x5e8(%rbp),%r12
+    0.35 :   c2ad:   mov    -0x5f0(%rbp),%r8
+    0.18 :   c2b4:   test   %rsi,%rsi
+    0.00 :   c2b7:   je     c91f <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x917>
+         : 253  constexpr pair&
+         : 254  operator=(const pair& __p)
+         : 255  noexcept(_S_nothrow_assignable<const _T1&, const _T2&>())
+         : 256  requires (_S_assignable<const _T1&, const _T2&>())
+         : 257  {
+         : 258  first = __p.first;
+    0.00 :   c2bd:   vmovdqa -0x450(%rbp),%xmm1
+         : 260  second = __p.second;
+    0.00 :   c2c5:   vmovdqa -0x440(%rbp),%xmm2
+         : 262  auto route_result = best_route->middleware.run(req, ctx, best_route->handler, out);
+    0.00 :   c2cd:   lea    0x2a0(%rsi),%rdi
+         : 264  first = __p.first;
+    0.00 :   c2d4:   vmovdqa -0x430(%rbp),%xmm3
+         : 266  second = __p.second;
+    0.35 :   c2dc:   vmovdqa -0x420(%rbp),%xmm4
+         : 268  first = __p.first;
+    0.00 :   c2e4:   vmovdqa -0x410(%rbp),%xmm5
+         : 270  second = __p.second;
+    0.00 :   c2ec:   vmovdqa -0x400(%rbp),%xmm6
+         : 272  first = __p.first;
+    0.00 :   c2f4:   vmovdqa -0x3f0(%rbp),%xmm7
+         : 274  second = __p.second;
+    0.18 :   c2fc:   vmovdqa -0x3e0(%rbp),%xmm0
+         : 276  first = __p.first;
+    0.00 :   c304:   vmovdqu %xmm1,0x8(%r12)
+    0.00 :   c30b:   vmovdqa -0x3d0(%rbp),%xmm1
+         : 279  second = __p.second;
+    0.00 :   c313:   vmovdqu %xmm2,0x18(%r12)
+    0.18 :   c31a:   vmovdqa -0x3c0(%rbp),%xmm2
+         : 282  first = __p.first;
+    0.00 :   c322:   vmovdqu %xmm3,0x28(%r12)
+    0.35 :   c329:   vmovdqa -0x3b0(%rbp),%xmm3
+         : 285  second = __p.second;
+    0.18 :   c331:   vmovdqu %xmm4,0x38(%r12)
+    0.00 :   c338:   vmovdqa -0x3a0(%rbp),%xmm4
+         : 288  first = __p.first;
+    0.00 :   c340:   vmovdqu %xmm5,0x48(%r12)
+    0.88 :   c347:   vmovdqa -0x390(%rbp),%xmm5
+         : 291  second = __p.second;
+    0.00 :   c34f:   vmovdqu %xmm6,0x58(%r12)
+    0.00 :   c356:   vmovdqa -0x380(%rbp),%xmm6
+         : 294  first = __p.first;
+    0.35 :   c35e:   vmovdqu %xmm7,0x68(%r12)
+    0.18 :   c365:   vmovdqa -0x370(%rbp),%xmm7
+         : 297  second = __p.second;
+    0.00 :   c36d:   vmovdqu %xmm0,0x78(%r12)
+    0.53 :   c374:   vmovdqa -0x360(%rbp),%xmm0
+    0.00 :   c37c:   vmovdqu %xmm2,0x98(%r12)
+         : 301  first = __p.first;
+    0.53 :   c386:   vmovdqu %xmm3,0xa8(%r12)
+         : 303  second = __p.second;
+    0.53 :   c390:   vmovdqu %xmm4,0xb8(%r12)
+         : 305  first = __p.first;
+    0.18 :   c39a:   vmovdqu %xmm5,0xc8(%r12)
+         : 307  second = __p.second;
+    0.35 :   c3a4:   vmovdqu %xmm6,0xd8(%r12)
+         : 309  first = __p.first;
+    0.00 :   c3ae:   vmovdqu %xmm7,0xe8(%r12)
+         : 311  second = __p.second;
+    0.18 :   c3b8:   vmovdqu %xmm0,0xf8(%r12)
+         : 313  first = __p.first;
+    0.71 :   c3c2:   vmovdqu %xmm1,0x88(%r12)
+    0.00 :   c3cc:   vmovdqa -0x350(%rbp),%xmm1
+         : 316  second = __p.second;
+    0.00 :   c3d4:   vmovdqa -0x340(%rbp),%xmm2
+         : 318  first = __p.first;
+    0.00 :   c3dc:   vmovdqa -0x330(%rbp),%xmm3
+         : 320  second = __p.second;
+    0.00 :   c3e4:   vmovdqa -0x320(%rbp),%xmm4
+         : 322  first = __p.first;
+    0.00 :   c3ec:   vmovdqa -0x310(%rbp),%xmm5
+         : 324  second = __p.second;
+    0.18 :   c3f4:   vmovdqa -0x300(%rbp),%xmm6
+         : 326  first = __p.first;
+    0.35 :   c3fc:   vmovdqu %xmm1,0x108(%r12)
+    0.71 :   c406:   vmovdqa -0x2f0(%rbp),%xmm7
+         : 329  second = __p.second;
+    0.00 :   c40e:   vmovdqa -0x2e0(%rbp),%xmm0
+    0.18 :   c416:   vmovdqu %xmm2,0x118(%r12)
+         : 332  first = __p.first;
+    0.35 :   c420:   vmovdqa -0x2d0(%rbp),%xmm1
+         : 334  second = __p.second;
+    0.00 :   c428:   vmovdqa -0x2c0(%rbp),%xmm2
+         : 336  first = __p.first;
+    0.18 :   c430:   vmovdqu %xmm3,0x128(%r12)
+    0.18 :   c43a:   vmovdqa -0x2b0(%rbp),%xmm3
+         : 339  second = __p.second;
+    0.18 :   c442:   vmovdqu %xmm4,0x138(%r12)
+    0.35 :   c44c:   vmovdqa -0x2a0(%rbp),%xmm4
+         : 342  first = __p.first;
+    0.00 :   c454:   vmovdqu %xmm5,0x148(%r12)
+    0.35 :   c45e:   vmovdqa -0x290(%rbp),%xmm5
+         : 345  second = __p.second;
+    0.00 :   c466:   vmovdqu %xmm6,0x158(%r12)
+    0.53 :   c470:   vmovdqa -0x280(%rbp),%xmm6
+         : 348  first = __p.first;
+    0.00 :   c478:   vmovdqu %xmm7,0x168(%r12)
+    0.35 :   c482:   vmovdqa -0x270(%rbp),%xmm7
+         : 351  second = __p.second;
+    0.18 :   c48a:   vmovdqu %xmm0,0x178(%r12)
+    0.35 :   c494:   vmovdqa -0x260(%rbp),%xmm0
+         : 354  first = __p.first;
+    0.00 :   c49c:   vmovdqu %xmm1,0x188(%r12)
+         : 356  second = __p.second;
+    0.71 :   c4a6:   vmovdqu %xmm2,0x198(%r12)
+         : 358  first = __p.first;
+    0.18 :   c4b0:   vmovdqu %xmm3,0x1a8(%r12)
+         : 360  second = __p.second;
+    0.18 :   c4ba:   vmovdqu %xmm4,0x1b8(%r12)
+         : 362  first = __p.first;
+    0.18 :   c4c4:   vmovdqu %xmm5,0x1c8(%r12)
+         : 364  second = __p.second;
+    0.71 :   c4ce:   vmovdqu %xmm6,0x1d8(%r12)
+         : 366  first = __p.first;
+    0.00 :   c4d8:   vmovdqu %xmm7,0x1e8(%r12)
+         : 368  second = __p.second;
+    0.53 :   c4e2:   vmovdqu %xmm0,0x1f8(%r12)
+         : 370  struct path_params {
+    0.71 :   c4ec:   mov    -0x250(%rbp),%rax
+    0.00 :   c4f3:   mov    %rax,0x208(%r12)
+         : 373  auto route_result = best_route->middleware.run(req, ctx, best_route->handler, out);
+    0.18 :   c4fb:   mov    0x350(%rsi),%rax
+    0.35 :   c502:   mov    0x358(%rsi),%rcx
+         : 376  [[nodiscard]] bool empty() const noexcept { return size == 0 || ptr == nullptr; }
+    0.00 :   c509:   test   %rax,%rax
+    0.00 :   c50c:   je     c8cf <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x8c7>
+    0.00 :   c512:   test   %rcx,%rcx
+    0.00 :   c515:   je     c8cf <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x8c7>
+         : 381  invoker inv{ptr, size, handler, req, ctx};
+    0.00 :   c51b:   mov    %rcx,-0x588(%rbp)
+         : 383  *this = inplace_function(std::forward<F>(f));
+         : 384  return *this;
+         : 385  }
+         :
+         : 387  R operator()(Args... args) const {
+         : 388  return vtable_->invoke(&storage_, std::forward<Args>(args)...);
+    0.00 :   c522:   mov    0xa0(%rax),%r9
+         : 390  };
+    0.00 :   c529:   lea    -0x590(%rbp),%rcx
+    0.00 :   c530:   mov    %rax,%rsi
+    0.00 :   c533:   mov    %rcx,-0x5d0(%rbp)
+         :
+         : 395  template <typename R, typename... Args> class function_ref<R(Args...)> {
+         : 396  public:
+         : 397  template <typename F>
+         : 398  function_ref(F&& f) noexcept
+         : 399  : callable_(std::addressof(f)), invoker_([](void* callable, Args... args) -> R {
+    0.00 :   c53a:   lea    -0x22a1(%rip),%rbx        # a2a0 <katana::function_ref<std::expected<void, std::error_code> (katana::http::response&)>::function_ref<katana::http::middleware_chain::run(katana::http::request const&, katana::http::request_context&, katana::inplace_function<std::expected<void, std::error_code> (katana::http::request const&, katana::http::request_context&, katana::http::response&), 160ul> const&, katana::http::response&) const::invoker::call(unsigned long, katana::http::response&) const::{lambda(katana::http::response&)#1}&>(katana::http::middleware_chain::run(katana::http::request const&, katana::http::request_context&, katana::inplace_function<std::expected<void, std::error_code> (katana::http::request const&, katana::http::request_context&, katana::http::response&), 160ul> const&, katana::http::response&) const::invoker::call(unsigned long, katana::http::response&) const::{lambda(katana::http::response&)#1}&)::{lambda(void*, katana::http::response&)#1}::_FUN(void*, katana::http::response&)>
+    0.00 :   c541:   lea    -0x5d0(%rbp),%rcx
+         : 402  invoker inv{ptr, size, handler, req, ctx};
+    0.00 :   c548:   mov    %rax,-0x590(%rbp)
+    0.00 :   c54f:   mov    %rdi,-0x580(%rbp)
+    0.00 :   c556:   mov    %rdx,-0x578(%rbp)
+    0.00 :   c55d:   mov    %rcx,-0x5c0(%rbp)
+    0.00 :   c564:   mov    %rbx,-0x5b8(%rbp)
+    0.00 :   c56b:   mov    %r12,-0x570(%rbp)
+         : 409  };
+    0.00 :   c572:   movq   $0x0,-0x5c8(%rbp)
+         : 411  function_ref(F&& f) noexcept
+    0.00 :   c57d:   lea    -0x5c0(%rbp),%rcx
+    0.00 :   c584:   lea    -0x236b(%rip),%rbx        # a220 <katana::function_ref<std::expected<void, std::error_code> (katana::http::response&)>::function_ref<katana::function_ref<std::expected<void, std::error_code> (katana::http::response&)>&>(katana::function_ref<std::expected<void, std::error_code> (katana::http::response&)>&)::{lambda(void*, katana::http::response&)#1}::_FUN(void*, katana::http::response&)>
+    0.00 :   c58b:   push   %rbx
+    0.00 :   c58c:   lea    -0x5b0(%rbp),%rdi
+    0.00 :   c593:   push   %rcx
+    0.00 :   c594:   mov    %r12,%rcx
+    0.00 :   c597:   call   *0x18(%r9)
+         : 419  if (!route_result) {
+    0.00 :   c59b:   cmpb   $0x0,-0x5a0(%rbp)
+    0.00 :   c5a2:   pop    %rax
+    0.00 :   c5a3:   pop    %rdx
+    0.00 :   c5a4:   je     c8f6 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x8ee>
+         : 424  using _Check
+         : 425  = __enable_if_t<is_error_code_enum<_ErrorCodeEnum>::value>;
+         :
+         : 427  public:
+         : 428  error_code() noexcept
+         : 429  : _M_value(0), _M_cat(&system_category()) { }
+    0.00 :   c5aa:   movl   $0x0,(%r14)
+    0.53 :   c5b1:   call   67f0 <std::_V2::system_category()@plt>
+         : 432  return dispatch_result{};
+    0.18 :   c5b6:   xor    %edx,%edx
+    0.00 :   c5b8:   mov    %rax,0x8(%r14)
+    0.00 :   c5bc:   jmp    c908 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x900>
+         : 436  if (actual.empty()) {
+    0.00 :   c5c1:   test   %rax,%rax
+    0.00 :   c5c4:   je     c276 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x26e>
+         : 439  if (size_ < MAX_PATH_PARAMS) {
+    0.00 :   c5ca:   mov    -0x40(%rbp),%rdx
+    0.00 :   c5ce:   cmp    $0xf,%rdx
+    0.00 :   c5d2:   ja     c633 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x62b>
+    0.00 :   c5d4:   mov    -0x5f8(%rbp),%rdi
+    0.00 :   c5db:   shl    $0x4,%rdi
+    0.00 :   c5df:   add    %rbx,%rdi
+    0.00 :   c5e2:   mov    0x190(%rdi),%rsi
+         : 447  constexpr pair&
+         : 448  operator=(pair&& __p)
+         : 449  noexcept(_S_nothrow_assignable<_T1, _T2>())
+         : 450  requires (_S_assignable<_T1, _T2>())
+         : 451  {
+         : 452  first = std::forward<first_type>(__p.first);
+    0.00 :   c5e9:   mov    0x188(%rdi),%rdi
+    0.00 :   c5f0:   mov    %rsi,-0x610(%rbp)
+    0.00 :   c5f7:   mov    %rdx,%rsi
+         : 456  ++size_;
+    0.00 :   c5fa:   inc    %rdx
+    0.00 :   c5fd:   shl    $0x5,%rsi
+    0.00 :   c601:   mov    %rdx,-0x40(%rbp)
+    0.00 :   c605:   sub    $0x30,%rsi
+    0.00 :   c609:   add    %rbp,%rsi
+    0.00 :   c60c:   mov    %rdi,-0x210(%rsi)
+         : 463  second = std::forward<second_type>(__p.second);
+    0.00 :   c613:   mov    %rax,-0x200(%rsi)
+         : 465  first = std::forward<first_type>(__p.first);
+    0.00 :   c61a:   mov    -0x610(%rbp),%rdi
+         : 467  second = std::forward<second_type>(__p.second);
+    0.00 :   c621:   mov    0x8(%r13),%rax
+         : 469  first = std::forward<first_type>(__p.first);
+    0.00 :   c625:   mov    %rdi,-0x208(%rsi)
+         : 471  second = std::forward<second_type>(__p.second);
+    0.00 :   c62c:   mov    %rax,-0x1f8(%rsi)
+         : 473  ++param_index;
+    0.00 :   c633:   incq   -0x5f8(%rbp)
+         : 475  for (size_t i = 0; i < segment_count; ++i) {
+    0.00 :   c63a:   inc    %r9
+    0.00 :   c63d:   add    $0x18,%r12
+    0.00 :   c641:   add    $0x10,%r13
+    0.00 :   c645:   cmp    %r9,%r11
+    0.00 :   c648:   jne    c246 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x23e>
+    0.00 :   c64e:   mov    %r8,%rsi
+    0.00 :   c651:   mov    -0x608(%rbp),%r11
+    0.00 :   c658:   mov    -0x600(%rbp),%r8
+    0.00 :   c65f:   mov    %rcx,%rdx
+         : 485  return static_cast<int>(literal_count * 16 + (MAX_ROUTE_SEGMENTS - param_count));
+    0.00 :   c662:   mov    $0x4,%eax
+    0.53 :   c667:   shlx   %eax,0x298(%rbx),%eax
+    0.53 :   c670:   sub    0x290(%rbx),%eax
+    0.53 :   c676:   add    $0x10,%eax
+         : 490  if (!best_route || score > best_score) {
+    0.00 :   c679:   test   %r8,%r8
+    0.00 :   c67c:   je     c68c <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x684>
+    0.00 :   c67e:   mov    -0x5dc(%rbp),%ecx
+    0.00 :   c684:   cmp    %ecx,%eax
+    0.00 :   c686:   jle    c1d0 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x1c8>
+         : 496  first = __p.first;
+    0.00 :   c68c:   vmovdqa -0x240(%rbp),%xmm2
+         : 498  second = __p.second;
+    0.18 :   c694:   vmovdqa -0x230(%rbp),%xmm3
+         : 500  best_route = &entry;
+    0.00 :   c69c:   mov    %rbx,%r8
+         : 502  first = __p.first;
+    0.00 :   c69f:   vmovdqa -0x220(%rbp),%xmm4
+         : 504  second = __p.second;
+    0.00 :   c6a7:   vmovdqa -0x210(%rbp),%xmm5
+         : 506  first = __p.first;
+    0.00 :   c6af:   vmovdqa -0x200(%rbp),%xmm6
+         : 508  second = __p.second;
+    0.18 :   c6b7:   vmovdqa -0x1f0(%rbp),%xmm7
+         : 510  first = __p.first;
+    0.00 :   c6bf:   vmovdqa -0x180(%rbp),%xmm1
+    0.00 :   c6c7:   vmovdqa %xmm2,-0x450(%rbp)
+    0.00 :   c6cf:   vmovdqa -0x1e0(%rbp),%xmm2
+         : 514  second = __p.second;
+    0.00 :   c6d7:   vmovdqa %xmm3,-0x440(%rbp)
+    0.00 :   c6df:   vmovdqa -0x1d0(%rbp),%xmm3
+         : 517  first = __p.first;
+    0.00 :   c6e7:   vmovdqa %xmm4,-0x430(%rbp)
+    0.00 :   c6ef:   vmovdqa -0x1c0(%rbp),%xmm4
+         : 520  second = __p.second;
+    0.53 :   c6f7:   vmovdqa %xmm5,-0x420(%rbp)
+    0.00 :   c6ff:   vmovdqa -0x1b0(%rbp),%xmm5
+         : 523  first = __p.first;
+    0.18 :   c707:   vmovdqa %xmm6,-0x410(%rbp)
+    0.00 :   c70f:   vmovdqa -0x1a0(%rbp),%xmm6
+         : 526  second = __p.second;
+    0.18 :   c717:   vmovdqa %xmm7,-0x400(%rbp)
+    0.18 :   c71f:   vmovdqa -0x190(%rbp),%xmm7
+         : 529  first = __p.first;
+    0.18 :   c727:   vmovdqa %xmm2,-0x3f0(%rbp)
+         : 531  second = __p.second;
+    0.00 :   c72f:   vmovdqa -0x170(%rbp),%xmm2
+    0.18 :   c737:   vmovdqa %xmm3,-0x3e0(%rbp)
+         : 534  first = __p.first;
+    0.18 :   c73f:   vmovdqa -0x160(%rbp),%xmm3
+    0.18 :   c747:   vmovdqa %xmm4,-0x3d0(%rbp)
+         : 537  second = __p.second;
+    0.00 :   c74f:   vmovdqa -0x150(%rbp),%xmm4
+         : 539  first = __p.first;
+    0.00 :   c757:   vmovdqa %xmm6,-0x3b0(%rbp)
+         : 541  second = __p.second;
+    0.35 :   c75f:   vmovdqa %xmm7,-0x3a0(%rbp)
+         : 543  first = __p.first;
+    0.00 :   c767:   vmovdqa %xmm1,-0x390(%rbp)
+         : 545  second = __p.second;
+    0.53 :   c76f:   vmovdqa %xmm2,-0x380(%rbp)
+         : 547  first = __p.first;
+    0.00 :   c777:   vmovdqa %xmm3,-0x370(%rbp)
+         : 549  second = __p.second;
+    0.53 :   c77f:   vmovdqa %xmm4,-0x360(%rbp)
+    0.35 :   c787:   vmovdqa %xmm5,-0x3c0(%rbp)
+         : 552  first = __p.first;
+    0.00 :   c78f:   vmovdqa -0x140(%rbp),%xmm5
+         : 554  second = __p.second;
+    0.00 :   c797:   vmovdqa -0x130(%rbp),%xmm6
+         : 556  first = __p.first;
+    0.00 :   c79f:   vmovdqa -0x120(%rbp),%xmm7
+         : 558  second = __p.second;
+    0.00 :   c7a7:   vmovdqa -0x110(%rbp),%xmm0
+         : 560  first = __p.first;
+    0.00 :   c7af:   vmovdqa -0x100(%rbp),%xmm1
+         : 562  second = __p.second;
+    0.18 :   c7b7:   vmovdqa -0xf0(%rbp),%xmm2
+         : 564  first = __p.first;
+    0.00 :   c7bf:   vmovdqa %xmm5,-0x350(%rbp)
+    0.35 :   c7c7:   vmovdqa -0xe0(%rbp),%xmm3
+         : 567  second = __p.second;
+    0.00 :   c7cf:   vmovdqa -0xd0(%rbp),%xmm4
+    0.00 :   c7d7:   vmovdqa %xmm6,-0x340(%rbp)
+         : 570  first = __p.first;
+    0.18 :   c7df:   vmovdqa -0xc0(%rbp),%xmm5
+         : 572  second = __p.second;
+    0.00 :   c7e7:   vmovdqa -0xb0(%rbp),%xmm6
+         : 574  first = __p.first;
+    0.18 :   c7ef:   vmovdqa %xmm7,-0x330(%rbp)
+    0.18 :   c7f7:   vmovdqa -0xa0(%rbp),%xmm7
+         : 577  second = __p.second;
+    0.00 :   c7ff:   vmovdqa %xmm0,-0x320(%rbp)
+    0.00 :   c807:   vmovdqa -0x90(%rbp),%xmm0
+         : 580  first = __p.first;
+    0.00 :   c80f:   vmovdqa %xmm1,-0x310(%rbp)
+    0.71 :   c817:   vmovdqa -0x80(%rbp),%xmm1
+         : 583  second = __p.second;
+    0.00 :   c81c:   vmovdqa %xmm2,-0x300(%rbp)
+    0.18 :   c824:   vmovdqa -0x70(%rbp),%xmm2
+         : 586  first = __p.first;
+    0.00 :   c829:   vmovdqa %xmm3,-0x2f0(%rbp)
+    0.18 :   c831:   vmovdqa -0x60(%rbp),%xmm3
+         : 589  second = __p.second;
+    0.00 :   c836:   vmovdqa %xmm4,-0x2e0(%rbp)
+    0.18 :   c83e:   vmovdqa -0x50(%rbp),%xmm4
+         : 592  first = __p.first;
+    0.00 :   c843:   vmovdqa %xmm5,-0x2d0(%rbp)
+         : 594  second = __p.second;
+    0.71 :   c84b:   vmovdqa %xmm6,-0x2c0(%rbp)
+         : 596  first = __p.first;
+    0.00 :   c853:   vmovdqa %xmm7,-0x2b0(%rbp)
+         : 598  second = __p.second;
+    0.35 :   c85b:   vmovdqa %xmm0,-0x2a0(%rbp)
+         : 600  first = __p.first;
+    0.00 :   c863:   vmovdqa %xmm1,-0x290(%rbp)
+         : 602  second = __p.second;
+    0.00 :   c86b:   vmovdqa %xmm2,-0x280(%rbp)
+         : 604  first = __p.first;
+    0.00 :   c873:   vmovdqa %xmm3,-0x270(%rbp)
+         : 606  second = __p.second;
+    0.18 :   c87b:   vmovdqa %xmm4,-0x260(%rbp)
+         : 608  struct path_params {
+    0.35 :   c883:   mov    -0x40(%rbp),%rcx
+         : 610  best_score = score;
+    0.00 :   c887:   mov    %eax,-0x5dc(%rbp)
+         : 612  struct path_params {
+    0.18 :   c88d:   mov    %rcx,-0x250(%rbp)
+    0.18 :   c894:   jmp    c1d0 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x1c8>
+    0.00 :   c899:   nopl   0x0(%rax)
+         : 616  while (ptr < end && *ptr != '/')
+    0.00 :   c8a0:   xor    %edi,%edi
+         : 618  out.parts[out.count++] =
+    0.00 :   c8a2:   lea    0x1(%rdi),%rcx
+    0.00 :   c8a6:   shl    $0x4,%rdi
+         : 621  std::string_view(seg_start, static_cast<size_t>(ptr - seg_start));
+    0.00 :   c8aa:   sub    %rsi,%rax
+         : 623  out.parts[out.count++] =
+    0.00 :   c8ad:   lea    -0x30(%rdi),%rbx
+    0.00 :   c8b1:   mov    %rcx,-0x460(%rbp)
+    0.00 :   c8b8:   lea    (%rbx,%rbp,1),%rcx
+         : 627  std::string_view(seg_start, static_cast<size_t>(ptr - seg_start));
+    0.00 :   c8bc:   mov    %rax,-0x530(%rcx)
+         : 629  out.parts[out.count++] =
+    0.00 :   c8c3:   mov    %rsi,-0x528(%rcx)
+         : 631  while (ptr < end) {
+    0.00 :   c8ca:   jmp    c15c <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x154>
+    0.18 :   c8cf:   mov    0x340(%rsi),%rax
+    0.35 :   c8d6:   lea    -0x5b0(%rbp),%r9
+    0.00 :   c8dd:   mov    %rdi,%rsi
+    0.18 :   c8e0:   mov    %r12,%rcx
+    0.00 :   c8e3:   mov    %r9,%rdi
+    0.00 :   c8e6:   call   *0x18(%rax)
+         : 639  if (!route_result) {
+    0.35 :   c8e9:   cmpb   $0x0,-0x5a0(%rbp)
+    0.88 :   c8f0:   jne    c5aa <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x5a2>
+         : 642  return dispatch_result{route_result.error(), true, true, 0};
+    0.00 :   c8f6:   vmovdqa -0x5b0(%rbp),%xmm5
+    0.00 :   c8fe:   mov    $0x1,%edx
+    0.00 :   c903:   vmovdqu %xmm5,(%r14)
+    0.00 :   c908:   movzbl %dl,%eax
+    0.53 :   c90b:   movl   $0x0,0x14(%r14)
+    0.71 :   c913:   mov    %dl,%ah
+    0.00 :   c915:   mov    %ax,0x10(%r14)
+    0.00 :   c91a:   jmp    c0f7 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0xef>
+         : 651  return 1u << idx;
+    0.00 :   c91f:   mov    %r14,%rax
+         : 653  uint32_t allowed_methods_mask = 0;
+    0.00 :   c922:   xor    %r9d,%r9d
+         : 655  return 1u << idx;
+    0.00 :   c925:   mov    %r11,%r14
+         : 657  bool path_matched = false;
+    0.00 :   c928:   xor    %r10d,%r10d
+         : 659  return 1u << idx;
+    0.00 :   c92b:   mov    %rax,%r11
+    0.00 :   c92e:   jmp    c940 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x938>
+         :
+         : 663  _GLIBCXX20_CONSTEXPR
+         : 664  __normal_iterator&
+         : 665  operator++() _GLIBCXX_NOEXCEPT
+         : 666  {
+         : 667  ++_M_current;
+    0.00 :   c930:   add    $0x360,%r13
+         : 669  for (const auto& entry : routes_) {
+    0.00 :   c937:   cmp    %r13,%r14
+    0.00 :   c93a:   je     ca44 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0xa3c>
+         : 672  if (entry.pattern.segment_count != split.count) {
+    0.00 :   c940:   mov    0x288(%r13),%rbx
+    0.00 :   c947:   prefetcht0 0x1008(%r13)
+    0.00 :   c94f:   cmp    %rbx,%r15
+    0.00 :   c952:   jne    c930 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x928>
+         : 677  if (segment_count == 0 && path_segment_count == 0) {
+    0.00 :   c954:   test   %r15,%r15
+    0.00 :   c957:   je     ca0c <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0xa04>
+    0.00 :   c95d:   mov    -0x5d8(%rbp),%r12
+    0.00 :   c964:   lea    0x8(%r13),%rcx
+    0.00 :   c968:   xor    %r8d,%r8d
+         : 683  if (segment.kind == segment_kind::literal) {
+    0.00 :   c96b:   cmpb   $0x0,(%rcx)
+    0.00 :   c96e:   mov    (%r12),%rax
+    0.00 :   c972:   jne    c9ef <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x9e7>
+    0.00 :   c974:   mov    0x8(%rcx),%rdi
+    0.00 :   c978:   vmovdqu 0x8(%rcx),%xmm1
+    0.00 :   c97d:   mov    %rax,%rsi
+    0.00 :   c980:   mov    0x8(%r12),%rdx
+    0.00 :   c985:   vmovdqa %xmm1,-0x590(%rbp)
+    0.00 :   c98d:   cmp    %rax,%rdi
+    0.00 :   c990:   jne    c930 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x928>
+    0.00 :   c992:   lea    -0x590(%rbp),%rdi
+    0.00 :   c999:   mov    %r11,-0x600(%rbp)
+    0.00 :   c9a0:   mov    %r9d,-0x5e8(%rbp)
+    0.00 :   c9a7:   mov    %r10b,-0x5dc(%rbp)
+    0.00 :   c9ae:   mov    %rcx,-0x5f8(%rbp)
+    0.00 :   c9b5:   mov    %r8,-0x5f0(%rbp)
+    0.00 :   c9bc:   call   bfa8 <std::basic_string_view<char, std::char_traits<char> >::compare(std::basic_string_view<char, std::char_traits<char> >) const>
+    0.00 :   c9c1:   movzbl -0x5dc(%rbp),%r10d
+    0.00 :   c9c9:   test   %eax,%eax
+    0.00 :   c9cb:   mov    -0x5e8(%rbp),%r9d
+    0.00 :   c9d2:   mov    -0x600(%rbp),%r11
+    0.00 :   c9d9:   jne    c930 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x928>
+    0.00 :   c9df:   mov    -0x5f0(%rbp),%r8
+    0.00 :   c9e6:   mov    -0x5f8(%rbp),%rcx
+    0.00 :   c9ed:   jmp    c9f8 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x9f0>
+         : 709  if (actual.empty()) {
+    0.00 :   c9ef:   test   %rax,%rax
+    0.00 :   c9f2:   je     c930 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x928>
+         : 712  for (size_t i = 0; i < segment_count; ++i) {
+    0.00 :   c9f8:   inc    %r8
+    0.00 :   c9fb:   add    $0x18,%rcx
+    0.00 :   c9ff:   add    $0x10,%r12
+    0.00 :   ca03:   cmp    %r8,%rbx
+    0.00 :   ca06:   jne    c96b <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x963>
+         : 718  allowed_methods_mask |= method_bit(entry.method);
+    0.00 :   ca0c:   movzbl 0x0(%r13),%eax
+         : 720  if (idx >= 31 || m == http::method::unknown) {
+    0.00 :   ca11:   prefetcht0 0xd80(%r13)
+    0.00 :   ca19:   cmp    $0x1e,%al
+    0.00 :   ca1b:   ja     ca2e <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0xa26>
+    0.00 :   ca1d:   cmp    $0x7,%al
+    0.00 :   ca1f:   je     ca2e <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0xa26>
+         : 726  return 1u << idx;
+    0.00 :   ca21:   mov    $0x1,%ebx
+    0.00 :   ca26:   shlx   %eax,%ebx,%eax
+         : 729  allowed_methods_mask |= method_bit(entry.method);
+    0.00 :   ca2b:   or     %eax,%r9d
+    0.00 :   ca2e:   add    $0x360,%r13
+         : 732  path_matched = true;
+    0.00 :   ca35:   mov    $0x1,%r10d
+         : 734  for (const auto& entry : routes_) {
+    0.00 :   ca3b:   cmp    %r13,%r14
+    0.00 :   ca3e:   jne    c940 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x938>
+    0.00 :   ca44:   mov    %r9d,-0x5d8(%rbp)
+         : 738  if (path_matched) {
+    0.00 :   ca4b:   mov    %r11,%r14
+    0.00 :   ca4e:   test   %r10b,%r10b
+    0.00 :   ca51:   je     c0d8 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0xd0>
+    0.00 :   ca57:   call   b5b8 <katana::get_error_category()>
+         : 743  make_error_code(error_code::method_not_allowed), true, true, allowed_methods_mask};
+    0.00 :   ca5c:   mov    -0x5d8(%rbp),%r9d
+    0.00 :   ca63:   movl   $0x8,(%r14)
+    0.00 :   ca6a:   movw   $0x101,0x10(%r14)
+    0.00 :   ca71:   mov    %rax,0x8(%r14)
+    0.00 :   ca75:   mov    %r9d,0x14(%r14)
+    0.00 :   ca79:   jmp    c0f7 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0xef>
+    0.00 :   ca7e:   lea    -0x590(%rbp),%rdi
+    0.00 :   ca85:   mov    %r8,-0x628(%rbp)
+    0.00 :   ca8c:   mov    %rsi,%rdx
+    0.00 :   ca8f:   mov    %rax,%rsi
+    0.00 :   ca92:   mov    %rcx,-0x618(%rbp)
+    0.00 :   ca99:   mov    %r9,-0x620(%rbp)
+    0.00 :   caa0:   mov    %r11,-0x610(%rbp)
+    0.00 :   caa7:   call   bfa8 <std::basic_string_view<char, std::char_traits<char> >::compare(std::basic_string_view<char, std::char_traits<char> >) const>
+    0.00 :   caac:   xor    %r10d,%r10d
+    0.00 :   caaf:   mov    -0x618(%rbp),%rcx
+    0.00 :   cab6:   mov    -0x628(%rbp),%r8
+    0.00 :   cabd:   test   %eax,%eax
+    0.00 :   cabf:   jne    c276 <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x26e>
+    0.00 :   cac5:   mov    -0x610(%rbp),%r11
+    0.00 :   cacc:   mov    -0x620(%rbp),%r9
+    0.00 :   cad3:   jmp    c63a <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x632>
+         : 766  split_result out{};
+    0.00 :   cad8:   lea    -0x560(%rbp),%rdi
+    0.00 :   cadf:   mov    $0x22,%ecx
+    0.00 :   cae4:   mov    %rdi,-0x5d8(%rbp)
+    0.00 :   caeb:   rep stos %rax,%es:(%rdi)
+         : 771  while (ptr < end) {
+    0.00 :   caee:   jmp    c15c <katana::http::router::dispatch_with_info(katana::http::request const&, katana::http::request_context&, katana::http::response&) const+0x154>
+         : 773  }
+    0.00 :   caf3:   call   6960 <__stack_chk_fail@plt>
