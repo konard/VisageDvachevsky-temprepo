@@ -1,0 +1,2 @@
+Use of uninitialized value $events in string ne at /usr/bin/callgrind_annotate line 465.
+Line 0: missing events line

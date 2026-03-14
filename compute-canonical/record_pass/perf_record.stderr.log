@@ -1,2 +1,0 @@
-[ perf record: Woken up 1 times to write data ]
-[ perf record: Captured and wrote 0,657 MB /mnt/bench/KATANA/profiling_results/e2e_instruction_perf_run/compute-canonical/record_pass/perf.data (5863 samples) ]

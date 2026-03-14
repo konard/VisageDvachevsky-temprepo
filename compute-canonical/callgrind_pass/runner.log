@@ -1,4 +1,0 @@
-sending command instrumentation on to pid 7998
-sending command dump after_wrk to pid 7998
-sending command instrumentation off to pid 7998
-/mnt/bench/KATANA/profiling_results/e2e_instruction_perf_run/compute-canonical/callgrind_pass/run_callgrind.sh: line 37:  7998 Killed                  KATANA_WORKERS=1 PORT=18081 COMPUTE_PORT=18081 valgrind --tool=callgrind --instr-atstart=no --dump-instr=yes --collect-jumps=yes --fair-sched=try --callgrind-out-file="$CALL_OUT" --log-file="$VALGRIND_LOG" build/perf-e2e/examples/codegen/compute_api/compute_api > "$out/server.stdout.log" 2> "$out/server.stderr.log"
